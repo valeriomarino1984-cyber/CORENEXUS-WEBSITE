@@ -50,32 +50,37 @@ export default function AdminNewUser() {
         throw new Error('Solo gli amministratori possono creare nuovi utenti');
       }
 
-      // Create user in Supabase Auth using admin API
-      const { data: authData, error: createError } = await supabase.auth.admin.createUser({
-        email: formData.email,
-        password: formData.password,
-        email_confirm: true,
-      });
-
-      if (createError) throw createError;
-
-      if (!authData.user) {
-        throw new Error('Errore nella creazione dell\'utente');
+      // Get session token
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        throw new Error('Sessione non valida');
       }
 
-      // Create client profile
-      const { error: clientError } = await supabase
-        .from('app_2b35a5a86e_clients')
-        .insert({
-          user_id: authData.user.id,
-          company_name: formData.company_name,
-          contact_name: formData.contact_name,
-          email: formData.email,
-          phone: formData.phone || null,
-          role: formData.role,
-        });
+      // Call Edge Function to create user
+      const response = await fetch(
+        'https://lvbzopwygjlozoupdidg.supabase.co/functions/v1/app_2b35a5a86e_create_user',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+            company_name: formData.company_name,
+            contact_name: formData.contact_name,
+            phone: formData.phone,
+            role: formData.role,
+          }),
+        }
+      );
 
-      if (clientError) throw clientError;
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Errore nella creazione dell\'utente');
+      }
 
       setSuccess('Utente creato con successo!');
       
