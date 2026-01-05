@@ -55,31 +55,41 @@ export default function AdminTicketDetail() {
 
   const checkAuth = async () => {
     try {
+      console.log('=== DEBUG: Starting authentication check ===');
       const { data: { user }, error: authError } = await supabase.auth.getUser();
+      console.log('Auth user:', user?.id, user?.email);
       
       if (authError || !user) {
+        console.error('Auth error:', authError);
         navigate('/admin/login');
         return;
       }
 
       // Check if user is admin
+      console.log('Checking admin role for user:', user.id);
       const { data: adminData, error: adminError } = await supabase
         .from('app_2b35a5a86e_clients')
         .select('*')
         .eq('user_id', user.id)
         .single();
 
+      console.log('Admin data:', adminData);
+      console.log('Admin error:', adminError);
+
       if (adminError) throw adminError;
 
       if (adminData.role !== 'admin' && adminData.role !== 'staff') {
+        console.error('User is not admin/staff. Role:', adminData.role);
         await supabase.auth.signOut();
         navigate('/admin/login');
         return;
       }
 
+      console.log('User is admin/staff. Proceeding to load ticket data.');
       setAdmin(adminData);
       await loadTicketData();
     } catch (err) {
+      console.error('=== ERROR in checkAuth ===', err);
       const errorMessage = err instanceof Error ? err.message : 'Errore nel caricamento dei dati';
       setError(errorMessage);
       setLoading(false);
@@ -88,14 +98,43 @@ export default function AdminTicketDetail() {
 
   const loadTicketData = async () => {
     try {
+      console.log('=== DEBUG: Loading ticket data ===');
+      console.log('Ticket ID:', id);
+      
+      // Get current user
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
+      console.log('Current user:', user?.id, user?.email);
+      
+      if (userError) {
+        console.error('User error:', userError);
+        throw userError;
+      }
+
       // Load ticket
+      console.log('Attempting to load ticket with ID:', id);
       const { data: ticketData, error: ticketError } = await supabase
         .from('app_2b35a5a86e_tickets')
         .select('*')
         .eq('id', id)
         .single();
 
-      if (ticketError) throw ticketError;
+      console.log('Ticket query result:', { ticketData, ticketError });
+      
+      if (ticketError) {
+        console.error('=== TICKET ERROR DETAILS ===');
+        console.error('Message:', ticketError.message);
+        console.error('Details:', ticketError.details);
+        console.error('Hint:', ticketError.hint);
+        console.error('Code:', ticketError.code);
+        throw ticketError;
+      }
+      
+      if (!ticketData) {
+        console.error('No ticket data returned for ID:', id);
+        throw new Error('Ticket not found');
+      }
+      
+      console.log('Ticket loaded successfully:', ticketData);
       setTicket(ticketData);
       setEditForm({
         status: ticketData.status,
@@ -103,44 +142,66 @@ export default function AdminTicketDetail() {
       });
 
       // Load client info
+      console.log('Loading client info for user_id:', ticketData.user_id);
       const { data: clientData, error: clientError } = await supabase
         .from('app_2b35a5a86e_clients')
         .select('*')
         .eq('user_id', ticketData.user_id)
         .single();
 
-      if (clientError) throw clientError;
+      console.log('Client data:', clientData);
+      if (clientError) {
+        console.error('Client error:', clientError);
+        throw clientError;
+      }
       setClient(clientData);
 
       // Load messages
+      console.log('Loading messages for ticket:', id);
       const { data: messagesData, error: messagesError } = await supabase
         .from('app_2b35a5a86e_ticket_messages')
         .select('*')
         .eq('ticket_id', id)
         .order('created_at', { ascending: true });
 
-      if (messagesError) throw messagesError;
+      console.log('Messages loaded:', messagesData?.length || 0);
+      if (messagesError) {
+        console.error('Messages error:', messagesError);
+        throw messagesError;
+      }
       setMessages(messagesData || []);
 
       // Load attachments
+      console.log('Loading attachments for ticket:', id);
       const { data: attachmentsData, error: attachmentsError } = await supabase
         .from('app_2b35a5a86e_ticket_attachments')
         .select('*')
         .eq('ticket_id', id)
         .order('created_at', { ascending: false });
 
-      if (attachmentsError) throw attachmentsError;
+      console.log('Attachments loaded:', attachmentsData?.length || 0);
+      if (attachmentsError) {
+        console.error('Attachments error:', attachmentsError);
+        throw attachmentsError;
+      }
       setAttachments(attachmentsData || []);
 
       // Load history
+      console.log('Loading history for ticket:', id);
       const { data: historyData, error: historyError } = await supabase
         .from('app_2b35a5a86e_ticket_history')
         .select('*')
         .eq('ticket_id', id)
         .order('created_at', { ascending: false });
 
-      if (historyError) throw historyError;
+      console.log('History loaded:', historyData?.length || 0);
+      if (historyError) {
+        console.error('History error:', historyError);
+        throw historyError;
+      }
       setHistory(historyData || []);
+
+      console.log('=== All ticket data loaded successfully ===');
 
       // Subscribe to real-time messages
       const messageSubscription = supabase
@@ -154,6 +215,7 @@ export default function AdminTicketDetail() {
             filter: `ticket_id=eq.${id}`,
           },
           (payload) => {
+            console.log('New message received:', payload.new);
             setMessages((prev) => [...prev, payload.new as TicketMessage]);
           }
         )
@@ -163,6 +225,7 @@ export default function AdminTicketDetail() {
         messageSubscription.unsubscribe();
       };
     } catch (err) {
+      console.error('=== ERROR in loadTicketData ===', err);
       const errorMessage = err instanceof Error ? err.message : 'Errore nel caricamento dei dati';
       setError(errorMessage);
     } finally {
