@@ -21,31 +21,66 @@ export default function AdminLogin() {
     setLoading(true);
 
     try {
+      console.log('=== LOGIN ATTEMPT START ===');
+      console.log('Email:', email);
+      
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
+      console.log('Auth response:', { data, error });
+
       if (error) throw error;
 
       if (data.user) {
+        console.log('Auth successful. User ID:', data.user.id);
+        console.log('Attempting to fetch client profile...');
+        
         // Check if user is admin
         const { data: clientData, error: clientError } = await supabase
           .from('app_2b35a5a86e_clients')
-          .select('role')
+          .select('*')
           .eq('user_id', data.user.id)
           .single();
 
-        if (clientError) throw new Error('Utente non trovato');
+        console.log('Client query result:', { clientData, clientError });
+
+        if (clientError) {
+          console.error('=== CLIENT QUERY ERROR ===');
+          console.error('Error message:', clientError.message);
+          console.error('Error details:', clientError.details);
+          console.error('Error hint:', clientError.hint);
+          console.error('Error code:', clientError.code);
+          
+          // More specific error message
+          if (clientError.code === 'PGRST116') {
+            throw new Error('Profilo utente non trovato nel database. Contatta l\'amministratore di sistema.');
+          } else if (clientError.message.includes('policy')) {
+            throw new Error('Errore di permessi (RLS). Le policy del database bloccano l\'accesso al profilo utente.');
+          } else {
+            throw new Error(`Errore database: ${clientError.message}`);
+          }
+        }
+
+        if (!clientData) {
+          console.error('No client data returned');
+          throw new Error('Profilo utente non trovato. User ID: ' + data.user.id);
+        }
+
+        console.log('Client data loaded:', clientData);
 
         if (clientData.role !== 'admin' && clientData.role !== 'staff') {
+          console.error('User role not authorized:', clientData.role);
           await supabase.auth.signOut();
           throw new Error('Accesso negato. Solo gli amministratori possono accedere a questa area.');
         }
 
+        console.log('Login successful! Redirecting to dashboard...');
         navigate('/admin/dashboard');
       }
     } catch (err) {
+      console.error('=== LOGIN ERROR ===', err);
       const errorMessage = err instanceof Error ? err.message : 'Errore durante il login. Verifica le credenziali.';
       setError(errorMessage);
     } finally {
