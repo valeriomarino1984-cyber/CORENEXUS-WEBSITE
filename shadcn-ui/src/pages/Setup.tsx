@@ -49,8 +49,9 @@ export default function Setup() {
       setTimeout(() => {
         navigate('/admin/login');
       }, 3000);
-    } catch (err: any) {
-      setError(err.message || 'An error occurred during setup');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred during setup';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }

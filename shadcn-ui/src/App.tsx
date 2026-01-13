@@ -16,6 +16,7 @@ import AdminTicketDetail from './pages/AdminTicketDetail';
 import AdminUsers from './pages/AdminUsers';
 import AdminNewUser from './pages/AdminNewUser';
 import AdminEditUser from './pages/AdminEditUser';
+import AdminUserManagement from './pages/AdminUserManagement';
 import Setup from './pages/Setup';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookiePolicy from './pages/CookiePolicy';
@@ -47,6 +48,7 @@ const AppContent = () => {
         <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/admin/users/new" element={<AdminNewUser />} />
         <Route path="/admin/users/edit/:id" element={<AdminEditUser />} />
+        <Route path="/admin/user-management" element={<AdminUserManagement />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />

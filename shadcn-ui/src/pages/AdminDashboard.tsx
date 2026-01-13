@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { supabase, type Ticket, type Client } from '@/lib/supabase';
-import { Loader2, LogOut, Search, Ticket as TicketIcon, Clock, CheckCircle2, AlertCircle, Users, Plus, UserCog } from 'lucide-react';
+import { Loader2, LogOut, Search, Ticket as TicketIcon, Clock, CheckCircle2, AlertCircle, Users, Plus, UserCog, Settings } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function AdminDashboard() {
@@ -170,12 +170,20 @@ export default function AdminDashboard() {
           </div>
           <div className="flex gap-3">
             <Button 
-              onClick={() => navigate('/admin/users')} 
+              onClick={() => navigate('/admin/user-management')} 
               variant="outline"
               className="border-purple-500/30 text-purple-400 hover:bg-purple-500/10"
             >
+              <Settings className="mr-2 h-4 w-4" />
+              Gestione Completa
+            </Button>
+            <Button 
+              onClick={() => navigate('/admin/users')} 
+              variant="outline"
+              className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10"
+            >
               <UserCog className="mr-2 h-4 w-4" />
-              Gestione Utenti
+              Utenti
             </Button>
             <Button 
               onClick={() => navigate('/admin/new-ticket')} 
@@ -251,7 +259,7 @@ export default function AdminDashboard() {
 
           <Card 
             className="glass-effect border-white/10 hover:border-purple-500/30 transition-all cursor-pointer"
-            onClick={() => navigate('/admin/users')}
+            onClick={() => navigate('/admin/user-management')}
           >
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium text-gray-400">Clienti</CardTitle>
