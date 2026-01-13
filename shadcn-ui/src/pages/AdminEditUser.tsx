@@ -38,35 +38,60 @@ export default function AdminEditUser() {
 
   const loadUser = async () => {
     try {
+      console.log('=== DEBUG: Loading user for edit ===');
+      console.log('User ID from URL:', id);
+      
       const { data: { user: currentUser }, error: authError } = await supabase.auth.getUser();
+      console.log('Current authenticated user:', currentUser?.id, currentUser?.email);
       
       if (authError || !currentUser) {
+        console.error('Auth error:', authError);
         navigate('/admin/login');
         return;
       }
 
       // Check if current user is admin
+      console.log('Checking if current user is admin...');
       const { data: adminData, error: adminError } = await supabase
         .from('app_2b35a5a86e_clients')
         .select('role')
         .eq('user_id', currentUser.id)
         .single();
 
+      console.log('Admin check result:', { adminData, adminError });
+
       if (adminError) throw adminError;
 
       if (adminData.role !== 'admin') {
+        console.error('User is not admin. Role:', adminData.role);
         throw new Error('Solo gli amministratori possono modificare gli utenti');
       }
 
       // Load user to edit
+      console.log('Loading user to edit with id:', id);
       const { data: userData, error: userError } = await supabase
         .from('app_2b35a5a86e_clients')
         .select('*')
         .eq('id', id)
         .single();
 
-      if (userError) throw userError;
+      console.log('User query result:', { userData, userError });
 
+      if (userError) {
+        console.error('=== USER LOAD ERROR DETAILS ===');
+        console.error('Message:', userError.message);
+        console.error('Details:', userError.details);
+        console.error('Hint:', userError.hint);
+        console.error('Code:', userError.code);
+        throw userError;
+      }
+
+      if (!userData) {
+        console.error('No user data returned for id:', id);
+        throw new Error('Utente non trovato');
+      }
+
+      console.log('User loaded successfully:', userData);
       setUser(userData);
       setFormData({
         company_name: userData.company_name,
@@ -76,6 +101,7 @@ export default function AdminEditUser() {
         role: userData.role,
       });
     } catch (err) {
+      console.error('=== ERROR in loadUser ===', err);
       const errorMessage = err instanceof Error ? err.message : 'Errore nel caricamento dell\'utente';
       setError(errorMessage);
     } finally {
@@ -184,7 +210,17 @@ export default function AdminEditUser() {
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900">
-        <p className="text-white">Utente non trovato</p>
+        <div className="text-center">
+          <p className="text-white text-xl mb-4">Utente non trovato</p>
+          <p className="text-gray-400 mb-6">ID ricercato: {id}</p>
+          <Button 
+            onClick={() => navigate('/admin/users')} 
+            className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Torna a Gestione Utenti
+          </Button>
+        </div>
       </div>
     );
   }
