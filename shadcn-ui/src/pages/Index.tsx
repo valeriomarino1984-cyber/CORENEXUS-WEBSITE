@@ -245,6 +245,9 @@ export default function Index() {
                 <p className="text-xs text-gray-500">
                   Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus.it</a>
                 </p>
+                <p className="text-xs text-gray-600">
+                  v1.0 - 20/01/2026
+                </p>
               </div>
             </div>
           </div>
