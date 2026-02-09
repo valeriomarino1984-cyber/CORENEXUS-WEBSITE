@@ -10,7 +10,7 @@ import ContactSection from '@/components/ContactSection';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
 import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, Building2, Rocket, Scale, Factory } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { localBusinessSchema, professionalServiceSchema, breadcrumbSchema } from '@/utils/seoSchemas';
 
@@ -30,6 +30,33 @@ export default function Index() {
     "@context": "https://schema.org",
     "@graph": [localBusinessSchema, professionalServiceSchema, homeBreadcrumb]
   };
+
+  const targetAudiences = [
+    {
+      icon: Building2,
+      title: "PMI",
+      description: "Riduciamo costi IT, inefficienze e problemi quotidiani con soluzioni pratiche e su misura.",
+      gradient: "from-blue-500 to-cyan-500"
+    },
+    {
+      icon: Rocket,
+      title: "Startup",
+      description: "Costruiamo infrastrutture scalabili fin dall'inizio, evitando errori costosi.",
+      gradient: "from-purple-500 to-pink-500"
+    },
+    {
+      icon: Scale,
+      title: "Studi professionali",
+      description: "Proteggiamo dati sensibili e garantiamo continuità operativa e compliance.",
+      gradient: "from-amber-500 to-orange-500"
+    },
+    {
+      icon: Factory,
+      title: "Aziende industriali",
+      description: "Integriamo sistemi, miglioriamo affidabilità e sicurezza dell'infrastruttura IT.",
+      gradient: "from-emerald-500 to-teal-500"
+    }
+  ];
 
   return (
     <>
@@ -152,6 +179,49 @@ export default function Index() {
                   ))}
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* A Chi Ci Rivolgiamo Section */}
+        <section id="target-audience" className="py-24 px-6 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-blue-950/20 to-black" />
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="text-center space-y-6 mb-16 animate-fade-in-up">
+              <h2 className="text-5xl md:text-6xl font-bold text-white">A chi ci rivolgiamo</h2>
+              <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                Soluzioni IT personalizzate per ogni tipo di realtà aziendale
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              {targetAudiences.map((audience, index) => (
+                <article 
+                  key={index}
+                  className="p-8 rounded-3xl glass-effect hover:bg-white/10 transition-all duration-500 card-hover group text-center"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${audience.gradient} flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                    <audience.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-4">{audience.title}</h3>
+                  <p className="text-gray-300 leading-relaxed">
+                    {audience.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+
+            <div className="text-center">
+              <Button
+                size="lg"
+                onClick={scrollToContact}
+                className="group premium-button text-white px-12 py-7 text-lg rounded-2xl font-semibold"
+                aria-label="Parliamo del tuo caso"
+              >
+                Parliamo del tuo caso
+                <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+              </Button>
             </div>
           </div>
         </section>
