@@ -10,7 +10,7 @@ import ContactSection from '@/components/ContactSection';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
 import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Sparkles, Building2, Rocket, Scale, Factory } from 'lucide-react';
+import { ArrowRight, Sparkles, Building2, Rocket, Scale, Factory, Gift } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { localBusinessSchema, professionalServiceSchema, breadcrumbSchema } from '@/utils/seoSchemas';
 
@@ -226,6 +226,47 @@ export default function Index() {
           </div>
         </section>
 
+        {/* Audit IT Gratuito Section */}
+        <section id="audit" className="py-24 px-6 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-emerald-950/20 to-black" />
+          
+          {/* Decorative elements */}
+          <div className="absolute top-10 right-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-float" />
+          <div className="absolute bottom-10 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
+          
+          <div className="max-w-4xl mx-auto relative z-10">
+            <div className="text-center animate-fade-in-up">
+              <div className="p-12 rounded-3xl glass-effect border border-emerald-500/30 hover:border-emerald-500/50 transition-all duration-500">
+                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center mb-8 mx-auto shadow-lg shadow-emerald-500/30">
+                  <Gift className="w-10 h-10 text-white" />
+                </div>
+                
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                  🎁 Audit IT gratuito
+                </h2>
+                
+                <p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-2xl mx-auto mb-4">
+                  Valutiamo l'infrastruttura, individuiamo criticità e opportunità di miglioramento.
+                </p>
+                
+                <p className="text-lg text-emerald-400 font-semibold mb-10">
+                  Senza impegno.
+                </p>
+                
+                <Button
+                  size="lg"
+                  onClick={scrollToContact}
+                  className="group bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-12 py-7 text-lg rounded-2xl font-semibold shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 transition-all duration-300"
+                  aria-label="Prenota l'audit gratuito"
+                >
+                  Prenota l'audit gratuito
+                  <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <ServicesSection />
         <FeaturesSection />
         <PricingSection />
@@ -316,7 +357,7 @@ export default function Index() {
                   Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus.it</a>
                 </p>
                 <p className="text-xs text-gray-600">
-                  v1.0 - 20/01/2026
+                  v1.1 - 09/02/2026
                 </p>
               </div>
             </div>
