@@ -108,8 +108,11 @@ export default function Index() {
               </h1>
 
               <p className="text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto leading-relaxed font-light">
-                Offriamo servizi informatici professionali per la gestione di reti aziendali, la sicurezza informatica, 
-                i sistemi di videosorveglianza Hikvision, l'assistenza server enterprise e centralini VoIP FreePBX a Roma Sud, Ostia, Fiumicino, EUR e provincia.
+                Aiutiamo le aziende a lavorare senza interruzioni grazie a servizi informatici affidabili: gestione delle reti aziendali, sicurezza informatica, server e sistemi di comunicazione.
+              </p>
+              
+              <p className="text-lg md:text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed">
+                Operiamo a Roma Sud, EUR, Ostia, Fiumicino e provincia, con supporto rapido e soluzioni su misura.
               </p>
 
               <div className="pt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -119,7 +122,7 @@ export default function Index() {
                   className="group premium-button text-white px-10 py-7 text-lg rounded-2xl font-semibold"
                   aria-label="Richiedi una consulenza gratuita"
                 >
-                  Richiedi Consulenza Gratuita
+                  Richiedi una consulenza gratuita
                   <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                 </Button>
               </div>
