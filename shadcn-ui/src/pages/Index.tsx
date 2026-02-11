@@ -103,8 +103,9 @@ export default function Index() {
                 </span>
               </div>
 
+              {/* H1 SEO Optimized - max 150 caratteri, parole chiave principali */}
               <h1 className="text-6xl md:text-8xl font-bold gradient-text leading-tight tracking-tight">
-                Assistenza informatica<br />e supporto sistemistico<br />per aziende a Roma
+                Assistenza Informatica e Supporto IT per Aziende a Roma
               </h1>
 
               <p className="text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto leading-relaxed font-light">
@@ -360,7 +361,7 @@ export default function Index() {
                   Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus.it</a>
                 </p>
                 <p className="text-xs text-gray-600">
-                  v1.1 - 09/02/2026
+                  v1.2 - 09/02/2026
                 </p>
               </div>
             </div>
