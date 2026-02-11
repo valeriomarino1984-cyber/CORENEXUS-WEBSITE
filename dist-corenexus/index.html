@@ -216,11 +216,40 @@
   }
   </script>
 
+  <!-- Style for SEO H1 - visually hidden but readable by crawlers -->
+  <style>
+    .seo-h1 {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+
   <script type="module" crossorigin src="/assets/index-CT8plQEk.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-C4PKd2UC.css">
 </head>
 
 <body>
+  <!-- SEO H1 - Static heading for search engine crawlers (Bing, Google) -->
+  <h1 class="seo-h1">Assistenza Informatica e Supporto IT per Aziende a Roma</h1>
+  
+  <!-- Noscript fallback content for SEO -->
+  <noscript>
+    <div style="padding: 40px; text-align: center; font-family: system-ui, sans-serif;">
+      <h2>CoreNexus - Assistenza Informatica Aziendale Roma</h2>
+      <p>Assistenza informatica e supporto sistemistico professionale per aziende a Roma Sud, Ostia, Fiumicino, EUR e provincia.</p>
+      <p>Servizi: Gestione reti aziendali, sicurezza informatica, videosorveglianza Hikvision, server enterprise, centralini VoIP FreePBX.</p>
+      <p>Contattaci: <a href="tel:+393913773304">+39 391 377 3304</a> | <a href="mailto:info@corenexus.it">info@corenexus.it</a></p>
+      <p><a href="https://corenexus.it">Visita il sito con JavaScript abilitato per la migliore esperienza.</a></p>
+    </div>
+  </noscript>
+  
   <div id="root"></div>
 </body>
 
