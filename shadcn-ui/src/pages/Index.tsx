@@ -301,9 +301,9 @@ export default function Index() {
                 <h4 className="text-lg font-semibold text-white">Link Utili</h4>
                 <ul className="space-y-2">
                   <li>
-                    <a href="#services" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
+                    <Link to="/servizi" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
                       Servizi IT
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <a href="#about" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">

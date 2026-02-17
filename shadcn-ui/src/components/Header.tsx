@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, LogIn, Shield } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,7 +20,20 @@ export default function Header() {
   }, []);
 
   const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    if (isHomePage) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate(`/#${id}`);
+    }
+    setIsMobileMenuOpen(false);
+  };
+
+  const goHome = () => {
+    if (isHomePage) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
     setIsMobileMenuOpen(false);
   };
 
@@ -29,21 +45,23 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold gradient-text cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <div className="text-2xl font-bold gradient-text cursor-pointer" onClick={goHome}>
             CoreNexus.it
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={goHome}
               className="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider"
             >
               Home
             </button>
             <button
-              onClick={() => scrollToSection('services')}
-              className="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider"
+              onClick={() => navigate('/servizi')}
+              className={`text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider ${
+                location.pathname === '/servizi' ? 'text-white' : ''
+              }`}
             >
               Servizi
             </button>
@@ -90,13 +108,13 @@ export default function Header() {
         {isMobileMenuOpen && (
           <nav className="md:hidden mt-4 pb-4 space-y-4 glass-effect rounded-2xl p-6 animate-fade-in-up">
             <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={goHome}
               className="block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2"
             >
               Home
             </button>
             <button
-              onClick={() => scrollToSection('services')}
+              onClick={() => { navigate('/servizi'); setIsMobileMenuOpen(false); }}
               className="block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2"
             >
               Servizi

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useLenis } from '@/hooks/useLenis';
 import Index from './pages/Index';
+import Servizi from './pages/Servizi';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import NewTicket from './pages/NewTicket';
@@ -36,6 +37,7 @@ const AppContent = () => {
       <WhatsAppWidget />
       <Routes>
         <Route path="/" element={<Index />} />
+        <Route path="/servizi" element={<Servizi />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/new-ticket" element={<NewTicket />} />
