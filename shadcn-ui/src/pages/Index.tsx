@@ -361,7 +361,7 @@ export default function Index() {
                   Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus.it</a>
                 </p>
                 <p className="text-xs text-gray-600">
-                  v1.3 - 11/02/2026
+                  v1.4 - 17/02/2026
                 </p>
               </div>
             </div>
