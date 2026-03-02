@@ -15,13 +15,14 @@ import {
   Check,
   Globe,
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { breadcrumbSchema } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 
 export default function DoveSiamo() {
+  const navigate = useNavigate();
   const scrollToContact = () => {
-    window.location.href = '/#contact';
+    navigate('/#contact');
   };
 
   const doveSiamoBreadcrumb = breadcrumbSchema([

@@ -18,13 +18,14 @@ import {
   FileWarning,
   ShieldAlert,
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { breadcrumbSchema } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 
 export default function SicurezzaInformatica() {
+  const navigate = useNavigate();
   const scrollToContact = () => {
-    window.location.href = '/#contact';
+    navigate('/#contact');
   };
 
   const sicurezzaBreadcrumb = breadcrumbSchema([

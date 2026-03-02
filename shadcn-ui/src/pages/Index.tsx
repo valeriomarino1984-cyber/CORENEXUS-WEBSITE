@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Header from '@/components/Header';
 import ServicesSection from '@/components/ServicesSection';
 import FeaturesSection from '@/components/FeaturesSection';
@@ -11,10 +12,27 @@ import WhatsAppWidget from '@/components/WhatsAppWidget';
 import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles, Building2, Rocket, Scale, Factory, Gift } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { localBusinessSchema, professionalServiceSchema, breadcrumbSchema } from '@/utils/seoSchemas';
 
 export default function Index() {
+  const location = useLocation();
+
+  // Handle hash-based scrolling when navigating from other pages
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      // Small delay to ensure the DOM is fully rendered
+      const timer = setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [location.hash]);
+
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -311,9 +329,9 @@ export default function Index() {
                     </a>
                   </li>
                   <li>
-                    <a href="#coverage" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
-                      Zone di Copertura
-                    </a>
+                    <Link to="/dove-siamo" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
+                      Dove Siamo
+                    </Link>
                   </li>
                   <li>
                     <a href="#contact" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
