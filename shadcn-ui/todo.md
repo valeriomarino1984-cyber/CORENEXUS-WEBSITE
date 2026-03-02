@@ -1,32 +1,31 @@
-# Piano di Sviluppo - Sito Assistenza Informatica Roma
+# CoreNexus - 3 Pagine Servizi Dedicate
 
-## Obiettivo
-Creare un sito web professionale per servizi di assistenza informatica sistemistica a Roma.
+## Struttura (ispirata a ITquadro.com/networking-e-reti-3)
 
-## File da Creare/Modificare
+Ogni pagina segue questa struttura:
+1. **Hero Section** — Titolo servizio + sottotitolo + bullet points vantaggi + CTA
+2. **Pacchetti Consulenza** — 3 card (Base, Professional, Enterprise) con dettagli
+3. **Sezione Descrittiva** — Testo approfondito + lista tecnologie/servizi specifici
+4. **CTA Contatto** — Rimando al form contatto in homepage
 
-1. **index.html** - Aggiornare il titolo e meta tags per SEO
-2. **src/pages/Index.tsx** - Homepage principale con:
-   - Hero section con call-to-action
-   - Sezione servizi offerti
-   - Sezione vantaggi/caratteristiche
-   - Sezione contatti con informazioni Roma
-   - Footer
+## Pagine da creare
 
-3. **src/components/Header.tsx** - Header con navigazione
-4. **src/components/ServicesSection.tsx** - Sezione servizi dettagliata
-5. **src/components/ContactSection.tsx** - Sezione contatti con form
+1. `/networking-reti` → `src/pages/NetworkingReti.tsx`
+   - Gestione reti aziendali, firewall, VPN, switch, VLAN, Wi-Fi, cablaggio
+   
+2. `/sicurezza-informatica` → `src/pages/SicurezzaInformatica.tsx`
+   - Cybersecurity, antivirus, firewall, monitoraggio Wazuh, penetration test
+   
+3. `/assistenza-sistemistica` → `src/pages/AssistenzaSistemistica.tsx`
+   - Supporto IT completo, manutenzione server, help desk, backup
 
-## Servizi da Includere
-- Assistenza sistemistica Windows/Linux
-- Gestione reti aziendali
-- Sicurezza informatica
-- Backup e disaster recovery
-- Supporto server
-- Assistenza remota e on-site (Roma)
+## File da modificare
+
+4. `src/App.tsx` — Aggiungere le 3 nuove route
+5. `src/components/Header.tsx` — Aggiungere dropdown "Servizi" con link alle 3 pagine
+6. `src/pages/Servizi.tsx` — Aggiungere link alle pagine dedicate nelle card servizi
 
 ## Design
-- Colori professionali (blu/grigio)
-- Layout moderno e responsive
-- Icone per servizi
-- Call-to-action evidenti
+- Stile coerente con il sito: dark theme, glass-effect, gradient-text
+- Animazioni con MorphingSection e TiltCard
+- Responsive mobile-first

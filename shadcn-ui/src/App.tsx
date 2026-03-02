@@ -6,6 +6,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useLenis } from '@/hooks/useLenis';
 import Index from './pages/Index';
 import Servizi from './pages/Servizi';
+import NetworkingReti from './pages/NetworkingReti';
+import SicurezzaInformatica from './pages/SicurezzaInformatica';
+import AssistenzaSistemistica from './pages/AssistenzaSistemistica';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import NewTicket from './pages/NewTicket';
@@ -38,6 +41,9 @@ const AppContent = () => {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/servizi" element={<Servizi />} />
+        <Route path="/networking-reti" element={<NetworkingReti />} />
+        <Route path="/sicurezza-informatica" element={<SicurezzaInformatica />} />
+        <Route path="/assistenza-sistemistica" element={<AssistenzaSistemistica />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/new-ticket" element={<NewTicket />} />
