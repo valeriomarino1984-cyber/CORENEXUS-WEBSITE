@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera } from 'lucide-react';
+import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, MapPin } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
@@ -130,6 +130,16 @@ export default function Header() {
               Chi Siamo
             </button>
             <button
+              onClick={() => {
+                navigate('/dove-siamo');
+              }}
+              className={`text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider ${
+                location.pathname === '/dove-siamo' ? 'text-white' : ''
+              }`}
+            >
+              Dove Siamo
+            </button>
+            <button
               onClick={() => scrollToSection('contact')}
               className="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider"
             >
@@ -213,6 +223,15 @@ export default function Header() {
               className="block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2"
             >
               Chi Siamo
+            </button>
+            <button
+              onClick={() => {
+                navigate('/dove-siamo');
+                setIsMobileMenuOpen(false);
+              }}
+              className="block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2"
+            >
+              Dove Siamo
             </button>
             <button
               onClick={() => scrollToSection('contact')}
