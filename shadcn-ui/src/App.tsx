@@ -10,6 +10,7 @@ import NetworkingReti from './pages/NetworkingReti';
 import SicurezzaInformatica from './pages/SicurezzaInformatica';
 import AssistenzaSistemistica from './pages/AssistenzaSistemistica';
 import ProjectManagement from './pages/ProjectManagement';
+import ImpiantiAllarme from './pages/ImpiantiAllarme';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import NewTicket from './pages/NewTicket';
@@ -46,6 +47,7 @@ const AppContent = () => {
         <Route path="/sicurezza-informatica" element={<SicurezzaInformatica />} />
         <Route path="/assistenza-sistemistica" element={<AssistenzaSistemistica />} />
         <Route path="/project-management" element={<ProjectManagement />} />
+        <Route path="/impianti-allarme-videosorveglianza" element={<ImpiantiAllarme />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/new-ticket" element={<NewTicket />} />

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList } from 'lucide-react';
+import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
@@ -13,7 +13,14 @@ export default function Header() {
   const servicesRef = useRef<HTMLDivElement>(null);
 
   const isHomePage = location.pathname === '/';
-  const isServicesPage = ['/servizi', '/networking-reti', '/sicurezza-informatica', '/assistenza-sistemistica', '/project-management'].includes(location.pathname);
+  const isServicesPage = [
+    '/servizi',
+    '/networking-reti',
+    '/sicurezza-informatica',
+    '/assistenza-sistemistica',
+    '/project-management',
+    '/impianti-allarme-videosorveglianza',
+  ].includes(location.pathname);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,6 +64,7 @@ export default function Header() {
     { name: 'Sicurezza Informatica', path: '/sicurezza-informatica', icon: ShieldCheck },
     { name: 'Assistenza Sistemistica', path: '/assistenza-sistemistica', icon: Wrench },
     { name: 'Project Management', path: '/project-management', icon: ClipboardList },
+    { name: 'Allarme e Videosorveglianza', path: '/impianti-allarme-videosorveglianza', icon: Camera },
   ];
 
   return (
@@ -93,7 +101,7 @@ export default function Header() {
               </button>
 
               {isServicesOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-64 glass-effect rounded-2xl border border-white/10 shadow-2xl overflow-hidden animate-fade-in-up">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 glass-effect rounded-2xl border border-white/10 shadow-2xl overflow-hidden animate-fade-in-up">
                   {serviceLinks.map((link, index) => (
                     <button
                       key={index}
