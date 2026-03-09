@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, MapPin, Globe, FileText, Phone, Cog } from 'lucide-react';
+import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, MapPin, Globe, FileText, Phone, Cog, Cpu } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
@@ -135,6 +135,16 @@ export default function Header() {
             </div>
 
             <button
+              onClick={() => {
+                navigate('/tecnologie');
+              }}
+              className={`text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap ${
+                location.pathname === '/tecnologie' ? 'text-white' : ''
+              }`}
+            >
+              Tecnologie
+            </button>
+            <button
               onClick={() => scrollToSection('about')}
               className="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap"
             >
@@ -229,6 +239,20 @@ export default function Header() {
               )}
             </div>
 
+            <button
+              onClick={() => {
+                navigate('/tecnologie');
+                setIsMobileMenuOpen(false);
+              }}
+              className={`block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2 ${
+                location.pathname === '/tecnologie' ? 'text-white' : ''
+              }`}
+            >
+              <span className="flex items-center gap-2">
+                <Cpu className="w-4 h-4 text-blue-400" />
+                Tecnologie
+              </span>
+            </button>
             <button
               onClick={() => scrollToSection('about')}
               className="block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2"
