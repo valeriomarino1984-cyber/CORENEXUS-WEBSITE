@@ -64,15 +64,15 @@ export default function Header() {
 
   const serviceLinks = [
     { name: 'Tutti i Servizi', path: '/servizi', icon: null },
+    { name: 'Contratti di Manutenzione', path: '/contratti-manutenzione', icon: FileText },
+    { name: 'Assistenza Sistemistica', path: '/assistenza-sistemistica', icon: Wrench },
+    { name: 'Automazione Processi IT', path: '/automazione-processi', icon: Cog },
+    { name: 'Project Management', path: '/project-management', icon: ClipboardList },
     { name: 'Networking e Reti', path: '/networking-reti', icon: Network },
     { name: 'Sicurezza Informatica', path: '/sicurezza-informatica', icon: ShieldCheck },
-    { name: 'Assistenza Sistemistica', path: '/assistenza-sistemistica', icon: Wrench },
-    { name: 'Project Management', path: '/project-management', icon: ClipboardList },
     { name: 'Allarme e Videosorveglianza', path: '/impianti-allarme-videosorveglianza', icon: Camera },
     { name: 'Siti Web & E-commerce', path: '/siti-web', icon: Globe },
-    { name: 'Contratti di Manutenzione', path: '/contratti-manutenzione', icon: FileText },
     { name: 'Centralini VoIP', path: '/centralini-voip', icon: Phone },
-    { name: 'Automazione Processi IT', path: '/automazione-processi', icon: Cog },
   ];
 
   return (
