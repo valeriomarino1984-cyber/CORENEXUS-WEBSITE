@@ -75,21 +75,21 @@ export default function ImpiantiAllarme() {
   const alarmBrands = [
     {
       name: 'Hikvision',
-      logo: 'https://mgx-backend-cdn.metadl.com/generate/images/720946/2026-03-09/2063284d-db2f-4ed8-a3d5-349780485b47.png',
+      logo: '/assets/brands/hikvision-logo.png',
       description: 'Leader mondiale nella produzione di sistemi di sicurezza. Hikvision offre centrali di allarme ibride con tecnologia AX PRO, sensori wireless avanzati e integrazione completa con i sistemi di videosorveglianza.',
       highlights: ['Centrali AX PRO wireless', 'Sensori PIR con immunità animali', 'Integrazione TVCC nativa', 'App Hik-Connect'],
       category: 'Allarme & Videosorveglianza',
     },
     {
       name: 'Ajax Systems',
-      logo: 'https://mgx-backend-cdn.metadl.com/generate/images/720946/2026-03-09/d0a9d850-0f57-4950-a5ee-f4030f642d23.png',
+      logo: '/assets/brands/ajax-logo.jpg',
       description: 'Il sistema di allarme wireless più premiato d\'Europa. Ajax combina design elegante, tecnologia proprietaria Jeweller e affidabilità certificata di grado 2 per una protezione senza compromessi.',
       highlights: ['Tecnologia Jeweller fino a 2km', 'Grado 2 certificato EN 50131', 'Verifica foto allarme', 'Batterie fino a 7 anni'],
       category: 'Allarme',
     },
     {
       name: 'Risco',
-      logo: 'https://mgx-backend-cdn.metadl.com/generate/images/720946/2026-03-09/248c610e-7577-4150-85b1-e60854142b08.png',
+      logo: '/assets/brands/risco-logo.jpg',
       description: 'Soluzioni professionali di sicurezza dal 1978. Risco è sinonimo di affidabilità con le sue centrali LightSYS e ProSYS, ideali per installazioni residenziali e commerciali di ogni dimensione.',
       highlights: ['Centrali LightSYS & ProSYS', 'Rilevatori VDT anti-mascheramento', 'Cloud RISCO per gestione remota', 'Oltre 45 anni di esperienza'],
       category: 'Allarme',
@@ -99,7 +99,7 @@ export default function ImpiantiAllarme() {
   const cctvBrands = [
     {
       name: 'Hikvision',
-      logo: 'https://mgx-backend-cdn.metadl.com/generate/images/720946/2026-03-09/2063284d-db2f-4ed8-a3d5-349780485b47.png',
+      logo: 'https://mgx-backend-cdn.metadl.com/generate/images/720946/2026-03-09/ee0f1c86-8565-436a-8215-c49fb2a849f1.png',
       description: 'N°1 al mondo nella videosorveglianza. Hikvision offre telecamere IP fino a 32MP, tecnologia ColorVu per immagini a colori 24/7, AcuSense con AI per ridurre i falsi allarmi e soluzioni NVR professionali.',
       highlights: ['Telecamere fino a 32MP', 'ColorVu visione a colori H24', 'AcuSense AI anti falsi allarmi', 'NVR fino a 64 canali'],
       category: 'Videosorveglianza',
@@ -290,7 +290,7 @@ export default function ImpiantiAllarme() {
           </div>
         </section>
 
-        {/* Brand Partners Section - Allarme */}
+        {/* Brand Partners Section */}
         <section className="py-24 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-emerald-950/10 to-black" />
           <div className="max-w-7xl mx-auto relative z-10">
