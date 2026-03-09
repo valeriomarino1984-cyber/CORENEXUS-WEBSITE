@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, MapPin, Globe, FileText, Phone } from 'lucide-react';
+import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, MapPin, Globe, FileText, Phone, Cog } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
@@ -23,6 +23,7 @@ export default function Header() {
     '/siti-web',
     '/contratti-manutenzione',
     '/centralini-voip',
+    '/automazione-processi',
   ].includes(location.pathname);
 
   useEffect(() => {
@@ -71,6 +72,7 @@ export default function Header() {
     { name: 'Siti Web & E-commerce', path: '/siti-web', icon: Globe },
     { name: 'Contratti di Manutenzione', path: '/contratti-manutenzione', icon: FileText },
     { name: 'Centralini VoIP', path: '/centralini-voip', icon: Phone },
+    { name: 'Automazione Processi IT', path: '/automazione-processi', icon: Cog },
   ];
 
   return (

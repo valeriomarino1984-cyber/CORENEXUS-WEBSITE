@@ -14,6 +14,7 @@ import ImpiantiAllarme from './pages/ImpiantiAllarme';
 import SitiWeb from './pages/SitiWeb';
 import ContrattiManutenzione from './pages/ContrattiManutenzione';
 import CentraliniVoip from './pages/CentraliniVoip';
+import AutomazioneProcessi from './pages/AutomazioneProcessi';
 import DoveSiamo from './pages/DoveSiamo';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -55,6 +56,7 @@ const AppContent = () => {
         <Route path="/siti-web" element={<SitiWeb />} />
         <Route path="/contratti-manutenzione" element={<ContrattiManutenzione />} />
         <Route path="/centralini-voip" element={<CentraliniVoip />} />
+        <Route path="/automazione-processi" element={<AutomazioneProcessi />} />
         <Route path="/dove-siamo" element={<DoveSiamo />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
