@@ -7,7 +7,7 @@ export default function ServicesSection() {
   const services = [
     {
       icon: Wrench,
-      title: 'Assistenza sistemistica professionale',
+      title: 'Consulenza sistemistica professionale',
       description:
         'Offriamo supporto tecnico informatico completo per infrastrutture aziendali on-premise e cloud. Monitoraggio costante, manutenzione preventiva e interventi rapidi da remoto o in sede. Le nostre soluzioni sistemistiche garantiscono continuità operativa, stabilità dei sistemi e riduzione dei tempi di fermo.',
       gradient: 'from-blue-500 to-cyan-500',

@@ -50,7 +50,7 @@ export default function Servizi() {
         "name": "Servizi IT CoreNexus Technology Solution",
         "description": "Elenco completo dei servizi informatici offerti da CoreNexus Technology Solution a Roma",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Assistenza Sistemistica Professionale" },
+          { "@type": "ListItem", "position": 1, "name": "Consulenza Sistemistica Professionale" },
           { "@type": "ListItem", "position": 2, "name": "Gestione Reti Aziendali" },
           { "@type": "ListItem", "position": 3, "name": "Sicurezza Informatica" },
           { "@type": "ListItem", "position": 4, "name": "Videosorveglianza Hikvision" },
@@ -67,7 +67,7 @@ export default function Servizi() {
   const mainServices = [
     {
       icon: Wrench,
-      title: 'Assistenza sistemistica professionale',
+      title: 'Consulenza sistemistica professionale',
       shortDesc: 'Supporto tecnico completo per infrastrutture aziendali on-premise e cloud.',
       details: [
         'Monitoraggio costante e manutenzione preventiva',
@@ -256,7 +256,7 @@ export default function Servizi() {
     <>
       <SEO
         title="Servizi IT per Aziende a Roma | CoreNexus"
-        description="Scopri tutti i servizi informatici di CoreNexus Technology Solution: assistenza sistemistica, gestione reti, cybersecurity, videosorveglianza Hikvision, server enterprise, centralini VoIP FreePBX e creazione siti web a Roma."
+        description="Scopri tutti i servizi informatici di CoreNexus Technology Solution: consulenza sistemistica, gestione reti, cybersecurity, videosorveglianza Hikvision, server enterprise, centralini VoIP FreePBX e creazione siti web a Roma."
         keywords={[
           'servizi IT Roma',
           'assistenza informatica aziendale',

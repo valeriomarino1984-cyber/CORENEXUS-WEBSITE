@@ -65,7 +65,7 @@ export default function Header() {
   const serviceLinks = [
     { name: 'Tutti i Servizi', path: '/servizi', icon: null },
     { name: 'Contratti di Manutenzione', path: '/contratti-manutenzione', icon: FileText },
-    { name: 'Assistenza Sistemistica', path: '/assistenza-sistemistica', icon: Wrench },
+    { name: 'Consulenza Sistemistica', path: '/assistenza-sistemistica', icon: Wrench },
     { name: 'Automazione Processi IT', path: '/automazione-processi', icon: Cog },
     { name: 'Project Management', path: '/project-management', icon: ClipboardList },
     { name: 'Networking e Reti', path: '/networking-reti', icon: Network },

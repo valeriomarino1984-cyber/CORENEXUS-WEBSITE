@@ -47,7 +47,7 @@ export const professionalServiceSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "CoreNexus Technology Solution - Assistenza Informatica Aziendale",
-  "description": "Servizi IT professionali per aziende a Roma: assistenza sistemistica, gestione reti, sicurezza informatica, videosorveglianza e server enterprise",
+  "description": "Servizi IT professionali per aziende a Roma: consulenza sistemistica, gestione reti, sicurezza informatica, videosorveglianza e server enterprise",
   "provider": {
     "@type": "Organization",
     "name": "CoreNexus Technology Solution"

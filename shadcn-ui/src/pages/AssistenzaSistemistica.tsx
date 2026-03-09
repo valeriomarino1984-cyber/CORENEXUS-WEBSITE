@@ -31,7 +31,7 @@ export default function AssistenzaSistemistica() {
   const assistenzaBreadcrumb = breadcrumbSchema([
     { name: 'Home', url: '/' },
     { name: 'Servizi', url: '/servizi' },
-    { name: 'Assistenza Sistemistica', url: '/assistenza-sistemistica' },
+    { name: 'Consulenza Sistemistica', url: '/assistenza-sistemistica' },
   ]);
 
   const assistenzaSchema = {
@@ -40,7 +40,7 @@ export default function AssistenzaSistemistica() {
       assistenzaBreadcrumb,
       {
         "@type": "Service",
-        "name": "Assistenza Sistemistica Professionale",
+        "name": "Consulenza Sistemistica Professionale",
         "description": "Supporto IT completo per aziende a Roma: manutenzione server, help desk, backup, gestione infrastrutture, monitoraggio sistemi",
         "provider": {
           "@type": "Organization",
@@ -51,7 +51,7 @@ export default function AssistenzaSistemistica() {
           "@type": "City",
           "name": "Roma"
         },
-        "serviceType": "Assistenza Sistemistica"
+        "serviceType": "Consulenza Sistemistica"
       }
     ]
   };
@@ -133,10 +133,10 @@ export default function AssistenzaSistemistica() {
   return (
     <>
       <SEO
-        title="Assistenza Sistemistica Roma | Supporto IT Aziendale - CoreNexus Technology Solution"
-        description="Assistenza sistemistica professionale per aziende a Roma. Manutenzione server, help desk, monitoraggio 24/7, backup, gestione infrastrutture IT. Supporto rapido e affidabile."
+        title="Consulenza Sistemistica Roma | Supporto IT Aziendale - CoreNexus Technology Solution"
+        description="Consulenza sistemistica professionale per aziende a Roma. Manutenzione server, help desk, monitoraggio 24/7, backup, gestione infrastrutture IT. Supporto rapido e affidabile."
         keywords={[
-          'assistenza sistemistica Roma',
+          'consulenza sistemistica Roma',
           'supporto IT aziendale',
           'manutenzione server Roma',
           'help desk aziendale',
@@ -183,7 +183,7 @@ export default function AssistenzaSistemistica() {
 
                   <h1 className="text-5xl md:text-7xl font-bold leading-tight">
                     <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 bg-clip-text text-transparent">
-                      Assistenza Sistemistica
+                      Consulenza Sistemistica
                     </span>
                   </h1>
 
@@ -243,7 +243,7 @@ export default function AssistenzaSistemistica() {
             <MorphingSection>
               <div className="text-center space-y-6 mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Pacchetti di Assistenza Sistemistica
+                  Pacchetti di Consulenza Sistemistica
                 </h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
                   Pacchetti flessibili per ogni esigenza: dal supporto occasionale alla gestione completa dell'infrastruttura IT.
@@ -317,20 +317,20 @@ export default function AssistenzaSistemistica() {
               <div className="space-y-12">
                 <div className="text-center space-y-6">
                   <h2 className="text-4xl md:text-5xl font-bold text-white">
-                    Assistenza Sistemistica nel Dettaglio
+                    Consulenza Sistemistica nel Dettaglio
                   </h2>
                   <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 to-teal-500 mx-auto rounded-full" />
                 </div>
 
                 <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
                   <p>
-                    L'assistenza sistemistica è il <strong className="text-white">cuore pulsante di ogni infrastruttura IT
+                    La consulenza sistemistica è il <strong className="text-white">cuore pulsante di ogni infrastruttura IT
                     aziendale</strong>. Senza un supporto tecnico competente e tempestivo, anche la migliore
                     tecnologia può diventare un ostacolo invece che un vantaggio competitivo.
                   </p>
 
                   <p>
-                    Il nostro servizio di assistenza sistemistica copre <strong className="text-white">l'intero ciclo di vita
+                    Il nostro servizio di consulenza sistemistica copre <strong className="text-white">l'intero ciclo di vita
                     dei sistemi IT</strong>: dalla progettazione e installazione, alla configurazione, monitoraggio,
                     manutenzione preventiva e risoluzione dei problemi.
                   </p>
