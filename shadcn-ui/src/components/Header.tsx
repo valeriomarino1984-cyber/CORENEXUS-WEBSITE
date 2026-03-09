@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, MapPin, Globe, FileText, Phone, Cog, Cpu } from 'lucide-react';
+import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, MapPin, Globe, FileText, Phone, Cog, Cpu, Briefcase } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
@@ -148,7 +148,7 @@ export default function Header() {
               onClick={() => scrollToSection('about')}
               className="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap"
             >
-              Chi Siamo
+              Cosa Facciamo
             </button>
             <button
               onClick={() => {
@@ -257,7 +257,10 @@ export default function Header() {
               onClick={() => scrollToSection('about')}
               className="block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2"
             >
-              Chi Siamo
+              <span className="flex items-center gap-2">
+                <Briefcase className="w-4 h-4 text-blue-400" />
+                Cosa Facciamo
+              </span>
             </button>
             <button
               onClick={() => {

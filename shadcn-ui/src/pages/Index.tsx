@@ -11,7 +11,7 @@ import ContactSection from '@/components/ContactSection';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
 import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Sparkles, Building2, Rocket, Scale, Factory, Gift } from 'lucide-react';
+import { ArrowRight, Sparkles, Building2, Rocket, Scale, Factory, Gift, Server, ShieldCheck, Cog, CheckCircle } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { localBusinessSchema, professionalServiceSchema, breadcrumbSchema } from '@/utils/seoSchemas';
 
@@ -40,7 +40,7 @@ export default function Index() {
   const homeBreadcrumb = breadcrumbSchema([
     { name: 'Home', url: '/' },
     { name: 'Servizi', url: '/#services' },
-    { name: 'Chi Siamo', url: '/#about' },
+    { name: 'Cosa Facciamo', url: '/#about' },
     { name: 'Contatti', url: '/#contact' }
   ]);
 
@@ -74,6 +74,35 @@ export default function Index() {
       description: "Integriamo sistemi, miglioriamo affidabilità e sicurezza dell'infrastruttura IT.",
       gradient: "from-emerald-500 to-teal-500"
     }
+  ];
+
+  const cosaFacciamo = [
+    {
+      icon: Server,
+      title: "Infrastrutture IT",
+      description: "Progettazione e gestione di server, reti e ambienti virtualizzati.",
+      gradient: "from-blue-500 to-indigo-600"
+    },
+    {
+      icon: ShieldCheck,
+      title: "Cyber Security",
+      description: "Protezione dei sistemi e dei dati aziendali con soluzioni di sicurezza avanzate.",
+      gradient: "from-red-500 to-rose-600"
+    },
+    {
+      icon: Cog,
+      title: "Automazione IT",
+      description: "Ottimizzazione dei processi tecnologici tramite automazione e integrazione dei sistemi.",
+      gradient: "from-purple-500 to-violet-600"
+    }
+  ];
+
+  const percheSceglierci = [
+    "Supporto tecnico specializzato",
+    "Infrastrutture progettate per crescere",
+    "Monitoraggio e prevenzione dei problemi",
+    "Soluzioni scalabili e sicure",
+    "Interventi rapidi e professionali"
   ];
 
   return (
@@ -154,52 +183,70 @@ export default function Index() {
           </div>
         </section>
 
-        {/* Chi Siamo Section - Dark Glassmorphism */}
+        {/* Cosa Facciamo Section - Dark Glassmorphism */}
         <section id="about" className="py-24 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/50 to-black" />
           <div className="max-w-6xl mx-auto relative z-10">
             <div className="text-center space-y-8 animate-fade-in-up">
-              <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">Chi siamo</h2>
+              <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">Cosa Facciamo</h2>
               
-              <div className="space-y-6 text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto">
-                <p className="text-xl">
-                  Siamo un team specializzato in <strong>assistenza informatica aziendale</strong> e <strong>servizi sistemistici professionali</strong> a Roma e provincia, 
-                  dedicato a imprese che desiderano migliorare le proprie infrastrutture tecnologiche.
-                </p>
-                
-                <p>
-                  La nostra esperienza copre tutto il ciclo di vita dei sistemi IT: progettazione, implementazione, monitoraggio e manutenzione di reti aziendali, 
-                  server enterprise, sistemi di sicurezza informatica e videosorveglianza nelle zone di Roma Sud, Ostia, Fiumicino, EUR, Acilia, Pomezia e limitrofe.
-                </p>
-                
-                <p>
-                  Con un approccio orientato alla sicurezza e all'efficienza, aiutiamo le aziende a ridurre i costi operativi, 
-                  prevenire interruzioni del servizio e proteggere i propri dati sensibili.
-                </p>
+              <p className="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto">
+                Offriamo soluzioni IT complete per garantire sicurezza, efficienza e continuità operativa alla tua azienda.
+              </p>
+
+              {/* Tre blocchi principali */}
+              <div className="pt-8 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                {cosaFacciamo.map((item, index) => (
+                  <article 
+                    key={index}
+                    className="p-10 rounded-3xl glass-effect hover:bg-white/10 transition-all duration-500 card-hover group text-center"
+                    style={{ animationDelay: `${index * 150}ms` }}
+                  >
+                    <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                      <item.icon className="w-10 h-10 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
+                    <p className="text-gray-300 leading-relaxed text-lg">
+                      {item.description}
+                    </p>
+                  </article>
+                ))}
               </div>
 
-              <div className="pt-12">
-                <h3 className="text-3xl font-semibold text-white mb-8">I nostri obiettivi</h3>
-                <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                  {[
-                    'Garantire infrastrutture informatiche performanti e sicure',
-                    'Fornire supporto sistemistico continuo e professionale',
-                    'Ottimizzare la gestione dei server e delle reti aziendali'
-                  ].map((goal, index) => (
-                    <article 
+              {/* Perché scegliere CoreNexus Technology Solution */}
+              <div className="pt-16">
+                <h3 className="text-3xl md:text-4xl font-semibold text-white mb-10">
+                  Perché scegliere CoreNexus Technology Solution
+                </h3>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+                  {percheSceglierci.map((item, index) => (
+                    <div 
                       key={index}
-                      className="p-8 rounded-3xl glass-effect hover:bg-white/10 transition-all duration-500 card-hover group"
+                      className="flex items-center gap-4 p-6 rounded-2xl glass-effect hover:bg-white/10 transition-all duration-500 group"
                       style={{ animationDelay: `${index * 100}ms` }}
                     >
-                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                        <span className="text-2xl font-bold text-white">{index + 1}</span>
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-emerald-500/20">
+                        <CheckCircle className="w-5 h-5 text-white" />
                       </div>
-                      <p className="text-gray-200 font-medium leading-relaxed">
-                        {goal}
+                      <p className="text-gray-200 font-medium leading-relaxed text-left">
+                        {item}
                       </p>
-                    </article>
+                    </div>
                   ))}
                 </div>
+              </div>
+
+              {/* CTA */}
+              <div className="pt-10">
+                <Button
+                  size="lg"
+                  onClick={scrollToContact}
+                  className="group premium-button text-white px-12 py-7 text-lg rounded-2xl font-semibold"
+                  aria-label="Scopri come possiamo aiutarti"
+                >
+                  Scopri come possiamo aiutarti
+                  <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                </Button>
               </div>
             </div>
           </div>
@@ -325,7 +372,7 @@ export default function Index() {
                   </li>
                   <li>
                     <a href="#about" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
-                      Chi Siamo
+                      Cosa Facciamo
                     </a>
                   </li>
                   <li>
@@ -379,7 +426,7 @@ export default function Index() {
                   Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus Technology Solution</a>
                 </p>
                 <p className="text-xs text-gray-600">
-                  v1.7 - 09/03/2026
+                  v1.8 - 09/03/2026
                 </p>
               </div>
             </div>
