@@ -15,6 +15,7 @@ Deno.serve(async (req) => {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
       },
     });
   }
@@ -58,20 +59,18 @@ Deno.serve(async (req) => {
 
     console.log(`[${requestId}] Processing contact form submission from:`, email);
 
-    // Format message for Telegram
-    const telegramMessage = `
-🔔 *Nuovo Contatto da CoreNexus.it*
+    // Format message for Telegram - use HTML parse mode to avoid Markdown escaping issues
+    const telegramMessage = `🔔 <b>Nuovo Contatto da CoreNexus.it</b>
 
-👤 *Nome:* ${name}
-📧 *Email:* ${email}
-📱 *Telefono:* ${phone || 'Non fornito'}
+👤 <b>Nome:</b> ${escapeHtml(name)}
+📧 <b>Email:</b> ${escapeHtml(email)}
+📱 <b>Telefono:</b> ${escapeHtml(phone || 'Non fornito')}
 
-💬 *Messaggio:*
-${message}
+💬 <b>Messaggio:</b>
+${escapeHtml(message)}
 
 ---
-_Inviato dal form contatti del sito CoreNexus.it_
-    `.trim();
+<i>Inviato dal form contatti del sito CoreNexus.it</i>`;
 
     // Send message to Telegram
     console.log(`[${requestId}] Sending message to Telegram chat ${TELEGRAM_CHAT_ID}`);
@@ -86,7 +85,7 @@ _Inviato dal form contatti del sito CoreNexus.it_
       body: JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
         text: telegramMessage,
-        parse_mode: 'Markdown',
+        parse_mode: 'HTML',
       }),
     });
 
@@ -131,3 +130,12 @@ _Inviato dal form contatti del sito CoreNexus.it_
     );
   }
 });
+
+// Helper function to escape HTML special characters
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
