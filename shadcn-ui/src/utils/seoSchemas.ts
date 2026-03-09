@@ -3,7 +3,7 @@
 export const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "CoreNexus",
+  "name": "CoreNexus Technology Solution",
   "image": "/images/photo1766412531.jpg",
   "description": "Assistenza informatica e supporto sistemistico professionale per aziende a Roma Sud, Ostia, Fiumicino, EUR e provincia",
   "url": "https://corenexus.it",
@@ -46,11 +46,11 @@ export const localBusinessSchema = {
 export const professionalServiceSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "name": "CoreNexus - Assistenza Informatica Aziendale",
+  "name": "CoreNexus Technology Solution - Assistenza Informatica Aziendale",
   "description": "Servizi IT professionali per aziende a Roma: assistenza sistemistica, gestione reti, sicurezza informatica, videosorveglianza e server enterprise",
   "provider": {
     "@type": "Organization",
-    "name": "CoreNexus"
+    "name": "CoreNexus Technology Solution"
   },
   "areaServed": {
     "@type": "State",
@@ -98,7 +98,7 @@ export const serviceSchema = (serviceName: string, description: string) => ({
   "description": description,
   "provider": {
     "@type": "Organization",
-    "name": "CoreNexus",
+    "name": "CoreNexus Technology Solution",
     "url": "https://corenexus.it"
   },
   "areaServed": {

@@ -44,7 +44,7 @@ export default function SicurezzaInformatica() {
         "description": "Servizi di cybersecurity per aziende a Roma: firewall, antivirus, monitoraggio, penetration test, compliance GDPR",
         "provider": {
           "@type": "Organization",
-          "name": "CoreNexus",
+          "name": "CoreNexus Technology Solution",
           "url": "https://corenexus.it"
         },
         "areaServed": {
@@ -133,7 +133,7 @@ export default function SicurezzaInformatica() {
   return (
     <>
       <SEO
-        title="Sicurezza Informatica Aziendale Roma | Cybersecurity PMI - CoreNexus"
+        title="Sicurezza Informatica Aziendale Roma | Cybersecurity PMI - CoreNexus Technology Solution"
         description="Servizi di sicurezza informatica per aziende a Roma. Firewall, monitoraggio SIEM Wazuh, vulnerability assessment, backup, compliance GDPR. Proteggiamo la tua azienda dalle minacce cyber."
         keywords={[
           'sicurezza informatica Roma',
@@ -443,9 +443,9 @@ export default function SicurezzaInformatica() {
         <footer className="bg-black border-t border-white/10 py-12 px-6">
           <div className="max-w-7xl mx-auto text-center space-y-4">
             <p className="text-gray-400 text-sm">
-              © 2025 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus.it</Link> - Tutti i diritti riservati.
+              © 2025 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</Link> - Tutti i diritti riservati.
             </p>
-            <p className="text-xs text-gray-600">v1.4 - 17/02/2026</p>
+            <p className="text-xs text-gray-600">v1.5 - 09/03/2026</p>
           </div>
         </footer>
 

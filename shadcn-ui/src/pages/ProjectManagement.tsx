@@ -59,7 +59,7 @@ export default function ProjectManagement() {
         "description": "Servizi di Project Management IT e Cyber Security a Roma. Gestione progetti, coordinamento stakeholder, monitoraggio SAL.",
         "provider": {
           "@type": "Organization",
-          "name": "CoreNexus",
+          "name": "CoreNexus Technology Solution",
           "url": "https://corenexus.it"
         },
         "areaServed": {
@@ -145,7 +145,7 @@ export default function ProjectManagement() {
   return (
     <>
       <SEO
-        title="IT & Cyber Security Project Management Roma | Project Manager - CoreNexus"
+        title="IT & Cyber Security Project Management Roma | Project Manager - CoreNexus Technology Solution"
         description="Servizi di Project Management IT e Cyber Security a Roma. I nostri Project Manager organizzano, gestiscono e supervisionano l'intero processo fino alla consegna con successo."
         keywords={[
           'project management IT Roma',
@@ -465,9 +465,9 @@ export default function ProjectManagement() {
         <footer className="bg-black border-t border-white/10 py-12 px-6">
           <div className="max-w-7xl mx-auto text-center space-y-4">
             <p className="text-gray-400 text-sm">
-              © 2025 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus.it</Link> - Tutti i diritti riservati.
+              © 2025 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</Link> - Tutti i diritti riservati.
             </p>
-            <p className="text-xs text-gray-600">v1.4 - 17/02/2026</p>
+            <p className="text-xs text-gray-600">v1.5 - 09/03/2026</p>
           </div>
         </footer>
 

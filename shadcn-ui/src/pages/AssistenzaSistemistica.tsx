@@ -44,7 +44,7 @@ export default function AssistenzaSistemistica() {
         "description": "Supporto IT completo per aziende a Roma: manutenzione server, help desk, backup, gestione infrastrutture, monitoraggio sistemi",
         "provider": {
           "@type": "Organization",
-          "name": "CoreNexus",
+          "name": "CoreNexus Technology Solution",
           "url": "https://corenexus.it"
         },
         "areaServed": {
@@ -133,7 +133,7 @@ export default function AssistenzaSistemistica() {
   return (
     <>
       <SEO
-        title="Assistenza Sistemistica Roma | Supporto IT Aziendale - CoreNexus"
+        title="Assistenza Sistemistica Roma | Supporto IT Aziendale - CoreNexus Technology Solution"
         description="Assistenza sistemistica professionale per aziende a Roma. Manutenzione server, help desk, monitoraggio 24/7, backup, gestione infrastrutture IT. Supporto rapido e affidabile."
         keywords={[
           'assistenza sistemistica Roma',
@@ -451,9 +451,9 @@ export default function AssistenzaSistemistica() {
         <footer className="bg-black border-t border-white/10 py-12 px-6">
           <div className="max-w-7xl mx-auto text-center space-y-4">
             <p className="text-gray-400 text-sm">
-              © 2025 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus.it</Link> - Tutti i diritti riservati.
+              © 2025 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</Link> - Tutti i diritti riservati.
             </p>
-            <p className="text-xs text-gray-600">v1.4 - 17/02/2026</p>
+            <p className="text-xs text-gray-600">v1.5 - 09/03/2026</p>
           </div>
         </footer>
 

@@ -122,7 +122,7 @@ export default function Dashboard() {
     <>
       <SEO
         title="Dashboard Cliente - Area Riservata Supporto IT"
-        description="Gestisci i tuoi ticket di assistenza IT, visualizza lo stato delle richieste e accedi al supporto tecnico CoreNexus per la tua azienda a Roma."
+        description="Gestisci i tuoi ticket di assistenza IT, visualizza lo stato delle richieste e accedi al supporto tecnico CoreNexus Technology Solution per la tua azienda a Roma."
         keywords={[
           'dashboard clienti IT',
           'gestione ticket supporto',

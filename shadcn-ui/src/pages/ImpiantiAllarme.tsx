@@ -48,7 +48,7 @@ export default function ImpiantiAllarme() {
         "description": "Installazione e manutenzione impianti di allarme e videosorveglianza a Roma. Sistemi antintrusione, TVCC, controllo accessi per aziende e privati.",
         "provider": {
           "@type": "Organization",
-          "name": "CoreNexus",
+          "name": "CoreNexus Technology Solution",
           "url": "https://corenexus.it"
         },
         "areaServed": {
@@ -137,7 +137,7 @@ export default function ImpiantiAllarme() {
   return (
     <>
       <SEO
-        title="Impianti di Allarme e Videosorveglianza Roma | TVCC - CoreNexus"
+        title="Impianti di Allarme e Videosorveglianza Roma | TVCC - CoreNexus Technology Solution"
         description="Installazione impianti di allarme e videosorveglianza a Roma. Telecamere IP HD/4K, centrali antintrusione, controllo accessi, monitoraggio remoto per aziende e privati."
         keywords={[
           'impianti allarme Roma',
@@ -445,9 +445,9 @@ export default function ImpiantiAllarme() {
         <footer className="bg-black border-t border-white/10 py-12 px-6">
           <div className="max-w-7xl mx-auto text-center space-y-4">
             <p className="text-gray-400 text-sm">
-              © 2025 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus.it</Link> - Tutti i diritti riservati.
+              © 2025 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</Link> - Tutti i diritti riservati.
             </p>
-            <p className="text-xs text-gray-600">v1.4 - 17/02/2026</p>
+            <p className="text-xs text-gray-600">v1.5 - 09/03/2026</p>
           </div>
         </footer>
 

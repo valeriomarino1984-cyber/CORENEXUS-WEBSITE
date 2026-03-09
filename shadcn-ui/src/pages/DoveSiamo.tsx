@@ -36,7 +36,7 @@ export default function DoveSiamo() {
       doveSiamoBreadcrumb,
       {
         "@type": "LocalBusiness",
-        "name": "CoreNexus",
+        "name": "CoreNexus Technology Solution",
         "description": "Assistenza informatica professionale a Roma Sud, EUR, Ostia, Fiumicino e provincia. Supporto IT aziendale, gestione reti, cybersecurity e videosorveglianza.",
         "url": "https://corenexus.it",
         "areaServed": [
@@ -153,8 +153,8 @@ export default function DoveSiamo() {
   return (
     <>
       <SEO
-        title="Dove Siamo | Zone di Copertura Assistenza IT Roma - CoreNexus"
-        description="CoreNexus opera a Roma Sud, EUR, Ostia, Fiumicino, Pomezia e provincia. Scopri le nostre zone di copertura per assistenza informatica, supporto IT aziendale e interventi on-site rapidi."
+        title="Dove Siamo | Zone di Copertura Assistenza IT Roma - CoreNexus Technology Solution"
+        description="CoreNexus Technology Solution opera a Roma Sud, EUR, Ostia, Fiumicino, Pomezia e provincia. Scopri le nostre zone di copertura per assistenza informatica, supporto IT aziendale e interventi on-site rapidi."
         keywords={[
           'assistenza informatica Roma Sud',
           'supporto IT Ostia',
@@ -231,7 +231,7 @@ export default function DoveSiamo() {
                     allowFullScreen={true}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="Zone di Copertura CoreNexus - Assistenza IT Roma Sud e Litorale"
+                    title="Zone di Copertura CoreNexus Technology Solution - Assistenza IT Roma Sud e Litorale"
                   />
                 </div>
               </div>
@@ -443,9 +443,9 @@ export default function DoveSiamo() {
         <footer className="bg-black border-t border-white/10 py-12 px-6">
           <div className="max-w-7xl mx-auto text-center space-y-4">
             <p className="text-gray-400 text-sm">
-              © 2025 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus.it</Link> - Tutti i diritti riservati.
+              © 2025 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</Link> - Tutti i diritti riservati.
             </p>
-            <p className="text-xs text-gray-600">v1.4 - 17/02/2026</p>
+            <p className="text-xs text-gray-600">v1.5 - 09/03/2026</p>
           </div>
         </footer>
 

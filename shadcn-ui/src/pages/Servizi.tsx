@@ -47,8 +47,8 @@ export default function Servizi() {
       {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        "name": "Servizi IT CoreNexus",
-        "description": "Elenco completo dei servizi informatici offerti da CoreNexus a Roma",
+        "name": "Servizi IT CoreNexus Technology Solution",
+        "description": "Elenco completo dei servizi informatici offerti da CoreNexus Technology Solution a Roma",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Assistenza Sistemistica Professionale" },
           { "@type": "ListItem", "position": 2, "name": "Gestione Reti Aziendali" },
@@ -256,7 +256,7 @@ export default function Servizi() {
     <>
       <SEO
         title="Servizi IT per Aziende a Roma | CoreNexus"
-        description="Scopri tutti i servizi informatici di CoreNexus: assistenza sistemistica, gestione reti, cybersecurity, videosorveglianza Hikvision, server enterprise, centralini VoIP FreePBX e creazione siti web a Roma."
+        description="Scopri tutti i servizi informatici di CoreNexus Technology Solution: assistenza sistemistica, gestione reti, cybersecurity, videosorveglianza Hikvision, server enterprise, centralini VoIP FreePBX e creazione siti web a Roma."
         keywords={[
           'servizi IT Roma',
           'assistenza informatica aziendale',
@@ -612,7 +612,7 @@ export default function Servizi() {
           <div className="max-w-7xl mx-auto">
             <div className="grid md:grid-cols-3 gap-12 mb-12">
               <div className="space-y-4">
-                <h3 className="text-xl font-bold text-white">CoreNexus</h3>
+                <h3 className="text-xl font-bold text-white">CoreNexus Technology Solution</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   Assistenza informatica professionale e supporto sistemistico per aziende a Roma Sud, Ostia, Fiumicino, EUR e provincia.
                 </p>
@@ -643,14 +643,14 @@ export default function Servizi() {
                 <div className="flex items-center justify-center gap-2">
                   <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
                   <p className="text-gray-400 text-sm">
-                    © 2025 <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus.it</a> - Tutti i diritti riservati.
+                    © 2025 <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</a> - Tutti i diritti riservati.
                   </p>
                 </div>
                 <p className="text-xs text-gray-500">
-                  Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus.it</a>
+                  Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus Technology Solution</a>
                 </p>
                 <p className="text-xs text-gray-600">
-                  v1.4 - 17/02/2026
+                  v1.5 - 09/03/2026
                 </p>
               </div>
             </div>

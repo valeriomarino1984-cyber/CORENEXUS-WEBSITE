@@ -305,7 +305,7 @@ export default function Index() {
             <div className="grid md:grid-cols-3 gap-12 mb-12">
               {/* Company Info */}
               <div className="space-y-4">
-                <h3 className="text-xl font-bold text-white">CoreNexus</h3>
+                <h3 className="text-xl font-bold text-white">CoreNexus Technology Solution</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   Assistenza informatica professionale e supporto sistemistico per aziende a Roma Sud, Ostia, Fiumicino, EUR e provincia.
                 </p>
@@ -369,17 +369,17 @@ export default function Index() {
                 <div className="flex items-center justify-center gap-2">
                   <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
                   <p className="text-gray-400 text-sm">
-                    © 2025 <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus.it</a> - Tutti i diritti riservati.
+                    © 2025 <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</a> - Tutti i diritti riservati.
                   </p>
                 </div>
                 <p className="text-xs text-gray-500">
-                  Assistenza informatica Roma | Supporto IT aziendale Ostia | Sistemista professionale Fiumicino | Assistenza IT EUR
+                  Assistenza informatica Roma | Assistenza informatica Ostia | Assistenza informatica Fiumicino | Assistenza informatica EUR | Assistenza informatica Acilia | Assistenza informatica Mostacciano
                 </p>
                 <p className="text-xs text-gray-500">
-                  Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus.it</a>
+                  Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus Technology Solution</a>
                 </p>
                 <p className="text-xs text-gray-600">
-                  v1.4 - 17/02/2026
+                  v1.5 - 04/03/2026
                 </p>
               </div>
             </div>
