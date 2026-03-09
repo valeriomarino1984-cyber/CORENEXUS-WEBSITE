@@ -81,17 +81,20 @@ export default function Header() {
         isScrolled ? 'glass-effect shadow-2xl' : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4">
+      <div className="max-w-7xl mx-auto px-4 lg:px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold gradient-text cursor-pointer" onClick={goHome}>
+          <div
+            className="text-lg lg:text-2xl font-bold gradient-text cursor-pointer whitespace-nowrap flex-shrink-0"
+            onClick={goHome}
+          >
             CoreNexus Technology Solution
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-4 xl:gap-6 ml-6">
             <button
               onClick={goHome}
-              className="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider"
+              className="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap"
             >
               Home
             </button>
@@ -100,7 +103,7 @@ export default function Header() {
             <div ref={servicesRef} className="relative">
               <button
                 onClick={() => setIsServicesOpen(!isServicesOpen)}
-                className={`flex items-center gap-1 text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider ${
+                className={`flex items-center gap-1 text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap ${
                   isServicesPage ? 'text-white' : ''
                 }`}
               >
@@ -133,7 +136,7 @@ export default function Header() {
 
             <button
               onClick={() => scrollToSection('about')}
-              className="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider"
+              className="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap"
             >
               Chi Siamo
             </button>
@@ -141,7 +144,7 @@ export default function Header() {
               onClick={() => {
                 navigate('/dove-siamo');
               }}
-              className={`text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider ${
+              className={`text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap ${
                 location.pathname === '/dove-siamo' ? 'text-white' : ''
               }`}
             >
@@ -149,31 +152,31 @@ export default function Header() {
             </button>
             <button
               onClick={() => scrollToSection('contact')}
-              className="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider"
+              className="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap"
             >
               Contatti
             </button>
             <Button
               onClick={() => navigate('/login')}
               variant="outline"
-              className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-6 py-2 rounded-xl text-sm font-semibold"
+              className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-4 xl:px-6 py-2 rounded-xl text-xs xl:text-sm font-semibold whitespace-nowrap"
             >
-              <LogIn className="w-4 h-4 mr-2" />
-              Area Riservata Clienti
+              <LogIn className="w-4 h-4 mr-1 xl:mr-2" />
+              Area Clienti
             </Button>
             <Button
               onClick={() => navigate('/admin/login')}
               variant="outline"
-              className="glass-effect border-red-500/30 hover:border-red-500/50 text-red-500 hover:bg-red-500/10 px-6 py-2 rounded-xl text-sm font-semibold"
+              className="glass-effect border-red-500/30 hover:border-red-500/50 text-red-500 hover:bg-red-500/10 px-4 xl:px-6 py-2 rounded-xl text-xs xl:text-sm font-semibold whitespace-nowrap"
             >
-              <Shield className="w-4 h-4 mr-2" />
-              Area Riservata Admin
+              <Shield className="w-4 h-4 mr-1 xl:mr-2" />
+              Area Admin
             </Button>
           </nav>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white p-2"
+            className="lg:hidden text-white p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -182,7 +185,7 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <nav className="md:hidden mt-4 pb-4 space-y-2 glass-effect rounded-2xl p-6 animate-fade-in-up">
+          <nav className="lg:hidden mt-4 pb-4 space-y-2 glass-effect rounded-2xl p-6 animate-fade-in-up">
             <button
               onClick={goHome}
               className="block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2"
