@@ -21,6 +21,9 @@ import {
   HardDrive,
   Cloud,
   Sun,
+  Award,
+  Globe,
+  ShieldCheck,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { breadcrumbSchema } from '@/utils/seoSchemas';
@@ -45,7 +48,7 @@ export default function ImpiantiAllarme() {
       {
         "@type": "Service",
         "name": "Impianti di Allarme e Videosorveglianza",
-        "description": "Installazione e manutenzione impianti di allarme e videosorveglianza a Roma. Sistemi antintrusione, TVCC, controllo accessi per aziende e privati.",
+        "description": "Installazione e manutenzione impianti di allarme e videosorveglianza a Roma. Sistemi antintrusione, TVCC, controllo accessi per aziende e privati. Partner ufficiali Hikvision, Ajax, Risco, Dahua.",
         "provider": {
           "@type": "Organization",
           "name": "CoreNexus Technology Solution",
@@ -66,6 +69,48 @@ export default function ImpiantiAllarme() {
     'Controllo remoto da smartphone e tablet ovunque ti trovi',
     'Integrazione con sistemi domotici e controllo accessi',
     'Manutenzione programmata e assistenza tecnica dedicata',
+    'Partner dei maggiori marchi mondiali: Hikvision, Ajax, Risco, Dahua',
+  ];
+
+  const alarmBrands = [
+    {
+      name: 'Hikvision',
+      logo: 'https://mgx-backend-cdn.metadl.com/generate/images/720946/2026-03-09/2063284d-db2f-4ed8-a3d5-349780485b47.png',
+      description: 'Leader mondiale nella produzione di sistemi di sicurezza. Hikvision offre centrali di allarme ibride con tecnologia AX PRO, sensori wireless avanzati e integrazione completa con i sistemi di videosorveglianza.',
+      highlights: ['Centrali AX PRO wireless', 'Sensori PIR con immunità animali', 'Integrazione TVCC nativa', 'App Hik-Connect'],
+      category: 'Allarme & Videosorveglianza',
+    },
+    {
+      name: 'Ajax Systems',
+      logo: 'https://mgx-backend-cdn.metadl.com/generate/images/720946/2026-03-09/d0a9d850-0f57-4950-a5ee-f4030f642d23.png',
+      description: 'Il sistema di allarme wireless più premiato d\'Europa. Ajax combina design elegante, tecnologia proprietaria Jeweller e affidabilità certificata di grado 2 per una protezione senza compromessi.',
+      highlights: ['Tecnologia Jeweller fino a 2km', 'Grado 2 certificato EN 50131', 'Verifica foto allarme', 'Batterie fino a 7 anni'],
+      category: 'Allarme',
+    },
+    {
+      name: 'Risco',
+      logo: 'https://mgx-backend-cdn.metadl.com/generate/images/720946/2026-03-09/248c610e-7577-4150-85b1-e60854142b08.png',
+      description: 'Soluzioni professionali di sicurezza dal 1978. Risco è sinonimo di affidabilità con le sue centrali LightSYS e ProSYS, ideali per installazioni residenziali e commerciali di ogni dimensione.',
+      highlights: ['Centrali LightSYS & ProSYS', 'Rilevatori VDT anti-mascheramento', 'Cloud RISCO per gestione remota', 'Oltre 45 anni di esperienza'],
+      category: 'Allarme',
+    },
+  ];
+
+  const cctvBrands = [
+    {
+      name: 'Hikvision',
+      logo: 'https://mgx-backend-cdn.metadl.com/generate/images/720946/2026-03-09/2063284d-db2f-4ed8-a3d5-349780485b47.png',
+      description: 'N°1 al mondo nella videosorveglianza. Hikvision offre telecamere IP fino a 32MP, tecnologia ColorVu per immagini a colori 24/7, AcuSense con AI per ridurre i falsi allarmi e soluzioni NVR professionali.',
+      highlights: ['Telecamere fino a 32MP', 'ColorVu visione a colori H24', 'AcuSense AI anti falsi allarmi', 'NVR fino a 64 canali'],
+      category: 'Videosorveglianza',
+    },
+    {
+      name: 'Dahua',
+      logo: 'https://mgx-backend-cdn.metadl.com/generate/images/720946/2026-03-09/49fe99b9-34ab-4c51-b7b3-9c0864680864.png',
+      description: 'Secondo produttore mondiale di sistemi di videosorveglianza. Dahua eccelle con la tecnologia WizSense per analisi AI, telecamere TiOC con sirena e luce integrata, e soluzioni Full-Color per riprese notturne cristalline.',
+      highlights: ['WizSense AI integrata', 'TiOC deterrenza attiva', 'Full-Color visione notturna', 'SMD Plus rilevamento smart'],
+      category: 'Videosorveglianza',
+    },
   ];
 
   const technologies = [
@@ -88,9 +133,9 @@ export default function ImpiantiAllarme() {
       ideal: 'Ideale per appartamenti e villette con protezione base antintrusione e videosorveglianza',
       features: [
         'Sopralluogo e progettazione gratuita',
-        'Centrale di allarme wireless',
+        'Centrale di allarme wireless Ajax / Risco',
         'Fino a 8 sensori (volumetrici + contatti)',
-        '2-4 telecamere IP Full HD',
+        '2-4 telecamere IP Hikvision / Dahua Full HD',
         'Videoregistratore NVR 4 canali',
         'App mobile per controllo remoto',
         'Installazione e configurazione completa',
@@ -104,11 +149,11 @@ export default function ImpiantiAllarme() {
       ideal: 'Per uffici, negozi e attività commerciali che necessitano di sicurezza professionale',
       features: [
         'Tutto del pacchetto Casa',
-        'Centrale di allarme filare/ibrida',
+        'Centrale di allarme filare/ibrida Risco ProSYS',
         'Fino a 16 sensori multi-zona',
-        '4-8 telecamere IP 4K con AI',
+        '4-8 telecamere IP Hikvision 4K con AcuSense AI',
         'Videoregistratore NVR 8 canali',
-        'Controllo accessi con badge',
+        'Controllo accessi con badge Hikvision',
         'Collegamento a centrale operativa',
         'Manutenzione annuale inclusa',
       ],
@@ -121,10 +166,10 @@ export default function ImpiantiAllarme() {
       ideal: 'Sicurezza completa per capannoni, magazzini e siti industriali con sorveglianza H24',
       features: [
         'Tutto del pacchetto Business',
-        'Telecamere PTZ e termiche',
+        'Telecamere PTZ e termiche Hikvision / Dahua',
         'Videoregistratore NVR 16+ canali',
         'Protezione perimetrale avanzata',
-        'Analisi video intelligente AI',
+        'Analisi video intelligente AI (AcuSense / WizSense)',
         'Riconoscimento targhe (LPR)',
         'Monitoraggio remoto 24/7',
         'SLA e assistenza prioritaria',
@@ -137,8 +182,8 @@ export default function ImpiantiAllarme() {
   return (
     <>
       <SEO
-        title="Impianti di Allarme e Videosorveglianza Roma | TVCC - CoreNexus Technology Solution"
-        description="Installazione impianti di allarme e videosorveglianza a Roma. Telecamere IP HD/4K, centrali antintrusione, controllo accessi, monitoraggio remoto per aziende e privati."
+        title="Impianti di Allarme e Videosorveglianza Roma | Hikvision Ajax Risco Dahua - CoreNexus Technology Solution"
+        description="Installazione impianti di allarme e videosorveglianza a Roma. Partner Hikvision, Ajax Systems, Risco, Dahua. Telecamere IP HD/4K, centrali antintrusione, controllo accessi per aziende e privati."
         keywords={[
           'impianti allarme Roma',
           'videosorveglianza Roma',
@@ -150,6 +195,10 @@ export default function ImpiantiAllarme() {
           'telecamere 4K',
           'sicurezza aziendale Roma',
           'impianti sicurezza Roma',
+          'Hikvision Roma',
+          'Ajax Systems Roma',
+          'Risco Roma',
+          'Dahua Roma',
         ]}
         canonical="/impianti-allarme-videosorveglianza"
         schema={allarmeSchema}
@@ -193,7 +242,8 @@ export default function ImpiantiAllarme() {
 
                   <p className="text-xl text-gray-400 leading-relaxed">
                     Progettiamo, installiamo e manuteniamo impianti di allarme e sistemi di videosorveglianza
-                    professionali per aziende e privati a Roma e provincia.
+                    professionali per aziende e privati a Roma e provincia. Lavoriamo con i{' '}
+                    <strong className="text-emerald-400">maggiori marchi mondiali</strong> del settore sicurezza.
                   </p>
 
                   <div className="space-y-4">
@@ -240,6 +290,161 @@ export default function ImpiantiAllarme() {
           </div>
         </section>
 
+        {/* Brand Partners Section - Allarme */}
+        <section className="py-24 px-6 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-emerald-950/10 to-black" />
+          <div className="max-w-7xl mx-auto relative z-10">
+            <MorphingSection>
+              <div className="text-center space-y-6 mb-16">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-effect text-emerald-400 text-sm font-semibold">
+                  <Award className="w-4 h-4" />
+                  Partner Ufficiali
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">
+                  I Marchi Leader Mondiali
+                </h2>
+                <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                  Collaboriamo con i <strong className="text-white">più grandi produttori mondiali</strong> di sistemi
+                  di allarme e videosorveglianza per garantirti prodotti affidabili, certificati e all'avanguardia.
+                </p>
+              </div>
+            </MorphingSection>
+
+            {/* Alarm Brands */}
+            <MorphingSection delay={0.1}>
+              <div className="mb-16">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
+                    <Siren className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white">Sistemi di Allarme</h3>
+                  <div className="flex-1 h-px bg-gradient-to-r from-white/20 to-transparent" />
+                </div>
+
+                <div className="grid md:grid-cols-3 gap-8">
+                  {alarmBrands.map((brand, index) => (
+                    <div
+                      key={index}
+                      className="group p-6 rounded-3xl glass-effect border border-white/10 hover:border-emerald-500/30 transition-all duration-500 hover:scale-[1.02]"
+                    >
+                      <div className="h-24 mb-6 flex items-center justify-center rounded-2xl bg-white/5 group-hover:bg-white/10 transition-colors overflow-hidden p-4">
+                        <img
+                          src={brand.logo}
+                          alt={`${brand.name} logo`}
+                          className="max-h-16 max-w-full object-contain filter brightness-90 group-hover:brightness-110 transition-all"
+                        />
+                      </div>
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <h4 className="text-xl font-bold text-white">{brand.name}</h4>
+                          <span className="text-xs px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-medium">
+                            {brand.category}
+                          </span>
+                        </div>
+                        <p className="text-gray-400 text-sm leading-relaxed">{brand.description}</p>
+                        <div className="pt-3 space-y-2">
+                          {brand.highlights.map((highlight, i) => (
+                            <div key={i} className="flex items-center gap-2">
+                              <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                              <span className="text-gray-300 text-sm">{highlight}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </MorphingSection>
+
+            {/* CCTV Brands */}
+            <MorphingSection delay={0.2}>
+              <div>
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
+                    <Camera className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white">Videosorveglianza</h3>
+                  <div className="flex-1 h-px bg-gradient-to-r from-white/20 to-transparent" />
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8">
+                  {cctvBrands.map((brand, index) => (
+                    <div
+                      key={index}
+                      className="group p-8 rounded-3xl glass-effect border border-white/10 hover:border-blue-500/30 transition-all duration-500 hover:scale-[1.02]"
+                    >
+                      <div className="flex flex-col md:flex-row gap-6">
+                        <div className="w-full md:w-40 h-24 flex items-center justify-center rounded-2xl bg-white/5 group-hover:bg-white/10 transition-colors overflow-hidden p-4 flex-shrink-0">
+                          <img
+                            src={brand.logo}
+                            alt={`${brand.name} logo`}
+                            className="max-h-16 max-w-full object-contain filter brightness-90 group-hover:brightness-110 transition-all"
+                          />
+                        </div>
+                        <div className="space-y-3 flex-1">
+                          <div className="flex items-center justify-between">
+                            <h4 className="text-xl font-bold text-white">{brand.name}</h4>
+                            <span className="text-xs px-2 py-1 rounded-full bg-blue-500/20 text-blue-400 font-medium">
+                              {brand.category}
+                            </span>
+                          </div>
+                          <p className="text-gray-400 text-sm leading-relaxed">{brand.description}</p>
+                          <div className="pt-2 grid grid-cols-2 gap-2">
+                            {brand.highlights.map((highlight, i) => (
+                              <div key={i} className="flex items-center gap-2">
+                                <ShieldCheck className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                                <span className="text-gray-300 text-sm">{highlight}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </MorphingSection>
+
+            {/* Brand Trust Banner */}
+            <MorphingSection delay={0.3}>
+              <div className="mt-16 p-8 rounded-3xl glass-effect border border-emerald-500/20 bg-gradient-to-r from-emerald-950/30 to-teal-950/30">
+                <div className="flex flex-col md:flex-row items-center gap-8">
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center flex-shrink-0">
+                      <Globe className="w-8 h-8 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-xl">Perché scegliamo questi brand?</h4>
+                      <p className="text-gray-400 text-sm mt-1">Qualità, affidabilità e innovazione certificata</p>
+                    </div>
+                  </div>
+                  <div className="flex-1 grid sm:grid-cols-3 gap-6">
+                    <div className="text-center">
+                      <div className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                        4+
+                      </div>
+                      <p className="text-gray-400 text-sm mt-1">Brand leader mondiali</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                        100%
+                      </div>
+                      <p className="text-gray-400 text-sm mt-1">Prodotti certificati</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                        3+ anni
+                      </div>
+                      <p className="text-gray-400 text-sm mt-1">Garanzia prodotti</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </MorphingSection>
+          </div>
+        </section>
+
         {/* Packages Section */}
         <section className="py-24 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/50 to-black" />
@@ -251,6 +456,7 @@ export default function ImpiantiAllarme() {
                 </h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
                   Soluzioni complete per ogni esigenza: dalla protezione della casa alla sicurezza industriale.
+                  Tutti i pacchetti includono prodotti <strong className="text-white">Hikvision, Ajax, Risco e Dahua</strong>.
                 </p>
               </div>
             </MorphingSection>
@@ -333,8 +539,11 @@ export default function ImpiantiAllarme() {
                   <p>
                     Progettiamo ogni impianto <strong className="text-white">su misura</strong>, partendo da un
                     sopralluogo tecnico gratuito per analizzare le vulnerabilità del sito e definire la
-                    soluzione più adeguata. Utilizziamo esclusivamente prodotti di brand leader nel settore
-                    della sicurezza.
+                    soluzione più adeguata. Utilizziamo esclusivamente prodotti dei brand leader mondiali:{' '}
+                    <strong className="text-emerald-400">Hikvision</strong>,{' '}
+                    <strong className="text-emerald-400">Ajax Systems</strong>,{' '}
+                    <strong className="text-emerald-400">Risco</strong> e{' '}
+                    <strong className="text-emerald-400">Dahua</strong>.
                   </p>
 
                   <p>
@@ -415,7 +624,7 @@ export default function ImpiantiAllarme() {
                 </h2>
                 <p className="text-xl text-gray-400 max-w-2xl mx-auto">
                   Richiedi un sopralluogo gratuito e senza impegno. Analizziamo il tuo sito
-                  e ti proponiamo la soluzione più adatta alle tue esigenze.
+                  e ti proponiamo la soluzione più adatta alle tue esigenze con i migliori brand del settore.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button
@@ -447,7 +656,7 @@ export default function ImpiantiAllarme() {
             <p className="text-gray-400 text-sm">
               © 2025 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</Link> - Tutti i diritti riservati.
             </p>
-            <p className="text-xs text-gray-600">v1.5 - 09/03/2026</p>
+            <p className="text-xs text-gray-600">v1.6 - 09/03/2026</p>
           </div>
         </footer>
 
