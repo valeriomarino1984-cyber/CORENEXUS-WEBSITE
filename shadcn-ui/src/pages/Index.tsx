@@ -379,7 +379,7 @@ export default function Index() {
                   Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus Technology Solution</a>
                 </p>
                 <p className="text-xs text-gray-600">
-                  v1.5 - 04/03/2026
+                  v1.7 - 09/03/2026
                 </p>
               </div>
             </div>
