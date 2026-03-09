@@ -11,6 +11,9 @@ import SicurezzaInformatica from './pages/SicurezzaInformatica';
 import AssistenzaSistemistica from './pages/AssistenzaSistemistica';
 import ProjectManagement from './pages/ProjectManagement';
 import ImpiantiAllarme from './pages/ImpiantiAllarme';
+import SitiWeb from './pages/SitiWeb';
+import ContrattiManutenzione from './pages/ContrattiManutenzione';
+import CentraliniVoip from './pages/CentraliniVoip';
 import DoveSiamo from './pages/DoveSiamo';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -49,6 +52,9 @@ const AppContent = () => {
         <Route path="/assistenza-sistemistica" element={<AssistenzaSistemistica />} />
         <Route path="/project-management" element={<ProjectManagement />} />
         <Route path="/impianti-allarme-videosorveglianza" element={<ImpiantiAllarme />} />
+        <Route path="/siti-web" element={<SitiWeb />} />
+        <Route path="/contratti-manutenzione" element={<ContrattiManutenzione />} />
+        <Route path="/centralini-voip" element={<CentraliniVoip />} />
         <Route path="/dove-siamo" element={<DoveSiamo />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />

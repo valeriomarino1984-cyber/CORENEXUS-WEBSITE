@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, MapPin } from 'lucide-react';
+import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, MapPin, Globe, FileText, Phone } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
@@ -20,6 +20,9 @@ export default function Header() {
     '/assistenza-sistemistica',
     '/project-management',
     '/impianti-allarme-videosorveglianza',
+    '/siti-web',
+    '/contratti-manutenzione',
+    '/centralini-voip',
   ].includes(location.pathname);
 
   useEffect(() => {
@@ -65,6 +68,9 @@ export default function Header() {
     { name: 'Assistenza Sistemistica', path: '/assistenza-sistemistica', icon: Wrench },
     { name: 'Project Management', path: '/project-management', icon: ClipboardList },
     { name: 'Allarme e Videosorveglianza', path: '/impianti-allarme-videosorveglianza', icon: Camera },
+    { name: 'Siti Web & E-commerce', path: '/siti-web', icon: Globe },
+    { name: 'Contratti di Manutenzione', path: '/contratti-manutenzione', icon: FileText },
+    { name: 'Centralini VoIP', path: '/centralini-voip', icon: Phone },
   ];
 
   return (
