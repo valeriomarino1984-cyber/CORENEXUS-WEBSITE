@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, MapPin, Globe, FileText, Phone, Cog, Cpu, Briefcase } from 'lucide-react';
+import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, Globe, FileText, Phone, Cog, Cpu, Briefcase, Monitor } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
@@ -135,9 +135,7 @@ export default function Header() {
             </div>
 
             <button
-              onClick={() => {
-                navigate('/tecnologie');
-              }}
+              onClick={() => navigate('/tecnologie')}
               className={`text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap ${
                 location.pathname === '/tecnologie' ? 'text-white' : ''
               }`}
@@ -151,9 +149,7 @@ export default function Header() {
               Cosa Facciamo
             </button>
             <button
-              onClick={() => {
-                navigate('/dove-siamo');
-              }}
+              onClick={() => navigate('/dove-siamo')}
               className={`text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap ${
                 location.pathname === '/dove-siamo' ? 'text-white' : ''
               }`}
@@ -165,6 +161,14 @@ export default function Header() {
               className="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap"
             >
               Contatti
+            </button>
+            <button
+              onClick={() => navigate('/assistenza-remota')}
+              className={`text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap ${
+                location.pathname === '/assistenza-remota' ? 'text-white' : ''
+              }`}
+            >
+              Assistenza Remota
             </button>
             <Button
               onClick={() => navigate('/login')}
@@ -276,6 +280,20 @@ export default function Header() {
               className="block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2"
             >
               Contatti
+            </button>
+            <button
+              onClick={() => {
+                navigate('/assistenza-remota');
+                setIsMobileMenuOpen(false);
+              }}
+              className={`block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2 ${
+                location.pathname === '/assistenza-remota' ? 'text-white' : ''
+              }`}
+            >
+              <span className="flex items-center gap-2">
+                <Monitor className="w-4 h-4 text-cyan-400" />
+                Assistenza Remota
+              </span>
             </button>
             <div className="pt-2 space-y-2">
               <Button

@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Send, RefreshCw, Monitor, Download, ExternalLink, Shield, Zap } from 'lucide-react';
+import { Send, RefreshCw } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/lib/supabase';
 
@@ -140,9 +140,8 @@ export default function ContactSection() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
-          {/* Colonna Sinistra - Form Contatti */}
-          <Card className="glass-effect border-white/10 bg-transparent text-white animate-fade-in-up card-hover">
+        <div className="flex justify-center">
+          <Card className="glass-effect border-white/10 bg-transparent text-white animate-fade-in-up card-hover max-w-2xl w-full">
             <CardHeader className="text-center">
               <CardTitle className="text-3xl text-white">Invia un messaggio</CardTitle>
               <CardDescription className="text-lg text-gray-400">
@@ -224,85 +223,6 @@ export default function ContactSection() {
               </form>
             </CardContent>
           </Card>
-
-          {/* Colonna Destra - Assistenza Remota */}
-          <div className="animate-fade-in-up flex flex-col gap-8" style={{ animationDelay: '150ms' }}>
-            <Card className="glass-effect border-white/10 bg-transparent text-white card-hover flex-1">
-              <CardHeader className="text-center pb-4">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center mb-6 mx-auto shadow-lg shadow-cyan-500/30">
-                  <Monitor className="w-10 h-10 text-white" />
-                </div>
-                <CardTitle className="text-3xl text-white">Assistenza Remota</CardTitle>
-                <CardDescription className="text-lg text-gray-400 mt-2">
-                  Ricevi supporto tecnico immediato direttamente sul tuo computer, senza attese e senza spostamenti.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-8">
-                <div className="space-y-4">
-                  <p className="text-gray-300 leading-relaxed text-center">
-                    Utilizziamo <strong className="text-white">UltraViewer</strong>, un software gratuito e sicuro per il controllo remoto del desktop. 
-                    Scaricalo, avvialo e comunicaci il tuo ID per ricevere assistenza in tempo reale.
-                  </p>
-                </div>
-
-                {/* Come funziona */}
-                <div className="space-y-4">
-                  <h4 className="text-xl font-semibold text-white text-center">Come funziona</h4>
-                  <div className="space-y-3">
-                    {[
-                      { step: '1', text: 'Scarica e installa UltraViewer' },
-                      { step: '2', text: 'Avvia il programma sul tuo PC' },
-                      { step: '3', text: 'Comunicaci il tuo ID e la password temporanea' },
-                      { step: '4', text: 'Il nostro tecnico si collegherà in pochi secondi' },
-                    ].map((item, index) => (
-                      <div key={index} className="flex items-center gap-4 p-3 rounded-xl glass-effect hover:bg-white/5 transition-all duration-300">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center flex-shrink-0">
-                          <span className="text-sm font-bold text-white">{item.step}</span>
-                        </div>
-                        <p className="text-gray-300 text-sm font-medium">{item.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Vantaggi */}
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { icon: Zap, label: 'Intervento immediato' },
-                    { icon: Shield, label: 'Connessione sicura' },
-                    { icon: Download, label: 'Software gratuito' },
-                    { icon: Monitor, label: 'Nessuno spostamento' },
-                  ].map((item, index) => (
-                    <div key={index} className="flex items-center gap-2 p-3 rounded-xl glass-effect text-center">
-                      <item.icon className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                      <span className="text-gray-300 text-xs font-medium">{item.label}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Download Button */}
-                <a
-                  href="https://www.ultraviewer.net/en/download.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  <Button
-                    type="button"
-                    className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white py-7 text-lg rounded-2xl font-semibold shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 transition-all duration-300 group"
-                  >
-                    <Download className="mr-2 w-5 h-5 group-hover:animate-bounce" />
-                    Scarica UltraViewer Gratis
-                    <ExternalLink className="ml-2 w-4 h-4 opacity-70" />
-                  </Button>
-                </a>
-
-                <p className="text-xs text-gray-500 text-center">
-                  UltraViewer è un software gratuito per uso personale e commerciale. Compatibile con Windows.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </div>
     </section>
