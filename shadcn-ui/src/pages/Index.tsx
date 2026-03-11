@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import Header from '@/components/Header';
 import ServicesSection from '@/components/ServicesSection';
 import FeaturesSection from '@/components/FeaturesSection';
@@ -17,12 +17,15 @@ import { localBusinessSchema, professionalServiceSchema, breadcrumbSchema } from
 
 export default function Index() {
   const location = useLocation();
+  const orb1Ref = useRef<HTMLDivElement>(null);
+  const orb2Ref = useRef<HTMLDivElement>(null);
+  const orb3Ref = useRef<HTMLDivElement>(null);
+  const orb4Ref = useRef<HTMLDivElement>(null);
 
   // Handle hash-based scrolling when navigating from other pages
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace('#', '');
-      // Small delay to ensure the DOM is fully rendered
       const timer = setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
@@ -32,6 +35,62 @@ export default function Index() {
       return () => clearTimeout(timer);
     }
   }, [location.hash]);
+
+  // Parallax effect on orbs based on scroll position
+  const handleParallax = useCallback(() => {
+    const scrollY = window.scrollY;
+    const speed1 = 0.3;
+    const speed2 = 0.15;
+    const speed3 = 0.2;
+    const speed4 = 0.1;
+
+    if (orb1Ref.current) {
+      orb1Ref.current.style.transform = `translateY(${scrollY * speed1}px) translateX(${Math.sin(scrollY * 0.002) * 30}px)`;
+    }
+    if (orb2Ref.current) {
+      orb2Ref.current.style.transform = `translateY(${scrollY * speed2}px) translateX(${Math.cos(scrollY * 0.003) * 40}px)`;
+    }
+    if (orb3Ref.current) {
+      orb3Ref.current.style.transform = `translateY(${scrollY * speed3}px) translateX(${Math.sin(scrollY * 0.0025) * 25}px)`;
+    }
+    if (orb4Ref.current) {
+      orb4Ref.current.style.transform = `translateY(${scrollY * speed4}px) translateX(${Math.cos(scrollY * 0.002) * 35}px)`;
+    }
+  }, []);
+
+  useEffect(() => {
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleParallax();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [handleParallax]);
+
+  // Scroll-triggered reveal for sections
+  useEffect(() => {
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    revealElements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -133,37 +192,59 @@ export default function Index() {
       <div className="min-h-screen bg-black">
         <Header />
 
-        {/* Hero Section - Apple Premium Style */}
+        {/* Hero Section - Fade-in Zoom + Parallax Orbs */}
         <section className="relative overflow-hidden pt-32 pb-24 px-6 premium-gradient">
           <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,transparent,rgba(255,255,255,0.1),transparent)]" />
           
-          {/* Floating Orbs */}
-          <div className="absolute top-20 left-10 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+          {/* Parallax Floating Orbs */}
+          <div
+            ref={orb1Ref}
+            className="absolute top-10 left-[5%] w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-3xl animate-orb-1 pointer-events-none"
+            style={{ transition: 'transform 0.1s linear' }}
+          />
+          <div
+            ref={orb2Ref}
+            className="absolute bottom-10 right-[5%] w-[450px] h-[450px] bg-purple-500/20 rounded-full blur-3xl animate-orb-2 pointer-events-none"
+            style={{ transition: 'transform 0.1s linear' }}
+          />
+          <div
+            ref={orb3Ref}
+            className="absolute top-[40%] right-[20%] w-[300px] h-[300px] bg-cyan-500/10 rounded-full blur-3xl animate-orb-3 pointer-events-none"
+            style={{ transition: 'transform 0.1s linear' }}
+          />
+          <div
+            ref={orb4Ref}
+            className="absolute bottom-[30%] left-[15%] w-[350px] h-[350px] bg-indigo-500/10 rounded-full blur-3xl animate-orb-1 pointer-events-none"
+            style={{ transition: 'transform 0.1s linear', animationDelay: '3s' }}
+          />
           
           <div className="max-w-7xl mx-auto relative z-10">
-            <div className="text-center space-y-8 animate-fade-in-up">
-              <div className="inline-block">
+            <div className="text-center space-y-8 animate-fade-in-zoom">
+              {/* Badge - stagger 1 */}
+              <div className="inline-block animate-stagger-1">
                 <span className="px-6 py-3 rounded-full glass-effect text-blue-400 text-sm font-semibold tracking-wide flex items-center gap-2 animate-pulse-glow">
                   <Sparkles className="w-4 h-4" />
                   Tecnologia e innovazione al servizio della tua impresa
                 </span>
               </div>
 
-              {/* H1 SEO Optimized - max 150 caratteri, parole chiave principali */}
-              <h1 className="text-6xl md:text-8xl font-bold gradient-text leading-tight tracking-tight">
+              {/* H1 with shimmer gradient - stagger 2 */}
+              <h1 className="text-6xl md:text-8xl font-bold gradient-text-shimmer leading-tight tracking-tight animate-stagger-2">
                 Assistenza Informatica e Supporto IT per Aziende a Roma
               </h1>
 
-              <p className="text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto leading-relaxed font-light">
+              {/* Subtitle - stagger 3 */}
+              <p className="text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto leading-relaxed font-light animate-stagger-3">
                 Aiutiamo le aziende a lavorare senza interruzioni grazie a servizi informatici affidabili: gestione delle reti aziendali, sicurezza informatica, server e sistemi di comunicazione.
               </p>
               
-              <p className="text-lg md:text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed">
+              {/* Location text - stagger 4 */}
+              <p className="text-lg md:text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed animate-stagger-4">
                 Operiamo a Roma Sud, EUR, Ostia, Fiumicino e provincia, con supporto rapido e soluzioni su misura.
               </p>
 
-              <div className="pt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
+              {/* CTA Button - stagger 5 */}
+              <div className="pt-8 flex flex-col sm:flex-row gap-4 justify-center items-center animate-stagger-5">
                 <Button
                   size="lg"
                   onClick={scrollToContact}
@@ -175,7 +256,7 @@ export default function Index() {
                 </Button>
               </div>
 
-              <p className="text-sm text-gray-500 pt-6 flex items-center justify-center gap-2">
+              <p className="text-sm text-gray-500 pt-6 flex items-center justify-center gap-2 animate-stagger-5">
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
                 Soluzioni IT affidabili, sicure e scalabili per la crescita della tua azienda
               </p>
@@ -183,11 +264,11 @@ export default function Index() {
           </div>
         </section>
 
-        {/* Cosa Facciamo Section - Dark Glassmorphism */}
+        {/* Cosa Facciamo Section - Scroll Reveal */}
         <section id="about" className="py-24 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/50 to-black" />
           <div className="max-w-6xl mx-auto relative z-10">
-            <div className="text-center space-y-8 animate-fade-in-up">
+            <div className="text-center space-y-8 reveal-on-scroll">
               <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">Cosa Facciamo</h2>
               
               <p className="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto">
@@ -199,8 +280,8 @@ export default function Index() {
                 {cosaFacciamo.map((item, index) => (
                   <article 
                     key={index}
-                    className="p-10 rounded-3xl glass-effect hover:bg-white/10 transition-all duration-500 card-hover group text-center"
-                    style={{ animationDelay: `${index * 150}ms` }}
+                    className="p-10 rounded-3xl glass-effect hover:bg-white/10 transition-all duration-500 card-hover group text-center reveal-on-scroll"
+                    style={{ transitionDelay: `${index * 150}ms` }}
                   >
                     <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                       <item.icon className="w-10 h-10 text-white" />
@@ -214,7 +295,7 @@ export default function Index() {
               </div>
 
               {/* Perché scegliere CoreNexus Technology Solution */}
-              <div className="pt-16">
+              <div className="pt-16 reveal-on-scroll">
                 <h3 className="text-3xl md:text-4xl font-semibold text-white mb-10">
                   Perché scegliere CoreNexus Technology Solution
                 </h3>
@@ -223,7 +304,7 @@ export default function Index() {
                     <div 
                       key={index}
                       className="flex items-center gap-4 p-6 rounded-2xl glass-effect hover:bg-white/10 transition-all duration-500 group"
-                      style={{ animationDelay: `${index * 100}ms` }}
+                      style={{ transitionDelay: `${index * 100}ms` }}
                     >
                       <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-emerald-500/20">
                         <CheckCircle className="w-5 h-5 text-white" />
@@ -252,11 +333,11 @@ export default function Index() {
           </div>
         </section>
 
-        {/* A Chi Ci Rivolgiamo Section */}
+        {/* A Chi Ci Rivolgiamo Section - Scroll Reveal */}
         <section id="target-audience" className="py-24 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-blue-950/20 to-black" />
           <div className="max-w-7xl mx-auto relative z-10">
-            <div className="text-center space-y-6 mb-16 animate-fade-in-up">
+            <div className="text-center space-y-6 mb-16 reveal-on-scroll">
               <h2 className="text-5xl md:text-6xl font-bold text-white">A chi ci rivolgiamo</h2>
               <p className="text-xl text-gray-400 max-w-3xl mx-auto">
                 Soluzioni IT personalizzate per ogni tipo di realtà aziendale
@@ -267,8 +348,8 @@ export default function Index() {
               {targetAudiences.map((audience, index) => (
                 <article 
                   key={index}
-                  className="p-8 rounded-3xl glass-effect hover:bg-white/10 transition-all duration-500 card-hover group text-center"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  className="p-8 rounded-3xl glass-effect hover:bg-white/10 transition-all duration-500 card-hover group text-center reveal-on-scroll"
+                  style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${audience.gradient} flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                     <audience.icon className="w-8 h-8 text-white" />
@@ -281,7 +362,7 @@ export default function Index() {
               ))}
             </div>
 
-            <div className="text-center">
+            <div className="text-center reveal-on-scroll">
               <Button
                 size="lg"
                 onClick={scrollToContact}
@@ -295,16 +376,16 @@ export default function Index() {
           </div>
         </section>
 
-        {/* Audit IT Gratuito Section */}
+        {/* Audit IT Gratuito Section - Scroll Reveal */}
         <section id="audit" className="py-24 px-6 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-emerald-950/20 to-black" />
           
           {/* Decorative elements */}
-          <div className="absolute top-10 right-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-10 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
+          <div className="absolute top-10 right-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-orb-2" />
+          <div className="absolute bottom-10 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl animate-orb-1" style={{ animationDelay: '1.5s' }} />
           
           <div className="max-w-4xl mx-auto relative z-10">
-            <div className="text-center animate-fade-in-up">
+            <div className="text-center reveal-on-scroll">
               <div className="p-12 rounded-3xl glass-effect border border-emerald-500/30 hover:border-emerald-500/50 transition-all duration-500">
                 <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center mb-8 mx-auto shadow-lg shadow-emerald-500/30">
                   <Gift className="w-10 h-10 text-white" />
@@ -426,7 +507,7 @@ export default function Index() {
                   Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus Technology Solution</a>
                 </p>
                 <p className="text-xs text-gray-600">
-                  v1.8 - 09/03/2026
+                  v1.9 - 11/03/2026
                 </p>
               </div>
             </div>
