@@ -218,8 +218,9 @@ export default function Index() {
             style={{ transition: 'transform 0.1s linear', animationDelay: '3s' }}
           />
           
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div className="text-center space-y-8 animate-fade-in-zoom">
+          {/* Hero content with fade-in zoom on the wrapper */}
+          <div className="max-w-7xl mx-auto relative z-10 animate-fade-in-zoom">
+            <div className="text-center space-y-8">
               {/* Badge - stagger 1 */}
               <div className="inline-block animate-stagger-1">
                 <span className="px-6 py-3 rounded-full glass-effect text-blue-400 text-sm font-semibold tracking-wide flex items-center gap-2 animate-pulse-glow">

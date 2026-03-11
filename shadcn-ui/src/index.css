@@ -257,74 +257,63 @@ html {
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* Fade-in with Zoom Effect */
+/* Fade-in with Zoom Effect for hero container */
 @keyframes fadeInZoom {
   from {
     opacity: 0;
-    transform: scale(0.92) translateY(20px);
+    transform: scale(0.95);
   }
   to {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: scale(1);
   }
 }
 
 .animate-fade-in-zoom {
-  animation: fadeInZoom 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeInZoom 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Staggered Fade-in Zoom for children */
-@keyframes fadeInZoomStagger {
+/* Staggered Fade-in for hero children - uses translate only, no scale conflict */
+@keyframes staggerFadeIn {
   from {
     opacity: 0;
-    transform: scale(0.9) translateY(25px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: translateY(0);
   }
 }
 
 .animate-stagger-1 {
   opacity: 0;
-  animation: fadeInZoomStagger 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+  animation: staggerFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
 }
 
 .animate-stagger-2 {
   opacity: 0;
-  animation: fadeInZoomStagger 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  animation: staggerFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
 }
 
 .animate-stagger-3 {
   opacity: 0;
-  animation: fadeInZoomStagger 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+  animation: staggerFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
 }
 
 .animate-stagger-4 {
   opacity: 0;
-  animation: fadeInZoomStagger 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+  animation: staggerFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
 }
 
 .animate-stagger-5 {
   opacity: 0;
-  animation: fadeInZoomStagger 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+  animation: staggerFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards;
 }
 
 /* Scroll-triggered reveal animation */
-@keyframes revealUp {
-  from {
-    opacity: 0;
-    transform: translateY(60px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(60px) scale(0.95);
+  transform: translateY(60px) scale(0.97);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
