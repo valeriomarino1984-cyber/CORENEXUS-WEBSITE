@@ -217,7 +217,7 @@ html {
     0 0 60px rgba(88, 86, 214, 0.15);
 }
 
-/* Gradient Text */
+/* Gradient Text - static */
 .gradient-text {
   background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
   -webkit-background-clip: text;
@@ -257,11 +257,11 @@ html {
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* Fade-in with Zoom Effect for hero container */
-@keyframes fadeInZoom {
+/* Hero fade-in zoom - applied to the outer wrapper only */
+@keyframes heroFadeInZoom {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.96);
   }
   to {
     opacity: 1;
@@ -269,15 +269,15 @@ html {
   }
 }
 
-.animate-fade-in-zoom {
-  animation: fadeInZoom 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.animate-hero-zoom {
+  animation: heroFadeInZoom 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Staggered Fade-in for hero children - uses translate only, no scale conflict */
-@keyframes staggerFadeIn {
+/* Staggered Fade-in for hero children */
+@keyframes staggerSlideUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(25px);
   }
   to {
     opacity: 1;
@@ -285,42 +285,42 @@ html {
   }
 }
 
-.animate-stagger-1 {
+.hero-stagger-1 {
   opacity: 0;
-  animation: staggerFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  animation: staggerSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
 }
 
-.animate-stagger-2 {
+.hero-stagger-2 {
   opacity: 0;
-  animation: staggerFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+  animation: staggerSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
 }
 
-.animate-stagger-3 {
+.hero-stagger-3 {
   opacity: 0;
-  animation: staggerFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+  animation: staggerSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards;
 }
 
-.animate-stagger-4 {
+.hero-stagger-4 {
   opacity: 0;
-  animation: staggerFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+  animation: staggerSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.75s forwards;
 }
 
-.animate-stagger-5 {
+.hero-stagger-5 {
   opacity: 0;
-  animation: staggerFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards;
+  animation: staggerSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.95s forwards;
 }
 
 /* Scroll-triggered reveal animation */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(60px) scale(0.97);
+  transform: translateY(50px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-on-scroll.revealed {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
 }
 
 /* Pulse Effect */
@@ -335,32 +335,6 @@ html {
 
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
-}
-
-/* Subtle shimmer for hero text */
-@keyframes shimmer {
-  0% {
-    background-position: -200% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
-}
-
-.gradient-text-shimmer {
-  background: linear-gradient(
-    90deg,
-    #007AFF 0%,
-    #5856D6 25%,
-    #00D4FF 50%,
-    #5856D6 75%,
-    #007AFF 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 6s linear infinite;
 }
 
 /* Scrollbar Styling */

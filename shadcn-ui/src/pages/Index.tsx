@@ -39,22 +39,18 @@ export default function Index() {
   // Parallax effect on orbs based on scroll position
   const handleParallax = useCallback(() => {
     const scrollY = window.scrollY;
-    const speed1 = 0.3;
-    const speed2 = 0.15;
-    const speed3 = 0.2;
-    const speed4 = 0.1;
 
     if (orb1Ref.current) {
-      orb1Ref.current.style.transform = `translateY(${scrollY * speed1}px) translateX(${Math.sin(scrollY * 0.002) * 30}px)`;
+      orb1Ref.current.style.transform = `translateY(${scrollY * 0.3}px) translateX(${Math.sin(scrollY * 0.002) * 30}px)`;
     }
     if (orb2Ref.current) {
-      orb2Ref.current.style.transform = `translateY(${scrollY * speed2}px) translateX(${Math.cos(scrollY * 0.003) * 40}px)`;
+      orb2Ref.current.style.transform = `translateY(${scrollY * 0.15}px) translateX(${Math.cos(scrollY * 0.003) * 40}px)`;
     }
     if (orb3Ref.current) {
-      orb3Ref.current.style.transform = `translateY(${scrollY * speed3}px) translateX(${Math.sin(scrollY * 0.0025) * 25}px)`;
+      orb3Ref.current.style.transform = `translateY(${scrollY * 0.2}px) translateX(${Math.sin(scrollY * 0.0025) * 25}px)`;
     }
     if (orb4Ref.current) {
-      orb4Ref.current.style.transform = `translateY(${scrollY * speed4}px) translateX(${Math.cos(scrollY * 0.002) * 35}px)`;
+      orb4Ref.current.style.transform = `translateY(${scrollY * 0.1}px) translateX(${Math.cos(scrollY * 0.002) * 35}px)`;
     }
   }, []);
 
@@ -218,34 +214,34 @@ export default function Index() {
             style={{ transition: 'transform 0.1s linear', animationDelay: '3s' }}
           />
           
-          {/* Hero content with fade-in zoom on the wrapper */}
-          <div className="max-w-7xl mx-auto relative z-10 animate-fade-in-zoom">
+          {/* Hero content - zoom on wrapper, stagger on children */}
+          <div className="max-w-7xl mx-auto relative z-10 animate-hero-zoom">
             <div className="text-center space-y-8">
-              {/* Badge - stagger 1 */}
-              <div className="inline-block animate-stagger-1">
+              {/* Badge */}
+              <div className="inline-block hero-stagger-1">
                 <span className="px-6 py-3 rounded-full glass-effect text-blue-400 text-sm font-semibold tracking-wide flex items-center gap-2 animate-pulse-glow">
                   <Sparkles className="w-4 h-4" />
                   Tecnologia e innovazione al servizio della tua impresa
                 </span>
               </div>
 
-              {/* H1 with shimmer gradient - stagger 2 */}
-              <h1 className="text-6xl md:text-8xl font-bold gradient-text-shimmer leading-tight tracking-tight animate-stagger-2">
+              {/* H1 - using gradient-text (proven visible) */}
+              <h1 className="text-6xl md:text-8xl font-bold gradient-text leading-tight tracking-tight hero-stagger-2">
                 Assistenza Informatica e Supporto IT per Aziende a Roma
               </h1>
 
-              {/* Subtitle - stagger 3 */}
-              <p className="text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto leading-relaxed font-light animate-stagger-3">
+              {/* Subtitle */}
+              <p className="text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto leading-relaxed font-light hero-stagger-3">
                 Aiutiamo le aziende a lavorare senza interruzioni grazie a servizi informatici affidabili: gestione delle reti aziendali, sicurezza informatica, server e sistemi di comunicazione.
               </p>
               
-              {/* Location text - stagger 4 */}
-              <p className="text-lg md:text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed animate-stagger-4">
+              {/* Location text */}
+              <p className="text-lg md:text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed hero-stagger-4">
                 Operiamo a Roma Sud, EUR, Ostia, Fiumicino e provincia, con supporto rapido e soluzioni su misura.
               </p>
 
-              {/* CTA Button - stagger 5 */}
-              <div className="pt-8 flex flex-col sm:flex-row gap-4 justify-center items-center animate-stagger-5">
+              {/* CTA Button */}
+              <div className="pt-8 flex flex-col sm:flex-row gap-4 justify-center items-center hero-stagger-5">
                 <Button
                   size="lg"
                   onClick={scrollToContact}
@@ -257,7 +253,7 @@ export default function Index() {
                 </Button>
               </div>
 
-              <p className="text-sm text-gray-500 pt-6 flex items-center justify-center gap-2 animate-stagger-5">
+              <p className="text-sm text-gray-500 pt-6 flex items-center justify-center gap-2 hero-stagger-5">
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
                 Soluzioni IT affidabili, sicure e scalabili per la crescita della tua azienda
               </p>
@@ -508,7 +504,7 @@ export default function Index() {
                   Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus Technology Solution</a>
                 </p>
                 <p className="text-xs text-gray-600">
-                  v1.9 - 11/03/2026
+                  v1.9.1 - 11/03/2026
                 </p>
               </div>
             </div>
