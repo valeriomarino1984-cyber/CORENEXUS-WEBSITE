@@ -6,7 +6,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint --quiet ./src",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prerender": "node prerender.mjs",
+    "build:prerender": "vite build && node prerender.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -76,6 +78,8 @@
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@metagptx/vite-plugin-source-locator": "latest",
+    "@prerenderer/prerenderer": "^1.2.5",
+    "@prerenderer/renderer-puppeteer": "^1.2.4",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^22.5.5",
