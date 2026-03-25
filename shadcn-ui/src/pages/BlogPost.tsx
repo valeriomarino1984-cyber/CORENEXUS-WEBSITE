@@ -1,3 +1,4 @@
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
@@ -379,6 +380,21 @@ const categoryGradient: Record<string, string> = {
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? blogPostsData[slug] : null;
+  const [readingProgress, setReadingProgress] = useState(0);
+
+  const handleScroll = useCallback(() => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    if (docHeight > 0) {
+      const progress = Math.min((scrollTop / docHeight) * 100, 100);
+      setReadingProgress(progress);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
 
   if (!post) {
     return (
@@ -423,6 +439,14 @@ export default function BlogPost() {
         keywords={post.tags}
         canonical={`/blog/${post.id}`}
       />
+
+      {/* Reading Progress Bar */}
+      <div className="fixed top-0 left-0 w-full h-1 z-[9999] bg-transparent">
+        <div
+          className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-blue-400 transition-[width] duration-150 ease-out shadow-[0_0_10px_rgba(59,130,246,0.5)]"
+          style={{ width: `${readingProgress}%` }}
+        />
+      </div>
 
       <div className="min-h-screen bg-black">
         <Header />
