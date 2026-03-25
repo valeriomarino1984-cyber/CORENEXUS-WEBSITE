@@ -20,6 +20,61 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    id: 'migrazione-cloud-aziendale',
+    title: 'Migrazione al Cloud: Guida Completa per le Aziende che Vogliono Innovare',
+    excerpt: 'Migrare al cloud non è solo spostare dati: è trasformare il modo in cui la tua azienda lavora. Scopri strategie, vantaggi e rischi da evitare.',
+    content: '',
+    category: 'Cloud',
+    date: '22 Marzo 2026',
+    readTime: '8 min',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80',
+    tags: ['Cloud', 'Migrazione', 'AWS', 'Azure', 'Infrastruttura']
+  },
+  {
+    id: 'gdpr-protezione-dati-aziende',
+    title: 'GDPR e Protezione Dati: Cosa Devono Sapere le Aziende nel 2026',
+    excerpt: 'Il GDPR non è solo burocrazia: è un\'opportunità per costruire fiducia con i clienti. Ecco come adeguarsi e proteggere i dati aziendali.',
+    content: '',
+    category: 'Compliance',
+    date: '18 Marzo 2026',
+    readTime: '7 min',
+    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f2?w=800&q=80',
+    tags: ['GDPR', 'Privacy', 'Protezione Dati', 'Compliance']
+  },
+  {
+    id: 'manutenzione-preventiva-it',
+    title: 'Manutenzione Preventiva IT: Come Evitare Guasti e Ridurre i Costi',
+    excerpt: 'Prevenire è meglio che curare, anche nell\'IT. Scopri come un piano di manutenzione preventiva può salvare la tua azienda da costosi fermi.',
+    content: '',
+    category: 'Manutenzione',
+    date: '14 Marzo 2026',
+    readTime: '6 min',
+    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80',
+    tags: ['Manutenzione', 'Preventiva', 'Server', 'Monitoraggio']
+  },
+  {
+    id: 'smart-working-vpn-aziendale',
+    title: 'Smart Working e VPN Aziendale: Lavorare da Remoto in Sicurezza',
+    excerpt: 'Lo smart working è qui per restare. Scopri come configurare una VPN aziendale sicura per proteggere i dati anche fuori dall\'ufficio.',
+    content: '',
+    category: 'Networking',
+    date: '12 Marzo 2026',
+    readTime: '7 min',
+    image: 'https://images.unsplash.com/photo-1585974738771-84483dd9f89f?w=800&q=80',
+    tags: ['Smart Working', 'VPN', 'Sicurezza', 'Lavoro Remoto']
+  },
+  {
+    id: 'disaster-recovery-piano-aziendale',
+    title: 'Disaster Recovery: Come Creare un Piano che Funziona Davvero',
+    excerpt: 'Un piano di disaster recovery ben progettato è la differenza tra un\'interruzione temporanea e una catastrofe aziendale. Ecco come crearlo.',
+    content: '',
+    category: 'Sicurezza',
+    date: '11 Marzo 2026',
+    readTime: '8 min',
+    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80',
+    tags: ['Disaster Recovery', 'Business Continuity', 'Backup', 'RTO']
+  },
+  {
     id: 'backup-aziendali-strategie-2025',
     title: 'Backup Aziendali: Le Migliori Strategie per Proteggere i Tuoi Dati nel 2025',
     excerpt: 'Scopri le strategie più efficaci per proteggere i dati aziendali con soluzioni di backup moderne, dalla regola 3-2-1 al backup in cloud ibrido.',
@@ -87,9 +142,12 @@ const blogPosts: BlogPost[] = [
   },
 ];
 
-const categories = ['Tutti', 'Sicurezza', 'Cybersecurity', 'Networking', 'Infrastruttura', 'Comunicazioni', 'Sicurezza Fisica'];
+const categories = ['Tutti', 'Cloud', 'Compliance', 'Manutenzione', 'Sicurezza', 'Cybersecurity', 'Networking', 'Infrastruttura', 'Comunicazioni', 'Sicurezza Fisica'];
 
 const categoryGradients: Record<string, string> = {
+  'Cloud': 'from-sky-500 to-blue-500',
+  'Compliance': 'from-yellow-500 to-amber-500',
+  'Manutenzione': 'from-lime-500 to-green-500',
   'Sicurezza': 'from-emerald-500 to-teal-500',
   'Cybersecurity': 'from-red-500 to-rose-500',
   'Networking': 'from-blue-500 to-cyan-500',
@@ -119,16 +177,19 @@ export default function Blog() {
   return (
     <>
       <SEO
-        title="Blog IT | Articoli su Sicurezza, Reti e Tecnologia - CoreNexus"
-        description="Leggi gli articoli del blog CoreNexus Technology Solution su cybersecurity, networking, virtualizzazione, VoIP e soluzioni IT per aziende a Roma."
+        title="Blog IT | Articoli su Sicurezza, Reti, Cloud e Tecnologia - CoreNexus"
+        description="Leggi gli articoli del blog CoreNexus Technology Solution su cybersecurity, networking, cloud, GDPR, smart working, VPN e soluzioni IT per aziende a Roma."
         keywords={[
           'blog IT Roma',
           'articoli cybersecurity',
           'guide networking aziendale',
+          'migrazione cloud',
+          'GDPR protezione dati',
+          'manutenzione preventiva IT',
+          'smart working VPN',
           'virtualizzazione server',
           'VoIP FreePBX',
           'videosorveglianza Hikvision',
-          'sicurezza informatica PMI',
         ]}
         canonical="/blog"
       />

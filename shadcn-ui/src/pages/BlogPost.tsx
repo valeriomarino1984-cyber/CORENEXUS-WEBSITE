@@ -18,6 +18,170 @@ interface BlogPostData {
 }
 
 const blogPostsData: Record<string, BlogPostData> = {
+  'migrazione-cloud-aziendale': {
+    id: 'migrazione-cloud-aziendale',
+    title: 'Migrazione al Cloud: Guida Completa per le Aziende che Vogliono Innovare',
+    excerpt: 'Migrare al cloud non è solo spostare dati: è trasformare il modo in cui la tua azienda lavora. Scopri strategie, vantaggi e rischi da evitare.',
+    category: 'Cloud',
+    date: '22 Marzo 2026',
+    readTime: '8 min',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80',
+    tags: ['Cloud', 'Migrazione', 'AWS', 'Azure', 'Infrastruttura'],
+    sections: [
+      {
+        heading: 'Perché migrare al cloud nel 2026',
+        content: 'Il cloud computing non è più una tendenza: è lo standard. Le aziende che ancora dipendono esclusivamente da server fisici on-premise affrontano costi crescenti di manutenzione, limitazioni di scalabilità e rischi di obsolescenza. La migrazione al cloud offre flessibilità, riduzione dei costi operativi e accesso a tecnologie all\'avanguardia come l\'intelligenza artificiale e il machine learning.'
+      },
+      {
+        heading: 'Le strategie di migrazione: le 6 R',
+        content: 'Esistono sei approcci principali alla migrazione cloud, noti come le "6 R": Rehost (lift-and-shift, spostamento diretto), Replatform (ottimizzazione parziale), Refactor (riscrittura per il cloud), Repurchase (sostituzione con SaaS), Retire (dismissione) e Retain (mantenimento on-premise). La scelta dipende dalla complessità dell\'applicazione, dal budget e dagli obiettivi aziendali.'
+      },
+      {
+        heading: 'Cloud pubblico, privato o ibrido?',
+        content: 'Il cloud pubblico (AWS, Azure, Google Cloud) offre scalabilità illimitata e costi variabili. Il cloud privato garantisce controllo totale e conformità normativa. Il cloud ibrido combina i vantaggi di entrambi, permettendo di mantenere i dati sensibili on-premise mentre si sfrutta la potenza del cloud pubblico per carichi di lavoro variabili. Per le PMI italiane, il cloud ibrido è spesso la scelta più equilibrata.'
+      },
+      {
+        heading: 'I rischi da evitare',
+        content: 'I principali rischi della migrazione cloud includono: sottovalutare i costi di banda e trasferimento dati, non pianificare adeguatamente la sicurezza, ignorare la conformità GDPR per i dati ospitati fuori dall\'UE, e non formare il personale sulle nuove piattaforme. Un assessment iniziale approfondito e un piano di migrazione graduale sono essenziali per il successo.'
+      },
+      {
+        heading: 'CoreNexus: il tuo partner per la migrazione cloud',
+        content: 'CoreNexus Technology Solution accompagna le aziende in ogni fase della migrazione: dall\'assessment iniziale dell\'infrastruttura alla scelta della piattaforma, dalla migrazione dei dati e delle applicazioni alla formazione del personale. Garantiamo zero downtime e supporto continuo post-migrazione.'
+      }
+    ]
+  },
+  'gdpr-protezione-dati-aziende': {
+    id: 'gdpr-protezione-dati-aziende',
+    title: 'GDPR e Protezione Dati: Cosa Devono Sapere le Aziende nel 2026',
+    excerpt: 'Il GDPR non è solo burocrazia: è un\'opportunità per costruire fiducia con i clienti. Ecco come adeguarsi e proteggere i dati aziendali.',
+    category: 'Compliance',
+    date: '18 Marzo 2026',
+    readTime: '7 min',
+    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f2?w=800&q=80',
+    tags: ['GDPR', 'Privacy', 'Protezione Dati', 'Compliance'],
+    sections: [
+      {
+        heading: 'Il GDPR nel 2026: cosa è cambiato',
+        content: 'Dal 2018 il GDPR ha rivoluzionato la gestione dei dati personali in Europa. Nel 2026, le sanzioni sono diventate più frequenti e severe, con il Garante italiano particolarmente attivo. Le aziende che non si sono ancora adeguate rischiano multe fino al 4% del fatturato annuo globale o 20 milioni di euro, oltre a danni reputazionali incalcolabili.'
+      },
+      {
+        heading: 'I principi fondamentali da rispettare',
+        content: 'Il GDPR si basa su principi chiave: liceità e trasparenza del trattamento, limitazione delle finalità, minimizzazione dei dati (raccogliere solo ciò che serve), esattezza, limitazione della conservazione, integrità e riservatezza. Ogni azienda deve documentare come applica questi principi attraverso il Registro dei Trattamenti.'
+      },
+      {
+        heading: 'Misure tecniche obbligatorie',
+        content: 'Dal punto di vista IT, il GDPR richiede: crittografia dei dati a riposo e in transito, controllo degli accessi basato su ruoli, log di audit per tracciare chi accede ai dati, backup regolari con test di ripristino, procedure di notifica breach entro 72 ore e valutazione d\'impatto (DPIA) per trattamenti ad alto rischio.'
+      },
+      {
+        heading: 'Il DPO: serve davvero?',
+        content: 'Il Data Protection Officer (DPO) è obbligatorio per enti pubblici, aziende che trattano dati su larga scala e aziende che trattano categorie particolari di dati. Anche quando non obbligatorio, nominare un DPO (anche esterno) dimostra accountability e facilita la gestione della compliance. È un investimento che ripaga in tranquillità e credibilità.'
+      },
+      {
+        heading: 'Come CoreNexus può aiutarti',
+        content: 'CoreNexus offre consulenza GDPR completa per le aziende: audit dell\'infrastruttura IT, implementazione delle misure tecniche richieste (crittografia, backup, access control), configurazione di sistemi di log e monitoraggio, e supporto nella redazione della documentazione obbligatoria. Proteggiamo i tuoi dati e la tua conformità.'
+      }
+    ]
+  },
+  'manutenzione-preventiva-it': {
+    id: 'manutenzione-preventiva-it',
+    title: 'Manutenzione Preventiva IT: Come Evitare Guasti e Ridurre i Costi',
+    excerpt: 'Prevenire è meglio che curare, anche nell\'IT. Scopri come un piano di manutenzione preventiva può salvare la tua azienda da costosi fermi.',
+    category: 'Manutenzione',
+    date: '14 Marzo 2026',
+    readTime: '6 min',
+    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80',
+    tags: ['Manutenzione', 'Preventiva', 'Server', 'Monitoraggio'],
+    sections: [
+      {
+        heading: 'Il costo nascosto della manutenzione reattiva',
+        content: 'Aspettare che qualcosa si rompa per intervenire è l\'approccio più costoso possibile. Un server che si guasta di venerdì pomeriggio può significare un intero weekend di fermo, con costi che includono: perdita di produttività, straordinari del personale IT, possibile perdita di dati, e danni alla reputazione con i clienti. Studi dimostrano che la manutenzione preventiva riduce i costi IT del 25-30%.'
+      },
+      {
+        heading: 'Cosa include un piano di manutenzione preventiva',
+        content: 'Un piano efficace comprende: aggiornamenti regolari di sistemi operativi e firmware, controllo dello stato di salute degli hard disk (SMART monitoring), pulizia fisica dei server e delle apparecchiature, verifica dei backup e test di ripristino, controllo delle performance di rete, revisione delle policy di sicurezza e aggiornamento antivirus/firewall.'
+      },
+      {
+        heading: 'Monitoraggio proattivo 24/7',
+        content: 'I moderni sistemi di monitoraggio (Zabbix, PRTG, Nagios) permettono di rilevare anomalie prima che diventino guasti. Temperature elevate, spazio disco in esaurimento, errori di memoria, latenza di rete anomala: tutti segnali che, se intercettati in tempo, permettono di intervenire preventivamente evitando interruzioni del servizio.'
+      },
+      {
+        heading: 'La frequenza ideale degli interventi',
+        content: 'Consigliamo: controlli settimanali automatizzati (script di monitoraggio), interventi mensili di verifica e ottimizzazione, manutenzione trimestrale approfondita con test di disaster recovery, e revisione annuale completa dell\'infrastruttura con pianificazione degli aggiornamenti hardware. Ogni azienda ha esigenze diverse: il piano va personalizzato.'
+      },
+      {
+        heading: 'I contratti di manutenzione CoreNexus',
+        content: 'CoreNexus offre contratti di manutenzione preventiva su misura: dal monitoraggio 24/7 agli interventi programmati, dalla gestione degli aggiornamenti al supporto remoto e on-site. I nostri contratti includono SLA garantiti, tempi di risposta certi e report mensili sullo stato dell\'infrastruttura.'
+      }
+    ]
+  },
+  'smart-working-vpn-aziendale': {
+    id: 'smart-working-vpn-aziendale',
+    title: 'Smart Working e VPN Aziendale: Lavorare da Remoto in Sicurezza',
+    excerpt: 'Lo smart working è qui per restare. Scopri come configurare una VPN aziendale sicura per proteggere i dati anche fuori dall\'ufficio.',
+    category: 'Networking',
+    date: '12 Marzo 2026',
+    readTime: '7 min',
+    image: 'https://images.unsplash.com/photo-1585974738771-84483dd9f89f?w=800&q=80',
+    tags: ['Smart Working', 'VPN', 'Sicurezza', 'Lavoro Remoto'],
+    sections: [
+      {
+        heading: 'Lo smart working nel 2026: numeri e tendenze',
+        content: 'Dopo la pandemia, lo smart working si è consolidato come modalità di lavoro standard. In Italia, oltre il 50% delle aziende offre almeno 2 giorni di lavoro remoto a settimana. Ma lavorare da casa senza adeguate misure di sicurezza espone l\'azienda a rischi significativi: reti Wi-Fi domestiche non protette, dispositivi personali vulnerabili e accessi non controllati ai dati aziendali.'
+      },
+      {
+        heading: 'VPN: cos\'è e perché è indispensabile',
+        content: 'Una VPN (Virtual Private Network) crea un tunnel crittografato tra il dispositivo del dipendente e la rete aziendale. Tutto il traffico passa attraverso questo tunnel, rendendo impossibile l\'intercettazione dei dati anche su reti Wi-Fi pubbliche. Le VPN moderne supportano protocolli come WireGuard e OpenVPN, offrendo velocità elevate e sicurezza di livello militare.'
+      },
+      {
+        heading: 'Soluzioni VPN per le aziende',
+        content: 'Per le PMI consigliamo soluzioni come: pfSense/OPNsense con OpenVPN integrato (open-source, affidabile), FortiGate con FortiClient VPN (enterprise, gestione centralizzata), o WireGuard per configurazioni leggere e performanti. La scelta dipende dal numero di utenti, dalla complessità della rete e dal budget. Tutte le soluzioni supportano l\'autenticazione a due fattori (2FA).'
+      },
+      {
+        heading: 'Oltre la VPN: sicurezza completa per il lavoro remoto',
+        content: 'La VPN è solo il primo passo. Una strategia completa di smart working sicuro include: endpoint protection su tutti i dispositivi, gestione centralizzata dei dispositivi (MDM), policy di accesso Zero Trust (verificare sempre, non fidarsi mai), segmentazione della rete per limitare l\'accesso solo alle risorse necessarie, e formazione continua dei dipendenti sulle best practice di sicurezza.'
+      },
+      {
+        heading: 'CoreNexus: smart working sicuro chiavi in mano',
+        content: 'CoreNexus progetta e implementa soluzioni complete per lo smart working: dalla configurazione della VPN aziendale alla protezione degli endpoint, dalla formazione del personale al monitoraggio continuo. Garantiamo che i tuoi dipendenti possano lavorare da qualsiasi luogo in totale sicurezza.'
+      }
+    ]
+  },
+  'disaster-recovery-piano-aziendale': {
+    id: 'disaster-recovery-piano-aziendale',
+    title: 'Disaster Recovery: Come Creare un Piano che Funziona Davvero',
+    excerpt: 'Un piano di disaster recovery ben progettato è la differenza tra un\'interruzione temporanea e una catastrofe aziendale. Ecco come crearlo.',
+    category: 'Sicurezza',
+    date: '11 Marzo 2026',
+    readTime: '8 min',
+    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80',
+    tags: ['Disaster Recovery', 'Business Continuity', 'Backup', 'RTO'],
+    sections: [
+      {
+        heading: 'Disaster Recovery vs Business Continuity',
+        content: 'Spesso confusi, sono concetti complementari. Il Business Continuity Plan (BCP) definisce come l\'azienda continua a operare durante un\'emergenza. Il Disaster Recovery Plan (DRP) si concentra specificamente sul ripristino dei sistemi IT dopo un disastro. Entrambi sono essenziali: il BCP senza DRP è incompleto, e viceversa.'
+      },
+      {
+        heading: 'RTO e RPO: i parametri chiave',
+        content: 'Il Recovery Time Objective (RTO) è il tempo massimo accettabile per ripristinare i sistemi dopo un guasto. Il Recovery Point Objective (RPO) è la quantità massima di dati che l\'azienda può permettersi di perdere, misurata in tempo. Un RPO di 1 ora significa che i backup devono essere eseguiti almeno ogni ora. Definire RTO e RPO realistici è il primo passo per un DRP efficace.'
+      },
+      {
+        heading: 'Scenari di disastro da considerare',
+        content: 'Un buon DRP copre molteplici scenari: guasto hardware (server, storage, rete), attacco ransomware, errore umano (cancellazione accidentale), disastro naturale (incendio, allagamento), interruzione prolungata dell\'energia elettrica, e guasto del provider di servizi. Per ogni scenario, il piano deve definire procedure specifiche, responsabilità e tempi di ripristino.'
+      },
+      {
+        heading: 'Implementazione tecnica',
+        content: 'Le soluzioni tecniche includono: replica in tempo reale su sito secondario (per RTO vicini a zero), backup incrementali frequenti su storage off-site o cloud, snapshot delle macchine virtuali, documentazione dettagliata delle configurazioni, e automazione delle procedure di ripristino. Strumenti come Veeam, Acronis e Zerto semplificano enormemente l\'implementazione.'
+      },
+      {
+        heading: 'Test periodici: la chiave del successo',
+        content: 'Un piano di disaster recovery non testato è un piano che non funziona. Consigliamo test completi almeno due volte l\'anno, simulando scenari reali: spegnimento del server principale, ripristino da backup, failover sul sito secondario. Ogni test deve essere documentato con tempi effettivi di ripristino e eventuali problemi riscontrati.'
+      },
+      {
+        heading: 'CoreNexus: protezione totale',
+        content: 'CoreNexus progetta piani di disaster recovery personalizzati: analisi dei rischi, definizione di RTO/RPO, implementazione delle soluzioni tecniche, documentazione completa e test periodici. Proteggiamo la continuità operativa della tua azienda.'
+      }
+    ]
+  },
   'backup-aziendali-strategie-2025': {
     id: 'backup-aziendali-strategie-2025',
     title: 'Backup Aziendali: Le Migliori Strategie per Proteggere i Tuoi Dati nel 2025',
@@ -200,6 +364,18 @@ const blogPostsData: Record<string, BlogPostData> = {
   }
 };
 
+const categoryGradient: Record<string, string> = {
+  'Cloud': 'from-sky-500 to-blue-500',
+  'Compliance': 'from-yellow-500 to-amber-500',
+  'Manutenzione': 'from-lime-500 to-green-500',
+  'Sicurezza': 'from-emerald-500 to-teal-500',
+  'Cybersecurity': 'from-red-500 to-rose-500',
+  'Networking': 'from-blue-500 to-cyan-500',
+  'Infrastruttura': 'from-purple-500 to-violet-500',
+  'Comunicazioni': 'from-amber-500 to-orange-500',
+  'Sicurezza Fisica': 'from-indigo-500 to-blue-500',
+};
+
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? blogPostsData[slug] : null;
@@ -226,15 +402,6 @@ export default function BlogPost() {
   const currentIndex = postIds.indexOf(post.id);
   const prevPost = currentIndex > 0 ? blogPostsData[postIds[currentIndex - 1]] : null;
   const nextPost = currentIndex < postIds.length - 1 ? blogPostsData[postIds[currentIndex + 1]] : null;
-
-  const categoryGradient: Record<string, string> = {
-    'Sicurezza': 'from-emerald-500 to-teal-500',
-    'Cybersecurity': 'from-red-500 to-rose-500',
-    'Networking': 'from-blue-500 to-cyan-500',
-    'Infrastruttura': 'from-purple-500 to-violet-500',
-    'Comunicazioni': 'from-amber-500 to-orange-500',
-    'Sicurezza Fisica': 'from-indigo-500 to-blue-500',
-  };
 
   const handleShare = async () => {
     if (navigator.share) {
