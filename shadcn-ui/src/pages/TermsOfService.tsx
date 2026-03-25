@@ -263,7 +263,7 @@ export default function TermsOfService() {
       <footer className="border-t border-white/10 py-8 px-6 mt-16">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-gray-400 text-sm">
-            © 2025 <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300">CoreNexus.it</a> - Tutti i diritti riservati
+            © 2026 <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300">CoreNexus.it</a> - Tutti i diritti riservati
           </p>
         </div>
       </footer>
