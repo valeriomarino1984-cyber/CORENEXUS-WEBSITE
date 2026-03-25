@@ -1,0 +1,327 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Header from '@/components/Header';
+import WhatsAppWidget from '@/components/WhatsAppWidget';
+import SEO from '@/components/SEO';
+import { Button } from '@/components/ui/button';
+import { ArrowRight, Calendar, Clock, Tag, Search, ChevronRight } from 'lucide-react';
+
+interface BlogPost {
+  id: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  category: string;
+  date: string;
+  readTime: string;
+  image: string;
+  tags: string[];
+}
+
+const blogPosts: BlogPost[] = [
+  {
+    id: 'backup-aziendali-strategie-2025',
+    title: 'Backup Aziendali: Le Migliori Strategie per Proteggere i Tuoi Dati nel 2025',
+    excerpt: 'Scopri le strategie più efficaci per proteggere i dati aziendali con soluzioni di backup moderne, dalla regola 3-2-1 al backup in cloud ibrido.',
+    content: '',
+    category: 'Sicurezza',
+    date: '10 Marzo 2026',
+    readTime: '6 min',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+    tags: ['Backup', 'Cloud', 'Sicurezza Dati', 'Disaster Recovery']
+  },
+  {
+    id: 'cybersecurity-pmi-guida',
+    title: 'Cybersecurity per PMI: Guida Pratica alla Protezione della Tua Azienda',
+    excerpt: 'Le PMI sono il bersaglio preferito dei cybercriminali. Ecco le misure essenziali per proteggere la tua azienda dagli attacchi informatici.',
+    content: '',
+    category: 'Cybersecurity',
+    date: '5 Marzo 2026',
+    readTime: '8 min',
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80',
+    tags: ['Cybersecurity', 'PMI', 'Firewall', 'Phishing']
+  },
+  {
+    id: 'rete-aziendale-performante',
+    title: 'Come Progettare una Rete Aziendale Performante e Sicura',
+    excerpt: 'Una rete ben progettata è la base di ogni infrastruttura IT. Scopri i principi fondamentali per creare una rete aziendale affidabile.',
+    content: '',
+    category: 'Networking',
+    date: '28 Febbraio 2026',
+    readTime: '7 min',
+    image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80',
+    tags: ['Networking', 'Switch', 'VLAN', 'Wi-Fi']
+  },
+  {
+    id: 'virtualizzazione-server-vantaggi',
+    title: 'Virtualizzazione dei Server: Vantaggi e Best Practice per le Aziende',
+    excerpt: 'La virtualizzazione riduce i costi hardware e migliora la flessibilità IT. Scopri come implementarla nella tua azienda.',
+    content: '',
+    category: 'Infrastruttura',
+    date: '20 Febbraio 2026',
+    readTime: '5 min',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+    tags: ['Virtualizzazione', 'Server', 'VMware', 'Proxmox']
+  },
+  {
+    id: 'voip-freepbx-centralino',
+    title: 'Centralino VoIP con FreePBX: Perché Conviene alle Aziende',
+    excerpt: 'Riduci i costi telefonici fino al 60% con un centralino VoIP FreePBX. Scopri funzionalità, vantaggi e come implementarlo.',
+    content: '',
+    category: 'Comunicazioni',
+    date: '15 Febbraio 2026',
+    readTime: '6 min',
+    image: 'https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=800&q=80',
+    tags: ['VoIP', 'FreePBX', 'Centralino', 'Telefonia']
+  },
+  {
+    id: 'videosorveglianza-hikvision-guida',
+    title: 'Videosorveglianza Hikvision: Guida Completa per Aziende e Negozi',
+    excerpt: 'Hikvision è leader mondiale nella videosorveglianza. Scopri come scegliere il sistema giusto per la tua attività.',
+    content: '',
+    category: 'Sicurezza Fisica',
+    date: '8 Febbraio 2026',
+    readTime: '7 min',
+    image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=800&q=80',
+    tags: ['Videosorveglianza', 'Hikvision', 'CCTV', 'NVR']
+  },
+];
+
+const categories = ['Tutti', 'Sicurezza', 'Cybersecurity', 'Networking', 'Infrastruttura', 'Comunicazioni', 'Sicurezza Fisica'];
+
+const categoryGradients: Record<string, string> = {
+  'Sicurezza': 'from-emerald-500 to-teal-500',
+  'Cybersecurity': 'from-red-500 to-rose-500',
+  'Networking': 'from-blue-500 to-cyan-500',
+  'Infrastruttura': 'from-purple-500 to-violet-500',
+  'Comunicazioni': 'from-amber-500 to-orange-500',
+  'Sicurezza Fisica': 'from-indigo-500 to-blue-500',
+};
+
+export default function Blog() {
+  const [selectedCategory, setSelectedCategory] = useState('Tutti');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredPosts = blogPosts.filter((post) => {
+    const matchesCategory = selectedCategory === 'Tutti' || post.category === selectedCategory;
+    const matchesSearch =
+      searchQuery === '' ||
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesCategory && matchesSearch;
+  });
+
+  const scrollToContact = () => {
+    window.location.href = '/#contact';
+  };
+
+  return (
+    <>
+      <SEO
+        title="Blog IT | Articoli su Sicurezza, Reti e Tecnologia - CoreNexus"
+        description="Leggi gli articoli del blog CoreNexus Technology Solution su cybersecurity, networking, virtualizzazione, VoIP e soluzioni IT per aziende a Roma."
+        keywords={[
+          'blog IT Roma',
+          'articoli cybersecurity',
+          'guide networking aziendale',
+          'virtualizzazione server',
+          'VoIP FreePBX',
+          'videosorveglianza Hikvision',
+          'sicurezza informatica PMI',
+        ]}
+        canonical="/blog"
+      />
+
+      <div className="min-h-screen bg-black">
+        <Header />
+
+        {/* Hero Section */}
+        <section className="relative overflow-hidden pt-32 pb-16 px-6">
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-950/30 via-black to-black" />
+          <div className="absolute top-20 left-[10%] w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-10 right-[10%] w-[350px] h-[350px] bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="max-w-6xl mx-auto relative z-10 text-center space-y-6">
+            <h1 className="text-5xl md:text-7xl font-bold gradient-text leading-tight">
+              Blog
+            </h1>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              Approfondimenti, guide e novità dal mondo IT per aiutare la tua azienda a restare sicura, efficiente e competitiva.
+            </p>
+
+            {/* Search Bar */}
+            <div className="max-w-xl mx-auto pt-4">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                <input
+                  type="text"
+                  placeholder="Cerca articoli..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-4 rounded-2xl glass-effect border border-white/10 text-white placeholder-gray-500 focus:border-blue-500/50 focus:outline-none transition-all duration-300 text-sm"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Category Filters */}
+        <section className="px-6 pb-8">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-wrap gap-3 justify-center">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
+                    selectedCategory === category
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg shadow-blue-500/25'
+                      : 'glass-effect text-gray-400 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Blog Posts Grid */}
+        <section className="px-6 pb-24">
+          <div className="max-w-6xl mx-auto">
+            {filteredPosts.length === 0 ? (
+              <div className="text-center py-20">
+                <p className="text-gray-400 text-lg">Nessun articolo trovato per la tua ricerca.</p>
+                <button
+                  onClick={() => {
+                    setSearchQuery('');
+                    setSelectedCategory('Tutti');
+                  }}
+                  className="mt-4 text-blue-400 hover:text-blue-300 transition-colors text-sm font-medium"
+                >
+                  Mostra tutti gli articoli
+                </button>
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredPosts.map((post, index) => (
+                  <article
+                    key={post.id}
+                    className="group rounded-3xl glass-effect overflow-hidden hover:bg-white/10 transition-all duration-500 card-hover flex flex-col"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    {/* Image */}
+                    <div className="relative h-48 overflow-hidden">
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      <span
+                        className={`absolute top-4 left-4 px-3 py-1 rounded-lg text-xs font-semibold text-white bg-gradient-to-r ${
+                          categoryGradients[post.category] || 'from-blue-500 to-purple-500'
+                        }`}
+                      >
+                        {post.category}
+                      </span>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6 flex flex-col flex-grow">
+                      {/* Meta */}
+                      <div className="flex items-center gap-4 text-xs text-gray-500 mb-3">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="w-3 h-3" />
+                          {post.date}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {post.readTime}
+                        </span>
+                      </div>
+
+                      {/* Title */}
+                      <h2 className="text-lg font-bold text-white mb-3 group-hover:text-blue-400 transition-colors duration-300 line-clamp-2">
+                        {post.title}
+                      </h2>
+
+                      {/* Excerpt */}
+                      <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-grow line-clamp-3">
+                        {post.excerpt}
+                      </p>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {post.tags.slice(0, 3).map((tag) => (
+                          <span
+                            key={tag}
+                            className="flex items-center gap-1 px-2 py-1 rounded-md text-xs text-gray-500 bg-white/5"
+                          >
+                            <Tag className="w-3 h-3" />
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Read More */}
+                      <Link
+                        to={`/blog/${post.id}`}
+                        className="flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-semibold transition-colors duration-300 group/link"
+                      >
+                        Leggi l'articolo
+                        <ChevronRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-300" />
+                      </Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="px-6 pb-24">
+          <div className="max-w-4xl mx-auto">
+            <div className="p-12 rounded-3xl glass-effect border border-blue-500/20 text-center space-y-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                Hai bisogno di supporto IT?
+              </h2>
+              <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+                Il nostro team è pronto ad aiutarti con soluzioni personalizzate per la tua azienda.
+              </p>
+              <Button
+                size="lg"
+                onClick={scrollToContact}
+                className="group premium-button text-white px-10 py-7 text-lg rounded-2xl font-semibold"
+              >
+                Contattaci ora
+                <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        <WhatsAppWidget />
+
+        {/* Footer */}
+        <footer className="bg-black border-t border-white/10 py-12 px-6">
+          <div className="max-w-7xl mx-auto text-center space-y-4">
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+              <p className="text-gray-400 text-sm">
+                © 2025{' '}
+                <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">
+                  CoreNexus Technology Solution
+                </a>{' '}
+                - Tutti i diritti riservati.
+              </p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </>
+  );
+}

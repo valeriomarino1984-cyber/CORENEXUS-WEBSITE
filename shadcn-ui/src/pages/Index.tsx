@@ -190,7 +190,7 @@ export default function Index() {
 
         {/* Hero Section - Fade-in Zoom + Parallax Orbs */}
         <section className="relative overflow-hidden pt-32 pb-24 px-6 premium-gradient">
-          <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,transparent,rgba(255,255,255,0.1),transparent)]" />
+          <div className="absolute inset-0 [mask-image:linear-gradient(0deg,transparent,rgba(255,255,255,0.1),transparent)] mt-[0px] mr-[0px] mb-[0px] ml-[0px] pt-[0px] pr-[0px] pb-[0px] pl-[0px] rounded-none text-[16px] font-normal text-[#F5F5F7] bg-[#00000000] opacity-100" />
           
           {/* Parallax Floating Orbs */}
           <div
@@ -216,7 +216,7 @@ export default function Index() {
           
           {/* Hero content - zoom on wrapper, stagger on children */}
           <div className="max-w-7xl mx-auto relative z-10 animate-hero-zoom">
-            <div className="text-center space-y-8">
+            <div className="space-y-8 mt-[0px] mr-[0px] mb-[0px] ml-[0px] pt-[0px] pr-[0px] pb-[0px] pl-[0px] rounded-none text-[16px] font-normal text-center text-[#F5F5F7] bg-[#00000000] opacity-100">
               {/* Badge */}
               <div className="inline-block hero-stagger-1">
                 <span className="px-6 py-3 rounded-full glass-effect text-blue-400 text-sm font-semibold tracking-wide flex items-center gap-2 animate-pulse-glow">

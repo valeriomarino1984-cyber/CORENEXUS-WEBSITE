@@ -17,6 +17,8 @@ import CentraliniVoip from './pages/CentraliniVoip';
 import AutomazioneProcessi from './pages/AutomazioneProcessi';
 import Tecnologie from './pages/Tecnologie';
 import AssistenzaRemota from './pages/AssistenzaRemota';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import DoveSiamo from './pages/DoveSiamo';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -61,6 +63,8 @@ const AppContent = () => {
         <Route path="/automazione-processi" element={<AutomazioneProcessi />} />
         <Route path="/tecnologie" element={<Tecnologie />} />
         <Route path="/assistenza-remota" element={<AssistenzaRemota />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/dove-siamo" element={<DoveSiamo />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />

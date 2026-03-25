@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, Globe, FileText, Phone, Cog, Cpu, Briefcase, Monitor } from 'lucide-react';
+import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, Globe, FileText, Phone, Cog, Cpu, Briefcase, Monitor, BookOpen } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
@@ -149,6 +149,14 @@ export default function Header() {
               Cosa Facciamo
             </button>
             <button
+              onClick={() => navigate('/blog')}
+              className={`text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap ${
+                location.pathname.startsWith('/blog') ? 'text-white' : ''
+              }`}
+            >
+              Blog
+            </button>
+            <button
               onClick={() => navigate('/dove-siamo')}
               className={`text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap ${
                 location.pathname === '/dove-siamo' ? 'text-white' : ''
@@ -264,6 +272,20 @@ export default function Header() {
               <span className="flex items-center gap-2">
                 <Briefcase className="w-4 h-4 text-blue-400" />
                 Cosa Facciamo
+              </span>
+            </button>
+            <button
+              onClick={() => {
+                navigate('/blog');
+                setIsMobileMenuOpen(false);
+              }}
+              className={`block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2 ${
+                location.pathname.startsWith('/blog') ? 'text-white' : ''
+              }`}
+            >
+              <span className="flex items-center gap-2">
+                <BookOpen className="w-4 h-4 text-blue-400" />
+                Blog
               </span>
             </button>
             <button
