@@ -5,16 +5,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { supabase, type Ticket, type Client } from '@/lib/supabase';
-import { Loader2, LogOut, Search, Ticket as TicketIcon, Clock, CheckCircle2, AlertCircle, Users, Plus, UserCog, Settings } from 'lucide-react';
+import { supabase, type Ticket, type Profile, type Company } from '@/lib/supabase';
+import { Loader2, LogOut, Search, Ticket as TicketIcon, Clock, CheckCircle2, AlertCircle, Users, Plus, UserCog, Settings, Building2 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [admin, setAdmin] = useState<Client | null>(null);
+  const [admin, setAdmin] = useState<Profile | null>(null);
   const [tickets, setTickets] = useState<Ticket[]>([]);
-  const [clients, setClients] = useState<Client[]>([]);
+  const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [companies, setCompanies] = useState<Company[]>([]);
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -33,16 +34,16 @@ export default function AdminDashboard() {
         return;
       }
 
-      // Check if user is admin
+      // Check if user is admin/agent
       const { data: adminData, error: adminError } = await supabase
-        .from('app_2b35a5a86e_clients')
-        .select('*')
-        .eq('user_id', user.id)
+        .from('profiles')
+        .select('*, companies(*)')
+        .eq('id', user.id)
         .single();
 
       if (adminError) throw adminError;
 
-      if (adminData.role !== 'admin' && adminData.role !== 'staff') {
+      if (adminData.role !== 'admin' && adminData.role !== 'agent') {
         await supabase.auth.signOut();
         navigate('/admin/login');
         return;
@@ -52,21 +53,30 @@ export default function AdminDashboard() {
 
       // Fetch all tickets
       const { data: ticketsData, error: ticketsError } = await supabase
-        .from('app_2b35a5a86e_tickets')
-        .select('*')
+        .from('tickets')
+        .select('*, companies(name)')
         .order('created_at', { ascending: false });
 
       if (ticketsError) throw ticketsError;
       setTickets(ticketsData || []);
 
-      // Fetch all clients
-      const { data: clientsData, error: clientsError } = await supabase
-        .from('app_2b35a5a86e_clients')
-        .select('*')
+      // Fetch all profiles
+      const { data: profilesData, error: profilesError } = await supabase
+        .from('profiles')
+        .select('*, companies(name)')
         .order('created_at', { ascending: false });
 
-      if (clientsError) throw clientsError;
-      setClients(clientsData || []);
+      if (profilesError) throw profilesError;
+      setProfiles(profilesData || []);
+
+      // Fetch all companies
+      const { data: companiesData, error: companiesError } = await supabase
+        .from('companies')
+        .select('*')
+        .order('name', { ascending: true });
+
+      if (companiesError) throw companiesError;
+      setCompanies(companiesData || []);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Errore nel caricamento dei dati';
       setError(errorMessage);
@@ -111,28 +121,21 @@ export default function AdminDashboard() {
     );
   };
 
-  const getCategoryLabel = (category: string) => {
-    const labels: Record<string, string> = {
-      network: 'Rete',
-      virtualization: 'Virtualizzazione',
-      systems: 'Sistemi',
-      monitoring: 'Monitoring',
-      security: 'Sicurezza',
-      maintenance: 'Manutenzione',
-      other: 'Altro',
-    };
-    return labels[category] || category;
+  const getCreatorName = (userId: string) => {
+    const profile = profiles.find(p => p.id === userId);
+    return profile ? profile.email : 'Utente sconosciuto';
   };
 
-  const getClientName = (userId: string) => {
-    const client = clients.find(c => c.user_id === userId);
-    return client ? `${client.company_name} (${client.contact_name})` : 'Cliente sconosciuto';
+  const getCompanyName = (companyId: string) => {
+    const company = companies.find(c => c.id === companyId);
+    return company ? company.name : 'Azienda sconosciuta';
   };
 
   const filteredTickets = tickets.filter(ticket => {
     const matchesSearch = ticket.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          ticket.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         getClientName(ticket.user_id).toLowerCase().includes(searchTerm.toLowerCase());
+                         getCreatorName(ticket.created_by).toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         getCompanyName(ticket.company_id).toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === 'all' || ticket.status === statusFilter;
     const matchesPriority = priorityFilter === 'all' || ticket.priority === priorityFilter;
     return matchesSearch && matchesStatus && matchesPriority;
@@ -143,7 +146,8 @@ export default function AdminDashboard() {
     open: tickets.filter((t) => t.status === 'open').length,
     inProgress: tickets.filter((t) => t.status === 'in_progress').length,
     resolved: tickets.filter((t) => t.status === 'resolved').length,
-    totalClients: clients.filter(c => c.role === 'client').length,
+    totalClients: profiles.filter(p => p.role === 'client').length,
+    totalCompanies: companies.length,
   };
 
   if (loading) {
@@ -164,7 +168,7 @@ export default function AdminDashboard() {
             </h1>
             {admin && (
               <p className="text-sm text-gray-400 mt-1">
-                Benvenuto, {admin.contact_name} ({admin.role === 'admin' ? 'Amministratore' : 'Staff'})
+                Benvenuto, {admin.email} ({admin.role === 'admin' ? 'Amministratore' : 'Agente'})
               </p>
             )}
           </div>
@@ -190,7 +194,7 @@ export default function AdminDashboard() {
               className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white"
             >
               <Plus className="mr-2 h-4 w-4" />
-              Nuovo Promemoria
+              Nuovo Ticket
             </Button>
             <Button variant="outline" onClick={handleLogout} className="border-red-500/30 text-red-400 hover:bg-red-500/10">
               <LogOut className="mr-2 h-4 w-4" />
@@ -208,7 +212,7 @@ export default function AdminDashboard() {
         )}
 
         {/* Statistics Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-6 mb-8">
           <Card className="glass-effect border-white/10">
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium text-gray-400">Ticket Totali</CardTitle>
@@ -259,7 +263,7 @@ export default function AdminDashboard() {
 
           <Card 
             className="glass-effect border-white/10 hover:border-purple-500/30 transition-all cursor-pointer"
-            onClick={() => navigate('/admin/user-management')}
+            onClick={() => navigate('/admin/users')}
           >
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium text-gray-400">Clienti</CardTitle>
@@ -268,6 +272,21 @@ export default function AdminDashboard() {
               <div className="flex items-center">
                 <Users className="h-8 w-8 text-purple-500 mr-3" />
                 <span className="text-3xl font-bold text-white">{stats.totalClients}</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card 
+            className="glass-effect border-white/10 hover:border-cyan-500/30 transition-all cursor-pointer"
+            onClick={() => navigate('/admin/user-management')}
+          >
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-medium text-gray-400">Aziende</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center">
+                <Building2 className="h-8 w-8 text-cyan-500 mr-3" />
+                <span className="text-3xl font-bold text-white">{stats.totalCompanies}</span>
               </div>
             </CardContent>
           </Card>
@@ -283,7 +302,7 @@ export default function AdminDashboard() {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <Input
-                  placeholder="Cerca ticket o cliente..."
+                  placeholder="Cerca ticket, cliente o azienda..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10 glass-effect border-white/20 text-white placeholder:text-gray-500"
@@ -322,7 +341,7 @@ export default function AdminDashboard() {
           <CardHeader>
             <CardTitle className="text-white">Tutti i Ticket</CardTitle>
             <CardDescription className="text-gray-400">
-              Gestisci tutte le richieste di assistenza e i promemoria di manutenzione
+              Gestisci tutte le richieste di assistenza
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -344,13 +363,19 @@ export default function AdminDashboard() {
                         <div className="flex-1">
                           <h3 className="font-semibold text-lg text-white mb-2">{ticket.title}</h3>
                           <p className="text-gray-400 text-sm mb-3 line-clamp-2">{ticket.description}</p>
-                          <p className="text-red-400 text-sm mb-3">
-                            Cliente: {getClientName(ticket.user_id)}
-                          </p>
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="text-cyan-400 text-sm">
+                              <Building2 className="inline h-3 w-3 mr-1" />
+                              {getCompanyName(ticket.company_id)}
+                            </span>
+                            <span className="text-gray-500">•</span>
+                            <span className="text-red-400 text-sm">
+                              {getCreatorName(ticket.created_by)}
+                            </span>
+                          </div>
                           <div className="flex flex-wrap gap-2">
                             {getStatusBadge(ticket.status)}
                             {getPriorityBadge(ticket.priority)}
-                            <Badge variant="outline" className="border-white/20 text-gray-300">{getCategoryLabel(ticket.category)}</Badge>
                           </div>
                         </div>
                       </div>

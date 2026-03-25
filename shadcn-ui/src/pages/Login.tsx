@@ -30,15 +30,16 @@ export default function Login() {
       if (authError) throw authError;
 
       if (authData.user) {
-        const { data: clientData, error: clientError } = await supabase
-          .from('clients')
+        // Check profile in new multi-tenant schema
+        const { data: profileData, error: profileError } = await supabase
+          .from('profiles')
           .select('role')
-          .eq('user_id', authData.user.id)
+          .eq('id', authData.user.id)
           .single();
 
-        if (clientError) throw clientError;
+        if (profileError) throw profileError;
 
-        if (clientData?.role === 'admin') {
+        if (profileData?.role === 'admin' || profileData?.role === 'agent') {
           navigate('/admin/dashboard');
         } else {
           navigate('/dashboard');

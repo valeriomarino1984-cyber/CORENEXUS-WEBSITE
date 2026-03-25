@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,19 +7,32 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { supabase, logTicketHistory } from '@/lib/supabase';
+import { supabase, type Company } from '@/lib/supabase';
 import { Loader2, ArrowLeft, Plus } from 'lucide-react';
 
 export default function AdminNewTicket() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [companies, setCompanies] = useState<Company[]>([]);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    category: 'maintenance',
     priority: 'medium',
+    company_id: '',
   });
+
+  useEffect(() => {
+    loadCompanies();
+  }, []);
+
+  const loadCompanies = async () => {
+    const { data } = await supabase
+      .from('companies')
+      .select('*')
+      .order('name', { ascending: true });
+    if (data) setCompanies(data);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,37 +47,37 @@ export default function AdminNewTicket() {
         return;
       }
 
-      // Check if user is admin
+      // Check if user is admin/agent
       const { data: adminData, error: adminError } = await supabase
-        .from('app_2b35a5a86e_clients')
-        .select('role')
-        .eq('user_id', user.id)
+        .from('profiles')
+        .select('role, company_id')
+        .eq('id', user.id)
         .single();
 
       if (adminError) throw adminError;
 
-      if (adminData.role !== 'admin' && adminData.role !== 'staff') {
+      if (adminData.role !== 'admin' && adminData.role !== 'agent') {
         throw new Error('Non hai i permessi per creare ticket');
       }
 
+      // Use selected company_id or admin's own company
+      const companyId = formData.company_id || adminData.company_id;
+
       // Create ticket
       const { data: ticketData, error: ticketError } = await supabase
-        .from('app_2b35a5a86e_tickets')
+        .from('tickets')
         .insert({
-          user_id: user.id,
           title: formData.title,
           description: formData.description,
-          category: formData.category,
           priority: formData.priority,
           status: 'open',
+          company_id: companyId,
+          created_by: user.id,
         })
         .select()
         .single();
 
       if (ticketError) throw ticketError;
-
-      // Log history
-      await logTicketHistory(ticketData.id, user.id, 'created');
 
       // Redirect to ticket detail
       navigate(`/admin/ticket/${ticketData.id}`);
@@ -92,10 +105,10 @@ export default function AdminNewTicket() {
           <CardHeader>
             <CardTitle className="text-2xl text-white flex items-center">
               <Plus className="mr-2 h-6 w-6 text-red-500" />
-              Nuovo Promemoria Manutenzione
+              Nuovo Ticket
             </CardTitle>
             <CardDescription className="text-gray-400">
-              Crea un promemoria per attività di manutenzione o interventi programmati
+              Crea un nuovo ticket di assistenza o promemoria di manutenzione
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -107,7 +120,27 @@ export default function AdminNewTicket() {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="title" className="text-gray-300">Titolo Promemoria *</Label>
+                <Label htmlFor="company" className="text-gray-300">Azienda</Label>
+                <Select
+                  value={formData.company_id}
+                  onValueChange={(value) => setFormData({ ...formData, company_id: value })}
+                  disabled={loading}
+                >
+                  <SelectTrigger id="company" className="glass-effect border-white/20 text-white">
+                    <SelectValue placeholder="Seleziona azienda (opzionale)" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {companies.map((company) => (
+                      <SelectItem key={company.id} value={company.id}>
+                        {company.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="title" className="text-gray-300">Titolo *</Label>
                 <Input
                   id="title"
                   placeholder="es. Backup server mensile - Cliente XYZ"
@@ -120,10 +153,10 @@ export default function AdminNewTicket() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="description" className="text-gray-300">Descrizione Attività *</Label>
+                <Label htmlFor="description" className="text-gray-300">Descrizione *</Label>
                 <Textarea
                   id="description"
-                  placeholder="Descrivi l'attività di manutenzione da eseguire, inclusi dettagli tecnici e note importanti..."
+                  placeholder="Descrivi l'attività o il problema..."
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   required
@@ -133,54 +166,23 @@ export default function AdminNewTicket() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="category" className="text-gray-300">Categoria *</Label>
-                  <Select
-                    value={formData.category}
-                    onValueChange={(value) => setFormData({ ...formData, category: value })}
-                    disabled={loading}
-                  >
-                    <SelectTrigger id="category" className="glass-effect border-white/20 text-white">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="maintenance">Manutenzione</SelectItem>
-                      <SelectItem value="network">Rete</SelectItem>
-                      <SelectItem value="virtualization">Virtualizzazione</SelectItem>
-                      <SelectItem value="systems">Sistemi</SelectItem>
-                      <SelectItem value="monitoring">Monitoring</SelectItem>
-                      <SelectItem value="security">Sicurezza</SelectItem>
-                      <SelectItem value="other">Altro</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="priority" className="text-gray-300">Priorità *</Label>
-                  <Select
-                    value={formData.priority}
-                    onValueChange={(value) => setFormData({ ...formData, priority: value })}
-                    disabled={loading}
-                  >
-                    <SelectTrigger id="priority" className="glass-effect border-white/20 text-white">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="low">Bassa</SelectItem>
-                      <SelectItem value="medium">Media</SelectItem>
-                      <SelectItem value="high">Alta</SelectItem>
-                      <SelectItem value="urgent">Urgente</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
-                <p className="text-sm text-blue-400">
-                  💡 <strong>Nota:</strong> Questo promemoria sarà visibile solo agli amministratori e allo staff. 
-                  Puoi usarlo per tenere traccia di manutenzioni programmate, scadenze e attività ricorrenti.
-                </p>
+              <div className="space-y-2">
+                <Label htmlFor="priority" className="text-gray-300">Priorità *</Label>
+                <Select
+                  value={formData.priority}
+                  onValueChange={(value) => setFormData({ ...formData, priority: value })}
+                  disabled={loading}
+                >
+                  <SelectTrigger id="priority" className="glass-effect border-white/20 text-white">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="low">Bassa</SelectItem>
+                    <SelectItem value="medium">Media</SelectItem>
+                    <SelectItem value="high">Alta</SelectItem>
+                    <SelectItem value="urgent">Urgente</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="flex gap-4">
@@ -206,7 +208,7 @@ export default function AdminNewTicket() {
                   ) : (
                     <>
                       <Plus className="mr-2 h-4 w-4" />
-                      Crea Promemoria
+                      Crea Ticket
                     </>
                   )}
                 </Button>

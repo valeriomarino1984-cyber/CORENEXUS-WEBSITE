@@ -5,15 +5,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { supabase, type Client } from '@/lib/supabase';
+import { supabase, type Profile, type Company } from '@/lib/supabase';
 import { Loader2, ArrowLeft, Search, Users, Plus, Edit, Shield, User } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function AdminUsers() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [admin, setAdmin] = useState<Client | null>(null);
-  const [users, setUsers] = useState<Client[]>([]);
+  const [users, setUsers] = useState<(Profile & { companies?: Company })[]>([]);
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [roleFilter, setRoleFilter] = useState('all');
@@ -31,27 +30,25 @@ export default function AdminUsers() {
         return;
       }
 
-      // Check if user is admin
+      // Check if user is admin/agent
       const { data: adminData, error: adminError } = await supabase
-        .from('app_2b35a5a86e_clients')
-        .select('*')
-        .eq('user_id', user.id)
+        .from('profiles')
+        .select('role')
+        .eq('id', user.id)
         .single();
 
       if (adminError) throw adminError;
 
-      if (adminData.role !== 'admin' && adminData.role !== 'staff') {
+      if (adminData.role !== 'admin' && adminData.role !== 'agent') {
         await supabase.auth.signOut();
         navigate('/admin/login');
         return;
       }
 
-      setAdmin(adminData);
-
-      // Fetch all users
+      // Fetch all users with company info
       const { data: usersData, error: usersError } = await supabase
-        .from('app_2b35a5a86e_clients')
-        .select('*')
+        .from('profiles')
+        .select('*, companies(*)')
         .order('created_at', { ascending: false });
 
       if (usersError) throw usersError;
@@ -65,20 +62,20 @@ export default function AdminUsers() {
   };
 
   const getRoleBadge = (role: string) => {
-    const config: Record<string, { variant: 'default' | 'secondary' | 'destructive' | 'outline', label: string, color: string }> = {
-      admin: { variant: 'destructive', label: 'Admin', color: 'text-red-500' },
-      staff: { variant: 'secondary', label: 'Staff', color: 'text-orange-500' },
-      client: { variant: 'outline', label: 'Cliente', color: 'text-blue-500' },
+    const config: Record<string, { variant: 'default' | 'secondary' | 'destructive' | 'outline', label: string }> = {
+      admin: { variant: 'destructive', label: 'Admin' },
+      agent: { variant: 'secondary', label: 'Agente' },
+      client: { variant: 'outline', label: 'Cliente' },
     };
     const roleConfig = config[role] || config.client;
     return <Badge variant={roleConfig.variant}>{roleConfig.label}</Badge>;
   };
 
   const filteredUsers = users.filter(user => {
+    const companyName = user.companies?.name || '';
     const matchesSearch = 
-      user.company_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.contact_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase());
+      user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      companyName.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesRole = roleFilter === 'all' || user.role === roleFilter;
     return matchesSearch && matchesRole;
   });
@@ -86,7 +83,7 @@ export default function AdminUsers() {
   const stats = {
     total: users.length,
     admins: users.filter(u => u.role === 'admin').length,
-    staff: users.filter(u => u.role === 'staff').length,
+    agents: users.filter(u => u.role === 'agent').length,
     clients: users.filter(u => u.role === 'client').length,
   };
 
@@ -161,12 +158,12 @@ export default function AdminUsers() {
 
           <Card className="glass-effect border-white/10">
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-gray-400">Staff</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-400">Agenti</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center">
                 <User className="h-8 w-8 text-orange-500 mr-3" />
-                <span className="text-3xl font-bold text-white">{stats.staff}</span>
+                <span className="text-3xl font-bold text-white">{stats.agents}</span>
               </div>
             </CardContent>
           </Card>
@@ -194,7 +191,7 @@ export default function AdminUsers() {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <Input
-                  placeholder="Cerca per nome, azienda o email..."
+                  placeholder="Cerca per email o azienda..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10 glass-effect border-white/20 text-white placeholder:text-gray-500"
@@ -207,7 +204,7 @@ export default function AdminUsers() {
                 <SelectContent>
                   <SelectItem value="all">Tutti i ruoli</SelectItem>
                   <SelectItem value="admin">Amministratori</SelectItem>
-                  <SelectItem value="staff">Staff</SelectItem>
+                  <SelectItem value="agent">Agenti</SelectItem>
                   <SelectItem value="client">Clienti</SelectItem>
                 </SelectContent>
               </Select>
@@ -240,20 +237,12 @@ export default function AdminUsers() {
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <h3 className="font-semibold text-lg text-white">{user.contact_name}</h3>
+                            <h3 className="font-semibold text-lg text-white">{user.email}</h3>
                             {getRoleBadge(user.role)}
                           </div>
                           <p className="text-gray-400 text-sm mb-2">
-                            <strong>Azienda:</strong> {user.company_name}
+                            <strong>Azienda:</strong> {user.companies?.name || 'N/A'}
                           </p>
-                          <p className="text-gray-400 text-sm mb-2">
-                            <strong>Email:</strong> {user.email}
-                          </p>
-                          {user.phone && (
-                            <p className="text-gray-400 text-sm mb-2">
-                              <strong>Telefono:</strong> {user.phone}
-                            </p>
-                          )}
                           <p className="text-xs text-gray-500 mt-3">
                             Creato il {new Date(user.created_at).toLocaleDateString('it-IT', {
                               day: '2-digit',

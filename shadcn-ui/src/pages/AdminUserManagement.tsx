@@ -10,18 +10,13 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { supabase, type Client } from '@/lib/supabase';
+import { supabase, type Profile, type Company } from '@/lib/supabase';
 import { Loader2, ArrowLeft, Plus, Edit, Building2, Users, Shield, User } from 'lucide-react';
-
-interface Company {
-  company_name: string;
-  userCount: number;
-}
 
 export default function AdminUserManagement() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [users, setUsers] = useState<Client[]>([]);
+  const [users, setUsers] = useState<(Profile & { companies?: Company })[]>([]);
   const [companies, setCompanies] = useState<Company[]>([]);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -33,32 +28,25 @@ export default function AdminUserManagement() {
   const [newUser, setNewUser] = useState({
     email: '',
     password: '',
-    contact_name: '',
-    company_name: '',
+    company_id: '',
     role: 'client',
-    phone: '',
   });
 
   // Edit Role Dialog
   const [showEditRole, setShowEditRole] = useState(false);
-  const [editingUser, setEditingUser] = useState<Client | null>(null);
+  const [editingUser, setEditingUser] = useState<Profile | null>(null);
   const [newRole, setNewRole] = useState('');
   const [updatingRole, setUpdatingRole] = useState(false);
 
   // Edit Company Dialog
   const [showEditCompany, setShowEditCompany] = useState(false);
-  const [newCompanyName, setNewCompanyName] = useState('');
+  const [newCompanyId, setNewCompanyId] = useState('');
   const [updatingCompany, setUpdatingCompany] = useState(false);
 
   // Create Company Dialog
   const [showCreateCompany, setShowCreateCompany] = useState(false);
   const [creatingCompany, setCreatingCompany] = useState(false);
-  const [newCompany, setNewCompany] = useState({
-    company_name: '',
-    contact_name: '',
-    email: '',
-    phone: '',
-  });
+  const [newCompanyName, setNewCompanyName] = useState('');
 
   useEffect(() => {
     checkAuth();
@@ -73,11 +61,10 @@ export default function AdminUserManagement() {
         return;
       }
 
-      // Check if user is admin
       const { data: adminData, error: adminError } = await supabase
-        .from('app_2b35a5a86e_clients')
+        .from('profiles')
         .select('role')
-        .eq('user_id', user.id)
+        .eq('id', user.id)
         .single();
 
       if (adminError) throw adminError;
@@ -98,35 +85,23 @@ export default function AdminUserManagement() {
 
   const loadData = async () => {
     try {
-      // Load all users
+      // Load all users with company info
       const { data: usersData, error: usersError } = await supabase
-        .from('app_2b35a5a86e_clients')
-        .select('*')
+        .from('profiles')
+        .select('*, companies(*)')
         .order('created_at', { ascending: false });
 
       if (usersError) throw usersError;
       setUsers(usersData || []);
 
-      // Load companies with user count
+      // Load companies
       const { data: companiesData, error: companiesError } = await supabase
-        .from('app_2b35a5a86e_clients')
-        .select('company_name');
+        .from('companies')
+        .select('*')
+        .order('name', { ascending: true });
 
       if (companiesError) throw companiesError;
-
-      // Count users per company
-      const companyMap = new Map<string, number>();
-      companiesData?.forEach((item) => {
-        const count = companyMap.get(item.company_name) || 0;
-        companyMap.set(item.company_name, count + 1);
-      });
-
-      const companiesList = Array.from(companyMap.entries()).map(([company_name, userCount]) => ({
-        company_name,
-        userCount,
-      })).sort((a, b) => a.company_name.localeCompare(b.company_name));
-
-      setCompanies(companiesList);
+      setCompanies(companiesData || []);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Errore nel caricamento dei dati';
       setError(errorMessage);
@@ -140,15 +115,12 @@ export default function AdminUserManagement() {
     setCreatingUser(true);
 
     try {
-      // Call Edge Function to create user
       const { data, error } = await supabase.functions.invoke('app_2b35a5a86e_create_user', {
         body: {
           email: newUser.email,
           password: newUser.password,
-          company_name: newUser.company_name,
-          contact_name: newUser.contact_name,
+          company_id: newUser.company_id,
           role: newUser.role,
-          phone: newUser.phone || null,
         },
       });
 
@@ -157,14 +129,7 @@ export default function AdminUserManagement() {
 
       setSuccess('Utente creato con successo!');
       setShowCreateUser(false);
-      setNewUser({
-        email: '',
-        password: '',
-        contact_name: '',
-        company_name: '',
-        role: 'client',
-        phone: '',
-      });
+      setNewUser({ email: '', password: '', company_id: '', role: 'client' });
       await loadData();
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Errore nella creazione dell\'utente';
@@ -183,7 +148,7 @@ export default function AdminUserManagement() {
 
     try {
       const { error: updateError } = await supabase
-        .from('app_2b35a5a86e_clients')
+        .from('profiles')
         .update({ role: newRole })
         .eq('id', editingUser.id);
 
@@ -210,8 +175,8 @@ export default function AdminUserManagement() {
 
     try {
       const { error: updateError } = await supabase
-        .from('app_2b35a5a86e_clients')
-        .update({ company_name: newCompanyName })
+        .from('profiles')
+        .update({ company_id: newCompanyId })
         .eq('id', editingUser.id);
 
       if (updateError) throw updateError;
@@ -235,29 +200,15 @@ export default function AdminUserManagement() {
     setCreatingCompany(true);
 
     try {
-      // Create a user for the company
-      const { data, error } = await supabase.functions.invoke('app_2b35a5a86e_create_user', {
-        body: {
-          email: newCompany.email,
-          password: 'TempPassword123!', // Temporary password
-          company_name: newCompany.company_name,
-          contact_name: newCompany.contact_name,
-          role: 'client',
-          phone: newCompany.phone || null,
-        },
-      });
+      const { error: insertError } = await supabase
+        .from('companies')
+        .insert({ name: newCompanyName });
 
-      if (error) throw error;
-      if (data.error) throw new Error(data.error);
+      if (insertError) throw insertError;
 
-      setSuccess('Azienda creata con successo! Password temporanea: TempPassword123!');
+      setSuccess('Azienda creata con successo!');
       setShowCreateCompany(false);
-      setNewCompany({
-        company_name: '',
-        contact_name: '',
-        email: '',
-        phone: '',
-      });
+      setNewCompanyName('');
       await loadData();
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Errore nella creazione dell\'azienda';
@@ -270,7 +221,7 @@ export default function AdminUserManagement() {
   const getRoleBadge = (role: string) => {
     const config: Record<string, { variant: 'default' | 'secondary' | 'destructive' | 'outline', label: string }> = {
       admin: { variant: 'destructive', label: 'Admin' },
-      staff: { variant: 'secondary', label: 'Staff' },
+      agent: { variant: 'secondary', label: 'Agente' },
       client: { variant: 'outline', label: 'Cliente' },
     };
     const roleConfig = config[role] || config.client;
@@ -282,10 +233,14 @@ export default function AdminUserManagement() {
     return user.role === roleFilter;
   });
 
+  const getUserCountForCompany = (companyId: string) => {
+    return users.filter(u => u.company_id === companyId).length;
+  };
+
   const stats = {
     total: users.length,
     admins: users.filter(u => u.role === 'admin').length,
-    staff: users.filter(u => u.role === 'staff').length,
+    agents: users.filter(u => u.role === 'agent').length,
     clients: users.filter(u => u.role === 'client').length,
     companies: companies.length,
   };
@@ -358,12 +313,12 @@ export default function AdminUserManagement() {
 
           <Card className="glass-effect border-white/10">
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-gray-400">Staff</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-400">Agenti</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center">
                 <User className="h-8 w-8 text-orange-500 mr-3" />
-                <span className="text-3xl font-bold text-white">{stats.staff}</span>
+                <span className="text-3xl font-bold text-white">{stats.agents}</span>
               </div>
             </CardContent>
           </Card>
@@ -417,7 +372,7 @@ export default function AdminUserManagement() {
                   <SelectContent>
                     <SelectItem value="all">Tutti i ruoli</SelectItem>
                     <SelectItem value="admin">Amministratori</SelectItem>
-                    <SelectItem value="staff">Staff</SelectItem>
+                    <SelectItem value="agent">Agenti</SelectItem>
                     <SelectItem value="client">Clienti</SelectItem>
                   </SelectContent>
                 </Select>
@@ -440,9 +395,9 @@ export default function AdminUserManagement() {
                   <form onSubmit={handleCreateUser} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="email" className="text-gray-300">Email *</Label>
+                        <Label htmlFor="create_email" className="text-gray-300">Email *</Label>
                         <Input
-                          id="email"
+                          id="create_email"
                           type="email"
                           value={newUser.email}
                           onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
@@ -451,9 +406,9 @@ export default function AdminUserManagement() {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="password" className="text-gray-300">Password *</Label>
+                        <Label htmlFor="create_password" className="text-gray-300">Password *</Label>
                         <Input
-                          id="password"
+                          id="create_password"
                           type="password"
                           value={newUser.password}
                           onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
@@ -465,55 +420,35 @@ export default function AdminUserManagement() {
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="contact_name" className="text-gray-300">Nome Contatto *</Label>
-                        <Input
-                          id="contact_name"
-                          value={newUser.contact_name}
-                          onChange={(e) => setNewUser({ ...newUser, contact_name: e.target.value })}
-                          required
-                          className="glass-effect border-white/20 text-white"
-                        />
+                        <Label htmlFor="create_company" className="text-gray-300">Azienda *</Label>
+                        <Select
+                          value={newUser.company_id}
+                          onValueChange={(value) => setNewUser({ ...newUser, company_id: value })}
+                        >
+                          <SelectTrigger id="create_company" className="glass-effect border-white/20 text-white">
+                            <SelectValue placeholder="Seleziona azienda" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {companies.map((company) => (
+                              <SelectItem key={company.id} value={company.id}>
+                                {company.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="phone" className="text-gray-300">Telefono</Label>
-                        <Input
-                          id="phone"
-                          type="tel"
-                          value={newUser.phone}
-                          onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })}
-                          className="glass-effect border-white/20 text-white"
-                        />
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="company_name" className="text-gray-300">Azienda *</Label>
-                        <Input
-                          id="company_name"
-                          value={newUser.company_name}
-                          onChange={(e) => setNewUser({ ...newUser, company_name: e.target.value })}
-                          required
-                          className="glass-effect border-white/20 text-white"
-                          list="companies-list"
-                        />
-                        <datalist id="companies-list">
-                          {companies.map((company) => (
-                            <option key={company.company_name} value={company.company_name} />
-                          ))}
-                        </datalist>
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="role" className="text-gray-300">Ruolo *</Label>
+                        <Label htmlFor="create_role" className="text-gray-300">Ruolo *</Label>
                         <Select
                           value={newUser.role}
                           onValueChange={(value) => setNewUser({ ...newUser, role: value })}
                         >
-                          <SelectTrigger id="role" className="glass-effect border-white/20 text-white">
+                          <SelectTrigger id="create_role" className="glass-effect border-white/20 text-white">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="client">Cliente</SelectItem>
-                            <SelectItem value="staff">Staff</SelectItem>
+                            <SelectItem value="agent">Agente</SelectItem>
                             <SelectItem value="admin">Admin</SelectItem>
                           </SelectContent>
                         </Select>
@@ -561,7 +496,6 @@ export default function AdminUserManagement() {
                     <TableHeader>
                       <TableRow className="border-white/10 hover:bg-white/5">
                         <TableHead className="text-gray-300">Email</TableHead>
-                        <TableHead className="text-gray-300">Nome</TableHead>
                         <TableHead className="text-gray-300">Azienda</TableHead>
                         <TableHead className="text-gray-300">Ruolo</TableHead>
                         <TableHead className="text-gray-300">Data Creazione</TableHead>
@@ -572,8 +506,7 @@ export default function AdminUserManagement() {
                       {filteredUsers.map((user) => (
                         <TableRow key={user.id} className="border-white/10 hover:bg-white/5">
                           <TableCell className="text-white">{user.email}</TableCell>
-                          <TableCell className="text-white">{user.contact_name}</TableCell>
-                          <TableCell className="text-white">{user.company_name}</TableCell>
+                          <TableCell className="text-white">{user.companies?.name || 'N/A'}</TableCell>
                           <TableCell>{getRoleBadge(user.role)}</TableCell>
                           <TableCell className="text-gray-400">
                             {new Date(user.created_at).toLocaleDateString('it-IT')}
@@ -598,7 +531,7 @@ export default function AdminUserManagement() {
                                 variant="outline"
                                 onClick={() => {
                                   setEditingUser(user);
-                                  setNewCompanyName(user.company_name);
+                                  setNewCompanyId(user.company_id);
                                   setShowEditCompany(true);
                                 }}
                                 className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10"
@@ -627,11 +560,11 @@ export default function AdminUserManagement() {
                     Nuova Azienda
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="glass-effect border-red-500/20 max-w-2xl">
+                <DialogContent className="glass-effect border-red-500/20">
                   <DialogHeader>
                     <DialogTitle className="text-white">Crea Nuova Azienda</DialogTitle>
                     <DialogDescription className="text-gray-400">
-                      Inserisci i dettagli della nuova azienda. Verrà creato un utente amministratore per l'azienda.
+                      Inserisci il nome della nuova azienda
                     </DialogDescription>
                   </DialogHeader>
                   <form onSubmit={handleCreateCompany} className="space-y-4">
@@ -639,50 +572,13 @@ export default function AdminUserManagement() {
                       <Label htmlFor="company_name_new" className="text-gray-300">Nome Azienda *</Label>
                       <Input
                         id="company_name_new"
-                        value={newCompany.company_name}
-                        onChange={(e) => setNewCompany({ ...newCompany, company_name: e.target.value })}
+                        value={newCompanyName}
+                        onChange={(e) => setNewCompanyName(e.target.value)}
                         required
                         className="glass-effect border-white/20 text-white"
+                        placeholder="Es. Azienda SRL"
                       />
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="company_contact" className="text-gray-300">Nome Contatto *</Label>
-                        <Input
-                          id="company_contact"
-                          value={newCompany.contact_name}
-                          onChange={(e) => setNewCompany({ ...newCompany, contact_name: e.target.value })}
-                          required
-                          className="glass-effect border-white/20 text-white"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="company_email" className="text-gray-300">Email *</Label>
-                        <Input
-                          id="company_email"
-                          type="email"
-                          value={newCompany.email}
-                          onChange={(e) => setNewCompany({ ...newCompany, email: e.target.value })}
-                          required
-                          className="glass-effect border-white/20 text-white"
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="company_phone" className="text-gray-300">Telefono</Label>
-                      <Input
-                        id="company_phone"
-                        type="tel"
-                        value={newCompany.phone}
-                        onChange={(e) => setNewCompany({ ...newCompany, phone: e.target.value })}
-                        className="glass-effect border-white/20 text-white"
-                      />
-                    </div>
-                    <Alert className="bg-blue-500/10 border-blue-500/50">
-                      <AlertDescription className="text-blue-400">
-                        Verrà creato un account con password temporanea: <strong>TempPassword123!</strong>
-                      </AlertDescription>
-                    </Alert>
                     <DialogFooter>
                       <Button
                         type="button"
@@ -722,17 +618,17 @@ export default function AdminUserManagement() {
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {companies.map((company) => (
-                    <Card key={company.company_name} className="glass-effect border-white/10 hover:border-red-500/30 transition-all">
+                    <Card key={company.id} className="glass-effect border-white/10 hover:border-red-500/30 transition-all">
                       <CardContent className="pt-6">
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-2">
                               <Building2 className="h-5 w-5 text-purple-500" />
-                              <h3 className="font-semibold text-white">{company.company_name}</h3>
+                              <h3 className="font-semibold text-white">{company.name}</h3>
                             </div>
                             <div className="flex items-center gap-2 text-sm text-gray-400">
                               <Users className="h-4 w-4" />
-                              <span>{company.userCount} utenti</span>
+                              <span>{getUserCountForCompany(company.id)} utenti</span>
                             </div>
                           </div>
                         </div>
@@ -751,7 +647,7 @@ export default function AdminUserManagement() {
             <DialogHeader>
               <DialogTitle className="text-white">Modifica Ruolo</DialogTitle>
               <DialogDescription className="text-gray-400">
-                Cambia il ruolo di {editingUser?.contact_name}
+                Cambia il ruolo di {editingUser?.email}
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-4">
@@ -763,7 +659,7 @@ export default function AdminUserManagement() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="client">Cliente</SelectItem>
-                    <SelectItem value="staff">Staff</SelectItem>
+                    <SelectItem value="agent">Agente</SelectItem>
                     <SelectItem value="admin">Admin</SelectItem>
                   </SelectContent>
                 </Select>
@@ -801,24 +697,24 @@ export default function AdminUserManagement() {
             <DialogHeader>
               <DialogTitle className="text-white">Modifica Azienda</DialogTitle>
               <DialogDescription className="text-gray-400">
-                Cambia l'azienda di {editingUser?.contact_name}
+                Cambia l'azienda di {editingUser?.email}
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-4">
               <div className="space-y-2">
                 <Label htmlFor="new_company" className="text-gray-300">Nuova Azienda</Label>
-                <Input
-                  id="new_company"
-                  value={newCompanyName}
-                  onChange={(e) => setNewCompanyName(e.target.value)}
-                  className="glass-effect border-white/20 text-white"
-                  list="companies-list-edit"
-                />
-                <datalist id="companies-list-edit">
-                  {companies.map((company) => (
-                    <option key={company.company_name} value={company.company_name} />
-                  ))}
-                </datalist>
+                <Select value={newCompanyId} onValueChange={setNewCompanyId}>
+                  <SelectTrigger id="new_company" className="glass-effect border-white/20 text-white">
+                    <SelectValue placeholder="Seleziona azienda" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {companies.map((company) => (
+                      <SelectItem key={company.id} value={company.id}>
+                        {company.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
             <DialogFooter>

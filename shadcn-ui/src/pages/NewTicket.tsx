@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { supabase, sendTicketNotification, logTicketHistory } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { Loader2, ArrowLeft } from 'lucide-react';
 
 export default function NewTicket() {
@@ -17,7 +17,6 @@ export default function NewTicket() {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    category: '',
     priority: 'medium',
   });
 
@@ -34,40 +33,27 @@ export default function NewTicket() {
         return;
       }
 
-      const { data: ticketData, error: insertError } = await supabase
-        .from('app_2b35a5a86e_tickets')
+      // Get profile to find company_id
+      const { data: profileData, error: profileError } = await supabase
+        .from('profiles')
+        .select('company_id')
+        .eq('id', user.id)
+        .single();
+
+      if (profileError) throw profileError;
+
+      const { error: insertError } = await supabase
+        .from('tickets')
         .insert({
-          user_id: user.id,
           title: formData.title,
           description: formData.description,
-          category: formData.category,
           priority: formData.priority,
           status: 'open',
-        })
-        .select()
-        .single();
+          company_id: profileData.company_id,
+          created_by: user.id,
+        });
 
       if (insertError) throw insertError;
-
-      // Log history
-      await logTicketHistory(ticketData.id, user.id, 'created');
-
-      // Send notification
-      const { data: clientData } = await supabase
-        .from('app_2b35a5a86e_clients')
-        .select('contact_name, email')
-        .eq('user_id', user.id)
-        .single();
-
-      if (clientData) {
-        await sendTicketNotification(
-          ticketData.id,
-          'created',
-          clientData.email,
-          clientData.contact_name,
-          formData.title
-        );
-      }
 
       navigate('/dashboard');
     } catch (err) {
@@ -79,10 +65,10 @@ export default function NewTicket() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
-      <header className="bg-white shadow-sm border-b">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+      <header className="glass-effect border-b border-white/10">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Button variant="ghost" onClick={() => navigate('/dashboard')}>
+          <Button variant="ghost" onClick={() => navigate('/dashboard')} className="text-blue-400 hover:text-blue-300">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Torna alla Dashboard
           </Button>
@@ -90,17 +76,17 @@ export default function NewTicket() {
       </header>
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Card>
+        <Card className="glass-effect border-white/10">
           <CardHeader>
-            <CardTitle>Nuovo Ticket di Assistenza</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-white">Nuovo Ticket di Assistenza</CardTitle>
+            <CardDescription className="text-gray-400">
               Compila il form per aprire una nuova richiesta di supporto tecnico
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="title">Titolo *</Label>
+                <Label htmlFor="title" className="text-gray-300">Titolo *</Label>
                 <Input
                   id="title"
                   placeholder="Breve descrizione del problema"
@@ -108,39 +94,18 @@ export default function NewTicket() {
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   required
                   disabled={loading}
+                  className="glass-effect border-white/20 text-white placeholder:text-gray-500"
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="category">Categoria *</Label>
-                <Select
-                  value={formData.category}
-                  onValueChange={(value) => setFormData({ ...formData, category: value })}
-                  required
-                  disabled={loading}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Seleziona una categoria" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="network">Rete</SelectItem>
-                    <SelectItem value="virtualization">Virtualizzazione</SelectItem>
-                    <SelectItem value="systems">Sistemi</SelectItem>
-                    <SelectItem value="monitoring">Monitoring</SelectItem>
-                    <SelectItem value="security">Sicurezza</SelectItem>
-                    <SelectItem value="other">Altro</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="priority">Priorità *</Label>
+                <Label htmlFor="priority" className="text-gray-300">Priorità *</Label>
                 <Select
                   value={formData.priority}
                   onValueChange={(value) => setFormData({ ...formData, priority: value })}
                   disabled={loading}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="glass-effect border-white/20 text-white">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -153,7 +118,7 @@ export default function NewTicket() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="description">Descrizione Dettagliata *</Label>
+                <Label htmlFor="description" className="text-gray-300">Descrizione Dettagliata *</Label>
                 <Textarea
                   id="description"
                   placeholder="Descrivi il problema in dettaglio..."
@@ -162,17 +127,18 @@ export default function NewTicket() {
                   rows={6}
                   required
                   disabled={loading}
+                  className="glass-effect border-white/20 text-white placeholder:text-gray-500"
                 />
               </div>
 
               {error && (
-                <Alert variant="destructive">
-                  <AlertDescription>{error}</AlertDescription>
+                <Alert variant="destructive" className="bg-red-500/10 border-red-500/50">
+                  <AlertDescription className="text-red-400">{error}</AlertDescription>
                 </Alert>
               )}
 
               <div className="flex gap-4">
-                <Button type="submit" disabled={loading} className="flex-1">
+                <Button type="submit" disabled={loading} className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white">
                   {loading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -187,6 +153,7 @@ export default function NewTicket() {
                   variant="outline"
                   onClick={() => navigate('/dashboard')}
                   disabled={loading}
+                  className="border-white/20 text-white hover:bg-white/10"
                 >
                   Annulla
                 </Button>

@@ -11,22 +11,17 @@ import {
   supabase, 
   type Ticket, 
   type TicketMessage, 
-  type TicketAttachment, 
-  type TicketHistory,
-  type Client,
-  logTicketHistory,
-  sendTicketNotification
+  type Profile,
+  type Company,
 } from '@/lib/supabase';
 import { 
   Loader2, 
   ArrowLeft, 
   Send, 
-  Paperclip, 
-  Download,
-  History,
   MessageSquare,
-  FileText,
-  Save
+  History,
+  Save,
+  Building2
 } from 'lucide-react';
 
 export default function AdminTicketDetail() {
@@ -34,11 +29,10 @@ export default function AdminTicketDetail() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [ticket, setTicket] = useState<Ticket | null>(null);
-  const [client, setClient] = useState<Client | null>(null);
-  const [admin, setAdmin] = useState<Client | null>(null);
+  const [creatorProfile, setCreatorProfile] = useState<Profile | null>(null);
+  const [company, setCompany] = useState<Company | null>(null);
+  const [agents, setAgents] = useState<Profile[]>([]);
   const [messages, setMessages] = useState<TicketMessage[]>([]);
-  const [attachments, setAttachments] = useState<TicketAttachment[]>([]);
-  const [history, setHistory] = useState<TicketHistory[]>([]);
   const [error, setError] = useState('');
   const [newMessage, setNewMessage] = useState('');
   const [sendingMessage, setSendingMessage] = useState(false);
@@ -47,6 +41,7 @@ export default function AdminTicketDetail() {
   const [editForm, setEditForm] = useState({
     status: '',
     priority: '',
+    assigned_to: '',
   });
 
   useEffect(() => {
@@ -55,41 +50,30 @@ export default function AdminTicketDetail() {
 
   const checkAuth = async () => {
     try {
-      console.log('=== DEBUG: Starting authentication check ===');
       const { data: { user }, error: authError } = await supabase.auth.getUser();
-      console.log('Auth user:', user?.id, user?.email);
       
       if (authError || !user) {
-        console.error('Auth error:', authError);
         navigate('/admin/login');
         return;
       }
 
-      // Check if user is admin
-      console.log('Checking admin role for user:', user.id);
+      // Check if user is admin/agent
       const { data: adminData, error: adminError } = await supabase
-        .from('app_2b35a5a86e_clients')
+        .from('profiles')
         .select('*')
-        .eq('user_id', user.id)
+        .eq('id', user.id)
         .single();
-
-      console.log('Admin data:', adminData);
-      console.log('Admin error:', adminError);
 
       if (adminError) throw adminError;
 
-      if (adminData.role !== 'admin' && adminData.role !== 'staff') {
-        console.error('User is not admin/staff. Role:', adminData.role);
+      if (adminData.role !== 'admin' && adminData.role !== 'agent') {
         await supabase.auth.signOut();
         navigate('/admin/login');
         return;
       }
 
-      console.log('User is admin/staff. Proceeding to load ticket data.');
-      setAdmin(adminData);
       await loadTicketData();
     } catch (err) {
-      console.error('=== ERROR in checkAuth ===', err);
       const errorMessage = err instanceof Error ? err.message : 'Errore nel caricamento dei dati';
       setError(errorMessage);
       setLoading(false);
@@ -98,113 +82,59 @@ export default function AdminTicketDetail() {
 
   const loadTicketData = async () => {
     try {
-      console.log('=== DEBUG: Loading ticket data ===');
-      console.log('Ticket ID:', id);
-      
-      // Get current user
-      const { data: { user }, error: userError } = await supabase.auth.getUser();
-      console.log('Current user:', user?.id, user?.email);
-      
-      if (userError) {
-        console.error('User error:', userError);
-        throw userError;
-      }
-
       // Load ticket
-      console.log('Attempting to load ticket with ID:', id);
       const { data: ticketData, error: ticketError } = await supabase
-        .from('app_2b35a5a86e_tickets')
+        .from('tickets')
         .select('*')
         .eq('id', id)
         .single();
 
-      console.log('Ticket query result:', { ticketData, ticketError });
-      
-      if (ticketError) {
-        console.error('=== TICKET ERROR DETAILS ===');
-        console.error('Message:', ticketError.message);
-        console.error('Details:', ticketError.details);
-        console.error('Hint:', ticketError.hint);
-        console.error('Code:', ticketError.code);
-        throw ticketError;
-      }
-      
-      if (!ticketData) {
-        console.error('No ticket data returned for ID:', id);
-        throw new Error('Ticket not found');
-      }
-      
-      console.log('Ticket loaded successfully:', ticketData);
+      if (ticketError) throw ticketError;
       setTicket(ticketData);
       setEditForm({
         status: ticketData.status,
         priority: ticketData.priority,
+        assigned_to: ticketData.assigned_to || '',
       });
 
-      // Load client info
-      console.log('Loading client info for user_id:', ticketData.user_id);
-      const { data: clientData, error: clientError } = await supabase
-        .from('app_2b35a5a86e_clients')
+      // Load creator profile
+      const { data: creatorData } = await supabase
+        .from('profiles')
         .select('*')
-        .eq('user_id', ticketData.user_id)
+        .eq('id', ticketData.created_by)
         .single();
 
-      console.log('Client data:', clientData);
-      if (clientError) {
-        console.error('Client error:', clientError);
-        throw clientError;
-      }
-      setClient(clientData);
+      if (creatorData) setCreatorProfile(creatorData);
+
+      // Load company
+      const { data: companyData } = await supabase
+        .from('companies')
+        .select('*')
+        .eq('id', ticketData.company_id)
+        .single();
+
+      if (companyData) setCompany(companyData);
+
+      // Load agents for assignment
+      const { data: agentsData } = await supabase
+        .from('profiles')
+        .select('*')
+        .in('role', ['admin', 'agent']);
+
+      if (agentsData) setAgents(agentsData);
 
       // Load messages
-      console.log('Loading messages for ticket:', id);
       const { data: messagesData, error: messagesError } = await supabase
         .from('app_2b35a5a86e_ticket_messages')
         .select('*')
         .eq('ticket_id', id)
         .order('created_at', { ascending: true });
 
-      console.log('Messages loaded:', messagesData?.length || 0);
-      if (messagesError) {
-        console.error('Messages error:', messagesError);
-        throw messagesError;
-      }
+      if (messagesError) throw messagesError;
       setMessages(messagesData || []);
 
-      // Load attachments
-      console.log('Loading attachments for ticket:', id);
-      const { data: attachmentsData, error: attachmentsError } = await supabase
-        .from('app_2b35a5a86e_ticket_attachments')
-        .select('*')
-        .eq('ticket_id', id)
-        .order('created_at', { ascending: false });
-
-      console.log('Attachments loaded:', attachmentsData?.length || 0);
-      if (attachmentsError) {
-        console.error('Attachments error:', attachmentsError);
-        throw attachmentsError;
-      }
-      setAttachments(attachmentsData || []);
-
-      // Load history
-      console.log('Loading history for ticket:', id);
-      const { data: historyData, error: historyError } = await supabase
-        .from('app_2b35a5a86e_ticket_history')
-        .select('*')
-        .eq('ticket_id', id)
-        .order('created_at', { ascending: false });
-
-      console.log('History loaded:', historyData?.length || 0);
-      if (historyError) {
-        console.error('History error:', historyError);
-        throw historyError;
-      }
-      setHistory(historyData || []);
-
-      console.log('=== All ticket data loaded successfully ===');
-
       // Subscribe to real-time messages
-      const messageSubscription = supabase
+      supabase
         .channel(`admin_ticket_messages_${id}`)
         .on(
           'postgres_changes',
@@ -215,17 +145,11 @@ export default function AdminTicketDetail() {
             filter: `ticket_id=eq.${id}`,
           },
           (payload) => {
-            console.log('New message received:', payload.new);
             setMessages((prev) => [...prev, payload.new as TicketMessage]);
           }
         )
         .subscribe();
-
-      return () => {
-        messageSubscription.unsubscribe();
-      };
     } catch (err) {
-      console.error('=== ERROR in loadTicketData ===', err);
       const errorMessage = err instanceof Error ? err.message : 'Errore nel caricamento dei dati';
       setError(errorMessage);
     } finally {
@@ -234,7 +158,7 @@ export default function AdminTicketDetail() {
   };
 
   const handleSendMessage = async () => {
-    if (!newMessage.trim() || !ticket || !admin) return;
+    if (!newMessage.trim() || !ticket) return;
 
     setSendingMessage(true);
     try {
@@ -251,22 +175,7 @@ export default function AdminTicketDetail() {
         });
 
       if (error) throw error;
-
       setNewMessage('');
-      
-      // Log history
-      await logTicketHistory(ticket.id, user.id, 'message_added');
-
-      // Send notification to client
-      if (client) {
-        await sendTicketNotification(
-          ticket.id,
-          'message',
-          client.email,
-          client.contact_name,
-          ticket.title
-        );
-      }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Errore nell\'invio del messaggio';
       setError(errorMessage);
@@ -276,46 +185,30 @@ export default function AdminTicketDetail() {
   };
 
   const handleUpdateTicket = async () => {
-    if (!ticket || !admin) return;
+    if (!ticket) return;
 
     setUpdatingTicket(true);
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+      const updateData: Record<string, string | null> = {
+        status: editForm.status,
+        priority: editForm.priority,
+      };
+
+      if (editForm.assigned_to) {
+        updateData.assigned_to = editForm.assigned_to;
+      }
 
       const { error } = await supabase
-        .from('app_2b35a5a86e_tickets')
-        .update({
-          status: editForm.status,
-          priority: editForm.priority,
-          updated_at: new Date().toISOString(),
-        })
+        .from('tickets')
+        .update(updateData)
         .eq('id', ticket.id);
 
       if (error) throw error;
 
-      // Log changes
-      if (ticket.status !== editForm.status) {
-        await logTicketHistory(ticket.id, user.id, 'field_updated', 'status', ticket.status, editForm.status);
-      }
-      if (ticket.priority !== editForm.priority) {
-        await logTicketHistory(ticket.id, user.id, 'field_updated', 'priority', ticket.priority, editForm.priority);
-      }
-
-      // Send notification to client
-      if (client) {
-        await sendTicketNotification(
-          ticket.id,
-          'updated',
-          client.email,
-          client.contact_name,
-          ticket.title
-        );
-      }
-
       await loadTicketData();
       setError('');
-      // Show success message
+      
+      // Show success toast
       const successDiv = document.createElement('div');
       successDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
       successDiv.textContent = 'Ticket aggiornato con successo';
@@ -360,24 +253,6 @@ export default function AdminTicketDetail() {
     );
   };
 
-  const getCategoryLabel = (category: string) => {
-    const labels: Record<string, string> = {
-      network: 'Rete',
-      virtualization: 'Virtualizzazione',
-      systems: 'Sistemi',
-      monitoring: 'Monitoring',
-      security: 'Sicurezza',
-      other: 'Altro',
-    };
-    return labels[category] || category;
-  };
-
-  const formatFileSize = (bytes: number) => {
-    if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900">
@@ -386,7 +261,7 @@ export default function AdminTicketDetail() {
     );
   }
 
-  if (!ticket || !client) {
+  if (!ticket) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900">
         <p className="text-white">Ticket non trovato</p>
@@ -412,24 +287,30 @@ export default function AdminTicketDetail() {
           </Alert>
         )}
 
-        {/* Client Info */}
+        {/* Company & Creator Info */}
         <Card className="mb-6 glass-effect border-orange-500/20">
           <CardHeader>
-            <CardTitle className="text-white">Informazioni Cliente</CardTitle>
+            <CardTitle className="text-white">Informazioni</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-gray-300">
               <div>
-                <p className="text-sm text-gray-500">Azienda</p>
-                <p className="font-semibold">{client.company_name}</p>
+                <p className="text-sm text-gray-500 flex items-center gap-1">
+                  <Building2 className="h-3 w-3" /> Azienda
+                </p>
+                <p className="font-semibold">{company?.name || 'N/A'}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-500">Contatto</p>
-                <p className="font-semibold">{client.contact_name}</p>
+                <p className="text-sm text-gray-500">Creato da</p>
+                <p className="font-semibold">{creatorProfile?.email || 'N/A'}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-500">Email</p>
-                <p className="font-semibold">{client.email}</p>
+                <p className="text-sm text-gray-500">Assegnato a</p>
+                <p className="font-semibold">
+                  {ticket.assigned_to 
+                    ? agents.find(a => a.id === ticket.assigned_to)?.email || 'N/A'
+                    : 'Non assegnato'}
+                </p>
               </div>
             </div>
           </CardContent>
@@ -444,7 +325,6 @@ export default function AdminTicketDetail() {
                 <div className="flex gap-2 mt-3">
                   {getStatusBadge(ticket.status)}
                   {getPriorityBadge(ticket.priority)}
-                  <Badge variant="outline" className="border-white/20 text-gray-300">{getCategoryLabel(ticket.category)}</Badge>
                 </div>
               </div>
             </div>
@@ -453,7 +333,7 @@ export default function AdminTicketDetail() {
             <p className="text-gray-300 mb-4">{ticket.description}</p>
             
             {/* Quick Update */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-black/30 rounded-lg">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 bg-black/30 rounded-lg">
               <div>
                 <label className="text-sm text-gray-400 mb-2 block">Stato</label>
                 <Select value={editForm.status} onValueChange={(value) => setEditForm({ ...editForm, status: value })}>
@@ -482,6 +362,21 @@ export default function AdminTicketDetail() {
                   </SelectContent>
                 </Select>
               </div>
+              <div>
+                <label className="text-sm text-gray-400 mb-2 block">Assegna a</label>
+                <Select value={editForm.assigned_to} onValueChange={(value) => setEditForm({ ...editForm, assigned_to: value })}>
+                  <SelectTrigger className="glass-effect border-white/20 text-white">
+                    <SelectValue placeholder="Seleziona agente" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {agents.map((agent) => (
+                      <SelectItem key={agent.id} value={agent.id}>
+                        {agent.email} ({agent.role})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               <div className="flex items-end">
                 <Button 
                   onClick={handleUpdateTicket} 
@@ -496,7 +391,7 @@ export default function AdminTicketDetail() {
                   ) : (
                     <>
                       <Save className="mr-2 h-4 w-4" />
-                      Salva Modifiche
+                      Salva
                     </>
                   )}
                 </Button>
@@ -515,169 +410,72 @@ export default function AdminTicketDetail() {
           </CardContent>
         </Card>
 
-        <Tabs defaultValue="chat" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 glass-effect border-white/10">
-            <TabsTrigger value="chat" className="data-[state=active]:bg-orange-500/20 data-[state=active]:text-orange-400">
-              <MessageSquare className="mr-2 h-4 w-4" />
-              Chat
-            </TabsTrigger>
-            <TabsTrigger value="attachments" className="data-[state=active]:bg-orange-500/20 data-[state=active]:text-orange-400">
-              <Paperclip className="mr-2 h-4 w-4" />
-              Allegati ({attachments.length})
-            </TabsTrigger>
-            <TabsTrigger value="history" className="data-[state=active]:bg-orange-500/20 data-[state=active]:text-orange-400">
-              <History className="mr-2 h-4 w-4" />
-              Storico
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="chat">
-            <Card className="glass-effect border-white/10">
-              <CardHeader>
-                <CardTitle className="text-white">Chat di Supporto</CardTitle>
-                <CardDescription className="text-gray-400">Comunica con il cliente</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4 mb-4 max-h-96 overflow-y-auto">
-                  {messages.length === 0 ? (
-                    <p className="text-center text-gray-500 py-8">Nessun messaggio ancora</p>
-                  ) : (
-                    messages.map((msg) => (
-                      <div
-                        key={msg.id}
-                        className={`flex ${msg.is_staff ? 'justify-end' : 'justify-start'}`}
-                      >
-                        <div
-                          className={`max-w-[70%] rounded-lg p-3 ${
-                            msg.is_staff
-                              ? 'bg-gradient-to-r from-orange-500 to-red-600 text-white'
-                              : 'bg-gray-700 text-white'
-                          }`}
-                        >
-                          <p className="text-sm">{msg.message}</p>
-                          <p className="text-xs mt-1 opacity-70">
-                            {new Date(msg.created_at).toLocaleTimeString('it-IT', {
-                              hour: '2-digit',
-                              minute: '2-digit',
-                            })}
-                          </p>
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-                <div className="flex gap-2">
-                  <Textarea
-                    placeholder="Scrivi una risposta al cliente..."
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    rows={2}
-                    className="glass-effect border-white/20 text-white placeholder:text-gray-500"
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        handleSendMessage();
-                      }
-                    }}
-                  />
-                  <Button 
-                    onClick={handleSendMessage} 
-                    disabled={sendingMessage || !newMessage.trim()}
-                    className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white"
+        {/* Chat */}
+        <Card className="glass-effect border-white/10">
+          <CardHeader>
+            <CardTitle className="text-white flex items-center">
+              <MessageSquare className="mr-2 h-5 w-5" />
+              Chat di Supporto
+            </CardTitle>
+            <CardDescription className="text-gray-400">Comunica con il cliente</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4 mb-4 max-h-96 overflow-y-auto">
+              {messages.length === 0 ? (
+                <p className="text-center text-gray-500 py-8">Nessun messaggio ancora</p>
+              ) : (
+                messages.map((msg) => (
+                  <div
+                    key={msg.id}
+                    className={`flex ${msg.is_staff ? 'justify-end' : 'justify-start'}`}
                   >
-                    {sendingMessage ? (
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                    ) : (
-                      <Send className="h-4 w-4" />
-                    )}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="attachments">
-            <Card className="glass-effect border-white/10">
-              <CardHeader>
-                <CardTitle className="text-white">Allegati</CardTitle>
-                <CardDescription className="text-gray-400">File caricati per questo ticket</CardDescription>
-              </CardHeader>
-              <CardContent>
-                {attachments.length === 0 ? (
-                  <p className="text-center text-gray-500 py-8">Nessun allegato</p>
-                ) : (
-                  <div className="space-y-2">
-                    {attachments.map((att) => (
-                      <div
-                        key={att.id}
-                        className="flex items-center justify-between p-3 border border-white/10 rounded-lg hover:bg-white/5"
-                      >
-                        <div className="flex items-center gap-3">
-                          <FileText className="h-5 w-5 text-gray-400" />
-                          <div>
-                            <p className="font-medium text-white">{att.file_name}</p>
-                            <p className="text-sm text-gray-400">
-                              {formatFileSize(att.file_size)} • {new Date(att.created_at).toLocaleDateString('it-IT')}
-                            </p>
-                          </div>
-                        </div>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => window.open(att.file_url, '_blank')}
-                          className="text-orange-400 hover:text-orange-300"
-                        >
-                          <Download className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    ))}
+                    <div
+                      className={`max-w-[70%] rounded-lg p-3 ${
+                        msg.is_staff
+                          ? 'bg-gradient-to-r from-orange-500 to-red-600 text-white'
+                          : 'bg-gray-700 text-white'
+                      }`}
+                    >
+                      <p className="text-sm">{msg.message}</p>
+                      <p className="text-xs mt-1 opacity-70">
+                        {new Date(msg.created_at).toLocaleTimeString('it-IT', {
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })}
+                      </p>
+                    </div>
                   </div>
-                )}
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="history">
-            <Card className="glass-effect border-white/10">
-              <CardHeader>
-                <CardTitle className="text-white">Storico Modifiche</CardTitle>
-                <CardDescription className="text-gray-400">Cronologia delle modifiche al ticket</CardDescription>
-              </CardHeader>
-              <CardContent>
-                {history.length === 0 ? (
-                  <p className="text-center text-gray-500 py-8">Nessuna modifica registrata</p>
+                ))
+              )}
+            </div>
+            <div className="flex gap-2">
+              <Textarea
+                placeholder="Scrivi una risposta al cliente..."
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+                rows={2}
+                className="glass-effect border-white/20 text-white placeholder:text-gray-500"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSendMessage();
+                  }
+                }}
+              />
+              <Button 
+                onClick={handleSendMessage} 
+                disabled={sendingMessage || !newMessage.trim()}
+                className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white"
+              >
+                {sendingMessage ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
                 ) : (
-                  <div className="space-y-3">
-                    {history.map((item) => (
-                      <div key={item.id} className="flex gap-3 p-3 border-l-2 border-orange-500">
-                        <History className="h-5 w-5 text-gray-400 flex-shrink-0 mt-0.5" />
-                        <div className="flex-1">
-                          <p className="font-medium text-white">
-                            {item.action === 'field_updated' && `Campo "${item.field_name}" aggiornato`}
-                            {item.action === 'message_added' && 'Messaggio aggiunto'}
-                            {item.action === 'attachment_added' && 'Allegato caricato'}
-                            {item.action === 'created' && 'Ticket creato'}
-                          </p>
-                          {item.old_value && item.new_value && (
-                            <p className="text-sm text-gray-400">
-                              Da "{item.old_value}" a "{item.new_value}"
-                            </p>
-                          )}
-                          {item.new_value && !item.old_value && (
-                            <p className="text-sm text-gray-400">{item.new_value}</p>
-                          )}
-                          <p className="text-xs text-gray-500 mt-1">
-                            {new Date(item.created_at).toLocaleString('it-IT')}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                  <Send className="h-4 w-4" />
                 )}
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </main>
     </div>
   );

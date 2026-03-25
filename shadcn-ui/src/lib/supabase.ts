@@ -5,26 +5,47 @@ const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-export interface Client {
+// ===== NEW MULTI-TENANT SCHEMA =====
+
+export interface Company {
   id: string;
-  user_id: string;
-  company_name: string;
-  contact_name: string;
-  email: string;
-  phone: string;
+  name: string;
   created_at: string;
+}
+
+export interface Profile {
+  id: string; // references auth.users(id)
+  email: string;
+  role: 'admin' | 'agent' | 'client';
+  company_id: string;
+  created_at: string;
+  // Joined fields (optional)
+  companies?: Company;
 }
 
 export interface Ticket {
   id: string;
-  user_id: string;
   title: string;
   description: string;
-  category: string;
-  priority: string;
   status: string;
+  priority: string;
+  company_id: string;
+  created_by: string;
+  assigned_to: string | null;
   created_at: string;
-  updated_at: string;
+  // Joined fields (optional)
+  companies?: Company;
+  creator?: Profile;
+  assignee?: Profile;
+}
+
+export interface TicketMessage {
+  id: string;
+  ticket_id: string;
+  user_id: string;
+  message: string;
+  is_staff: boolean;
+  created_at: string;
 }
 
 export interface TicketAttachment {
@@ -38,15 +59,6 @@ export interface TicketAttachment {
   created_at: string;
 }
 
-export interface TicketMessage {
-  id: string;
-  ticket_id: string;
-  user_id: string;
-  message: string;
-  is_staff: boolean;
-  created_at: string;
-}
-
 export interface TicketHistory {
   id: string;
   ticket_id: string;
@@ -57,6 +69,14 @@ export interface TicketHistory {
   new_value: string | null;
   created_at: string;
 }
+
+// Legacy type alias for backward compatibility
+export type Client = Profile & {
+  user_id: string;
+  company_name: string;
+  contact_name: string;
+  phone: string;
+};
 
 // Helper function to upload file to Supabase Storage
 export const uploadTicketAttachment = async (

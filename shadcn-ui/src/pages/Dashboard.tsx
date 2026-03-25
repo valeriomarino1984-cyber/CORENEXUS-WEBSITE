@@ -1,30 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '@/lib/supabase';
+import { supabase, type Profile, type Ticket, type Company } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { LogOut, Plus, Clock, CheckCircle2, AlertCircle } from 'lucide-react';
 import SEO from '@/components/SEO';
 
-interface Ticket {
-  id: string;
-  title: string;
-  description: string;
-  status: string;
-  priority: string;
-  created_at: string;
-}
-
-interface Client {
-  contact_name: string;
-  company_name: string;
-}
-
 export default function Dashboard() {
   const navigate = useNavigate();
   const [tickets, setTickets] = useState<Ticket[]>([]);
-  const [client, setClient] = useState<Client | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [company, setCompany] = useState<Company | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -40,20 +27,24 @@ export default function Dashboard() {
         return;
       }
 
-      const { data: clientData } = await supabase
-        .from('clients')
-        .select('contact_name, company_name')
-        .eq('user_id', user.id)
+      // Load profile
+      const { data: profileData } = await supabase
+        .from('profiles')
+        .select('*, companies(*)')
+        .eq('id', user.id)
         .single();
 
-      if (clientData) {
-        setClient(clientData);
+      if (profileData) {
+        setProfile(profileData);
+        if (profileData.companies) {
+          setCompany(profileData.companies);
+        }
       }
 
+      // Load tickets for the user's company (RLS will filter automatically)
       const { data: ticketsData } = await supabase
         .from('tickets')
         .select('*')
-        .eq('client_id', user.id)
         .order('created_at', { ascending: false });
 
       if (ticketsData) {
@@ -78,6 +69,7 @@ export default function Dashboard() {
       case 'in_progress':
         return <AlertCircle className="w-4 h-4" />;
       case 'resolved':
+      case 'closed':
         return <CheckCircle2 className="w-4 h-4" />;
       default:
         return <Clock className="w-4 h-4" />;
@@ -92,6 +84,8 @@ export default function Dashboard() {
         return 'bg-blue-500/20 text-blue-400 border-blue-500/50';
       case 'resolved':
         return 'bg-green-500/20 text-green-400 border-green-500/50';
+      case 'closed':
+        return 'bg-gray-500/20 text-gray-400 border-gray-500/50';
       default:
         return 'bg-gray-500/20 text-gray-400 border-gray-500/50';
     }
@@ -105,9 +99,21 @@ export default function Dashboard() {
         return 'In Lavorazione';
       case 'resolved':
         return 'Risolto';
+      case 'closed':
+        return 'Chiuso';
       default:
         return status;
     }
+  };
+
+  const getPriorityLabel = (priority: string) => {
+    const labels: Record<string, string> = {
+      low: 'Bassa',
+      medium: 'Media',
+      high: 'Alta',
+      urgent: 'Urgente',
+    };
+    return labels[priority] || priority;
   };
 
   if (loading) {
@@ -138,9 +144,9 @@ export default function Dashboard() {
           <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div>
               <h1 className="text-2xl font-bold text-white">Dashboard Cliente</h1>
-              {client && (
+              {profile && company && (
                 <p className="text-sm text-gray-300">
-                  {client.contact_name} - {client.company_name}
+                  {profile.email} - {company.name}
                 </p>
               )}
             </div>
@@ -197,7 +203,7 @@ export default function Dashboard() {
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-center gap-4 text-sm text-gray-400">
-                      <span>Priorità: {ticket.priority}</span>
+                      <span>Priorità: {getPriorityLabel(ticket.priority)}</span>
                       <span>•</span>
                       <span>{new Date(ticket.created_at).toLocaleDateString('it-IT')}</span>
                     </div>

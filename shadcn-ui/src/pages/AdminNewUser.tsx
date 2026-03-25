@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { supabase } from '@/lib/supabase';
+import { supabase, type Company } from '@/lib/supabase';
 import { Loader2, ArrowLeft, UserPlus } from 'lucide-react';
 
 export default function AdminNewUser() {
@@ -14,14 +14,25 @@ export default function AdminNewUser() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [companies, setCompanies] = useState<Company[]>([]);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    company_name: '',
-    contact_name: '',
-    phone: '',
+    company_id: '',
     role: 'client',
   });
+
+  useEffect(() => {
+    loadCompanies();
+  }, []);
+
+  const loadCompanies = async () => {
+    const { data } = await supabase
+      .from('companies')
+      .select('*')
+      .order('name', { ascending: true });
+    if (data) setCompanies(data);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,9 +50,9 @@ export default function AdminNewUser() {
       }
 
       const { data: adminData, error: adminError } = await supabase
-        .from('app_2b35a5a86e_clients')
+        .from('profiles')
         .select('role')
-        .eq('user_id', currentUser.id)
+        .eq('id', currentUser.id)
         .single();
 
       if (adminError) throw adminError;
@@ -68,9 +79,7 @@ export default function AdminNewUser() {
           body: JSON.stringify({
             email: formData.email,
             password: formData.password,
-            company_name: formData.company_name,
-            contact_name: formData.contact_name,
-            phone: formData.phone,
+            company_id: formData.company_id,
             role: formData.role,
           }),
         }
@@ -115,7 +124,7 @@ export default function AdminNewUser() {
               Crea Nuovo Utente
             </CardTitle>
             <CardDescription className="text-gray-400">
-              Crea un nuovo utente e assegna ruolo e permessi
+              Crea un nuovo utente e assegna ruolo e azienda
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -167,50 +176,28 @@ export default function AdminNewUser() {
               </div>
 
               <div className="border-t border-white/10 pt-6 space-y-4">
-                <h3 className="text-lg font-semibold text-white">Informazioni Utente</h3>
+                <h3 className="text-lg font-semibold text-white">Azienda e Ruolo</h3>
 
                 <div className="space-y-2">
-                  <Label htmlFor="contact_name" className="text-gray-300">Nome Contatto *</Label>
-                  <Input
-                    id="contact_name"
-                    placeholder="Mario Rossi"
-                    value={formData.contact_name}
-                    onChange={(e) => setFormData({ ...formData, contact_name: e.target.value })}
+                  <Label htmlFor="company" className="text-gray-300">Azienda *</Label>
+                  <Select
+                    value={formData.company_id}
+                    onValueChange={(value) => setFormData({ ...formData, company_id: value })}
                     required
                     disabled={loading}
-                    className="glass-effect border-white/20 text-white placeholder:text-gray-500"
-                  />
+                  >
+                    <SelectTrigger id="company" className="glass-effect border-white/20 text-white">
+                      <SelectValue placeholder="Seleziona azienda" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {companies.map((company) => (
+                        <SelectItem key={company.id} value={company.id}>
+                          {company.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="company_name" className="text-gray-300">Nome Azienda *</Label>
-                  <Input
-                    id="company_name"
-                    placeholder="Azienda SRL"
-                    value={formData.company_name}
-                    onChange={(e) => setFormData({ ...formData, company_name: e.target.value })}
-                    required
-                    disabled={loading}
-                    className="glass-effect border-white/20 text-white placeholder:text-gray-500"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-gray-300">Telefono</Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="+39 123 456 7890"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    disabled={loading}
-                    className="glass-effect border-white/20 text-white placeholder:text-gray-500"
-                  />
-                </div>
-              </div>
-
-              <div className="border-t border-white/10 pt-6 space-y-4">
-                <h3 className="text-lg font-semibold text-white">Ruolo e Permessi</h3>
 
                 <div className="space-y-2">
                   <Label htmlFor="role" className="text-gray-300">Ruolo *</Label>
@@ -224,7 +211,7 @@ export default function AdminNewUser() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="client">Cliente - Può creare e gestire solo i propri ticket</SelectItem>
-                      <SelectItem value="staff">Staff - Può visualizzare e rispondere a tutti i ticket</SelectItem>
+                      <SelectItem value="agent">Agente - Può visualizzare e rispondere a tutti i ticket</SelectItem>
                       <SelectItem value="admin">Admin - Accesso completo al sistema</SelectItem>
                     </SelectContent>
                   </Select>
@@ -235,9 +222,9 @@ export default function AdminNewUser() {
                     💡 <strong>Nota sui Ruoli:</strong>
                   </p>
                   <ul className="text-sm text-blue-400 mt-2 space-y-1 list-disc list-inside">
-                    <li><strong>Cliente:</strong> Accesso limitato alla propria area riservata</li>
-                    <li><strong>Staff:</strong> Può gestire ticket di tutti i clienti</li>
-                    <li><strong>Admin:</strong> Può creare utenti e gestire tutto il sistema</li>
+                    <li><strong>Cliente:</strong> Vede solo i ticket della propria azienda</li>
+                    <li><strong>Agente:</strong> Può gestire ticket di tutte le aziende</li>
+                    <li><strong>Admin:</strong> Può creare utenti, aziende e gestire tutto il sistema</li>
                   </ul>
                 </div>
               </div>

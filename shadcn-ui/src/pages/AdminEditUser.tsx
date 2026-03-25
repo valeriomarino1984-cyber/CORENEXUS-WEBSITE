@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { supabase, type Client } from '@/lib/supabase';
+import { supabase, type Profile, type Company } from '@/lib/supabase';
 import { Loader2, ArrowLeft, Save, Trash2, Key } from 'lucide-react';
 
 export default function AdminEditUser() {
@@ -15,21 +15,20 @@ export default function AdminEditUser() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [deleting, setDeleting] = useState(false);
-  const [resettingPassword, setResettingPassword] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [user, setUser] = useState<Client | null>(null);
+  const [user, setUser] = useState<(Profile & { companies?: Company }) | null>(null);
+  const [companies, setCompanies] = useState<Company[]>([]);
   const [newPassword, setNewPassword] = useState('');
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
+  const [resettingPassword, setResettingPassword] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   const [formData, setFormData] = useState({
-    company_name: '',
-    contact_name: '',
     email: '',
-    phone: '',
     role: 'client',
+    company_id: '',
   });
 
   useEffect(() => {
@@ -38,70 +37,50 @@ export default function AdminEditUser() {
 
   const loadUser = async () => {
     try {
-      console.log('=== DEBUG: Loading user for edit ===');
-      console.log('User ID from URL:', id);
-      
       const { data: { user: currentUser }, error: authError } = await supabase.auth.getUser();
-      console.log('Current authenticated user:', currentUser?.id, currentUser?.email);
       
       if (authError || !currentUser) {
-        console.error('Auth error:', authError);
         navigate('/admin/login');
         return;
       }
 
       // Check if current user is admin
-      console.log('Checking if current user is admin...');
       const { data: adminData, error: adminError } = await supabase
-        .from('app_2b35a5a86e_clients')
+        .from('profiles')
         .select('role')
-        .eq('user_id', currentUser.id)
+        .eq('id', currentUser.id)
         .single();
-
-      console.log('Admin check result:', { adminData, adminError });
 
       if (adminError) throw adminError;
 
       if (adminData.role !== 'admin') {
-        console.error('User is not admin. Role:', adminData.role);
         throw new Error('Solo gli amministratori possono modificare gli utenti');
       }
 
       // Load user to edit
-      console.log('Loading user to edit with id:', id);
       const { data: userData, error: userError } = await supabase
-        .from('app_2b35a5a86e_clients')
-        .select('*')
+        .from('profiles')
+        .select('*, companies(*)')
         .eq('id', id)
         .single();
 
-      console.log('User query result:', { userData, userError });
+      if (userError) throw userError;
+      if (!userData) throw new Error('Utente non trovato');
 
-      if (userError) {
-        console.error('=== USER LOAD ERROR DETAILS ===');
-        console.error('Message:', userError.message);
-        console.error('Details:', userError.details);
-        console.error('Hint:', userError.hint);
-        console.error('Code:', userError.code);
-        throw userError;
-      }
-
-      if (!userData) {
-        console.error('No user data returned for id:', id);
-        throw new Error('Utente non trovato');
-      }
-
-      console.log('User loaded successfully:', userData);
       setUser(userData);
       setFormData({
-        company_name: userData.company_name,
-        contact_name: userData.contact_name,
         email: userData.email,
-        phone: userData.phone || '',
         role: userData.role,
+        company_id: userData.company_id,
       });
+
+      // Load companies
+      const { data: companiesData } = await supabase
+        .from('companies')
+        .select('*')
+        .order('name', { ascending: true });
+      if (companiesData) setCompanies(companiesData);
     } catch (err) {
-      console.error('=== ERROR in loadUser ===', err);
       const errorMessage = err instanceof Error ? err.message : 'Errore nel caricamento dell\'utente';
       setError(errorMessage);
     } finally {
@@ -118,22 +97,17 @@ export default function AdminEditUser() {
     try {
       if (!user) return;
 
-      // Update client profile
       const { error: updateError } = await supabase
-        .from('app_2b35a5a86e_clients')
+        .from('profiles')
         .update({
-          company_name: formData.company_name,
-          contact_name: formData.contact_name,
-          phone: formData.phone || null,
           role: formData.role,
+          company_id: formData.company_id,
         })
         .eq('id', user.id);
 
       if (updateError) throw updateError;
 
       setSuccess('Utente aggiornato con successo!');
-      
-      // Reload user data
       await loadUser();
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Errore nell\'aggiornamento dell\'utente';
@@ -156,9 +130,8 @@ export default function AdminEditUser() {
     try {
       if (!user) return;
 
-      // Reset password using admin API
       const { error: resetError } = await supabase.auth.admin.updateUserById(
-        user.user_id,
+        user.id,
         { password: newPassword }
       );
 
@@ -182,12 +155,8 @@ export default function AdminEditUser() {
     try {
       if (!user) return;
 
-      // Delete user from auth
-      const { error: deleteAuthError } = await supabase.auth.admin.deleteUser(user.user_id);
-
+      const { error: deleteAuthError } = await supabase.auth.admin.deleteUser(user.id);
       if (deleteAuthError) throw deleteAuthError;
-
-      // Client profile will be deleted automatically via CASCADE
 
       navigate('/admin/users');
     } catch (err) {
@@ -212,7 +181,6 @@ export default function AdminEditUser() {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900">
         <div className="text-center">
           <p className="text-white text-xl mb-4">Utente non trovato</p>
-          <p className="text-gray-400 mb-6">ID ricercato: {id}</p>
           <Button 
             onClick={() => navigate('/admin/users')} 
             className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white"
@@ -241,7 +209,7 @@ export default function AdminEditUser() {
           <CardHeader>
             <CardTitle className="text-2xl text-white">Modifica Utente</CardTitle>
             <CardDescription className="text-gray-400">
-              Aggiorna informazioni, ruolo e permessi dell'utente
+              Aggiorna ruolo e azienda dell'utente
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -270,51 +238,32 @@ export default function AdminEditUser() {
                     disabled
                     className="glass-effect border-white/20 text-gray-500 cursor-not-allowed"
                   />
-                  <p className="text-xs text-gray-500">L'email non può essere modificata</p>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="contact_name" className="text-gray-300">Nome Contatto *</Label>
-                  <Input
-                    id="contact_name"
-                    placeholder="Mario Rossi"
-                    value={formData.contact_name}
-                    onChange={(e) => setFormData({ ...formData, contact_name: e.target.value })}
-                    required
-                    disabled={saving}
-                    className="glass-effect border-white/20 text-white placeholder:text-gray-500"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="company_name" className="text-gray-300">Nome Azienda *</Label>
-                  <Input
-                    id="company_name"
-                    placeholder="Azienda SRL"
-                    value={formData.company_name}
-                    onChange={(e) => setFormData({ ...formData, company_name: e.target.value })}
-                    required
-                    disabled={saving}
-                    className="glass-effect border-white/20 text-white placeholder:text-gray-500"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-gray-300">Telefono</Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="+39 123 456 7890"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    disabled={saving}
-                    className="glass-effect border-white/20 text-white placeholder:text-gray-500"
-                  />
+                  <p className="text-xs text-gray-500">L'email non puo essere modificata</p>
                 </div>
               </div>
 
               <div className="border-t border-white/10 pt-6 space-y-4">
-                <h3 className="text-lg font-semibold text-white">Ruolo e Permessi</h3>
+                <h3 className="text-lg font-semibold text-white">Azienda e Ruolo</h3>
+
+                <div className="space-y-2">
+                  <Label htmlFor="company" className="text-gray-300">Azienda *</Label>
+                  <Select
+                    value={formData.company_id}
+                    onValueChange={(value) => setFormData({ ...formData, company_id: value })}
+                    disabled={saving}
+                  >
+                    <SelectTrigger id="company" className="glass-effect border-white/20 text-white">
+                      <SelectValue placeholder="Seleziona azienda" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {companies.map((company) => (
+                        <SelectItem key={company.id} value={company.id}>
+                          {company.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="role" className="text-gray-300">Ruolo *</Label>
@@ -328,7 +277,7 @@ export default function AdminEditUser() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="client">Cliente</SelectItem>
-                      <SelectItem value="staff">Staff</SelectItem>
+                      <SelectItem value="agent">Agente</SelectItem>
                       <SelectItem value="admin">Admin</SelectItem>
                     </SelectContent>
                   </Select>
@@ -425,7 +374,7 @@ export default function AdminEditUser() {
                     <DialogHeader>
                       <DialogTitle className="text-white">Conferma Eliminazione</DialogTitle>
                       <DialogDescription className="text-gray-400">
-                        Sei sicuro di voler eliminare questo utente? Questa azione è irreversibile e eliminerà anche tutti i ticket associati.
+                        Sei sicuro di voler eliminare questo utente? Questa azione e irreversibile.
                       </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
