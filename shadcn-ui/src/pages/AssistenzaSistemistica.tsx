@@ -21,6 +21,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { breadcrumbSchema } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
+import FAQSection from '@/components/FAQSection';
 
 export default function AssistenzaSistemistica() {
   const navigate = useNavigate();
@@ -127,6 +128,21 @@ export default function AssistenzaSistemistica() {
       discount: '20%',
       gradient: 'from-emerald-500 to-green-500',
       highlighted: false,
+    },
+  ];
+
+  const faqs = [
+    {
+      question: 'Cosa si intende per monitoraggio proattivo dei sistemi IT?',
+      answer: 'Utilizziamo tecnologie avanzate come Zabbix e Wazuh per monitorare h24 server, reti e macchine virtuali. Questo ci permette di ricevere avvisi in tempo reale su anomalie di carico o tentativi di intrusione, intervenendo spesso prima che l\'utente si accorga del problema.',
+    },
+    {
+      question: 'Fornite supporto per infrastrutture virtualizzate Proxmox e VMware a Roma?',
+      answer: 'Sì, siamo specializzati nella progettazione e gestione di ambienti virtuali complessi. Offriamo consulenza sistemistica specifica per l\'ottimizzazione di cluster Proxmox e VMware, garantendo alta affidabilità e disaster recovery per le aziende del litorale romano e della zona EUR.',
+    },
+    {
+      question: 'Intervenite anche su server Linux e ambienti Open Source?',
+      answer: 'Assolutamente. La nostra esperienza copre distribuzioni Enterprise come Ubuntu Server e Red Hat, oltre alla gestione di firewall pfSense e centralini VoIP FreePBX.',
     },
   ];
 
@@ -409,6 +425,9 @@ export default function AssistenzaSistemistica() {
             </MorphingSection>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FAQSection faqs={faqs} accentColor="emerald" gradientFrom="emerald-500" gradientTo="teal-500" />
 
         {/* CTA Section */}
         <section className="py-24 px-6 relative">

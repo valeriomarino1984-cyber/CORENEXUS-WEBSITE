@@ -1,0 +1,44 @@
+1. Per la pagina: Contratti di Manutenzione
+Obiettivo: Rassicurare sui costi e sulla continuità operativa.
+
+D: Quali sono i vantaggi di un contratto di manutenzione informatica rispetto all'intervento a chiamata?
+
+R: Il contratto di manutenzione garantisce tempi di intervento certi (SLA), costi fissi e prevedibili, e soprattutto un monitoraggio proattivo che previene i guasti prima che blocchino l'azienda. A differenza dell'intervento a chiamata, con i nostri piani Professional e Enterprise la tua infrastruttura è sempre sotto controllo.
+
+D: Offrite assistenza informatica con canone mensile a Roma e provincia?
+
+R: Certamente. CoreNexus propone pacchetti di assistenza personalizzati per aziende a Roma EUR, Ostia, Fiumicino e Pomezia, includendo supporto remoto illimitato e interventi on-site programmati per mantenere i sistemi sempre aggiornati.
+
+D: È possibile personalizzare il pacchetto di manutenzione?
+
+R: Sì, ogni realtà ha esigenze diverse. Valutiamo insieme il numero di postazioni, server e apparati di rete per creare un piano su misura che includa backup, sicurezza e supporto sistemistico.
+
+2. Per la pagina: Assistenza Sistemistica
+Obiettivo: Dimostrare competenza tecnica e velocità.
+
+D: Cosa si intende per monitoraggio proattivo dei sistemi IT?
+
+R: Utilizziamo tecnologie avanzate come Zabbix e Wazuh per monitorare h24 server, reti e macchine virtuali. Questo ci permette di ricevere avvisi in tempo reale su anomalie di carico o tentativi di intrusione, intervenendo spesso prima che l'utente si accorga del problema.
+
+D: Fornite supporto per infrastrutture virtualizzate Proxmox e VMware a Roma?
+
+R: Sì, siamo specializzati nella progettazione e gestione di ambienti virtuali complessi. Offriamo consulenza sistemistica specifica per l'ottimizzazione di cluster Proxmox e VMware, garantendo alta affidabilità e disaster recovery per le aziende del litorale romano e della zona EUR.
+
+D: Intervenite anche su server Linux e ambienti Open Source?
+
+R: Assolutamente. La nostra esperienza copre distribuzioni Enterprise come Ubuntu Server e Red Hat, oltre alla gestione di firewall pfSense e centralini VoIP FreePBX.
+
+3. Per la pagina: Impianti Allarme e Videosorveglianza
+Obiettivo: Puntare sulla sicurezza moderna e la conformità legale.
+
+D: Gli impianti di videosorveglianza Hikvision sono a norma GDPR?
+
+R: Sì, i nostri sistemi sono configurati seguendo rigorosamente le normative sulla privacy. Forniamo supporto per la corretta gestione dei log di accesso e l'oscuramento delle aree pubbliche, garantendo che la sicurezza della tua azienda a Roma sia pienamente conforme alle leggi vigenti.
+
+D: È possibile integrare l'allarme con la videosorveglianza su smartphone?
+
+R: Certamente. Grazie alle tecnologie Hikvision, integriamo telecamere e sensori di allarme in un'unica app. Riceverai notifiche push con video-verifica immediata in caso di intrusione, ovunque ti trovi.
+
+D: Effettuate installazioni di videosorveglianza ad Ostia, Fiumicino e Roma Sud?
+
+R: Sì, operiamo su tutto il territorio di Roma Sud e provincia. Realizziamo sopralluoghi gratuiti per progettare impianti su misura per uffici, magazzini e aree industriali, garantendo assistenza post-vendita e manutenzione periodica.

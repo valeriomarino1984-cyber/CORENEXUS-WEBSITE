@@ -28,6 +28,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { breadcrumbSchema } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
+import FAQSection from '@/components/FAQSection';
 
 export default function ImpiantiAllarme() {
   const navigate = useNavigate();
@@ -176,6 +177,21 @@ export default function ImpiantiAllarme() {
       ],
       gradient: 'from-emerald-500 to-cyan-500',
       highlighted: false,
+    },
+  ];
+
+  const faqs = [
+    {
+      question: 'Gli impianti di videosorveglianza Hikvision sono a norma GDPR?',
+      answer: 'Sì, i nostri sistemi sono configurati seguendo rigorosamente le normative sulla privacy. Forniamo supporto per la corretta gestione dei log di accesso e l\'oscuramento delle aree pubbliche, garantendo che la sicurezza della tua azienda a Roma sia pienamente conforme alle leggi vigenti.',
+    },
+    {
+      question: 'È possibile integrare l\'allarme con la videosorveglianza su smartphone?',
+      answer: 'Certamente. Grazie alle tecnologie Hikvision, integriamo telecamere e sensori di allarme in un\'unica app. Riceverai notifiche push con video-verifica immediata in caso di intrusione, ovunque ti trovi.',
+    },
+    {
+      question: 'Effettuate installazioni di videosorveglianza ad Ostia, Fiumicino e Roma Sud?',
+      answer: 'Sì, operiamo su tutto il territorio di Roma Sud e provincia. Realizziamo sopralluoghi gratuiti per progettare impianti su misura per uffici, magazzini e aree industriali, garantendo assistenza post-vendita e manutenzione periodica.',
     },
   ];
 
@@ -612,6 +628,9 @@ export default function ImpiantiAllarme() {
             </MorphingSection>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FAQSection faqs={faqs} accentColor="emerald" gradientFrom="emerald-500" gradientTo="teal-500" />
 
         {/* CTA Section */}
         <section className="py-24 px-6 relative">

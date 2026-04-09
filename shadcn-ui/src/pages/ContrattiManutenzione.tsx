@@ -22,6 +22,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { breadcrumbSchema } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
+import FAQSection from '@/components/FAQSection';
 
 export default function ContrattiManutenzione() {
   const navigate = useNavigate();
@@ -134,6 +135,21 @@ export default function ContrattiManutenzione() {
     { icon: Shield, title: 'Sicurezza IT', description: 'Antivirus, firewall, patch di sicurezza e protezione endpoint' },
     { icon: Activity, title: 'Monitoraggio Rete', description: 'Controllo continuo delle performance e disponibilità della rete' },
     { icon: Settings, title: 'Gestione Workstation', description: 'Configurazione, aggiornamento e supporto postazioni di lavoro' },
+  ];
+
+  const faqs = [
+    {
+      question: 'Quali sono i vantaggi di un contratto di manutenzione informatica rispetto all\'intervento a chiamata?',
+      answer: 'Il contratto di manutenzione garantisce tempi di intervento certi (SLA), costi fissi e prevedibili, e soprattutto un monitoraggio proattivo che previene i guasti prima che blocchino l\'azienda. A differenza dell\'intervento a chiamata, con i nostri piani Professional e Enterprise la tua infrastruttura è sempre sotto controllo.',
+    },
+    {
+      question: 'Offrite assistenza informatica con canone mensile a Roma e provincia?',
+      answer: 'Certamente. CoreNexus propone pacchetti di assistenza personalizzati per aziende a Roma EUR, Ostia, Fiumicino e Pomezia, includendo supporto remoto illimitato e interventi on-site programmati per mantenere i sistemi sempre aggiornati.',
+    },
+    {
+      question: 'È possibile personalizzare il pacchetto di manutenzione?',
+      answer: 'Sì, ogni realtà ha esigenze diverse. Valutiamo insieme il numero di postazioni, server e apparati di rete per creare un piano su misura che includa backup, sicurezza e supporto sistemistico.',
+    },
   ];
 
   return (
@@ -381,6 +397,9 @@ export default function ContrattiManutenzione() {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FAQSection faqs={faqs} accentColor="emerald" gradientFrom="emerald-500" gradientTo="blue-500" />
 
         {/* CTA Section */}
         <section className="py-24 px-6 relative">
