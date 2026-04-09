@@ -3,69 +3,77 @@
   <!-- Homepage -->
   <url>
     <loc>https://corenexus.it/</loc>
-    <lastmod>2026-03-25</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+
+  <!-- Contatti (sezione nella homepage) -->
+  <url>
+    <loc>https://corenexus.it/#contact</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <!-- Servizi -->
   <url>
     <loc>https://corenexus.it/servizi</loc>
-    <lastmod>2026-03-25</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://corenexus.it/contratti-manutenzione</loc>
-    <lastmod>2026-03-25</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://corenexus.it/assistenza-sistemistica</loc>
-    <lastmod>2026-03-25</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://corenexus.it/automazione-processi</loc>
-    <lastmod>2026-03-25</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://corenexus.it/project-management</loc>
-    <lastmod>2026-03-25</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://corenexus.it/networking-reti</loc>
-    <lastmod>2026-03-25</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://corenexus.it/sicurezza-informatica</loc>
-    <lastmod>2026-03-25</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://corenexus.it/impianti-allarme-videosorveglianza</loc>
-    <lastmod>2026-03-25</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://corenexus.it/siti-web</loc>
-    <lastmod>2026-03-25</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://corenexus.it/centralini-voip</loc>
-    <lastmod>2026-03-25</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -73,7 +81,7 @@
   <!-- Tecnologie -->
   <url>
     <loc>https://corenexus.it/tecnologie</loc>
-    <lastmod>2026-03-25</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -81,7 +89,7 @@
   <!-- Assistenza Remota -->
   <url>
     <loc>https://corenexus.it/assistenza-remota</loc>
-    <lastmod>2026-03-25</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -89,9 +97,21 @@
   <!-- Blog -->
   <url>
     <loc>https://corenexus.it/blog</loc>
-    <lastmod>2026-03-25</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://corenexus.it/blog/intelligenza-artificiale-azienda</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://corenexus.it/blog/chatbot-assistenti-virtuali-ai</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://corenexus.it/blog/migrazione-cloud-aziendale</loc>
@@ -163,7 +183,7 @@
   <!-- Dove Siamo -->
   <url>
     <loc>https://corenexus.it/dove-siamo</loc>
-    <lastmod>2026-03-25</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
