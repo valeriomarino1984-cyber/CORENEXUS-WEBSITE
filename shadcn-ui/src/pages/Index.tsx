@@ -160,6 +160,8 @@ export default function Index() {
     "Interventi rapidi e professionali"
   ];
 
+  const heroTitle = "Assistenza Informatica e Supporto IT per Aziende a Roma";
+
   return (
     <>
       <SEO
@@ -225,9 +227,12 @@ export default function Index() {
                 </span>
               </div>
 
-              {/* H1 - using gradient-text (proven visible) */}
-              <h1 className="text-6xl md:text-8xl font-bold gradient-text leading-tight tracking-tight hero-stagger-2">
-                Assistenza Informatica e Supporto IT per Aziende a Roma
+              {/* H1 - Glitch Effect with multi-layer overlay */}
+              <h1
+                className="text-6xl md:text-8xl font-bold glitch-text leading-tight tracking-tight hero-stagger-2"
+                data-text={heroTitle}
+              >
+                {heroTitle}
               </h1>
 
               {/* Subtitle */}
