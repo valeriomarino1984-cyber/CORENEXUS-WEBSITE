@@ -12,7 +12,7 @@ serve(async (req) => {
   }
 
   try {
-    console.log("=== Setup Admin Edge Function Started ===")
+    console.log("=== Setup Admin Edge Function Started (Multi-Tenant) ===")
     
     const supabaseAdmin = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
@@ -25,57 +25,125 @@ serve(async (req) => {
       }
     )
 
-    const { email, password, fullName, companyName, phone } = await req.json()
+    const { email, password, companyName } = await req.json()
     
-    if (!email || !password || !fullName) {
-      throw new Error("Email, password, and full name are required")
+    if (!email || !password) {
+      throw new Error("Email and password are required")
     }
 
-    console.log("Creating admin user with email:", email)
+    const company = companyName || "CoreNexus"
+    console.log("Creating admin user with email:", email, "company:", company)
 
-    // Create user in Supabase Auth
-    const { data: authData, error: createError } = await supabaseAdmin.auth.admin.createUser({
-      email,
-      password,
-      email_confirm: true,
-    })
-
-    if (createError) {
-      console.error("Create user error:", createError)
-      throw createError
-    }
+    // Step 1: Check if user already exists in auth
+    const { data: existingUsers } = await supabaseAdmin.auth.admin.listUsers()
+    const existingUser = existingUsers?.users?.find((u: any) => u.email === email)
     
-    if (!authData.user) {
-      throw new Error("Failed to create user")
-    }
+    let userId: string
 
-    console.log("Auth user created:", authData.user.id)
-
-    // Insert into clients table with admin role
-    const { error: clientError } = await supabaseAdmin
-      .from("app_2b35a5a86e_clients")
-      .insert({
-        user_id: authData.user.id,
-        company_name: companyName || "CoreNexus IT",
-        contact_name: fullName,
+    if (existingUser) {
+      console.log("User already exists in auth:", existingUser.id)
+      userId = existingUser.id
+      
+      // Update password
+      const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(userId, {
+        password,
+        email_confirm: true,
+      })
+      if (updateError) {
+        console.error("Update user error:", updateError)
+      } else {
+        console.log("Password updated for existing user")
+      }
+    } else {
+      // Create user in Supabase Auth
+      const { data: authData, error: createError } = await supabaseAdmin.auth.admin.createUser({
         email,
-        phone: phone || null,
-        role: "admin",
+        password,
+        email_confirm: true,
       })
 
-    if (clientError) {
-      console.error("Client insert error:", clientError)
-      await supabaseAdmin.auth.admin.deleteUser(authData.user.id)
-      throw clientError
+      if (createError) {
+        console.error("Create user error:", createError)
+        throw createError
+      }
+      
+      if (!authData.user) {
+        throw new Error("Failed to create user")
+      }
+
+      userId = authData.user.id
+      console.log("Auth user created:", userId)
     }
 
-    console.log("Admin account created successfully")
+    // Step 2: Ensure company exists
+    let companyId: string
+
+    const { data: existingCompany } = await supabaseAdmin
+      .from("companies")
+      .select("id")
+      .eq("name", company)
+      .single()
+
+    if (existingCompany) {
+      companyId = existingCompany.id
+      console.log("Company already exists:", companyId)
+    } else {
+      const { data: newCompany, error: companyError } = await supabaseAdmin
+        .from("companies")
+        .insert({ name: company })
+        .select("id")
+        .single()
+
+      if (companyError) {
+        console.error("Company insert error:", companyError)
+        throw new Error("Failed to create company: " + companyError.message)
+      }
+
+      companyId = newCompany.id
+      console.log("Company created:", companyId)
+    }
+
+    // Step 3: Upsert profile with admin role
+    const { error: profileError } = await supabaseAdmin
+      .from("profiles")
+      .upsert({
+        id: userId,
+        email,
+        role: "admin",
+        company_id: companyId,
+      }, { onConflict: "id" })
+
+    if (profileError) {
+      console.error("Profile upsert error:", profileError)
+      throw new Error("Failed to create profile: " + profileError.message)
+    }
+
+    console.log("Admin profile created/updated successfully")
+
+    // Step 4: Also insert into legacy clients table for backward compatibility
+    const { error: legacyError } = await supabaseAdmin
+      .from("app_2b35a5a86e_clients")
+      .upsert({
+        user_id: userId,
+        company_name: company,
+        contact_name: "Admin",
+        email,
+        phone: null,
+        role: "admin",
+      }, { onConflict: "user_id" })
+
+    if (legacyError) {
+      console.warn("Legacy clients table upsert warning (non-critical):", legacyError.message)
+    }
+
+    console.log("Admin account setup completed successfully")
 
     return new Response(
       JSON.stringify({ 
         success: true, 
         message: "Admin account created successfully",
-        user: { id: authData.user.id, email: authData.user.email }
+        user: { id: userId, email },
+        company: { id: companyId, name: company }
       }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },

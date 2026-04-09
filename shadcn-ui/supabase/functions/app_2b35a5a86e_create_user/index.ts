@@ -47,27 +47,42 @@ serve(async (req) => {
 
     console.log("Authenticated user:", user.id)
 
-    // Check if user is admin
-    const { data: adminData, error: adminError } = await supabaseAdmin
-      .from("app_2b35a5a86e_clients")
+    // Check if user is admin - try new schema first, then fallback to old
+    let isAdmin = false
+
+    // Try new profiles table
+    const { data: profileData, error: profileError } = await supabaseAdmin
+      .from("profiles")
       .select("role")
-      .eq("user_id", user.id)
+      .eq("id", user.id)
       .single()
 
-    if (adminError) {
-      console.error("Admin check error:", adminError)
-      throw new Error("Failed to verify admin status")
+    if (!profileError && profileData) {
+      isAdmin = profileData.role === "admin"
+      console.log("Found in profiles table, role:", profileData.role)
+    } else {
+      // Fallback to old clients table
+      const { data: adminData, error: adminError } = await supabaseAdmin
+        .from("app_2b35a5a86e_clients")
+        .select("role")
+        .eq("user_id", user.id)
+        .single()
+
+      if (!adminError && adminData) {
+        isAdmin = adminData.role === "admin"
+        console.log("Found in clients table, role:", adminData.role)
+      }
     }
 
-    if (!adminData || adminData.role !== "admin") {
-      console.error("User role:", adminData?.role)
+    if (!isAdmin) {
       throw new Error("Only admins can create users")
     }
 
     console.log("Admin verified, creating user...")
 
     // Get user data from request
-    const { email, password, company_name, contact_name, phone, role } = await req.json()
+    const body = await req.json()
+    const { email, password, role, company_id, company_name, contact_name, phone } = body
     console.log("Creating user with email:", email, "role:", role)
 
     // Create user with admin privileges
@@ -88,24 +103,41 @@ serve(async (req) => {
 
     console.log("User created:", authData.user.id)
 
-    // Insert into clients table
-    const { error: clientError } = await supabaseAdmin
-      .from("app_2b35a5a86e_clients")
-      .insert({
-        user_id: authData.user.id,
-        company_name,
-        contact_name,
-        email,
-        phone: phone || null,
-        role,
-      })
+    // Insert into new profiles table if company_id is provided
+    if (company_id) {
+      const { error: profileInsertError } = await supabaseAdmin
+        .from("profiles")
+        .insert({
+          id: authData.user.id,
+          email,
+          role: role || "client",
+          company_id,
+        })
 
-    if (clientError) {
-      console.error("Client insert error:", clientError)
-      throw clientError
+      if (profileInsertError) {
+        console.error("Profile insert error:", profileInsertError)
+        throw profileInsertError
+      }
+      console.log("Profile record created successfully (new schema)")
+    } else {
+      // Fallback: insert into old clients table
+      const { error: clientError } = await supabaseAdmin
+        .from("app_2b35a5a86e_clients")
+        .insert({
+          user_id: authData.user.id,
+          company_name: company_name || "",
+          contact_name: contact_name || "",
+          email,
+          phone: phone || null,
+          role: role || "client",
+        })
+
+      if (clientError) {
+        console.error("Client insert error:", clientError)
+        throw clientError
+      }
+      console.log("Client record created successfully (old schema)")
     }
-
-    console.log("Client record created successfully")
 
     return new Response(
       JSON.stringify({ success: true, user: authData.user }),

@@ -20,6 +20,28 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    id: 'intelligenza-artificiale-azienda',
+    title: 'Intelligenza Artificiale in Azienda: Come l\'AI Sta Trasformando il Business',
+    excerpt: 'L\'intelligenza artificiale non è più fantascienza: è uno strumento concreto che sta rivoluzionando produttività, decisioni e competitività delle aziende. Scopri come integrarla nella tua impresa.',
+    content: '',
+    category: 'Intelligenza Artificiale',
+    date: '5 Aprile 2026',
+    readTime: '9 min',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
+    tags: ['AI', 'Machine Learning', 'Automazione', 'Business', 'Innovazione']
+  },
+  {
+    id: 'chatbot-assistenti-virtuali-ai',
+    title: 'Chatbot e Assistenti Virtuali: Come l\'AI Migliora il Servizio Clienti',
+    excerpt: 'I chatbot basati su intelligenza artificiale stanno rivoluzionando il customer service. Scopri come implementarli per offrire assistenza 24/7 e ridurre i costi operativi.',
+    content: '',
+    category: 'Intelligenza Artificiale',
+    date: '1 Aprile 2026',
+    readTime: '8 min',
+    image: 'https://images.unsplash.com/photo-1531746790095-e5a6e6b9e6f4?w=800&q=80',
+    tags: ['Chatbot', 'AI', 'Customer Service', 'NLP', 'Automazione']
+  },
+  {
     id: 'migrazione-cloud-aziendale',
     title: 'Migrazione al Cloud: Guida Completa per le Aziende che Vogliono Innovare',
     excerpt: 'Migrare al cloud non è solo spostare dati: è trasformare il modo in cui la tua azienda lavora. Scopri strategie, vantaggi e rischi da evitare.',
@@ -142,9 +164,10 @@ const blogPosts: BlogPost[] = [
   },
 ];
 
-const categories = ['Tutti', 'Cloud', 'Compliance', 'Manutenzione', 'Sicurezza', 'Cybersecurity', 'Networking', 'Infrastruttura', 'Comunicazioni', 'Sicurezza Fisica'];
+const categories = ['Tutti', 'Intelligenza Artificiale', 'Cloud', 'Compliance', 'Manutenzione', 'Sicurezza', 'Cybersecurity', 'Networking', 'Infrastruttura', 'Comunicazioni', 'Sicurezza Fisica'];
 
 const categoryGradients: Record<string, string> = {
+  'Intelligenza Artificiale': 'from-violet-500 to-fuchsia-500',
   'Cloud': 'from-sky-500 to-blue-500',
   'Compliance': 'from-yellow-500 to-amber-500',
   'Manutenzione': 'from-lime-500 to-green-500',
@@ -177,13 +200,15 @@ export default function Blog() {
   return (
     <>
       <SEO
-        title="Blog IT | Articoli su Sicurezza, Reti, Cloud e Tecnologia - CoreNexus"
-        description="Leggi gli articoli del blog CoreNexus Technology Solution su cybersecurity, networking, cloud, GDPR, smart working, VPN e soluzioni IT per aziende a Roma."
+        title="Blog IT | Articoli su Sicurezza, Reti, Cloud, AI e Tecnologia - CoreNexus"
+        description="Leggi gli articoli del blog CoreNexus Technology Solution su cybersecurity, networking, cloud, intelligenza artificiale, GDPR, smart working, VPN e soluzioni IT per aziende a Roma."
         keywords={[
           'blog IT Roma',
           'articoli cybersecurity',
           'guide networking aziendale',
           'migrazione cloud',
+          'intelligenza artificiale azienda',
+          'chatbot AI',
           'GDPR protezione dati',
           'manutenzione preventiva IT',
           'smart working VPN',
