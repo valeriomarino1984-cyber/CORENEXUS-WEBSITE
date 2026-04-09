@@ -19,6 +19,11 @@ import {
   BarChart3,
   Users,
   Wifi,
+  Brain,
+  Sparkles,
+  MessageSquare,
+  Bot,
+  Zap,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { breadcrumbSchema } from '@/utils/seoSchemas';
@@ -42,8 +47,8 @@ export default function CentraliniVoip() {
       voipBreadcrumb,
       {
         "@type": "Service",
-        "name": "Centralini VoIP FreePBX",
-        "description": "Installazione e configurazione centralini VoIP FreePBX e Asterisk a Roma. Soluzioni telefoniche professionali on-premise per aziende.",
+        "name": "Centralini VoIP FreePBX con Intelligenza Artificiale",
+        "description": "Installazione e configurazione centralini VoIP FreePBX e Asterisk a Roma con integrazione AI. Soluzioni telefoniche professionali on-premise con intelligenza artificiale per aziende.",
         "provider": {
           "@type": "Organization",
           "name": "CoreNexus Technology Solution",
@@ -53,7 +58,7 @@ export default function CentraliniVoip() {
           "@type": "City",
           "name": "Roma"
         },
-        "serviceType": "VoIP PBX"
+        "serviceType": "VoIP PBX con AI"
       }
     ]
   };
@@ -63,7 +68,8 @@ export default function CentraliniVoip() {
     'Installazione on-premise per massimo controllo e sicurezza',
     'Tecnologia FreePBX e Asterisk open-source e affidabile',
     'Integrazione con CRM, gestionali e sistemi aziendali',
-    'Supporto tecnico dedicato e formazione del personale',
+    'Intelligenza Artificiale integrata per automazione e analisi avanzata',
+    'Progetti AI personalizzabili su misura per il tuo business',
   ];
 
   const voipFeatures = [
@@ -72,7 +78,7 @@ export default function CentraliniVoip() {
     { icon: Phone, title: 'FreePBX & Asterisk', description: 'Tecnologia open-source affidabile e collaudata a livello enterprise' },
     { icon: Lock, title: 'Sicurezza Avanzata', description: 'Protezione contro intrusioni e chiamate fraudolente con fail2ban e firewall' },
     { icon: Cloud, title: 'Integrazione Completa', description: 'Connessione con CRM, gestionale e altri sistemi aziendali via API' },
-    { icon: Headphones, title: 'Supporto Dedicato', description: 'Assistenza tecnica continua e formazione del personale' },
+    { icon: Brain, title: 'AI Integrata', description: 'Intelligenza artificiale per trascrizione, analisi sentiment e automazione delle comunicazioni' },
   ];
 
   const voipCapabilities = [
@@ -84,6 +90,39 @@ export default function CentraliniVoip() {
     { icon: Smartphone, title: 'App Mobile', description: 'Interno aziendale sul tuo smartphone con app softphone dedicate' },
     { icon: Wifi, title: 'Multi-Sede', description: 'Collegamento tra sedi diverse con VPN per chiamate interne gratuite' },
     { icon: Settings, title: 'Registrazione', description: 'Registrazione automatica delle chiamate per formazione e compliance' },
+  ];
+
+  const aiFeatures = [
+    {
+      icon: MessageSquare,
+      title: 'Trascrizione Automatica',
+      description: 'Trascrizione in tempo reale delle chiamate con riconoscimento vocale avanzato. Ogni conversazione viene convertita in testo ricercabile e archiviabile.',
+    },
+    {
+      icon: Brain,
+      title: 'Analisi del Sentiment',
+      description: 'L\'AI analizza il tono e il sentiment delle conversazioni per identificare clienti insoddisfatti, opportunità di vendita e trend nelle comunicazioni.',
+    },
+    {
+      icon: Bot,
+      title: 'Assistente Vocale AI',
+      description: 'Risponditore automatico intelligente basato su AI che comprende il linguaggio naturale, risponde alle domande frequenti e smista le chiamate in modo intelligente.',
+    },
+    {
+      icon: Sparkles,
+      title: 'Riassunti Automatici',
+      description: 'Al termine di ogni chiamata, l\'AI genera automaticamente un riassunto con i punti chiave, le azioni da intraprendere e le informazioni rilevanti.',
+    },
+    {
+      icon: Zap,
+      title: 'Automazione Workflow',
+      description: 'Creazione automatica di ticket, aggiornamento CRM e invio follow-up basati sul contenuto delle chiamate, senza intervento manuale.',
+    },
+    {
+      icon: BarChart3,
+      title: 'Analytics Predittive',
+      description: 'Analisi predittiva dei volumi di chiamata, identificazione pattern e suggerimenti per ottimizzare il servizio clienti e le risorse del team.',
+    },
   ];
 
   const voipPackages = [
@@ -113,6 +152,7 @@ export default function CentraliniVoip() {
         'Call center con statistiche',
         'Integrazione CRM',
         'App mobile per interni',
+        'Trascrizione AI delle chiamate',
         'Backup automatico',
         'Supporto prioritario 12 mesi',
       ],
@@ -120,16 +160,18 @@ export default function CentraliniVoip() {
       gradient: 'from-green-500 to-blue-500',
     },
     {
-      name: 'Centralino Enterprise',
+      name: 'Centralino Enterprise + AI',
       price: 'Su preventivo',
-      description: 'Soluzione completa per grandi aziende',
+      description: 'Soluzione completa con Intelligenza Artificiale',
       features: [
         'Interni illimitati',
         'Multi-sede con VPN',
         'Disaster recovery',
         'Integrazione avanzata ERP/CRM',
-        'Reportistica personalizzata',
-        'Formazione del personale',
+        'Suite AI completa (trascrizione, sentiment, riassunti)',
+        'Assistente vocale AI personalizzato',
+        'Analytics predittive e reportistica AI',
+        'Progetto AI custom su misura',
         'SLA con supporto H24/7',
       ],
       highlighted: false,
@@ -140,8 +182,8 @@ export default function CentraliniVoip() {
   return (
     <>
       <SEO
-        title="Centralini VoIP FreePBX Roma | Telefonia Aziendale - CoreNexus Technology Solution"
-        description="Installazione e configurazione centralini VoIP FreePBX e Asterisk a Roma. Soluzioni telefoniche professionali on-premise per aziende. IVR, code di attesa, integrazione CRM."
+        title="Centralini VoIP FreePBX con AI Roma | Telefonia Aziendale Intelligente - CoreNexus Technology Solution"
+        description="Installazione centralini VoIP FreePBX e Asterisk a Roma con integrazione AI. Trascrizione automatica, analisi sentiment, assistente vocale AI. Progetti AI personalizzabili per aziende."
         keywords={[
           'centralino VoIP Roma',
           'FreePBX Roma',
@@ -153,6 +195,11 @@ export default function CentraliniVoip() {
           'centralino on-premise',
           'IVR aziendale',
           'telefonia IP Roma',
+          'centralino VoIP intelligenza artificiale',
+          'AI telefonia aziendale',
+          'trascrizione chiamate AI',
+          'assistente vocale AI aziendale',
+          'progetti AI personalizzabili',
         ]}
         canonical="/centralini-voip"
         schema={voipSchema}
@@ -181,26 +228,37 @@ export default function CentraliniVoip() {
 
               <div className="grid lg:grid-cols-2 gap-16 items-center">
                 <div className="space-y-8">
-                  <div className="inline-block">
+                  <div className="inline-flex gap-3 flex-wrap">
                     <span className="px-4 py-2 rounded-full glass-effect text-green-400 text-sm font-semibold tracking-wide flex items-center gap-2">
                       <Phone className="w-4 h-4" />
                       Telefonia Professionale
+                    </span>
+                    <span className="px-4 py-2 rounded-full glass-effect text-purple-400 text-sm font-semibold tracking-wide flex items-center gap-2">
+                      <Brain className="w-4 h-4" />
+                      AI Integrata
                     </span>
                   </div>
 
                   <h1 className="text-5xl md:text-7xl font-bold gradient-text leading-tight">
                     Centralini VoIP
+                    <span className="block text-3xl md:text-4xl mt-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                      + Intelligenza Artificiale
+                    </span>
                   </h1>
 
                   <p className="text-xl text-gray-400 leading-relaxed">
-                    Soluzioni telefoniche professionali con FreePBX e Asterisk.
-                    Centralini totalmente personalizzabili, on-premise, con integrazione CRM e supporto dedicato.
+                    Soluzioni telefoniche professionali con FreePBX e Asterisk, potenziate dall&apos;Intelligenza Artificiale.
+                    Centralini personalizzabili con trascrizione automatica, analisi sentiment e progetti AI su misura.
                   </p>
 
                   <div className="space-y-4">
                     {keyPoints.map((point, index) => (
                       <div key={index} className="flex items-start gap-3 group">
-                        <div className="w-6 h-6 rounded-full bg-gradient-to-br from-green-500 to-blue-500 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
+                        <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform ${
+                          index >= 4
+                            ? 'bg-gradient-to-br from-purple-500 to-pink-500'
+                            : 'bg-gradient-to-br from-green-500 to-blue-500'
+                        }`}>
                           <Check className="w-3.5 h-3.5 text-white" />
                         </div>
                         <span className="text-gray-300 text-lg">{point}</span>
@@ -223,18 +281,20 @@ export default function CentraliniVoip() {
                   <div className="relative">
                     <div className="w-80 h-80 rounded-3xl glass-effect border border-green-500/20 p-8 flex flex-col items-center justify-center gap-6">
                       <div className="grid grid-cols-3 gap-4">
-                        {[Phone, Shield, Settings, Lock, Cloud, Headphones, Smartphone, PhoneCall, Wifi].map((Icon, i) => (
+                        {[Phone, Shield, Settings, Lock, Cloud, Headphones, Brain, PhoneCall, Sparkles].map((Icon, i) => (
                           <div
                             key={i}
-                            className="w-16 h-16 rounded-2xl glass-effect flex items-center justify-center hover:bg-green-500/20 transition-all duration-300 hover:scale-110"
+                            className={`w-16 h-16 rounded-2xl glass-effect flex items-center justify-center transition-all duration-300 hover:scale-110 ${
+                              i >= 6 ? 'hover:bg-purple-500/20' : 'hover:bg-green-500/20'
+                            }`}
                             style={{ animationDelay: `${i * 100}ms` }}
                           >
-                            <Icon className="w-7 h-7 text-green-400" />
+                            <Icon className={`w-7 h-7 ${i >= 6 ? 'text-purple-400' : 'text-green-400'}`} />
                           </div>
                         ))}
                       </div>
                     </div>
-                    <div className="absolute -inset-4 bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-3xl blur-xl -z-10" />
+                    <div className="absolute -inset-4 bg-gradient-to-br from-green-500/20 via-purple-500/10 to-blue-500/20 rounded-3xl blur-xl -z-10" />
                   </div>
                 </div>
               </div>
@@ -252,7 +312,7 @@ export default function CentraliniVoip() {
                   Perché Scegliere FreePBX
                 </h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                  Una piattaforma telefonica enterprise con la flessibilità dell&apos;open-source
+                  Una piattaforma telefonica enterprise con la flessibilità dell&apos;open-source e la potenza dell&apos;AI
                 </p>
               </div>
             </MorphingSection>
@@ -261,7 +321,11 @@ export default function CentraliniVoip() {
               {voipFeatures.map((f, i) => (
                 <MorphingSection key={i} delay={i * 0.1}>
                   <div className="p-8 rounded-3xl glass-effect hover:bg-white/10 transition-all duration-500 card-hover group flex flex-col items-center text-center h-full">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-blue-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 ${
+                      f.icon === Brain
+                        ? 'bg-gradient-to-br from-purple-500 to-pink-600'
+                        : 'bg-gradient-to-br from-green-500 to-blue-600'
+                    }`}>
                       <f.icon className="w-8 h-8 text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-white mb-3">{f.title}</h3>
@@ -305,6 +369,91 @@ export default function CentraliniVoip() {
           </div>
         </section>
 
+        {/* AI Integration Section */}
+        <section className="py-24 px-6 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/20 to-black" />
+          <div className="absolute top-40 left-0 w-[500px] h-[500px] bg-purple-500/8 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-pink-500/8 rounded-full blur-3xl" />
+
+          <div className="max-w-7xl mx-auto relative z-10">
+            <MorphingSection>
+              <div className="text-center space-y-6 mb-16">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-effect border border-purple-500/30">
+                  <Brain className="w-5 h-5 text-purple-400" />
+                  <span className="text-purple-400 text-sm font-semibold">Intelligenza Artificiale</span>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">
+                  AI & Centralini VoIP
+                </h2>
+                <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full" />
+                <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                  Potenzia il tuo centralino con l&apos;Intelligenza Artificiale. Trascrizione automatica, analisi del sentiment,
+                  assistenti vocali e molto altro per rivoluzionare le comunicazioni aziendali.
+                </p>
+              </div>
+            </MorphingSection>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+              {aiFeatures.map((feature, i) => (
+                <MorphingSection key={i} delay={i * 0.1}>
+                  <div className="p-8 rounded-3xl glass-effect border border-purple-500/10 hover:border-purple-500/30 transition-all duration-500 card-hover group h-full">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <feature.icon className="w-7 h-7 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+                    <p className="text-gray-400 leading-relaxed">{feature.description}</p>
+                  </div>
+                </MorphingSection>
+              ))}
+            </div>
+
+            {/* AI Custom Projects Box */}
+            <MorphingSection>
+              <div className="p-10 rounded-3xl glass-effect border border-purple-500/20 bg-gradient-to-br from-purple-950/30 to-pink-950/20">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                  <div className="space-y-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/20 border border-purple-500/30">
+                      <Sparkles className="w-4 h-4 text-purple-400" />
+                      <span className="text-purple-300 text-sm font-medium">Progetti Su Misura</span>
+                    </div>
+                    <h3 className="text-3xl md:text-4xl font-bold text-white">
+                      Progetti AI Personalizzabili
+                    </h3>
+                    <p className="text-lg text-gray-300 leading-relaxed">
+                      Ogni azienda ha esigenze uniche. Il nostro team sviluppa <strong className="text-white">soluzioni AI personalizzate</strong> integrate
+                      direttamente nel tuo centralino VoIP, progettate per risolvere le sfide specifiche del tuo business.
+                    </p>
+                    <p className="text-lg text-gray-300 leading-relaxed">
+                      Dall&apos;automazione del customer service alla creazione di assistenti vocali intelligenti,
+                      dall&apos;analisi avanzata delle conversazioni alla generazione automatica di report — progettiamo
+                      e realizziamo la soluzione AI ideale per la tua azienda.
+                    </p>
+                  </div>
+                  <div className="space-y-4">
+                    {[
+                      { label: 'Chatbot vocali personalizzati', desc: 'Assistenti AI che rispondono alle chiamate con la voce e lo stile del tuo brand' },
+                      { label: 'Routing intelligente', desc: 'Smistamento automatico delle chiamate basato su AI e analisi del contesto' },
+                      { label: 'Integrazione LLM', desc: 'Modelli linguistici avanzati per comprensione e generazione di risposte naturali' },
+                      { label: 'Dashboard AI analytics', desc: 'Pannello di controllo con insight predittivi e KPI generati dall\'intelligenza artificiale' },
+                      { label: 'Automazione post-chiamata', desc: 'Creazione automatica di task, email di follow-up e aggiornamento CRM tramite AI' },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-start gap-4 p-4 rounded-2xl glass-effect hover:bg-white/5 transition-all duration-300 group">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
+                          <Check className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-white font-semibold mb-1">{item.label}</h4>
+                          <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </MorphingSection>
+          </div>
+        </section>
+
         {/* Packages Section */}
         <section className="py-24 px-6 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/50 to-black" />
@@ -317,7 +466,7 @@ export default function CentraliniVoip() {
                   Pacchetti Centralino
                 </h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                  Scegli la soluzione più adatta alle tue esigenze
+                  Scegli la soluzione più adatta alle tue esigenze — ora anche con AI integrata
                 </p>
               </div>
             </MorphingSection>
@@ -338,6 +487,11 @@ export default function CentraliniVoip() {
                           Più Richiesto
                         </div>
                       )}
+                      {index === 2 && (
+                        <div className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 text-white text-sm font-semibold mb-4">
+                          AI Powered
+                        </div>
+                      )}
                       <h4 className="text-2xl font-bold text-white mb-2">{pkg.name}</h4>
                       <div className="text-3xl font-bold gradient-text mb-3">{pkg.price}</div>
                       <p className="text-gray-400 mb-6">{pkg.description}</p>
@@ -345,8 +499,16 @@ export default function CentraliniVoip() {
                     <ul className="space-y-3 mb-8 flex-grow">
                       {pkg.features.map((feat, idx) => (
                         <li key={idx} className="flex items-start gap-3 text-gray-300">
-                          <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center mt-0.5 flex-shrink-0">
-                            <div className="w-2 h-2 rounded-full bg-green-500" />
+                          <div className={`w-5 h-5 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0 ${
+                            feat.toLowerCase().includes('ai') || feat.toLowerCase().includes('intelligenza')
+                              ? 'bg-purple-500/20'
+                              : 'bg-green-500/20'
+                          }`}>
+                            <div className={`w-2 h-2 rounded-full ${
+                              feat.toLowerCase().includes('ai') || feat.toLowerCase().includes('intelligenza')
+                                ? 'bg-purple-500'
+                                : 'bg-green-500'
+                            }`} />
                           </div>
                           <span className="text-sm leading-relaxed text-left">{feat}</span>
                         </li>
@@ -406,6 +568,15 @@ export default function CentraliniVoip() {
                     aziendale</strong>, permettendo di visualizzare le informazioni del chiamante, registrare le
                     chiamate e generare report dettagliati sulle performance del team.
                   </p>
+
+                  <p>
+                    Con l&apos;integrazione dell&apos;<strong className="text-white">Intelligenza Artificiale</strong>, il centralino
+                    diventa uno strumento ancora più potente: trascrizione automatica delle chiamate, analisi del sentiment
+                    in tempo reale, assistenti vocali intelligenti e automazione dei processi post-chiamata. Il nostro team
+                    progetta e sviluppa <strong className="text-white">soluzioni AI personalizzate</strong> che si adattano
+                    perfettamente alle esigenze specifiche della tua azienda, trasformando ogni interazione telefonica in
+                    un&apos;opportunità di miglioramento e crescita.
+                  </p>
                 </div>
               </div>
             </MorphingSection>
@@ -419,10 +590,10 @@ export default function CentraliniVoip() {
             <MorphingSection>
               <div className="p-12 rounded-3xl glass-effect border border-green-500/20 space-y-8">
                 <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Modernizza la telefonia aziendale
+                  Modernizza la telefonia aziendale con l&apos;AI
                 </h2>
                 <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                  Contattaci per una consulenza gratuita. Analizzeremo le tue esigenze telefoniche e ti proporremo la soluzione VoIP ideale.
+                  Contattaci per una consulenza gratuita. Analizzeremo le tue esigenze telefoniche e ti proporremo la soluzione VoIP + AI ideale per il tuo business.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button
@@ -454,7 +625,7 @@ export default function CentraliniVoip() {
             <p className="text-gray-400 text-sm">
               © 2026 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</Link> - Tutti i diritti riservati.
             </p>
-            <p className="text-xs text-gray-600">v2.0 - 25/03/2026</p>
+            <p className="text-xs text-gray-600">v2.1 - 09/04/2026</p>
           </div>
         </footer>
 
