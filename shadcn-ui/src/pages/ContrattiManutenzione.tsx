@@ -36,6 +36,32 @@ export default function ContrattiManutenzione() {
     { name: 'Contratti di Manutenzione', url: '/contratti-manutenzione' },
   ]);
 
+  const faqSchemaData = {
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "Quali sono i vantaggi di un contratto di manutenzione informatica rispetto all'intervento a chiamata?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il contratto di manutenzione garantisce tempi di intervento certi (SLA), costi fissi e prevedibili, e un monitoraggio proattivo che previene i guasti prima che blocchino l'azienda. Con i piani Professional e Enterprise di CoreNexus, la tua infrastruttura è sempre sotto controllo."
+      }
+    }, {
+      "@type": "Question",
+      "name": "Offrite assistenza informatica con canone mensile a Roma e provincia?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Certamente. Proponiamo pacchetti di assistenza personalizzati per aziende a Roma EUR, Ostia, Fiumicino e Pomezia, includendo supporto remoto illimitato e interventi on-site programmati."
+      }
+    }, {
+      "@type": "Question",
+      "name": "È possibile personalizzare il pacchetto di manutenzione?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sì, valutiamo insieme il numero di postazioni, server e apparati di rete per creare un piano su misura che includa backup, sicurezza e supporto sistemistico basato sulle reali esigenze della tua azienda."
+      }
+    }]
+  };
+
   const manutenzioneSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -54,7 +80,8 @@ export default function ContrattiManutenzione() {
           "name": "Roma"
         },
         "serviceType": "IT Maintenance"
-      }
+      },
+      faqSchemaData
     ]
   };
 
@@ -140,15 +167,15 @@ export default function ContrattiManutenzione() {
   const faqs = [
     {
       question: 'Quali sono i vantaggi di un contratto di manutenzione informatica rispetto all\'intervento a chiamata?',
-      answer: 'Il contratto di manutenzione garantisce tempi di intervento certi (SLA), costi fissi e prevedibili, e soprattutto un monitoraggio proattivo che previene i guasti prima che blocchino l\'azienda. A differenza dell\'intervento a chiamata, con i nostri piani Professional e Enterprise la tua infrastruttura è sempre sotto controllo.',
+      answer: 'Il contratto di manutenzione garantisce tempi di intervento certi (SLA), costi fissi e prevedibili, e un monitoraggio proattivo che previene i guasti prima che blocchino l\'azienda. Con i piani Professional e Enterprise di CoreNexus, la tua infrastruttura è sempre sotto controllo.',
     },
     {
       question: 'Offrite assistenza informatica con canone mensile a Roma e provincia?',
-      answer: 'Certamente. CoreNexus propone pacchetti di assistenza personalizzati per aziende a Roma EUR, Ostia, Fiumicino e Pomezia, includendo supporto remoto illimitato e interventi on-site programmati per mantenere i sistemi sempre aggiornati.',
+      answer: 'Certamente. Proponiamo pacchetti di assistenza personalizzati per aziende a Roma EUR, Ostia, Fiumicino e Pomezia, includendo supporto remoto illimitato e interventi on-site programmati.',
     },
     {
       question: 'È possibile personalizzare il pacchetto di manutenzione?',
-      answer: 'Sì, ogni realtà ha esigenze diverse. Valutiamo insieme il numero di postazioni, server e apparati di rete per creare un piano su misura che includa backup, sicurezza e supporto sistemistico.',
+      answer: 'Sì, valutiamo insieme il numero di postazioni, server e apparati di rete per creare un piano su misura che includa backup, sicurezza e supporto sistemistico basato sulle reali esigenze della tua azienda.',
     },
   ];
 

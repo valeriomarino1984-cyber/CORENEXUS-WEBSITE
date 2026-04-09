@@ -35,6 +35,32 @@ export default function AssistenzaSistemistica() {
     { name: 'Consulenza Sistemistica', url: '/assistenza-sistemistica' },
   ]);
 
+  const faqSchemaData = {
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "Cosa si intende per monitoraggio proattivo dei sistemi IT?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Utilizziamo tecnologie avanzate come Zabbix e Wazuh per monitorare h24 server e reti. Riceviamo avvisi in tempo reale su anomalie, intervenendo spesso prima che l'utente riscontri un blocco operativo."
+      }
+    }, {
+      "@type": "Question",
+      "name": "Forneite supporto per infrastrutture virtualizzate Proxmox e VMware a Roma?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sì, siamo specializzati nella progettazione e gestione di ambienti virtuali complessi Proxmox e VMware, garantendo alta affidabilità e disaster recovery per le aziende a Roma Sud, EUR e Ostia."
+      }
+    }, {
+      "@type": "Question",
+      "name": "Intervenite anche su server Linux e ambienti Open Source?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Assolutamente. La nostra esperienza copre distribuzioni Enterprise come Ubuntu Server e Red Hat, oltre alla gestione di firewall pfSense e centralini VoIP FreePBX."
+      }
+    }]
+  };
+
   const assistenzaSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -53,7 +79,8 @@ export default function AssistenzaSistemistica() {
           "name": "Roma"
         },
         "serviceType": "Consulenza Sistemistica"
-      }
+      },
+      faqSchemaData
     ]
   };
 
@@ -134,11 +161,11 @@ export default function AssistenzaSistemistica() {
   const faqs = [
     {
       question: 'Cosa si intende per monitoraggio proattivo dei sistemi IT?',
-      answer: 'Utilizziamo tecnologie avanzate come Zabbix e Wazuh per monitorare h24 server, reti e macchine virtuali. Questo ci permette di ricevere avvisi in tempo reale su anomalie di carico o tentativi di intrusione, intervenendo spesso prima che l\'utente si accorga del problema.',
+      answer: 'Utilizziamo tecnologie avanzate come Zabbix e Wazuh per monitorare h24 server e reti. Riceviamo avvisi in tempo reale su anomalie, intervenendo spesso prima che l\'utente riscontri un blocco operativo.',
     },
     {
-      question: 'Fornite supporto per infrastrutture virtualizzate Proxmox e VMware a Roma?',
-      answer: 'Sì, siamo specializzati nella progettazione e gestione di ambienti virtuali complessi. Offriamo consulenza sistemistica specifica per l\'ottimizzazione di cluster Proxmox e VMware, garantendo alta affidabilità e disaster recovery per le aziende del litorale romano e della zona EUR.',
+      question: 'Forneite supporto per infrastrutture virtualizzate Proxmox e VMware a Roma?',
+      answer: 'Sì, siamo specializzati nella progettazione e gestione di ambienti virtuali complessi Proxmox e VMware, garantendo alta affidabilità e disaster recovery per le aziende a Roma Sud, EUR e Ostia.',
     },
     {
       question: 'Intervenite anche su server Linux e ambienti Open Source?',

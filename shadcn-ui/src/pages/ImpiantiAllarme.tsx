@@ -42,6 +42,32 @@ export default function ImpiantiAllarme() {
     { name: 'Impianti di Allarme e Videosorveglianza', url: '/impianti-allarme-videosorveglianza' },
   ]);
 
+  const faqSchemaData = {
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "Gli impianti di videosorveglianza Hikvision sono a norma GDPR?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sì, i nostri sistemi Hikvision sono configurati seguendo le normative sulla privacy, con gestione dei log di accesso e oscuramento delle aree pubbliche per la piena conformità legale a Roma."
+      }
+    }, {
+      "@type": "Question",
+      "name": "È possibile integrare l'allarme con la videosorveglianza su smartphone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Certamente. Integriamo telecamere e sensori in un'unica app, permettendo di ricevere notifiche push con video-verifica immediata in caso di intrusione, ovunque ti trovi."
+      }
+    }, {
+      "@type": "Question",
+      "name": "Effettuate installazioni di videosorveglianza ad Ostia, Fiumicino e Roma Sud?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sì, operiamo su tutto il territorio di Roma Sud e provincia, realizzando sopralluoghi gratuiti e progettando impianti su misura per uffici, magazzini e aree industriali."
+      }
+    }]
+  };
+
   const allarmeSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -60,7 +86,8 @@ export default function ImpiantiAllarme() {
           "name": "Roma"
         },
         "serviceType": "Impianti di Sicurezza"
-      }
+      },
+      faqSchemaData
     ]
   };
 
@@ -183,15 +210,15 @@ export default function ImpiantiAllarme() {
   const faqs = [
     {
       question: 'Gli impianti di videosorveglianza Hikvision sono a norma GDPR?',
-      answer: 'Sì, i nostri sistemi sono configurati seguendo rigorosamente le normative sulla privacy. Forniamo supporto per la corretta gestione dei log di accesso e l\'oscuramento delle aree pubbliche, garantendo che la sicurezza della tua azienda a Roma sia pienamente conforme alle leggi vigenti.',
+      answer: 'Sì, i nostri sistemi Hikvision sono configurati seguendo le normative sulla privacy, con gestione dei log di accesso e oscuramento delle aree pubbliche per la piena conformità legale a Roma.',
     },
     {
       question: 'È possibile integrare l\'allarme con la videosorveglianza su smartphone?',
-      answer: 'Certamente. Grazie alle tecnologie Hikvision, integriamo telecamere e sensori di allarme in un\'unica app. Riceverai notifiche push con video-verifica immediata in caso di intrusione, ovunque ti trovi.',
+      answer: 'Certamente. Integriamo telecamere e sensori in un\'unica app, permettendo di ricevere notifiche push con video-verifica immediata in caso di intrusione, ovunque ti trovi.',
     },
     {
       question: 'Effettuate installazioni di videosorveglianza ad Ostia, Fiumicino e Roma Sud?',
-      answer: 'Sì, operiamo su tutto il territorio di Roma Sud e provincia. Realizziamo sopralluoghi gratuiti per progettare impianti su misura per uffici, magazzini e aree industriali, garantendo assistenza post-vendita e manutenzione periodica.',
+      answer: 'Sì, operiamo su tutto il territorio di Roma Sud e provincia, realizzando sopralluoghi gratuiti e progettando impianti su misura per uffici, magazzini e aree industriali.',
     },
   ];
 

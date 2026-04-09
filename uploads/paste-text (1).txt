@@ -1,0 +1,90 @@
+1. Codice per: Contratti di Manutenzione
+HTML
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Quali sono i vantaggi di un contratto di manutenzione informatica rispetto all'intervento a chiamata?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Il contratto di manutenzione garantisce tempi di intervento certi (SLA), costi fissi e prevedibili, e un monitoraggio proattivo che previene i guasti prima che blocchino l'azienda. Con i piani Professional e Enterprise di CoreNexus, la tua infrastruttura è sempre sotto controllo."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Offrite assistenza informatica con canone mensile a Roma e provincia?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Certamente. Proponiamo pacchetti di assistenza personalizzati per aziende a Roma EUR, Ostia, Fiumicino e Pomezia, includendo supporto remoto illimitato e interventi on-site programmati."
+    }
+  }, {
+    "@type": "Question",
+    "name": "È possibile personalizzare il pacchetto di manutenzione?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sì, valutiamo insieme il numero di postazioni, server e apparati di rete per creare un piano su misura che includa backup, sicurezza e supporto sistemistico basato sulle reali esigenze della tua azienda."
+    }
+  }]
+}
+</script>
+2. Codice per: Assistenza Sistemistica
+HTML
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Cosa si intende per monitoraggio proattivo dei sistemi IT?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Utilizziamo tecnologie avanzate come Zabbix e Wazuh per monitorare h24 server e reti. Riceviamo avvisi in tempo reale su anomalie, intervenendo spesso prima che l'utente riscontri un blocco operativo."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Forneite supporto per infrastrutture virtualizzate Proxmox e VMware a Roma?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sì, siamo specializzati nella progettazione e gestione di ambienti virtuali complessi Proxmox e VMware, garantendo alta affidabilità e disaster recovery per le aziende a Roma Sud, EUR e Ostia."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Intervenite anche su server Linux e ambienti Open Source?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Assolutamente. La nostra esperienza copre distribuzioni Enterprise come Ubuntu Server e Red Hat, oltre alla gestione di firewall pfSense e centralini VoIP FreePBX."
+    }
+  }]
+}
+</script>
+3. Codice per: Impianti Allarme e Videosorveglianza
+HTML
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Gli impianti di videosorveglianza Hikvision sono a norma GDPR?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sì, i nostri sistemi Hikvision sono configurati seguendo le normative sulla privacy, con gestione dei log di accesso e oscuramento delle aree pubbliche per la piena conformità legale a Roma."
+    }
+  }, {
+    "@type": "Question",
+    "name": "È possibile integrare l'allarme con la videosorveglianza su smartphone?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Certamente. Integriamo telecamere e sensori in un'unica app, permettendo di ricevere notifiche push con video-verifica immediata in caso di intrusione, ovunque ti trovi."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Effettuate installazioni di videosorveglianza ad Ostia, Fiumicino e Roma Sud?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sì, operiamo su tutto il territorio di Roma Sud e provincia, realizzando sopralluoghi gratuiti e progettando impianti su misura per uffici, magazzini e aree industriali."
+    }
+  }]
+}
+</script>
