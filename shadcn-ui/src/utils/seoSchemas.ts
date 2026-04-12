@@ -8,11 +8,14 @@ export const localBusinessSchema = {
   "description": "Assistenza informatica e supporto sistemistico professionale per aziende a Roma Sud, Ostia, Fiumicino, EUR e provincia",
   "url": "https://corenexus.it",
   "telephone": "+393913773304",
+  "email": "info@corenexus.it",
   "priceRange": "€€",
   "address": {
     "@type": "PostalAddress",
+    "streetAddress": "Roma Sud",
     "addressLocality": "Roma",
     "addressRegion": "Lazio",
+    "postalCode": "00100",
     "addressCountry": "IT"
   },
   "geo": {
@@ -20,6 +23,30 @@ export const localBusinessSchema = {
     "latitude": 41.7519,
     "longitude": 12.2853
   },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+393913773304",
+      "contactType": "customer service",
+      "email": "info@corenexus.it",
+      "availableLanguage": ["Italian", "English"],
+      "areaServed": "IT",
+      "hoursAvailable": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+393913773304",
+      "contactType": "technical support",
+      "email": "supporto@corenexus.it",
+      "availableLanguage": ["Italian"],
+      "areaServed": "IT"
+    }
+  ],
   "areaServed": [
     { "@type": "City", "name": "Roma" },
     { "@type": "Place", "name": "Ostia" },
@@ -65,6 +92,48 @@ export const professionalServiceSchema = {
     "Server Enterprise",
     "Centralini VoIP"
   ]
+};
+
+export const contactPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contatti - CoreNexus Technology Solution",
+  "description": "Contatta CoreNexus Technology Solution per assistenza informatica, supporto IT e consulenza tecnologica a Roma.",
+  "url": "https://corenexus.it/contatti",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "CoreNexus Technology Solution",
+    "url": "https://corenexus.it",
+    "telephone": "+393913773304",
+    "email": "info@corenexus.it",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Roma Sud",
+      "addressLocality": "Roma",
+      "addressRegion": "Lazio",
+      "postalCode": "00100",
+      "addressCountry": "IT"
+    },
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+393913773304",
+        "contactType": "customer service",
+        "email": "info@corenexus.it",
+        "availableLanguage": ["Italian", "English"],
+        "contactOption": "TollFree",
+        "areaServed": "IT"
+      },
+      {
+        "@type": "ContactPoint",
+        "telephone": "+393913773304",
+        "contactType": "technical support",
+        "email": "supporto@corenexus.it",
+        "availableLanguage": ["Italian"],
+        "areaServed": "IT"
+      }
+    ]
+  }
 };
 
 export const breadcrumbSchema = (items: Array<{ name: string; url: string }>) => ({

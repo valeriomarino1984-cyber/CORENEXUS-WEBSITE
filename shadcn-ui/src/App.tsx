@@ -20,6 +20,7 @@ import AssistenzaRemota from './pages/AssistenzaRemota';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import DoveSiamo from './pages/DoveSiamo';
+import Contatti from './pages/Contatti';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import NewTicket from './pages/NewTicket';
@@ -66,6 +67,7 @@ const AppContent = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/dove-siamo" element={<DoveSiamo />} />
+        <Route path="/contatti" element={<Contatti />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/new-ticket" element={<NewTicket />} />

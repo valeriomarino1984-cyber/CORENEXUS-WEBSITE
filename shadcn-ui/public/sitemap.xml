@@ -3,17 +3,17 @@
   <!-- Homepage -->
   <url>
     <loc>https://corenexus.it/</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Contatti (sezione nella homepage) -->
+  <!-- Contatti (pagina dedicata) -->
   <url>
-    <loc>https://corenexus.it/#contact</loc>
-    <lastmod>2026-04-09</lastmod>
+    <loc>https://corenexus.it/contatti</loc>
+    <lastmod>2026-04-12</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
 
   <!-- Servizi -->
@@ -73,7 +73,7 @@
   </url>
   <url>
     <loc>https://corenexus.it/centralini-voip</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

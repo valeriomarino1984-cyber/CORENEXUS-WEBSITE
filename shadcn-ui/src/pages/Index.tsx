@@ -12,11 +12,12 @@ import WhatsAppWidget from '@/components/WhatsAppWidget';
 import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles, Building2, Rocket, Scale, Factory, Gift, Server, ShieldCheck, Cog, CheckCircle } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { localBusinessSchema, professionalServiceSchema, breadcrumbSchema } from '@/utils/seoSchemas';
 
 export default function Index() {
   const location = useLocation();
+  const navigate = useNavigate();
   const orb1Ref = useRef<HTMLDivElement>(null);
   const orb2Ref = useRef<HTMLDivElement>(null);
   const orb3Ref = useRef<HTMLDivElement>(null);
@@ -96,7 +97,7 @@ export default function Index() {
     { name: 'Home', url: '/' },
     { name: 'Servizi', url: '/#services' },
     { name: 'Cosa Facciamo', url: '/#about' },
-    { name: 'Contatti', url: '/#contact' }
+    { name: 'Contatti', url: '/contatti' }
   ]);
 
   const combinedSchema = {
@@ -439,8 +440,10 @@ export default function Index() {
                 <p className="text-gray-400 text-sm leading-relaxed">
                   Assistenza informatica professionale e supporto sistemistico per aziende a Roma Sud, Ostia, Fiumicino, EUR e provincia.
                 </p>
-                <address className="text-gray-400 text-sm not-italic">
+                <address className="text-gray-400 text-sm not-italic space-y-1">
                   <p>Roma, Lazio</p>
+                  <p>📞 <a href="tel:+393913773304" className="text-blue-400 hover:text-blue-300 transition-colors">+39 391 377 3304</a></p>
+                  <p>✉️ <a href="mailto:info@corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">info@corenexus.it</a></p>
                 </address>
               </div>
 
@@ -464,9 +467,14 @@ export default function Index() {
                     </Link>
                   </li>
                   <li>
-                    <a href="#contact" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
+                    <Link to="/contatti" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
                       Contatti
-                    </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/blog" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
+                      Blog
+                    </Link>
                   </li>
                 </ul>
               </nav>
@@ -509,7 +517,7 @@ export default function Index() {
                   Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus Technology Solution</a>
                 </p>
                 <p className="text-xs text-gray-600">
-                  v2.0 - 25/03/2026
+                  v2.1 - 12/04/2026
                 </p>
               </div>
             </div>

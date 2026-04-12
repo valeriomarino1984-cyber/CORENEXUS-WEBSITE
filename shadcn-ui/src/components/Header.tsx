@@ -165,8 +165,10 @@ export default function Header() {
               Dove Siamo
             </button>
             <button
-              onClick={() => scrollToSection('contact')}
-              className="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap"
+              onClick={() => navigate('/contatti')}
+              className={`text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap ${
+                location.pathname === '/contatti' ? 'text-white' : ''
+              }`}
             >
               Contatti
             </button>
@@ -298,10 +300,18 @@ export default function Header() {
               Dove Siamo
             </button>
             <button
-              onClick={() => scrollToSection('contact')}
-              className="block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2"
+              onClick={() => {
+                navigate('/contatti');
+                setIsMobileMenuOpen(false);
+              }}
+              className={`block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2 ${
+                location.pathname === '/contatti' ? 'text-white' : ''
+              }`}
             >
-              Contatti
+              <span className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-blue-400" />
+                Contatti
+              </span>
             </button>
             <button
               onClick={() => {
@@ -335,7 +345,10 @@ export default function Header() {
                 Area Riservata Admin
               </Button>
               <Button
-                onClick={() => scrollToSection('contact')}
+                onClick={() => {
+                  navigate('/contatti');
+                  setIsMobileMenuOpen(false);
+                }}
                 className="w-full premium-button text-white px-6 py-3 rounded-xl text-sm font-semibold"
               >
                 Richiedi Preventivo
