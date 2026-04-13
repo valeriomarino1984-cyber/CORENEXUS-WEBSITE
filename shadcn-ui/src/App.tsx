@@ -16,6 +16,7 @@ import SitiWeb from './pages/SitiWeb';
 import ContrattiManutenzione from './pages/ContrattiManutenzione';
 import CentraliniVoip from './pages/CentraliniVoip';
 import AutomazioneProcessi from './pages/AutomazioneProcessi';
+import KubernetesContainer from './pages/KubernetesContainer';
 import Tecnologie from './pages/Tecnologie';
 import AssistenzaRemota from './pages/AssistenzaRemota';
 import Blog from './pages/Blog';
@@ -64,6 +65,7 @@ const AppContent = () => {
         <Route path="/contratti-manutenzione" element={<ContrattiManutenzione />} />
         <Route path="/centralini-voip" element={<CentraliniVoip />} />
         <Route path="/automazione-processi" element={<AutomazioneProcessi />} />
+        <Route path="/kubernetes-container" element={<KubernetesContainer />} />
         <Route path="/tecnologie" element={<Tecnologie />} />
         <Route path="/assistenza-remota" element={<AssistenzaRemota />} />
         <Route path="/blog" element={<Blog />} />

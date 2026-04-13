@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, Globe, FileText, Phone, Cog, Cpu, Briefcase, Monitor, BookOpen } from 'lucide-react';
+import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, Globe, FileText, Phone, Cog, Cpu, Briefcase, Monitor, BookOpen, Container } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
@@ -24,6 +24,7 @@ export default function Header() {
     '/contratti-manutenzione',
     '/centralini-voip',
     '/automazione-processi',
+    '/kubernetes-container',
   ].includes(location.pathname);
 
   useEffect(() => {
@@ -67,6 +68,7 @@ export default function Header() {
     { name: 'Contratti di Manutenzione', path: '/contratti-manutenzione', icon: FileText },
     { name: 'Consulenza Sistemistica', path: '/assistenza-sistemistica', icon: Wrench },
     { name: 'Automazione Processi IT', path: '/automazione-processi', icon: Cog },
+    { name: 'Kubernetes e Container', path: '/kubernetes-container', icon: Container },
     { name: 'Project Management', path: '/project-management', icon: ClipboardList },
     { name: 'Networking e Reti', path: '/networking-reti', icon: Network },
     { name: 'Sicurezza Informatica', path: '/sicurezza-informatica', icon: ShieldCheck },
