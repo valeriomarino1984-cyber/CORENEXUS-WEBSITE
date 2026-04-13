@@ -578,6 +578,96 @@ html {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
+/* ========================================
+   Cursor Follower / Trailing Cursor
+   ======================================== */
+.cursor-follower-container {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  mix-blend-mode: screen;
+}
+
+/* Inner dot */
+.cursor-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #007AFF 0%, #5856D6 100%);
+  box-shadow: 0 0 10px rgba(0, 122, 255, 0.8), 0 0 20px rgba(88, 86, 214, 0.4);
+  will-change: transform;
+  transition: width 0.3s ease, height 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cursor-inner-hover {
+  width: 12px;
+  height: 12px;
+  box-shadow: 0 0 15px rgba(0, 122, 255, 1), 0 0 30px rgba(88, 86, 214, 0.6);
+}
+
+.cursor-inner-click {
+  width: 6px;
+  height: 6px;
+  box-shadow: 0 0 20px rgba(0, 122, 255, 1), 0 0 40px rgba(88, 86, 214, 0.8);
+}
+
+/* Outer ring */
+.cursor-outer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 122, 255, 0.4);
+  background: radial-gradient(circle, rgba(0, 122, 255, 0.05) 0%, transparent 70%);
+  box-shadow: 0 0 15px rgba(0, 122, 255, 0.15), 0 0 30px rgba(88, 86, 214, 0.08);
+  will-change: transform;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              background 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.cursor-hover {
+  width: 56px;
+  height: 56px;
+  border-color: rgba(0, 122, 255, 0.6);
+  background: radial-gradient(circle, rgba(0, 122, 255, 0.1) 0%, transparent 70%);
+  box-shadow: 0 0 25px rgba(0, 122, 255, 0.25), 0 0 50px rgba(88, 86, 214, 0.15);
+}
+
+.cursor-click {
+  width: 28px;
+  height: 28px;
+  border-color: rgba(88, 86, 214, 0.8);
+  box-shadow: 0 0 30px rgba(0, 122, 255, 0.4), 0 0 60px rgba(88, 86, 214, 0.3);
+}
+
+/* Trail particles */
+.cursor-trail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+/* Hide custom cursor on touch/mobile */
+@media (hover: none) and (pointer: coarse) {
+  .cursor-follower-container {
+    display: none !important;
+  }
+}
+
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 10px;
