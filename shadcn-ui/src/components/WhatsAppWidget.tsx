@@ -6,7 +6,7 @@ export default function WhatsAppWidget() {
   const [isOpen, setIsOpen] = useState(false);
   
   // Numero WhatsApp (formato internazionale senza + e spazi)
-  const whatsappNumber = '393913773304';
+  const whatsappNumber = '393534012055';
   
   // Messaggio predefinito
   const defaultMessage = 'Ciao! Ho bisogno di assistenza tecnica.';

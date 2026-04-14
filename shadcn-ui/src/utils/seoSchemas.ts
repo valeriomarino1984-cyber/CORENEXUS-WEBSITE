@@ -7,7 +7,7 @@ export const localBusinessSchema = {
   "image": "/images/photo1766412531.jpg",
   "description": "Assistenza informatica e supporto sistemistico professionale per aziende a Roma Sud, Ostia, Fiumicino, EUR e provincia",
   "url": "https://corenexus.it",
-  "telephone": "+393913773304",
+  "telephone": "+393534012055",
   "email": "info@corenexus.it",
   "priceRange": "€€",
   "address": {
@@ -26,7 +26,7 @@ export const localBusinessSchema = {
   "contactPoint": [
     {
       "@type": "ContactPoint",
-      "telephone": "+393913773304",
+      "telephone": "+393534012055",
       "contactType": "customer service",
       "email": "info@corenexus.it",
       "availableLanguage": ["Italian", "English"],
@@ -40,7 +40,7 @@ export const localBusinessSchema = {
     },
     {
       "@type": "ContactPoint",
-      "telephone": "+393913773304",
+      "telephone": "+393534012055",
       "contactType": "technical support",
       "email": "supporto@corenexus.it",
       "availableLanguage": ["Italian"],
@@ -104,7 +104,7 @@ export const contactPageSchema = {
     "@type": "Organization",
     "name": "CoreNexus Technology Solution",
     "url": "https://corenexus.it",
-    "telephone": "+393913773304",
+    "telephone": "+393534012055",
     "email": "info@corenexus.it",
     "address": {
       "@type": "PostalAddress",
@@ -117,7 +117,7 @@ export const contactPageSchema = {
     "contactPoint": [
       {
         "@type": "ContactPoint",
-        "telephone": "+393913773304",
+        "telephone": "+393534012055",
         "contactType": "customer service",
         "email": "info@corenexus.it",
         "availableLanguage": ["Italian", "English"],
@@ -126,7 +126,7 @@ export const contactPageSchema = {
       },
       {
         "@type": "ContactPoint",
-        "telephone": "+393913773304",
+        "telephone": "+393534012055",
         "contactType": "technical support",
         "email": "supporto@corenexus.it",
         "availableLanguage": ["Italian"],
@@ -177,6 +177,6 @@ export const serviceSchema = (serviceName: string, description: string) => ({
   "availableChannel": {
     "@type": "ServiceChannel",
     "serviceUrl": "https://corenexus.it",
-    "servicePhone": "+393913773304"
+    "servicePhone": "+393534012055"
   }
 });

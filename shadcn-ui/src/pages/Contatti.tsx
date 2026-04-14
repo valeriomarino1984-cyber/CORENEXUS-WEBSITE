@@ -26,8 +26,8 @@ export default function Contatti() {
     {
       icon: Phone,
       title: 'Telefono',
-      value: '+39 391 377 3304',
-      href: 'tel:+393913773304',
+      value: '+39 353 401 2055',
+      href: 'tel:+393534012055',
       description: 'Chiamaci per assistenza immediata',
       gradient: 'from-green-500 to-emerald-600',
     },
@@ -42,8 +42,8 @@ export default function Contatti() {
     {
       icon: MessageCircle,
       title: 'WhatsApp',
-      value: '+39 391 377 3304',
-      href: 'https://wa.me/393913773304?text=Ciao%2C%20vorrei%20informazioni%20sui%20vostri%20servizi%20IT',
+      value: '+39 353 401 2055',
+      href: 'https://wa.me/393534012055?text=Ciao%2C%20vorrei%20informazioni%20sui%20vostri%20servizi%20IT',
       description: 'Scrivici su WhatsApp per una risposta rapida',
       gradient: 'from-emerald-500 to-green-600',
     },
@@ -61,7 +61,7 @@ export default function Contatti() {
     <>
       <SEO
         title="Contatti CoreNexus Technology Solution | Assistenza IT Roma - Telefono, Email, WhatsApp"
-        description="Contatta CoreNexus Technology Solution per assistenza informatica a Roma. Telefono: +39 391 377 3304, Email: info@corenexus.it. Supporto IT rapido per aziende a Roma Sud, EUR, Ostia, Fiumicino."
+        description="Contatta CoreNexus Technology Solution per assistenza informatica a Roma. Telefono: +39 353 401 2055, Email: info@corenexus.it. Supporto IT rapido per aziende a Roma Sud, EUR, Ostia, Fiumicino."
         keywords={[
           'contatti CoreNexus',
           'assistenza informatica Roma contatti',

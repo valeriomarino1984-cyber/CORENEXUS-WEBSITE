@@ -442,7 +442,7 @@ export default function Index() {
                 </p>
                 <address className="text-gray-400 text-sm not-italic space-y-1">
                   <p>Roma, Lazio</p>
-                  <p>📞 <a href="tel:+393913773304" className="text-blue-400 hover:text-blue-300 transition-colors">+39 391 377 3304</a></p>
+                  <p>📞 <a href="tel:+393534012055" className="text-blue-400 hover:text-blue-300 transition-colors">+39 353 401 2055</a></p>
                   <p>✉️ <a href="mailto:info@corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">info@corenexus.it</a></p>
                 </address>
               </div>
