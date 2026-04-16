@@ -406,15 +406,27 @@ export default function Index() {
                   Senza impegno.
                 </p>
                 
-                <Button
-                  size="lg"
-                  onClick={scrollToContact}
-                  className="group bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-12 py-7 text-lg rounded-2xl font-semibold shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 transition-all duration-300"
-                  aria-label="Prenota l'audit gratuito"
-                >
-                  Prenota l'audit gratuito
-                  <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button
+                    size="lg"
+                    onClick={() => navigate('/audit-gratuito')}
+                    className="group bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-12 py-7 text-lg rounded-2xl font-semibold shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 transition-all duration-300"
+                    aria-label="Scopri di più sull'audit gratuito"
+                  >
+                    Scopri di più
+                    <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                  </Button>
+                  <Button
+                    size="lg"
+                    onClick={scrollToContact}
+                    variant="outline"
+                    className="group glass-effect border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 px-12 py-7 text-lg rounded-2xl font-semibold transition-all duration-300"
+                    aria-label="Prenota l'audit gratuito"
+                  >
+                    Prenota ora
+                    <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
@@ -460,6 +472,11 @@ export default function Index() {
                     <a href="#about" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
                       Cosa Facciamo
                     </a>
+                  </li>
+                  <li>
+                    <Link to="/audit-gratuito" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                      🎁 Audit IT Gratuito
+                    </Link>
                   </li>
                   <li>
                     <Link to="/dove-siamo" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
@@ -517,7 +534,7 @@ export default function Index() {
                   Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus Technology Solution</a>
                 </p>
                 <p className="text-xs text-gray-600">
-                  v2.1 - 12/04/2026
+                  v2.1 - 16/04/2026
                 </p>
               </div>
             </div>

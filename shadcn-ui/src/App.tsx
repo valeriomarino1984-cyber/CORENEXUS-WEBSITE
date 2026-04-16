@@ -19,6 +19,7 @@ import AutomazioneProcessi from './pages/AutomazioneProcessi';
 import KubernetesContainer from './pages/KubernetesContainer';
 import Tecnologie from './pages/Tecnologie';
 import AssistenzaRemota from './pages/AssistenzaRemota';
+import AuditGratuito from './pages/AuditGratuito';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import DoveSiamo from './pages/DoveSiamo';
@@ -68,6 +69,7 @@ const AppContent = () => {
         <Route path="/kubernetes-container" element={<KubernetesContainer />} />
         <Route path="/tecnologie" element={<Tecnologie />} />
         <Route path="/assistenza-remota" element={<AssistenzaRemota />} />
+        <Route path="/audit-gratuito" element={<AuditGratuito />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/dove-siamo" element={<DoveSiamo />} />
