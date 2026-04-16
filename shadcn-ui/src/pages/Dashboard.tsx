@@ -4,7 +4,7 @@ import { supabase, type Profile, type Ticket, type Company } from '@/lib/supabas
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { LogOut, Plus, Clock, CheckCircle2, AlertCircle } from 'lucide-react';
+import { LogOut, Plus, Clock, CheckCircle2, AlertCircle, Home } from 'lucide-react';
 import SEO from '@/components/SEO';
 
 export default function Dashboard() {
@@ -150,14 +150,24 @@ export default function Dashboard() {
                 </p>
               )}
             </div>
-            <Button
-              onClick={handleLogout}
-              variant="outline"
-              className="glass-effect border-white/20 text-white hover:bg-white/10"
-            >
-              <LogOut className="w-4 h-4 mr-2" />
-              Esci
-            </Button>
+            <div className="flex gap-3">
+              <Button
+                onClick={() => navigate('/')}
+                variant="outline"
+                className="glass-effect border-white/20 text-white hover:bg-white/10"
+              >
+                <Home className="w-4 h-4 mr-2" />
+                Homepage
+              </Button>
+              <Button
+                onClick={handleLogout}
+                variant="outline"
+                className="glass-effect border-white/20 text-white hover:bg-white/10"
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                Esci
+              </Button>
+            </div>
           </div>
         </header>
 

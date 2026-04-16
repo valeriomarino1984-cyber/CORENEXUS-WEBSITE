@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, Home } from 'lucide-react';
 import SEO from '@/components/SEO';
 
 export default function Login() {
@@ -125,6 +125,17 @@ export default function Login() {
                 {loading ? 'Accesso in corso...' : 'Accedi'}
               </Button>
             </form>
+
+            <div className="mt-4 text-center">
+              <Button
+                onClick={() => navigate('/')}
+                variant="ghost"
+                className="text-gray-400 hover:text-white hover:bg-white/10"
+              >
+                <Home className="w-4 h-4 mr-2" />
+                Torna alla Homepage
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>

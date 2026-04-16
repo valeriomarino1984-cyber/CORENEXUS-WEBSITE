@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { supabase } from '@/lib/supabase';
-import { Loader2, Shield } from 'lucide-react';
+import { Loader2, Shield, Home } from 'lucide-react';
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -125,6 +125,17 @@ export default function AdminLogin() {
               )}
             </Button>
           </form>
+
+          <div className="mt-4 text-center">
+            <Button
+              onClick={() => navigate('/')}
+              variant="ghost"
+              className="text-gray-400 hover:text-white hover:bg-white/10"
+            >
+              <Home className="w-4 h-4 mr-2" />
+              Torna alla Homepage
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </div>

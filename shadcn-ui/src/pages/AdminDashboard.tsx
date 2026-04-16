@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { supabase, type Ticket, type Profile, type Company } from '@/lib/supabase';
-import { Loader2, LogOut, Search, Ticket as TicketIcon, Clock, CheckCircle2, AlertCircle, Users, Plus, UserCog, Settings, Building2 } from 'lucide-react';
+import { Loader2, LogOut, Search, Ticket as TicketIcon, Clock, CheckCircle2, AlertCircle, Users, Plus, UserCog, Settings, Building2, Home } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function AdminDashboard() {
@@ -172,7 +172,15 @@ export default function AdminDashboard() {
               </p>
             )}
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-wrap justify-end">
+            <Button 
+              onClick={() => navigate('/')} 
+              variant="outline"
+              className="border-green-500/30 text-green-400 hover:bg-green-500/10"
+            >
+              <Home className="mr-2 h-4 w-4" />
+              Homepage
+            </Button>
             <Button 
               onClick={() => navigate('/admin/user-management')} 
               variant="outline"
