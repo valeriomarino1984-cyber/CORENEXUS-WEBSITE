@@ -77,127 +77,123 @@ export default function Header() {
     { name: 'Centralini VoIP', path: '/centralini-voip', icon: Phone },
   ];
 
+  const navLinkClass = (isActive: boolean) =>
+    `text-gray-300 hover:text-white transition-colors duration-300 text-[13px] font-medium uppercase tracking-wider whitespace-nowrap ${isActive ? 'text-white' : ''}`;
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled ? 'glass-effect shadow-2xl' : 'bg-transparent'
       }`}
     >
-      <div className="w-full px-4 lg:px-6 py-4">
-        {/* Desktop Navigation - single row, fully centered */}
-        <nav className="hidden lg:flex items-center justify-center gap-3 xl:gap-4 flex-wrap">
+      <div className="max-w-[1400px] mx-auto px-4 lg:px-6 py-3">
+        {/* Desktop: Two rows, both centered */}
+        <div className="hidden lg:flex flex-col items-center gap-2">
+          {/* Row 1: Logo centered */}
           <div
-            className="text-lg xl:text-2xl font-bold gradient-text cursor-pointer whitespace-nowrap flex-shrink-0"
+            className="text-xl xl:text-2xl font-bold gradient-text cursor-pointer whitespace-nowrap"
             onClick={goHome}
           >
             CoreNexus Technology Solution
           </div>
 
-          <button
-            onClick={goHome}
-            className="text-gray-300 hover:text-white transition-colors duration-300 text-xs xl:text-sm font-medium uppercase tracking-wider whitespace-nowrap"
-          >
-            Home
-          </button>
-
-          {/* Services Dropdown */}
-          <div ref={servicesRef} className="relative">
-            <button
-              onClick={() => setIsServicesOpen(!isServicesOpen)}
-              className={`flex items-center gap-1 text-gray-300 hover:text-white transition-colors duration-300 text-xs xl:text-sm font-medium uppercase tracking-wider whitespace-nowrap ${
-                isServicesPage ? 'text-white' : ''
-              }`}
-            >
-              Servizi
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isServicesOpen ? 'rotate-180' : ''}`} />
+          {/* Row 2: Nav links + buttons, all centered */}
+          <nav className="flex items-center justify-center gap-3 xl:gap-4">
+            <button onClick={goHome} className={navLinkClass(false)}>
+              Home
             </button>
 
-            {isServicesOpen && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 glass-effect rounded-2xl border border-white/10 shadow-2xl overflow-hidden animate-fade-in-up">
-                {serviceLinks.map((link, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      navigate(link.path);
-                      setIsServicesOpen(false);
-                    }}
-                    className={`w-full flex items-center gap-3 px-5 py-3.5 text-left text-sm transition-all duration-200 ${
-                      location.pathname === link.path
-                        ? 'text-white bg-white/10'
-                        : 'text-gray-400 hover:text-white hover:bg-white/5'
-                    } ${index === 0 ? 'border-b border-white/10 font-semibold' : ''}`}
-                  >
-                    {link.icon && <link.icon className="w-4 h-4 text-blue-400" />}
-                    {link.name}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+            {/* Services Dropdown */}
+            <div ref={servicesRef} className="relative">
+              <button
+                onClick={() => setIsServicesOpen(!isServicesOpen)}
+                className={`flex items-center gap-1 ${navLinkClass(isServicesPage)}`}
+              >
+                Servizi
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isServicesOpen ? 'rotate-180' : ''}`} />
+              </button>
 
-          <button
-            onClick={() => navigate('/tecnologie')}
-            className={`text-gray-300 hover:text-white transition-colors duration-300 text-xs xl:text-sm font-medium uppercase tracking-wider whitespace-nowrap ${
-              location.pathname === '/tecnologie' ? 'text-white' : ''
-            }`}
-          >
-            Tecnologie
-          </button>
-          <button
-            onClick={() => scrollToSection('about')}
-            className="text-gray-300 hover:text-white transition-colors duration-300 text-xs xl:text-sm font-medium uppercase tracking-wider whitespace-nowrap"
-          >
-            Cosa Facciamo
-          </button>
-          <button
-            onClick={() => navigate('/blog')}
-            className={`text-gray-300 hover:text-white transition-colors duration-300 text-xs xl:text-sm font-medium uppercase tracking-wider whitespace-nowrap ${
-              location.pathname.startsWith('/blog') ? 'text-white' : ''
-            }`}
-          >
-            Blog
-          </button>
-          <button
-            onClick={() => navigate('/dove-siamo')}
-            className={`text-gray-300 hover:text-white transition-colors duration-300 text-xs xl:text-sm font-medium uppercase tracking-wider whitespace-nowrap ${
-              location.pathname === '/dove-siamo' ? 'text-white' : ''
-            }`}
-          >
-            Dove Siamo
-          </button>
-          <button
-            onClick={() => navigate('/contatti')}
-            className={`text-gray-300 hover:text-white transition-colors duration-300 text-xs xl:text-sm font-medium uppercase tracking-wider whitespace-nowrap ${
-              location.pathname === '/contatti' ? 'text-white' : ''
-            }`}
-          >
-            Contatti
-          </button>
-          <button
-            onClick={() => navigate('/assistenza-remota')}
-            className={`text-gray-300 hover:text-white transition-colors duration-300 text-xs xl:text-sm font-medium uppercase tracking-wider whitespace-nowrap ${
-              location.pathname === '/assistenza-remota' ? 'text-white' : ''
-            }`}
-          >
-            Assistenza Remota
-          </button>
-          <Button
-            onClick={() => navigate('/login')}
-            variant="outline"
-            className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-3 xl:px-5 py-2 rounded-xl text-xs xl:text-sm font-semibold whitespace-nowrap flex-shrink-0"
-          >
-            <LogIn className="w-3.5 h-3.5 mr-1" />
-            Area Clienti
-          </Button>
-          <Button
-            onClick={() => navigate('/admin/login')}
-            variant="outline"
-            className="glass-effect border-red-500/30 hover:border-red-500/50 text-red-500 hover:bg-red-500/10 px-3 xl:px-5 py-2 rounded-xl text-xs xl:text-sm font-semibold whitespace-nowrap flex-shrink-0"
-          >
-            <Shield className="w-3.5 h-3.5 mr-1" />
-            Area Admin
-          </Button>
-        </nav>
+              {isServicesOpen && (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 glass-effect rounded-2xl border border-white/10 shadow-2xl overflow-hidden animate-fade-in-up">
+                  {serviceLinks.map((link, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        navigate(link.path);
+                        setIsServicesOpen(false);
+                      }}
+                      className={`w-full flex items-center gap-3 px-5 py-3.5 text-left text-sm transition-all duration-200 ${
+                        location.pathname === link.path
+                          ? 'text-white bg-white/10'
+                          : 'text-gray-400 hover:text-white hover:bg-white/5'
+                      } ${index === 0 ? 'border-b border-white/10 font-semibold' : ''}`}
+                    >
+                      {link.icon && <link.icon className="w-4 h-4 text-blue-400" />}
+                      {link.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <button
+              onClick={() => navigate('/tecnologie')}
+              className={navLinkClass(location.pathname === '/tecnologie')}
+            >
+              Tecnologie
+            </button>
+            <button
+              onClick={() => scrollToSection('about')}
+              className={navLinkClass(false)}
+            >
+              Cosa Facciamo
+            </button>
+            <button
+              onClick={() => navigate('/blog')}
+              className={navLinkClass(location.pathname.startsWith('/blog'))}
+            >
+              Blog
+            </button>
+            <button
+              onClick={() => navigate('/dove-siamo')}
+              className={navLinkClass(location.pathname === '/dove-siamo')}
+            >
+              Dove Siamo
+            </button>
+            <button
+              onClick={() => navigate('/contatti')}
+              className={navLinkClass(location.pathname === '/contatti')}
+            >
+              Contatti
+            </button>
+            <button
+              onClick={() => navigate('/assistenza-remota')}
+              className={navLinkClass(location.pathname === '/assistenza-remota')}
+            >
+              Assistenza Remota
+            </button>
+
+            {/* Separator */}
+            <div className="w-px h-5 bg-white/20" />
+
+            <Button
+              onClick={() => navigate('/login')}
+              variant="outline"
+              className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-3 xl:px-4 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap"
+            >
+              <LogIn className="w-3.5 h-3.5 mr-1" />
+              Area Clienti
+            </Button>
+            <Button
+              onClick={() => navigate('/admin/login')}
+              variant="outline"
+              className="glass-effect border-red-500/30 hover:border-red-500/50 text-red-500 hover:bg-red-500/10 px-3 xl:px-4 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap"
+            >
+              <Shield className="w-3.5 h-3.5 mr-1" />
+              Area Admin
+            </Button>
+          </nav>
+        </div>
 
         {/* Mobile: logo + hamburger */}
         <div className="flex lg:hidden items-center justify-between">
