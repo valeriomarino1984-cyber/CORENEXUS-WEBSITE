@@ -84,16 +84,18 @@ export default function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 lg:px-6 py-4">
-        <div className="flex items-center justify-between">
+        {/* Desktop: centered layout with logo on top and nav below */}
+        <div className="hidden lg:flex flex-col items-center gap-3">
+          {/* Logo - centered */}
           <div
-            className="text-lg lg:text-2xl font-bold gradient-text cursor-pointer whitespace-nowrap flex-shrink-0"
+            className="text-lg lg:text-2xl font-bold gradient-text cursor-pointer whitespace-nowrap"
             onClick={goHome}
           >
             CoreNexus Technology Solution
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-4 xl:gap-6 ml-6">
+          {/* Navigation - centered */}
+          <nav className="flex items-center gap-4 xl:gap-5 flex-wrap justify-center">
             <button
               onClick={goHome}
               className="text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider whitespace-nowrap"
@@ -199,10 +201,19 @@ export default function Header() {
               Area Admin
             </Button>
           </nav>
+        </div>
 
-          {/* Mobile Menu Button */}
+        {/* Mobile: logo + hamburger */}
+        <div className="flex lg:hidden items-center justify-between">
+          <div
+            className="text-lg font-bold gradient-text cursor-pointer whitespace-nowrap flex-shrink-0"
+            onClick={goHome}
+          >
+            CoreNexus Technology Solution
+          </div>
+
           <button
-            className="lg:hidden text-white p-2"
+            className="text-white p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
