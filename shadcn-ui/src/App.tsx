@@ -4,6 +4,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useLenis } from '@/hooks/useLenis';
+import ScrollToTop from './components/ScrollToTop';
 import CursorFollower from './components/CursorFollower';
 import Index from './pages/Index';
 import Servizi from './pages/Servizi';
@@ -51,6 +52,7 @@ const AppContent = () => {
   
   return (
     <>
+      <ScrollToTop />
       <CursorFollower />
       <CookieBanner />
       <WhatsAppWidget />
