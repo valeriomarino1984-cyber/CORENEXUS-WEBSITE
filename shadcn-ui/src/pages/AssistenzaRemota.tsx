@@ -27,7 +27,7 @@ export default function AssistenzaRemota() {
       <div className="min-h-screen bg-black">
         <Header />
 
-        {/* Hero Banner con immagine UltraViewer */}
+        {/* Hero Banner */}
         <section className="relative overflow-hidden pt-32 pb-20 px-6">
           <div className="absolute inset-0 bg-gradient-to-b from-cyan-950/30 via-black to-black" />
           <div className="absolute top-20 left-10 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl animate-float" />
@@ -35,17 +35,6 @@ export default function AssistenzaRemota() {
 
           <div className="max-w-6xl mx-auto relative z-10">
             <div className="text-center space-y-8 animate-fade-in-up">
-              {/* Banner Image */}
-              <div className="flex justify-center mb-8">
-                <div className="rounded-3xl overflow-hidden glass-effect border border-cyan-500/20 shadow-2xl shadow-cyan-500/10 max-w-md">
-                  <img
-                    src="/assets/ultraviewer-banner.png"
-                    alt="UltraViewer - Software per assistenza remota"
-                    className="w-full h-auto object-contain"
-                  />
-                </div>
-              </div>
-
               <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center mx-auto shadow-lg shadow-cyan-500/30">
                 <Monitor className="w-10 h-10 text-white" />
               </div>
