@@ -13,34 +13,50 @@ import { Badge } from '@/components/ui/badge';
 import { supabase, type Profile, type Company } from '@/lib/supabase';
 import { Loader2, ArrowLeft, Plus, Edit, Building2, Users, Shield, User, Trash2, AlertTriangle } from 'lucide-react';
 
+const SUPABASE_URL = 'https://lvbzopwygjlozoupdidg.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2YnpvcHd5Z2psb3pvdXBkaWRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI2MDM0MzYsImV4cCI6MjA3ODE3OTQzNn0.JHZAljzfggG1aNnUMdw89QhUkc-TGe3-a7A0xdH09O0';
+
 /**
- * Extract a meaningful error message from a Supabase Edge Function error.
- * FunctionsHttpError from supabase-js only returns a generic message, but the
- * actual error payload is available in `error.context.response` which we can
- * parse to surface the real backend error to the user.
+ * Call an edge function via direct fetch. This bypasses supabase-js's
+ * FunctionsHttpError wrapping which hides the real backend error body.
  */
-async function extractEdgeFunctionError(error: unknown): Promise<string> {
-  if (!error) return 'Errore sconosciuto';
+async function invokeEdgeFunction(functionName: string, body: unknown): Promise<{ data: unknown; status: number }> {
+  const { data: { session } } = await supabase.auth.getSession();
+  const token = session?.access_token;
 
-  const err = error as { context?: { response?: Response }; message?: string };
-
-  if (err.context?.response) {
-    try {
-      const cloned = err.context.response.clone();
-      const body = await cloned.json();
-      if (body?.error) return body.error;
-      if (body?.message) return body.message;
-    } catch {
-      try {
-        const text = await err.context.response.clone().text();
-        if (text) return text;
-      } catch {
-        // ignore
-      }
-    }
+  if (!token) {
+    throw new Error('Sessione scaduta, effettua il login');
   }
 
-  return err.message || 'Errore sconosciuto';
+  const response = await fetch(`${SUPABASE_URL}/functions/v1/${functionName}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+      'apikey': SUPABASE_ANON_KEY,
+    },
+    body: JSON.stringify(body),
+  });
+
+  let data: unknown = null;
+  const text = await response.text();
+  try {
+    data = text ? JSON.parse(text) : null;
+  } catch {
+    data = { error: text || `HTTP ${response.status}` };
+  }
+
+  if (!response.ok) {
+    const errMsg = (data as { error?: string; message?: string })?.error
+      || (data as { error?: string; message?: string })?.message
+      || `Errore HTTP ${response.status}`;
+    const err = new Error(errMsg) as Error & { status?: number; payload?: unknown };
+    err.status = response.status;
+    err.payload = data;
+    throw err;
+  }
+
+  return { data, status: response.status };
 }
 
 export default function AdminUserManagement() {
@@ -51,7 +67,7 @@ export default function AdminUserManagement() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [roleFilter, setRoleFilter] = useState('all');
-  
+
   const [showCreateUser, setShowCreateUser] = useState(false);
   const [creatingUser, setCreatingUser] = useState(false);
   const [newUser, setNewUser] = useState({
@@ -85,7 +101,6 @@ export default function AdminUserManagement() {
   const checkAuth = async () => {
     try {
       const { data: { user }, error: authError } = await supabase.auth.getUser();
-      
       if (authError || !user) {
         navigate('/admin/login');
         return;
@@ -98,7 +113,6 @@ export default function AdminUserManagement() {
         .single();
 
       if (adminError) throw adminError;
-
       if (adminData.role !== 'admin') {
         navigate('/admin/dashboard');
         return;
@@ -147,21 +161,15 @@ export default function AdminUserManagement() {
         throw new Error('Devi selezionare un\'azienda');
       }
 
-      const { data, error: fnError } = await supabase.functions.invoke('app_2b35a5a86e_create_user', {
-        body: {
-          email: newUser.email,
-          password: newUser.password,
-          company_id: newUser.company_id,
-          role: newUser.role,
-        },
+      const { data } = await invokeEdgeFunction('app_2b35a5a86e_create_user', {
+        email: newUser.email,
+        password: newUser.password,
+        company_id: newUser.company_id,
+        role: newUser.role,
       });
 
-      if (fnError) {
-        // Try to extract the real error from the response body
-        const realError = await extractEdgeFunctionError(fnError);
-        throw new Error(realError);
-      }
-      if (data?.error) throw new Error(data.error);
+      const responseData = data as { error?: string; success?: boolean };
+      if (responseData?.error) throw new Error(responseData.error);
 
       setSuccess(`Utente ${newUser.email} creato con successo come ${newUser.role}!`);
       setShowCreateUser(false);
@@ -178,7 +186,6 @@ export default function AdminUserManagement() {
 
   const handleUpdateRole = async () => {
     if (!editingUser) return;
-    
     setError('');
     setSuccess('');
     setUpdatingRole(true);
@@ -192,7 +199,7 @@ export default function AdminUserManagement() {
 
       if (updateError) throw updateError;
       if (!data || data.length === 0) {
-        throw new Error('Aggiornamento bloccato dalle policy RLS. Verifica i permessi dell\'amministratore.');
+        throw new Error('Aggiornamento bloccato dalle policy RLS.');
       }
 
       setSuccess('Ruolo aggiornato con successo!');
@@ -209,7 +216,6 @@ export default function AdminUserManagement() {
 
   const handleUpdateCompany = async () => {
     if (!editingUser) return;
-    
     setError('');
     setSuccess('');
     setUpdatingCompany(true);
@@ -223,7 +229,7 @@ export default function AdminUserManagement() {
 
       if (updateError) throw updateError;
       if (!data || data.length === 0) {
-        throw new Error('Aggiornamento bloccato dalle policy RLS. Verifica i permessi dell\'amministratore.');
+        throw new Error('Aggiornamento bloccato dalle policy RLS.');
       }
 
       setSuccess('Azienda aggiornata con successo!');
@@ -258,7 +264,7 @@ export default function AdminUserManagement() {
 
       if (insertError) {
         if (insertError.code === '42501' || insertError.message?.includes('row-level security')) {
-          throw new Error('Permessi insufficienti: le policy RLS bloccano la creazione. Esegui lo script fix_companies_rls.sql su Supabase.');
+          throw new Error('Permessi insufficienti: esegui lo script fix_companies_rls.sql su Supabase.');
         }
         if (insertError.code === '23505') {
           throw new Error('Esiste già un\'azienda con questo nome');
@@ -267,7 +273,7 @@ export default function AdminUserManagement() {
       }
 
       if (!data) {
-        throw new Error('Creazione azienda fallita: nessun dato restituito. Probabile problema RLS.');
+        throw new Error('Creazione azienda fallita.');
       }
 
       setSuccess(`Azienda "${data.name}" creata con successo!`);
@@ -277,7 +283,6 @@ export default function AdminUserManagement() {
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Errore nella creazione dell\'azienda';
       setError(errorMessage);
-      console.error('Create company error:', err);
     } finally {
       setCreatingCompany(false);
     }
@@ -285,7 +290,6 @@ export default function AdminUserManagement() {
 
   const handleDeleteCompany = async () => {
     if (!companyToDelete) return;
-
     setError('');
     setSuccess('');
     setDeletingCompany(true);
@@ -293,9 +297,7 @@ export default function AdminUserManagement() {
     try {
       const userCount = getUserCountForCompany(companyToDelete.id);
       if (userCount > 0) {
-        throw new Error(
-          `Impossibile eliminare: ci sono ${userCount} utenti associati a questa azienda. Riassegna o elimina prima gli utenti.`
-        );
+        throw new Error(`Impossibile eliminare: ${userCount} utenti associati.`);
       }
 
       const { data, error: deleteError } = await supabase
@@ -305,27 +307,26 @@ export default function AdminUserManagement() {
         .select();
 
       if (deleteError) {
-        if (deleteError.code === '42501' || deleteError.message?.includes('row-level security')) {
-          throw new Error('Permessi insufficienti: le policy RLS bloccano l\'eliminazione. Esegui lo script fix_companies_rls.sql su Supabase.');
+        if (deleteError.code === '42501') {
+          throw new Error('Permessi insufficienti: esegui fix_companies_rls.sql.');
         }
         if (deleteError.code === '23503') {
-          throw new Error('Impossibile eliminare: ci sono record correlati (utenti, ticket) che dipendono da questa azienda.');
+          throw new Error('Impossibile eliminare: ci sono record correlati.');
         }
         throw deleteError;
       }
 
       if (!data || data.length === 0) {
-        throw new Error('Eliminazione bloccata dalle policy RLS. Verifica i permessi dell\'amministratore.');
+        throw new Error('Eliminazione bloccata dalle policy RLS.');
       }
 
-      setSuccess(`Azienda "${companyToDelete.name}" eliminata con successo!`);
+      setSuccess(`Azienda "${companyToDelete.name}" eliminata!`);
       setShowDeleteCompany(false);
       setCompanyToDelete(null);
       await loadData();
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Errore nell\'eliminazione dell\'azienda';
+      const errorMessage = err instanceof Error ? err.message : 'Errore nell\'eliminazione';
       setError(errorMessage);
-      console.error('Delete company error:', err);
     } finally {
       setDeletingCompany(false);
     }
@@ -380,7 +381,7 @@ export default function AdminUserManagement() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {error && (
           <Alert variant="destructive" className="mb-6 bg-red-500/10 border-red-500/50">
-            <AlertDescription className="text-red-400">{error}</AlertDescription>
+            <AlertDescription className="text-red-400 whitespace-pre-wrap">{error}</AlertDescription>
           </Alert>
         )}
 
@@ -399,162 +400,81 @@ export default function AdminUserManagement() {
 
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
           <Card className="glass-effect border-white/10">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-gray-400">Totale Utenti</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center">
-                <Users className="h-8 w-8 text-blue-500 mr-3" />
-                <span className="text-3xl font-bold text-white">{stats.total}</span>
-              </div>
-            </CardContent>
+            <CardHeader className="pb-3"><CardTitle className="text-sm font-medium text-gray-400">Totale Utenti</CardTitle></CardHeader>
+            <CardContent><div className="flex items-center"><Users className="h-8 w-8 text-blue-500 mr-3" /><span className="text-3xl font-bold text-white">{stats.total}</span></div></CardContent>
           </Card>
-
           <Card className="glass-effect border-white/10">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-gray-400">Amministratori</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center">
-                <Shield className="h-8 w-8 text-red-500 mr-3" />
-                <span className="text-3xl font-bold text-white">{stats.admins}</span>
-              </div>
-            </CardContent>
+            <CardHeader className="pb-3"><CardTitle className="text-sm font-medium text-gray-400">Amministratori</CardTitle></CardHeader>
+            <CardContent><div className="flex items-center"><Shield className="h-8 w-8 text-red-500 mr-3" /><span className="text-3xl font-bold text-white">{stats.admins}</span></div></CardContent>
           </Card>
-
           <Card className="glass-effect border-white/10">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-gray-400">Agenti</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center">
-                <User className="h-8 w-8 text-orange-500 mr-3" />
-                <span className="text-3xl font-bold text-white">{stats.agents}</span>
-              </div>
-            </CardContent>
+            <CardHeader className="pb-3"><CardTitle className="text-sm font-medium text-gray-400">Agenti</CardTitle></CardHeader>
+            <CardContent><div className="flex items-center"><User className="h-8 w-8 text-orange-500 mr-3" /><span className="text-3xl font-bold text-white">{stats.agents}</span></div></CardContent>
           </Card>
-
           <Card className="glass-effect border-white/10">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-gray-400">Clienti</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center">
-                <Users className="h-8 w-8 text-blue-500 mr-3" />
-                <span className="text-3xl font-bold text-white">{stats.clients}</span>
-              </div>
-            </CardContent>
+            <CardHeader className="pb-3"><CardTitle className="text-sm font-medium text-gray-400">Clienti</CardTitle></CardHeader>
+            <CardContent><div className="flex items-center"><Users className="h-8 w-8 text-blue-500 mr-3" /><span className="text-3xl font-bold text-white">{stats.clients}</span></div></CardContent>
           </Card>
-
           <Card className="glass-effect border-white/10">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-gray-400">Aziende</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center">
-                <Building2 className="h-8 w-8 text-purple-500 mr-3" />
-                <span className="text-3xl font-bold text-white">{stats.companies}</span>
-              </div>
-            </CardContent>
+            <CardHeader className="pb-3"><CardTitle className="text-sm font-medium text-gray-400">Aziende</CardTitle></CardHeader>
+            <CardContent><div className="flex items-center"><Building2 className="h-8 w-8 text-purple-500 mr-3" /><span className="text-3xl font-bold text-white">{stats.companies}</span></div></CardContent>
           </Card>
         </div>
 
         <Tabs defaultValue="users" className="space-y-6">
           <TabsList className="glass-effect border-white/10">
-            <TabsTrigger value="users" className="data-[state=active]:bg-red-500/20">
-              <Users className="h-4 w-4 mr-2" />
-              Gestione Utenti
-            </TabsTrigger>
-            <TabsTrigger value="companies" className="data-[state=active]:bg-red-500/20">
-              <Building2 className="h-4 w-4 mr-2" />
-              Gestione Aziende
-            </TabsTrigger>
+            <TabsTrigger value="users" className="data-[state=active]:bg-red-500/20"><Users className="h-4 w-4 mr-2" />Gestione Utenti</TabsTrigger>
+            <TabsTrigger value="companies" className="data-[state=active]:bg-red-500/20"><Building2 className="h-4 w-4 mr-2" />Gestione Aziende</TabsTrigger>
           </TabsList>
 
           <TabsContent value="users" className="space-y-6">
             <div className="flex justify-between items-center">
-              <div className="flex gap-4">
-                <Select value={roleFilter} onValueChange={setRoleFilter}>
-                  <SelectTrigger className="w-[200px] glass-effect border-white/20 text-white">
-                    <SelectValue placeholder="Filtra per ruolo" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Tutti i ruoli</SelectItem>
-                    <SelectItem value="admin">Amministratori</SelectItem>
-                    <SelectItem value="agent">Agenti</SelectItem>
-                    <SelectItem value="client">Clienti</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+              <Select value={roleFilter} onValueChange={setRoleFilter}>
+                <SelectTrigger className="w-[200px] glass-effect border-white/20 text-white"><SelectValue placeholder="Filtra per ruolo" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Tutti i ruoli</SelectItem>
+                  <SelectItem value="admin">Amministratori</SelectItem>
+                  <SelectItem value="agent">Agenti</SelectItem>
+                  <SelectItem value="client">Clienti</SelectItem>
+                </SelectContent>
+              </Select>
 
               <Dialog open={showCreateUser} onOpenChange={setShowCreateUser}>
                 <DialogTrigger asChild>
                   <Button className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white">
-                    <Plus className="mr-2 h-4 w-4" />
-                    Nuovo Utente
+                    <Plus className="mr-2 h-4 w-4" />Nuovo Utente
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="glass-effect border-red-500/20 max-w-2xl">
                   <DialogHeader>
                     <DialogTitle className="text-white">Crea Nuovo Utente</DialogTitle>
-                    <DialogDescription className="text-gray-400">
-                      Inserisci i dettagli del nuovo utente
-                    </DialogDescription>
+                    <DialogDescription className="text-gray-400">Inserisci i dettagli del nuovo utente</DialogDescription>
                   </DialogHeader>
                   <form onSubmit={handleCreateUser} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="create_email" className="text-gray-300">Email *</Label>
-                        <Input
-                          id="create_email"
-                          type="email"
-                          value={newUser.email}
-                          onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-                          required
-                          className="glass-effect border-white/20 text-white"
-                        />
+                        <Input id="create_email" type="email" value={newUser.email} onChange={(e) => setNewUser({ ...newUser, email: e.target.value })} required className="glass-effect border-white/20 text-white" />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="create_password" className="text-gray-300">Password *</Label>
-                        <Input
-                          id="create_password"
-                          type="password"
-                          value={newUser.password}
-                          onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
-                          required
-                          minLength={6}
-                          className="glass-effect border-white/20 text-white"
-                        />
+                        <Input id="create_password" type="password" value={newUser.password} onChange={(e) => setNewUser({ ...newUser, password: e.target.value })} required minLength={6} className="glass-effect border-white/20 text-white" />
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="create_company" className="text-gray-300">Azienda *</Label>
-                        <Select
-                          value={newUser.company_id}
-                          onValueChange={(value) => setNewUser({ ...newUser, company_id: value })}
-                        >
-                          <SelectTrigger id="create_company" className="glass-effect border-white/20 text-white">
-                            <SelectValue placeholder="Seleziona azienda" />
-                          </SelectTrigger>
+                        <Select value={newUser.company_id} onValueChange={(value) => setNewUser({ ...newUser, company_id: value })}>
+                          <SelectTrigger id="create_company" className="glass-effect border-white/20 text-white"><SelectValue placeholder="Seleziona azienda" /></SelectTrigger>
                           <SelectContent>
-                            {companies.map((company) => (
-                              <SelectItem key={company.id} value={company.id}>
-                                {company.name}
-                              </SelectItem>
-                            ))}
+                            {companies.map((company) => (<SelectItem key={company.id} value={company.id}>{company.name}</SelectItem>))}
                           </SelectContent>
                         </Select>
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="create_role" className="text-gray-300">Ruolo *</Label>
-                        <Select
-                          value={newUser.role}
-                          onValueChange={(value) => setNewUser({ ...newUser, role: value })}
-                        >
-                          <SelectTrigger id="create_role" className="glass-effect border-white/20 text-white">
-                            <SelectValue />
-                          </SelectTrigger>
+                        <Select value={newUser.role} onValueChange={(value) => setNewUser({ ...newUser, role: value })}>
+                          <SelectTrigger id="create_role" className="glass-effect border-white/20 text-white"><SelectValue /></SelectTrigger>
                           <SelectContent>
                             <SelectItem value="client">Cliente</SelectItem>
                             <SelectItem value="agent">Agente</SelectItem>
@@ -564,27 +484,9 @@ export default function AdminUserManagement() {
                       </div>
                     </div>
                     <DialogFooter>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={() => setShowCreateUser(false)}
-                        className="border-white/20 text-white"
-                      >
-                        Annulla
-                      </Button>
-                      <Button
-                        type="submit"
-                        disabled={creatingUser}
-                        className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white"
-                      >
-                        {creatingUser ? (
-                          <>
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Creazione...
-                          </>
-                        ) : (
-                          'Crea Utente'
-                        )}
+                      <Button type="button" variant="outline" onClick={() => setShowCreateUser(false)} className="border-white/20 text-white">Annulla</Button>
+                      <Button type="submit" disabled={creatingUser} className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white">
+                        {creatingUser ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" />Creazione...</>) : ('Crea Utente')}
                       </Button>
                     </DialogFooter>
                   </form>
@@ -595,9 +497,7 @@ export default function AdminUserManagement() {
             <Card className="glass-effect border-white/10">
               <CardHeader>
                 <CardTitle className="text-white">Tutti gli Utenti</CardTitle>
-                <CardDescription className="text-gray-400">
-                  {filteredUsers.length} utenti trovati
-                </CardDescription>
+                <CardDescription className="text-gray-400">{filteredUsers.length} utenti trovati</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="rounded-md border border-white/10">
@@ -617,36 +517,14 @@ export default function AdminUserManagement() {
                           <TableCell className="text-white">{user.email}</TableCell>
                           <TableCell className="text-white">{user.companies?.name || 'N/A'}</TableCell>
                           <TableCell>{getRoleBadge(user.role)}</TableCell>
-                          <TableCell className="text-gray-400">
-                            {new Date(user.created_at).toLocaleDateString('it-IT')}
-                          </TableCell>
+                          <TableCell className="text-gray-400">{new Date(user.created_at).toLocaleDateString('it-IT')}</TableCell>
                           <TableCell className="text-right">
                             <div className="flex justify-end gap-2">
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => {
-                                  setEditingUser(user);
-                                  setNewRole(user.role);
-                                  setShowEditRole(true);
-                                }}
-                                className="border-orange-500/30 text-orange-400 hover:bg-orange-500/10"
-                              >
-                                <Edit className="h-3 w-3 mr-1" />
-                                Ruolo
+                              <Button size="sm" variant="outline" onClick={() => { setEditingUser(user); setNewRole(user.role); setShowEditRole(true); }} className="border-orange-500/30 text-orange-400 hover:bg-orange-500/10">
+                                <Edit className="h-3 w-3 mr-1" />Ruolo
                               </Button>
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => {
-                                  setEditingUser(user);
-                                  setNewCompanyId(user.company_id);
-                                  setShowEditCompany(true);
-                                }}
-                                className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10"
-                              >
-                                <Building2 className="h-3 w-3 mr-1" />
-                                Azienda
+                              <Button size="sm" variant="outline" onClick={() => { setEditingUser(user); setNewCompanyId(user.company_id); setShowEditCompany(true); }} className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10">
+                                <Building2 className="h-3 w-3 mr-1" />Azienda
                               </Button>
                             </div>
                           </TableCell>
@@ -664,51 +542,23 @@ export default function AdminUserManagement() {
               <Dialog open={showCreateCompany} onOpenChange={setShowCreateCompany}>
                 <DialogTrigger asChild>
                   <Button className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white">
-                    <Plus className="mr-2 h-4 w-4" />
-                    Nuova Azienda
+                    <Plus className="mr-2 h-4 w-4" />Nuova Azienda
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="glass-effect border-red-500/20">
                   <DialogHeader>
                     <DialogTitle className="text-white">Crea Nuova Azienda</DialogTitle>
-                    <DialogDescription className="text-gray-400">
-                      Inserisci il nome della nuova azienda
-                    </DialogDescription>
+                    <DialogDescription className="text-gray-400">Inserisci il nome della nuova azienda</DialogDescription>
                   </DialogHeader>
                   <form onSubmit={handleCreateCompany} className="space-y-4">
                     <div className="space-y-2">
                       <Label htmlFor="company_name_new" className="text-gray-300">Nome Azienda *</Label>
-                      <Input
-                        id="company_name_new"
-                        value={newCompanyName}
-                        onChange={(e) => setNewCompanyName(e.target.value)}
-                        required
-                        className="glass-effect border-white/20 text-white"
-                        placeholder="Es. Azienda SRL"
-                      />
+                      <Input id="company_name_new" value={newCompanyName} onChange={(e) => setNewCompanyName(e.target.value)} required className="glass-effect border-white/20 text-white" placeholder="Es. Azienda SRL" />
                     </div>
                     <DialogFooter>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={() => setShowCreateCompany(false)}
-                        className="border-white/20 text-white"
-                      >
-                        Annulla
-                      </Button>
-                      <Button
-                        type="submit"
-                        disabled={creatingCompany}
-                        className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white"
-                      >
-                        {creatingCompany ? (
-                          <>
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Creazione...
-                          </>
-                        ) : (
-                          'Crea Azienda'
-                        )}
+                      <Button type="button" variant="outline" onClick={() => setShowCreateCompany(false)} className="border-white/20 text-white">Annulla</Button>
+                      <Button type="submit" disabled={creatingCompany} className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white">
+                        {creatingCompany ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" />Creazione...</>) : ('Crea Azienda')}
                       </Button>
                     </DialogFooter>
                   </form>
@@ -719,9 +569,7 @@ export default function AdminUserManagement() {
             <Card className="glass-effect border-white/10">
               <CardHeader>
                 <CardTitle className="text-white">Tutte le Aziende</CardTitle>
-                <CardDescription className="text-gray-400">
-                  {companies.length} aziende registrate
-                </CardDescription>
+                <CardDescription className="text-gray-400">{companies.length} aziende registrate</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -741,16 +589,7 @@ export default function AdminUserManagement() {
                                 <span>{userCount} utenti</span>
                               </div>
                             </div>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => {
-                                setCompanyToDelete(company);
-                                setShowDeleteCompany(true);
-                              }}
-                              className="border-red-500/30 text-red-400 hover:bg-red-500/10 hover:text-red-300 shrink-0"
-                              title={userCount > 0 ? `Impossibile eliminare: ${userCount} utenti associati` : 'Elimina azienda'}
-                            >
+                            <Button size="sm" variant="outline" onClick={() => { setCompanyToDelete(company); setShowDeleteCompany(true); }} className="border-red-500/30 text-red-400 hover:bg-red-500/10 hover:text-red-300 shrink-0" title={userCount > 0 ? `Impossibile eliminare: ${userCount} utenti associati` : 'Elimina azienda'}>
                               <Trash2 className="h-4 w-4" />
                             </Button>
                           </div>
@@ -764,22 +603,17 @@ export default function AdminUserManagement() {
           </TabsContent>
         </Tabs>
 
-        {/* Edit Role Dialog */}
         <Dialog open={showEditRole} onOpenChange={setShowEditRole}>
           <DialogContent className="glass-effect border-orange-500/20">
             <DialogHeader>
               <DialogTitle className="text-white">Modifica Ruolo</DialogTitle>
-              <DialogDescription className="text-gray-400">
-                Cambia il ruolo di {editingUser?.email}
-              </DialogDescription>
+              <DialogDescription className="text-gray-400">Cambia il ruolo di {editingUser?.email}</DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-4">
               <div className="space-y-2">
                 <Label htmlFor="new_role" className="text-gray-300">Nuovo Ruolo</Label>
                 <Select value={newRole} onValueChange={setNewRole}>
-                  <SelectTrigger id="new_role" className="glass-effect border-white/20 text-white">
-                    <SelectValue />
-                  </SelectTrigger>
+                  <SelectTrigger id="new_role" className="glass-effect border-white/20 text-white"><SelectValue /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="client">Cliente</SelectItem>
                     <SelectItem value="agent">Agente</SelectItem>
@@ -789,94 +623,45 @@ export default function AdminUserManagement() {
               </div>
             </div>
             <DialogFooter>
-              <Button
-                variant="outline"
-                onClick={() => setShowEditRole(false)}
-                className="border-white/20 text-white"
-              >
-                Annulla
-              </Button>
-              <Button
-                onClick={handleUpdateRole}
-                disabled={updatingRole}
-                className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white"
-              >
-                {updatingRole ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Aggiornamento...
-                  </>
-                ) : (
-                  'Conferma'
-                )}
+              <Button variant="outline" onClick={() => setShowEditRole(false)} className="border-white/20 text-white">Annulla</Button>
+              <Button onClick={handleUpdateRole} disabled={updatingRole} className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white">
+                {updatingRole ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" />Aggiornamento...</>) : ('Conferma')}
               </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
 
-        {/* Edit Company Dialog */}
         <Dialog open={showEditCompany} onOpenChange={setShowEditCompany}>
           <DialogContent className="glass-effect border-blue-500/20">
             <DialogHeader>
               <DialogTitle className="text-white">Modifica Azienda</DialogTitle>
-              <DialogDescription className="text-gray-400">
-                Cambia l'azienda di {editingUser?.email}
-              </DialogDescription>
+              <DialogDescription className="text-gray-400">Cambia l'azienda di {editingUser?.email}</DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-4">
               <div className="space-y-2">
                 <Label htmlFor="new_company" className="text-gray-300">Nuova Azienda</Label>
                 <Select value={newCompanyId} onValueChange={setNewCompanyId}>
-                  <SelectTrigger id="new_company" className="glass-effect border-white/20 text-white">
-                    <SelectValue placeholder="Seleziona azienda" />
-                  </SelectTrigger>
+                  <SelectTrigger id="new_company" className="glass-effect border-white/20 text-white"><SelectValue placeholder="Seleziona azienda" /></SelectTrigger>
                   <SelectContent>
-                    {companies.map((company) => (
-                      <SelectItem key={company.id} value={company.id}>
-                        {company.name}
-                      </SelectItem>
-                    ))}
+                    {companies.map((company) => (<SelectItem key={company.id} value={company.id}>{company.name}</SelectItem>))}
                   </SelectContent>
                 </Select>
               </div>
             </div>
             <DialogFooter>
-              <Button
-                variant="outline"
-                onClick={() => setShowEditCompany(false)}
-                className="border-white/20 text-white"
-              >
-                Annulla
-              </Button>
-              <Button
-                onClick={handleUpdateCompany}
-                disabled={updatingCompany}
-                className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white"
-              >
-                {updatingCompany ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Aggiornamento...
-                  </>
-                ) : (
-                  'Conferma'
-                )}
+              <Button variant="outline" onClick={() => setShowEditCompany(false)} className="border-white/20 text-white">Annulla</Button>
+              <Button onClick={handleUpdateCompany} disabled={updatingCompany} className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white">
+                {updatingCompany ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" />Aggiornamento...</>) : ('Conferma')}
               </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
 
-        {/* Delete Company Dialog */}
         <Dialog open={showDeleteCompany} onOpenChange={setShowDeleteCompany}>
           <DialogContent className="glass-effect border-red-500/30">
             <DialogHeader>
-              <DialogTitle className="text-white flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-red-500" />
-                Conferma Eliminazione
-              </DialogTitle>
-              <DialogDescription className="text-gray-400">
-                Sei sicuro di voler eliminare l'azienda <span className="font-semibold text-white">"{companyToDelete?.name}"</span>?
-              </DialogDescription>
+              <DialogTitle className="text-white flex items-center gap-2"><AlertTriangle className="h-5 w-5 text-red-500" />Conferma Eliminazione</DialogTitle>
+              <DialogDescription className="text-gray-400">Sei sicuro di voler eliminare l'azienda <span className="font-semibold text-white">"{companyToDelete?.name}"</span>?</DialogDescription>
             </DialogHeader>
             <div className="py-4">
               {companyToDelete && (
@@ -884,48 +669,18 @@ export default function AdminUserManagement() {
                   <AlertTriangle className="h-4 w-4 text-red-400" />
                   <AlertDescription className="text-red-300 ml-2">
                     {getUserCountForCompany(companyToDelete.id) > 0 ? (
-                      <>
-                        <strong>Attenzione:</strong> Questa azienda ha{' '}
-                        <strong>{getUserCountForCompany(companyToDelete.id)} utenti associati</strong>.
-                        Devi prima riassegnarli o eliminarli.
-                      </>
+                      <><strong>Attenzione:</strong> Questa azienda ha <strong>{getUserCountForCompany(companyToDelete.id)} utenti associati</strong>. Devi prima riassegnarli o eliminarli.</>
                     ) : (
-                      <>
-                        Questa operazione è <strong>irreversibile</strong>. L'azienda verrà eliminata permanentemente.
-                      </>
+                      <>Questa operazione è <strong>irreversibile</strong>.</>
                     )}
                   </AlertDescription>
                 </Alert>
               )}
             </div>
             <DialogFooter>
-              <Button
-                variant="outline"
-                onClick={() => {
-                  setShowDeleteCompany(false);
-                  setCompanyToDelete(null);
-                }}
-                className="border-white/20 text-white"
-                disabled={deletingCompany}
-              >
-                Annulla
-              </Button>
-              <Button
-                onClick={handleDeleteCompany}
-                disabled={deletingCompany || (companyToDelete ? getUserCountForCompany(companyToDelete.id) > 0 : false)}
-                className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white"
-              >
-                {deletingCompany ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Eliminazione...
-                  </>
-                ) : (
-                  <>
-                    <Trash2 className="mr-2 h-4 w-4" />
-                    Elimina Definitivamente
-                  </>
-                )}
+              <Button variant="outline" onClick={() => { setShowDeleteCompany(false); setCompanyToDelete(null); }} className="border-white/20 text-white" disabled={deletingCompany}>Annulla</Button>
+              <Button onClick={handleDeleteCompany} disabled={deletingCompany || (companyToDelete ? getUserCountForCompany(companyToDelete.id) > 0 : false)} className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white">
+                {deletingCompany ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" />Eliminazione...</>) : (<><Trash2 className="mr-2 h-4 w-4" />Elimina Definitivamente</>)}
               </Button>
             </DialogFooter>
           </DialogContent>
