@@ -14,7 +14,6 @@ serve(async (req) => {
   try {
     console.log("=== Edge Function Started ===")
     
-    // Create admin client with service role key
     const supabaseAdmin = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
@@ -28,29 +27,31 @@ serve(async (req) => {
 
     console.log("Admin client created")
 
-    // Verify the calling user is authenticated
     const authHeader = req.headers.get("Authorization")
     if (!authHeader) {
-      throw new Error("Missing authorization header")
+      return new Response(
+        JSON.stringify({ error: "Missing authorization header" }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 401 }
+      )
     }
 
     const token = authHeader.replace("Bearer ", "")
-    console.log("Token extracted from header")
     
-    // Use admin client to verify user
     const { data: { user }, error: userError } = await supabaseAdmin.auth.getUser(token)
     
     if (userError || !user) {
       console.error("Auth error:", userError)
-      throw new Error("Unauthorized")
+      return new Response(
+        JSON.stringify({ error: "Unauthorized: " + (userError?.message || "invalid token") }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 401 }
+      )
     }
 
     console.log("Authenticated user:", user.id)
 
-    // Check if user is admin - try new schema first, then fallback to old
+    // Check if user is admin
     let isAdmin = false
 
-    // Try new profiles table
     const { data: profileData, error: profileError } = await supabaseAdmin
       .from("profiles")
       .select("role")
@@ -61,7 +62,6 @@ serve(async (req) => {
       isAdmin = profileData.role === "admin"
       console.log("Found in profiles table, role:", profileData.role)
     } else {
-      // Fallback to old clients table
       const { data: adminData, error: adminError } = await supabaseAdmin
         .from("app_2b35a5a86e_clients")
         .select("role")
@@ -75,15 +75,47 @@ serve(async (req) => {
     }
 
     if (!isAdmin) {
-      throw new Error("Only admins can create users")
+      return new Response(
+        JSON.stringify({ error: "Solo gli amministratori possono creare utenti" }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 403 }
+      )
     }
 
-    console.log("Admin verified, creating user...")
+    console.log("Admin verified, parsing body...")
 
-    // Get user data from request
     const body = await req.json()
-    const { email, password, role, company_id, company_name, contact_name, phone } = body
-    console.log("Creating user with email:", email, "role:", role)
+    const { email, password, role, company_id } = body
+
+    if (!email || !password) {
+      return new Response(
+        JSON.stringify({ error: "Email e password sono obbligatori" }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 400 }
+      )
+    }
+
+    if (!company_id) {
+      return new Response(
+        JSON.stringify({ error: "company_id è obbligatorio" }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 400 }
+      )
+    }
+
+    // Verify company exists
+    const { data: companyData, error: companyError } = await supabaseAdmin
+      .from("companies")
+      .select("id, name")
+      .eq("id", company_id)
+      .single()
+
+    if (companyError || !companyData) {
+      console.error("Company check error:", companyError)
+      return new Response(
+        JSON.stringify({ error: "Azienda non trovata. Seleziona un'azienda valida." }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 400 }
+      )
+    }
+
+    console.log("Creating user with email:", email, "role:", role, "company:", companyData.name)
 
     // Create user with admin privileges
     const { data: authData, error: createError } = await supabaseAdmin.auth.admin.createUser({
@@ -94,50 +126,44 @@ serve(async (req) => {
 
     if (createError) {
       console.error("Create user error:", createError)
-      throw createError
+      const msg = createError.message?.includes("already") || createError.message?.includes("registered")
+        ? "Esiste già un utente con questa email"
+        : `Errore creazione utente: ${createError.message}`
+      return new Response(
+        JSON.stringify({ error: msg }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 400 }
+      )
     }
     
     if (!authData.user) {
-      throw new Error("Failed to create user")
+      return new Response(
+        JSON.stringify({ error: "Creazione utente fallita senza errori specifici" }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 500 }
+      )
     }
 
     console.log("User created:", authData.user.id)
 
-    // Insert into new profiles table if company_id is provided
-    if (company_id) {
-      const { error: profileInsertError } = await supabaseAdmin
-        .from("profiles")
-        .insert({
-          id: authData.user.id,
-          email,
-          role: role || "client",
-          company_id,
-        })
+    // Use upsert to handle case where a trigger may have auto-created the profile row
+    const { error: profileInsertError } = await supabaseAdmin
+      .from("profiles")
+      .upsert({
+        id: authData.user.id,
+        email,
+        role: role || "client",
+        company_id,
+      }, { onConflict: "id" })
 
-      if (profileInsertError) {
-        console.error("Profile insert error:", profileInsertError)
-        throw profileInsertError
-      }
-      console.log("Profile record created successfully (new schema)")
-    } else {
-      // Fallback: insert into old clients table
-      const { error: clientError } = await supabaseAdmin
-        .from("app_2b35a5a86e_clients")
-        .insert({
-          user_id: authData.user.id,
-          company_name: company_name || "",
-          contact_name: contact_name || "",
-          email,
-          phone: phone || null,
-          role: role || "client",
-        })
-
-      if (clientError) {
-        console.error("Client insert error:", clientError)
-        throw clientError
-      }
-      console.log("Client record created successfully (old schema)")
+    if (profileInsertError) {
+      console.error("Profile upsert error:", profileInsertError)
+      // Rollback: delete the auth user so we don't leave orphan records
+      await supabaseAdmin.auth.admin.deleteUser(authData.user.id)
+      return new Response(
+        JSON.stringify({ error: `Errore creazione profilo: ${profileInsertError.message}` }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 500 }
+      )
     }
+    console.log("Profile record created successfully")
 
     return new Response(
       JSON.stringify({ success: true, user: authData.user }),
@@ -148,11 +174,12 @@ serve(async (req) => {
     )
   } catch (error) {
     console.error("Edge function error:", error)
+    const message = error instanceof Error ? error.message : String(error)
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: `Errore interno: ${message}` }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 400,
+        status: 500,
       }
     )
   }

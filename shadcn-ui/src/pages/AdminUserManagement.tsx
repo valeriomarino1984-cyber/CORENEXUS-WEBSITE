@@ -13,6 +13,36 @@ import { Badge } from '@/components/ui/badge';
 import { supabase, type Profile, type Company } from '@/lib/supabase';
 import { Loader2, ArrowLeft, Plus, Edit, Building2, Users, Shield, User, Trash2, AlertTriangle } from 'lucide-react';
 
+/**
+ * Extract a meaningful error message from a Supabase Edge Function error.
+ * FunctionsHttpError from supabase-js only returns a generic message, but the
+ * actual error payload is available in `error.context.response` which we can
+ * parse to surface the real backend error to the user.
+ */
+async function extractEdgeFunctionError(error: unknown): Promise<string> {
+  if (!error) return 'Errore sconosciuto';
+
+  const err = error as { context?: { response?: Response }; message?: string };
+
+  if (err.context?.response) {
+    try {
+      const cloned = err.context.response.clone();
+      const body = await cloned.json();
+      if (body?.error) return body.error;
+      if (body?.message) return body.message;
+    } catch {
+      try {
+        const text = await err.context.response.clone().text();
+        if (text) return text;
+      } catch {
+        // ignore
+      }
+    }
+  }
+
+  return err.message || 'Errore sconosciuto';
+}
+
 export default function AdminUserManagement() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -22,7 +52,6 @@ export default function AdminUserManagement() {
   const [success, setSuccess] = useState('');
   const [roleFilter, setRoleFilter] = useState('all');
   
-  // Create User Dialog
   const [showCreateUser, setShowCreateUser] = useState(false);
   const [creatingUser, setCreatingUser] = useState(false);
   const [newUser, setNewUser] = useState({
@@ -32,23 +61,19 @@ export default function AdminUserManagement() {
     role: 'client',
   });
 
-  // Edit Role Dialog
   const [showEditRole, setShowEditRole] = useState(false);
   const [editingUser, setEditingUser] = useState<Profile | null>(null);
   const [newRole, setNewRole] = useState('');
   const [updatingRole, setUpdatingRole] = useState(false);
 
-  // Edit Company Dialog
   const [showEditCompany, setShowEditCompany] = useState(false);
   const [newCompanyId, setNewCompanyId] = useState('');
   const [updatingCompany, setUpdatingCompany] = useState(false);
 
-  // Create Company Dialog
   const [showCreateCompany, setShowCreateCompany] = useState(false);
   const [creatingCompany, setCreatingCompany] = useState(false);
   const [newCompanyName, setNewCompanyName] = useState('');
 
-  // Delete Company Dialog
   const [showDeleteCompany, setShowDeleteCompany] = useState(false);
   const [deletingCompany, setDeletingCompany] = useState(false);
   const [companyToDelete, setCompanyToDelete] = useState<Company | null>(null);
@@ -118,7 +143,11 @@ export default function AdminUserManagement() {
     setCreatingUser(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('app_2b35a5a86e_create_user', {
+      if (!newUser.company_id) {
+        throw new Error('Devi selezionare un\'azienda');
+      }
+
+      const { data, error: fnError } = await supabase.functions.invoke('app_2b35a5a86e_create_user', {
         body: {
           email: newUser.email,
           password: newUser.password,
@@ -127,16 +156,21 @@ export default function AdminUserManagement() {
         },
       });
 
-      if (error) throw error;
+      if (fnError) {
+        // Try to extract the real error from the response body
+        const realError = await extractEdgeFunctionError(fnError);
+        throw new Error(realError);
+      }
       if (data?.error) throw new Error(data.error);
 
-      setSuccess('Utente creato con successo!');
+      setSuccess(`Utente ${newUser.email} creato con successo come ${newUser.role}!`);
       setShowCreateUser(false);
       setNewUser({ email: '', password: '', company_id: '', role: 'client' });
       await loadData();
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Errore nella creazione dell\'utente';
       setError(errorMessage);
+      console.error('Create user error:', err);
     } finally {
       setCreatingUser(false);
     }
@@ -257,7 +291,6 @@ export default function AdminUserManagement() {
     setDeletingCompany(true);
 
     try {
-      // Check if company has associated users
       const userCount = getUserCountForCompany(companyToDelete.id);
       if (userCount > 0) {
         throw new Error(
