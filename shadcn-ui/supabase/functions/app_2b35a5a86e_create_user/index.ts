@@ -4,6 +4,14 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3"
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+}
+
+function json(body: unknown, status = 200) {
+  return new Response(JSON.stringify(body), {
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
+    status,
+  })
 }
 
 serve(async (req) => {
@@ -13,91 +21,102 @@ serve(async (req) => {
 
   try {
     console.log("=== Edge Function Started ===")
-    
-    const supabaseAdmin = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
-      {
-        auth: {
-          autoRefreshToken: false,
-          persistSession: false
-        }
-      }
-    )
 
-    console.log("Admin client created")
+    const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? ""
+    const SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+
+    if (!SUPABASE_URL || !SERVICE_KEY) {
+      return json({
+        error: "Configurazione server mancante: SUPABASE_URL o SUPABASE_SERVICE_ROLE_KEY non settati",
+      }, 500)
+    }
+
+    const supabaseAdmin = createClient(SUPABASE_URL, SERVICE_KEY, {
+      auth: { autoRefreshToken: false, persistSession: false },
+    })
 
     const authHeader = req.headers.get("Authorization")
     if (!authHeader) {
-      return new Response(
-        JSON.stringify({ error: "Missing authorization header" }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 401 }
-      )
+      return json({ error: "Header Authorization mancante" }, 401)
     }
 
-    const token = authHeader.replace("Bearer ", "")
-    
-    const { data: { user }, error: userError } = await supabaseAdmin.auth.getUser(token)
-    
-    if (userError || !user) {
+    const token = authHeader.replace("Bearer ", "").trim()
+    if (!token) {
+      return json({ error: "Token di autenticazione vuoto" }, 401)
+    }
+
+    // Verify the caller
+    const { data: userRes, error: userError } = await supabaseAdmin.auth.getUser(token)
+    if (userError || !userRes?.user) {
       console.error("Auth error:", userError)
-      return new Response(
-        JSON.stringify({ error: "Unauthorized: " + (userError?.message || "invalid token") }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 401 }
-      )
+      return json({ error: `Non autorizzato: ${userError?.message || "token non valido"}` }, 401)
     }
 
-    console.log("Authenticated user:", user.id)
+    const caller = userRes.user
+    console.log("Authenticated user:", caller.id, caller.email)
 
-    // Check if user is admin
+    // ============================================================
+    // Verify the caller is admin - use maybeSingle() to avoid throw
+    // ============================================================
     let isAdmin = false
+    let adminCheckDetail = ""
 
     const { data: profileData, error: profileError } = await supabaseAdmin
       .from("profiles")
-      .select("role")
-      .eq("id", user.id)
-      .single()
+      .select("role, email")
+      .eq("id", caller.id)
+      .maybeSingle()
 
-    if (!profileError && profileData) {
+    if (profileError) {
+      adminCheckDetail = `profiles query error: ${profileError.message} (code: ${profileError.code})`
+      console.error(adminCheckDetail)
+    } else if (profileData) {
+      console.log("Found in profiles table:", profileData)
       isAdmin = profileData.role === "admin"
-      console.log("Found in profiles table, role:", profileData.role)
+      adminCheckDetail = `profiles.role = "${profileData.role}"`
     } else {
-      const { data: adminData, error: adminError } = await supabaseAdmin
+      adminCheckDetail = "Nessun record trovato nella tabella profiles per questo utente"
+      console.log(adminCheckDetail)
+
+      // Fallback: legacy clients table
+      const { data: legacy, error: legacyErr } = await supabaseAdmin
         .from("app_2b35a5a86e_clients")
         .select("role")
-        .eq("user_id", user.id)
-        .single()
+        .eq("user_id", caller.id)
+        .maybeSingle()
 
-      if (!adminError && adminData) {
-        isAdmin = adminData.role === "admin"
-        console.log("Found in clients table, role:", adminData.role)
+      if (!legacyErr && legacy) {
+        isAdmin = legacy.role === "admin"
+        adminCheckDetail += ` | legacy.role = "${legacy.role}"`
       }
     }
 
     if (!isAdmin) {
-      return new Response(
-        JSON.stringify({ error: "Solo gli amministratori possono creare utenti" }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 403 }
-      )
+      console.error("Admin check failed:", adminCheckDetail)
+      return json({
+        error: `Permessi insufficienti. Solo gli amministratori possono creare utenti. Dettaglio: ${adminCheckDetail}. Email chiamante: ${caller.email}`,
+      }, 403)
     }
 
-    console.log("Admin verified, parsing body...")
+    console.log("Admin verified ✓")
 
-    const body = await req.json()
+    // ============================================================
+    // Parse body
+    // ============================================================
+    let body: { email?: string; password?: string; role?: string; company_id?: string }
+    try {
+      body = await req.json()
+    } catch (e) {
+      return json({ error: `Body JSON non valido: ${e instanceof Error ? e.message : String(e)}` }, 400)
+    }
+
     const { email, password, role, company_id } = body
 
     if (!email || !password) {
-      return new Response(
-        JSON.stringify({ error: "Email e password sono obbligatori" }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 400 }
-      )
+      return json({ error: "Email e password sono obbligatori" }, 400)
     }
-
     if (!company_id) {
-      return new Response(
-        JSON.stringify({ error: "company_id è obbligatorio" }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 400 }
-      )
+      return json({ error: "company_id è obbligatorio" }, 400)
     }
 
     // Verify company exists
@@ -105,19 +124,18 @@ serve(async (req) => {
       .from("companies")
       .select("id, name")
       .eq("id", company_id)
-      .single()
+      .maybeSingle()
 
-    if (companyError || !companyData) {
-      console.error("Company check error:", companyError)
-      return new Response(
-        JSON.stringify({ error: "Azienda non trovata. Seleziona un'azienda valida." }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 400 }
-      )
+    if (companyError) {
+      return json({ error: `Errore verifica azienda: ${companyError.message}` }, 500)
+    }
+    if (!companyData) {
+      return json({ error: "Azienda non trovata. Seleziona un'azienda valida." }, 400)
     }
 
-    console.log("Creating user with email:", email, "role:", role, "company:", companyData.name)
+    console.log(`Creating user ${email} as ${role || "client"} in company ${companyData.name}`)
 
-    // Create user with admin privileges
+    // Create the user
     const { data: authData, error: createError } = await supabaseAdmin.auth.admin.createUser({
       email,
       password,
@@ -125,62 +143,55 @@ serve(async (req) => {
     })
 
     if (createError) {
-      console.error("Create user error:", createError)
-      const msg = createError.message?.includes("already") || createError.message?.includes("registered")
+      console.error("createUser error:", createError)
+      const m = createError.message || ""
+      const friendly = m.toLowerCase().includes("already") || m.toLowerCase().includes("registered") || m.toLowerCase().includes("exists")
         ? "Esiste già un utente con questa email"
-        : `Errore creazione utente: ${createError.message}`
-      return new Response(
-        JSON.stringify({ error: msg }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 400 }
-      )
-    }
-    
-    if (!authData.user) {
-      return new Response(
-        JSON.stringify({ error: "Creazione utente fallita senza errori specifici" }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 500 }
-      )
+        : `Errore creazione utente: ${m}`
+      return json({ error: friendly }, 400)
     }
 
-    console.log("User created:", authData.user.id)
+    if (!authData?.user) {
+      return json({ error: "Creazione utente fallita senza errore esplicito" }, 500)
+    }
 
-    // Use upsert to handle case where a trigger may have auto-created the profile row
-    const { error: profileInsertError } = await supabaseAdmin
+    console.log("Auth user created:", authData.user.id)
+
+    // Upsert profile (trigger may have already inserted one)
+    const { error: profileUpsertError } = await supabaseAdmin
       .from("profiles")
-      .upsert({
-        id: authData.user.id,
-        email,
-        role: role || "client",
-        company_id,
-      }, { onConflict: "id" })
-
-    if (profileInsertError) {
-      console.error("Profile upsert error:", profileInsertError)
-      // Rollback: delete the auth user so we don't leave orphan records
-      await supabaseAdmin.auth.admin.deleteUser(authData.user.id)
-      return new Response(
-        JSON.stringify({ error: `Errore creazione profilo: ${profileInsertError.message}` }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 500 }
+      .upsert(
+        {
+          id: authData.user.id,
+          email,
+          role: role || "client",
+          company_id,
+        },
+        { onConflict: "id" }
       )
-    }
-    console.log("Profile record created successfully")
 
-    return new Response(
-      JSON.stringify({ success: true, user: authData.user }),
-      {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 200,
-      }
-    )
+    if (profileUpsertError) {
+      console.error("Profile upsert error:", profileUpsertError)
+      await supabaseAdmin.auth.admin.deleteUser(authData.user.id)
+      return json({
+        error: `Errore creazione profilo: ${profileUpsertError.message} (code: ${profileUpsertError.code}). L'utente auth è stato rimosso.`,
+      }, 500)
+    }
+
+    console.log("Profile upserted successfully ✓")
+
+    return json({
+      success: true,
+      user: {
+        id: authData.user.id,
+        email: authData.user.email,
+        role: role || "client",
+        company: companyData.name,
+      },
+    }, 200)
   } catch (error) {
-    console.error("Edge function error:", error)
-    const message = error instanceof Error ? error.message : String(error)
-    return new Response(
-      JSON.stringify({ error: `Errore interno: ${message}` }),
-      {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 500,
-      }
-    )
+    console.error("Unhandled edge function error:", error)
+    const message = error instanceof Error ? `${error.message}\n${error.stack || ""}` : String(error)
+    return json({ error: `Errore interno server: ${message}` }, 500)
   }
 })
