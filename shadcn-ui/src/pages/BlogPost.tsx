@@ -66,7 +66,7 @@ const blogPostsData: Record<string, BlogPostData> = {
     category: 'Intelligenza Artificiale',
     date: '1 Aprile 2026',
     readTime: '8 min',
-    image: 'https://images.unsplash.com/photo-1531746790095-e5a6e6b9e6f4?w=800&q=80',
+    image: 'https://mgx-backend-cdn.metadl.com/generate/images/720946/2026-04-20/m6vge7iaafiq/blog-chatbot-ai.png',
     tags: ['Chatbot', 'AI', 'Customer Service', 'NLP', 'Automazione'],
     sections: [
       {
@@ -138,7 +138,7 @@ const blogPostsData: Record<string, BlogPostData> = {
     category: 'Compliance',
     date: '18 Marzo 2026',
     readTime: '7 min',
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f2?w=800&q=80',
+    image: 'https://mgx-backend-cdn.metadl.com/generate/images/720946/2026-04-20/m6vg2vyaafha/blog-gdpr-privacy.png',
     tags: ['GDPR', 'Privacy', 'Protezione Dati', 'Compliance'],
     sections: [
       {
