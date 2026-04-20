@@ -11,7 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { supabase, type Profile, type Company } from '@/lib/supabase';
-import { Loader2, ArrowLeft, Plus, Edit, Building2, Users, Shield, User } from 'lucide-react';
+import { Loader2, ArrowLeft, Plus, Edit, Building2, Users, Shield, User, Trash2, AlertTriangle } from 'lucide-react';
 
 export default function AdminUserManagement() {
   const navigate = useNavigate();
@@ -47,6 +47,11 @@ export default function AdminUserManagement() {
   const [showCreateCompany, setShowCreateCompany] = useState(false);
   const [creatingCompany, setCreatingCompany] = useState(false);
   const [newCompanyName, setNewCompanyName] = useState('');
+
+  // Delete Company Dialog
+  const [showDeleteCompany, setShowDeleteCompany] = useState(false);
+  const [deletingCompany, setDeletingCompany] = useState(false);
+  const [companyToDelete, setCompanyToDelete] = useState<Company | null>(null);
 
   useEffect(() => {
     checkAuth();
@@ -85,7 +90,6 @@ export default function AdminUserManagement() {
 
   const loadData = async () => {
     try {
-      // Load all users with company info
       const { data: usersData, error: usersError } = await supabase
         .from('profiles')
         .select('*, companies(*)')
@@ -94,7 +98,6 @@ export default function AdminUserManagement() {
       if (usersError) throw usersError;
       setUsers(usersData || []);
 
-      // Load companies
       const { data: companiesData, error: companiesError } = await supabase
         .from('companies')
         .select('*')
@@ -213,7 +216,6 @@ export default function AdminUserManagement() {
         throw new Error('Il nome azienda non può essere vuoto');
       }
 
-      // Use .select() to force returning the inserted row so RLS silent failures surface as errors
       const { data, error: insertError } = await supabase
         .from('companies')
         .insert({ name: trimmedName })
@@ -221,7 +223,6 @@ export default function AdminUserManagement() {
         .single();
 
       if (insertError) {
-        // Detailed error message based on error code
         if (insertError.code === '42501' || insertError.message?.includes('row-level security')) {
           throw new Error('Permessi insufficienti: le policy RLS bloccano la creazione. Esegui lo script fix_companies_rls.sql su Supabase.');
         }
@@ -232,7 +233,7 @@ export default function AdminUserManagement() {
       }
 
       if (!data) {
-        throw new Error('Creazione azienda fallita: nessun dato restituito. Probabile problema RLS. Esegui lo script fix_companies_rls.sql.');
+        throw new Error('Creazione azienda fallita: nessun dato restituito. Probabile problema RLS.');
       }
 
       setSuccess(`Azienda "${data.name}" creata con successo!`);
@@ -245,6 +246,55 @@ export default function AdminUserManagement() {
       console.error('Create company error:', err);
     } finally {
       setCreatingCompany(false);
+    }
+  };
+
+  const handleDeleteCompany = async () => {
+    if (!companyToDelete) return;
+
+    setError('');
+    setSuccess('');
+    setDeletingCompany(true);
+
+    try {
+      // Check if company has associated users
+      const userCount = getUserCountForCompany(companyToDelete.id);
+      if (userCount > 0) {
+        throw new Error(
+          `Impossibile eliminare: ci sono ${userCount} utenti associati a questa azienda. Riassegna o elimina prima gli utenti.`
+        );
+      }
+
+      const { data, error: deleteError } = await supabase
+        .from('companies')
+        .delete()
+        .eq('id', companyToDelete.id)
+        .select();
+
+      if (deleteError) {
+        if (deleteError.code === '42501' || deleteError.message?.includes('row-level security')) {
+          throw new Error('Permessi insufficienti: le policy RLS bloccano l\'eliminazione. Esegui lo script fix_companies_rls.sql su Supabase.');
+        }
+        if (deleteError.code === '23503') {
+          throw new Error('Impossibile eliminare: ci sono record correlati (utenti, ticket) che dipendono da questa azienda.');
+        }
+        throw deleteError;
+      }
+
+      if (!data || data.length === 0) {
+        throw new Error('Eliminazione bloccata dalle policy RLS. Verifica i permessi dell\'amministratore.');
+      }
+
+      setSuccess(`Azienda "${companyToDelete.name}" eliminata con successo!`);
+      setShowDeleteCompany(false);
+      setCompanyToDelete(null);
+      await loadData();
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Errore nell\'eliminazione dell\'azienda';
+      setError(errorMessage);
+      console.error('Delete company error:', err);
+    } finally {
+      setDeletingCompany(false);
     }
   };
 
@@ -307,7 +357,6 @@ export default function AdminUserManagement() {
           </Alert>
         )}
 
-        {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">
             Gestione Completa
@@ -315,7 +364,6 @@ export default function AdminUserManagement() {
           <p className="text-gray-400 mt-2">Gestisci utenti, ruoli e aziende</p>
         </div>
 
-        {/* Statistics Cards */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
           <Card className="glass-effect border-white/10">
             <CardHeader className="pb-3">
@@ -378,7 +426,6 @@ export default function AdminUserManagement() {
           </Card>
         </div>
 
-        {/* Tabs */}
         <Tabs defaultValue="users" className="space-y-6">
           <TabsList className="glass-effect border-white/10">
             <TabsTrigger value="users" className="data-[state=active]:bg-red-500/20">
@@ -391,7 +438,6 @@ export default function AdminUserManagement() {
             </TabsTrigger>
           </TabsList>
 
-          {/* Users Tab */}
           <TabsContent value="users" className="space-y-6">
             <div className="flex justify-between items-center">
               <div className="flex gap-4">
@@ -580,7 +626,6 @@ export default function AdminUserManagement() {
             </Card>
           </TabsContent>
 
-          {/* Companies Tab */}
           <TabsContent value="companies" className="space-y-6">
             <div className="flex justify-end">
               <Dialog open={showCreateCompany} onOpenChange={setShowCreateCompany}>
@@ -647,24 +692,39 @@ export default function AdminUserManagement() {
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {companies.map((company) => (
-                    <Card key={company.id} className="glass-effect border-white/10 hover:border-red-500/30 transition-all">
-                      <CardContent className="pt-6">
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-2">
-                              <Building2 className="h-5 w-5 text-purple-500" />
-                              <h3 className="font-semibold text-white">{company.name}</h3>
+                  {companies.map((company) => {
+                    const userCount = getUserCountForCompany(company.id);
+                    return (
+                      <Card key={company.id} className="glass-effect border-white/10 hover:border-red-500/30 transition-all">
+                        <CardContent className="pt-6">
+                          <div className="flex items-start justify-between gap-2">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 mb-2">
+                                <Building2 className="h-5 w-5 text-purple-500 shrink-0" />
+                                <h3 className="font-semibold text-white truncate">{company.name}</h3>
+                              </div>
+                              <div className="flex items-center gap-2 text-sm text-gray-400">
+                                <Users className="h-4 w-4" />
+                                <span>{userCount} utenti</span>
+                              </div>
                             </div>
-                            <div className="flex items-center gap-2 text-sm text-gray-400">
-                              <Users className="h-4 w-4" />
-                              <span>{getUserCountForCompany(company.id)} utenti</span>
-                            </div>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => {
+                                setCompanyToDelete(company);
+                                setShowDeleteCompany(true);
+                              }}
+                              className="border-red-500/30 text-red-400 hover:bg-red-500/10 hover:text-red-300 shrink-0"
+                              title={userCount > 0 ? `Impossibile eliminare: ${userCount} utenti associati` : 'Elimina azienda'}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
                           </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>
@@ -767,6 +827,71 @@ export default function AdminUserManagement() {
                   </>
                 ) : (
                   'Conferma'
+                )}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        {/* Delete Company Dialog */}
+        <Dialog open={showDeleteCompany} onOpenChange={setShowDeleteCompany}>
+          <DialogContent className="glass-effect border-red-500/30">
+            <DialogHeader>
+              <DialogTitle className="text-white flex items-center gap-2">
+                <AlertTriangle className="h-5 w-5 text-red-500" />
+                Conferma Eliminazione
+              </DialogTitle>
+              <DialogDescription className="text-gray-400">
+                Sei sicuro di voler eliminare l'azienda <span className="font-semibold text-white">"{companyToDelete?.name}"</span>?
+              </DialogDescription>
+            </DialogHeader>
+            <div className="py-4">
+              {companyToDelete && (
+                <Alert className="bg-red-500/10 border-red-500/30">
+                  <AlertTriangle className="h-4 w-4 text-red-400" />
+                  <AlertDescription className="text-red-300 ml-2">
+                    {getUserCountForCompany(companyToDelete.id) > 0 ? (
+                      <>
+                        <strong>Attenzione:</strong> Questa azienda ha{' '}
+                        <strong>{getUserCountForCompany(companyToDelete.id)} utenti associati</strong>.
+                        Devi prima riassegnarli o eliminarli.
+                      </>
+                    ) : (
+                      <>
+                        Questa operazione è <strong>irreversibile</strong>. L'azienda verrà eliminata permanentemente.
+                      </>
+                    )}
+                  </AlertDescription>
+                </Alert>
+              )}
+            </div>
+            <DialogFooter>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setShowDeleteCompany(false);
+                  setCompanyToDelete(null);
+                }}
+                className="border-white/20 text-white"
+                disabled={deletingCompany}
+              >
+                Annulla
+              </Button>
+              <Button
+                onClick={handleDeleteCompany}
+                disabled={deletingCompany || (companyToDelete ? getUserCountForCompany(companyToDelete.id) > 0 : false)}
+                className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white"
+              >
+                {deletingCompany ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Eliminazione...
+                  </>
+                ) : (
+                  <>
+                    <Trash2 className="mr-2 h-4 w-4" />
+                    Elimina Definitivamente
+                  </>
                 )}
               </Button>
             </DialogFooter>
