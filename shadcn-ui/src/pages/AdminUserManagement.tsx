@@ -125,7 +125,7 @@ export default function AdminUserManagement() {
       });
 
       if (error) throw error;
-      if (data.error) throw new Error(data.error);
+      if (data?.error) throw new Error(data.error);
 
       setSuccess('Utente creato con successo!');
       setShowCreateUser(false);
@@ -147,12 +147,16 @@ export default function AdminUserManagement() {
     setUpdatingRole(true);
 
     try {
-      const { error: updateError } = await supabase
+      const { data, error: updateError } = await supabase
         .from('profiles')
         .update({ role: newRole })
-        .eq('id', editingUser.id);
+        .eq('id', editingUser.id)
+        .select();
 
       if (updateError) throw updateError;
+      if (!data || data.length === 0) {
+        throw new Error('Aggiornamento bloccato dalle policy RLS. Verifica i permessi dell\'amministratore.');
+      }
 
       setSuccess('Ruolo aggiornato con successo!');
       setShowEditRole(false);
@@ -174,12 +178,16 @@ export default function AdminUserManagement() {
     setUpdatingCompany(true);
 
     try {
-      const { error: updateError } = await supabase
+      const { data, error: updateError } = await supabase
         .from('profiles')
         .update({ company_id: newCompanyId })
-        .eq('id', editingUser.id);
+        .eq('id', editingUser.id)
+        .select();
 
       if (updateError) throw updateError;
+      if (!data || data.length === 0) {
+        throw new Error('Aggiornamento bloccato dalle policy RLS. Verifica i permessi dell\'amministratore.');
+      }
 
       setSuccess('Azienda aggiornata con successo!');
       setShowEditCompany(false);
@@ -200,19 +208,41 @@ export default function AdminUserManagement() {
     setCreatingCompany(true);
 
     try {
-      const { error: insertError } = await supabase
+      const trimmedName = newCompanyName.trim();
+      if (!trimmedName) {
+        throw new Error('Il nome azienda non può essere vuoto');
+      }
+
+      // Use .select() to force returning the inserted row so RLS silent failures surface as errors
+      const { data, error: insertError } = await supabase
         .from('companies')
-        .insert({ name: newCompanyName });
+        .insert({ name: trimmedName })
+        .select()
+        .single();
 
-      if (insertError) throw insertError;
+      if (insertError) {
+        // Detailed error message based on error code
+        if (insertError.code === '42501' || insertError.message?.includes('row-level security')) {
+          throw new Error('Permessi insufficienti: le policy RLS bloccano la creazione. Esegui lo script fix_companies_rls.sql su Supabase.');
+        }
+        if (insertError.code === '23505') {
+          throw new Error('Esiste già un\'azienda con questo nome');
+        }
+        throw insertError;
+      }
 
-      setSuccess('Azienda creata con successo!');
+      if (!data) {
+        throw new Error('Creazione azienda fallita: nessun dato restituito. Probabile problema RLS. Esegui lo script fix_companies_rls.sql.');
+      }
+
+      setSuccess(`Azienda "${data.name}" creata con successo!`);
       setShowCreateCompany(false);
       setNewCompanyName('');
       await loadData();
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Errore nella creazione dell\'azienda';
       setError(errorMessage);
+      console.error('Create company error:', err);
     } finally {
       setCreatingCompany(false);
     }
