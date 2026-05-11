@@ -31,6 +31,8 @@ import {
   TrendingUp,
   Clock,
   Zap,
+  Ban,
+  LayoutDashboard,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { breadcrumbSchema } from '@/utils/seoSchemas';
@@ -55,7 +57,7 @@ export default function SicurezzaInformatica() {
       {
         "@type": "Service",
         "name": "Sicurezza Informatica Aziendale",
-        "description": "Servizi di cybersecurity per aziende a Roma: firewall, monitoraggio SIEM Wazuh, Zabbix, vulnerability assessment, backup, compliance GDPR",
+        "description": "Servizi di cybersecurity per aziende a Roma: firewall, monitoraggio SIEM Wazuh, Zabbix, vulnerability assessment, backup, compliance GDPR, Active Response e dashboard personalizzate",
         "provider": {
           "@type": "Organization",
           "name": "CoreNexus Technology Solution",
@@ -74,8 +76,8 @@ export default function SicurezzaInformatica() {
     'Proteggiamo la tua azienda da minacce informatiche e attacchi cyber',
     'Implementiamo soluzioni di sicurezza multilivello personalizzate',
     'Monitoriamo 24/7 la tua infrastruttura con Wazuh SIEM e Zabbix',
-    'Garantiamo conformità GDPR e normative di settore',
-    'Formiamo il tuo personale sulle best practice di sicurezza',
+    'Blocco automatico degli IP malevoli con Active Response',
+    'Dashboard personalizzate per il tuo team IT e management',
   ];
 
   const technologies = [
@@ -99,6 +101,8 @@ export default function SicurezzaInformatica() {
     { icon: ShieldAlert, title: 'Compliance & Auditing', desc: 'Verifica automatica della conformità a standard PCI-DSS, HIPAA, GDPR, NIST 800-53 con report dettagliati.' },
     { icon: Bell, title: 'Alerting Intelligente', desc: 'Sistema di alerting multi-livello con correlazione eventi, riduzione falsi positivi e notifiche via email, Slack, Telegram.' },
     { icon: Database, title: 'Log Management Centralizzato', desc: 'Raccolta e indicizzazione centralizzata di tutti i log aziendali con retention policy configurabili e ricerca full-text.' },
+    { icon: Ban, title: 'Active Response — Blocco IP', desc: 'Risposta automatica agli attacchi: blocco immediato degli IP malevoli tramite firewall rules dinamiche, ban temporaneo o permanente in caso di brute force, port scanning o exploit attempts.' },
+    { icon: LayoutDashboard, title: 'Dashboard Personalizzate', desc: 'Creiamo dashboard su misura per il tuo team: viste executive per il management, pannelli tecnici per il SOC, report automatici e KPI di sicurezza personalizzati per ogni reparto.' },
   ];
 
   const zabbixFeatures = [
@@ -148,6 +152,8 @@ export default function SicurezzaInformatica() {
         'Tutto del pacchetto Smart',
         'Setup SIEM Wazuh completo',
         'Setup Zabbix monitoring infrastruttura',
+        'Active Response con blocco IP automatico',
+        'Dashboard personalizzate per il tuo team',
         'Monitoraggio 24/7 per 3 mesi',
         'Implementazione MFA',
         'Hardening server e workstation',
@@ -165,6 +171,8 @@ export default function SicurezzaInformatica() {
       features: [
         'Tutto del pacchetto Plus',
         'Wazuh + Zabbix fully managed',
+        'Active Response avanzato multi-livello',
+        'Dashboard executive e SOC dedicate',
         'Penetration test periodici',
         'Monitoraggio 24/7 continuativo',
         'Incident response plan',
@@ -183,11 +191,14 @@ export default function SicurezzaInformatica() {
     <>
       <SEO
         title="Sicurezza Informatica Aziendale Roma | Wazuh & Zabbix Monitoring - CoreNexus Technology Solution"
-        description="Servizi di sicurezza informatica per aziende a Roma. Monitoraggio con Wazuh SIEM e Zabbix, firewall, vulnerability assessment, backup, compliance GDPR. Proteggiamo la tua azienda dalle minacce cyber."
+        description="Servizi di sicurezza informatica per aziende a Roma. Monitoraggio con Wazuh SIEM e Zabbix, Active Response con blocco automatico IP, dashboard personalizzate, firewall, vulnerability assessment, compliance GDPR."
         keywords={[
           'sicurezza informatica Roma',
           'cybersecurity aziendale',
           'Wazuh SIEM Roma',
+          'Wazuh Active Response',
+          'blocco automatico IP',
+          'dashboard personalizzate sicurezza',
           'Zabbix monitoring',
           'monitoraggio infrastruttura IT',
           'firewall aziendale Roma',
@@ -302,7 +313,7 @@ export default function SicurezzaInformatica() {
                 </h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
                   Piattaforma open-source di Security Information and Event Management per il rilevamento delle minacce,
-                  il monitoraggio dell'integrità e la risposta agli incidenti in tempo reale.
+                  il monitoraggio dell&apos;integrità e la risposta agli incidenti in tempo reale.
                 </p>
               </div>
             </MorphingSection>
@@ -325,11 +336,11 @@ export default function SicurezzaInformatica() {
             </MorphingSection>
 
             {/* Wazuh Features Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {wazuhFeatures.map((feature, index) => (
                 <MorphingSection key={index} delay={index * 0.1}>
                   <div className="p-6 rounded-2xl glass-effect border border-white/5 hover:border-red-500/30 transition-all duration-500 group hover:bg-white/5 h-full">
-                    <div className="flex items-start gap-4">
+                    <div className="flex flex-col items-start gap-4">
                       <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                         <feature.icon className="w-6 h-6 text-white" />
                       </div>
@@ -342,6 +353,134 @@ export default function SicurezzaInformatica() {
                 </MorphingSection>
               ))}
             </div>
+
+            {/* ===== ACTIVE RESPONSE & DASHBOARD PERSONALIZZATE SECTION ===== */}
+            <MorphingSection delay={0.4}>
+              <div className="mt-16 grid md:grid-cols-2 gap-8">
+                {/* Active Response - Blocco Automatico IP */}
+                <div className="p-8 rounded-3xl glass-effect border border-red-500/30 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-red-500/10 rounded-full blur-3xl" />
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center">
+                        <Ban className="w-7 h-7 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-white">Active Response</h3>
+                        <p className="text-red-400 text-sm font-medium">Blocco Automatico IP</p>
+                      </div>
+                    </div>
+
+                    <p className="text-gray-300 mb-6 leading-relaxed">
+                      Il modulo Active Response di Wazuh reagisce automaticamente alle minacce rilevate,
+                      bloccando gli IP malevoli in tempo reale senza intervento umano.
+                    </p>
+
+                    <div className="space-y-4 mb-6">
+                      {[
+                        { trigger: 'Brute Force SSH/RDP', action: 'Ban IP per 30 min dopo 5 tentativi falliti', severity: 'high' },
+                        { trigger: 'Port Scanning', action: 'Blocco immediato IP + notifica SOC', severity: 'medium' },
+                        { trigger: 'SQL Injection Attempt', action: 'Ban permanente + isolamento endpoint', severity: 'critical' },
+                        { trigger: 'Malware Detection', action: 'Quarantena file + blocco comunicazione C2', severity: 'critical' },
+                      ].map((rule, i) => (
+                        <div key={i} className="p-3 rounded-xl bg-white/5 border border-white/10 hover:border-red-500/30 transition-colors">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-white font-medium text-sm">{rule.trigger}</span>
+                            <span className={`text-xs px-2 py-0.5 rounded-full ${
+                              rule.severity === 'critical' ? 'bg-red-500/20 text-red-400' :
+                              rule.severity === 'high' ? 'bg-orange-500/20 text-orange-400' :
+                              'bg-yellow-500/20 text-yellow-400'
+                            }`}>
+                              {rule.severity}
+                            </span>
+                          </div>
+                          <p className="text-gray-400 text-xs">{rule.action}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Active Response Flow Diagram */}
+                    <div className="p-4 rounded-2xl bg-black/50 border border-red-500/20">
+                      <p className="text-gray-500 text-xs uppercase tracking-wider mb-3 font-semibold">Flusso Active Response</p>
+                      <div className="flex items-center justify-between gap-2">
+                        {[
+                          { step: '1', label: 'Evento', color: 'from-gray-500 to-gray-600' },
+                          { step: '2', label: 'Analisi', color: 'from-yellow-500 to-orange-500' },
+                          { step: '3', label: 'Match Regola', color: 'from-orange-500 to-red-500' },
+                          { step: '4', label: 'Blocco IP', color: 'from-red-500 to-red-700' },
+                          { step: '5', label: 'Alert', color: 'from-red-700 to-purple-600' },
+                        ].map((item, i) => (
+                          <div key={i} className="flex flex-col items-center gap-1 flex-1">
+                            <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${item.color} flex items-center justify-center text-white text-xs font-bold`}>
+                              {item.step}
+                            </div>
+                            <span className="text-gray-400 text-[10px] text-center">{item.label}</span>
+                            {i < 4 && <div className="absolute" />}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Dashboard Personalizzate */}
+                <div className="p-8 rounded-3xl glass-effect border border-blue-500/30 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl" />
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center">
+                        <LayoutDashboard className="w-7 h-7 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-white">Dashboard Personalizzate</h3>
+                        <p className="text-blue-400 text-sm font-medium">Su misura per il tuo team</p>
+                      </div>
+                    </div>
+
+                    <p className="text-gray-300 mb-6 leading-relaxed">
+                      Progettiamo e realizziamo dashboard Wazuh personalizzate per ogni livello aziendale:
+                      dal SOC tecnico al management executive, con KPI e metriche rilevanti.
+                    </p>
+
+                    <div className="space-y-4 mb-6">
+                      {[
+                        { name: 'Dashboard Executive', desc: 'KPI di alto livello, trend mensili, risk score aziendale, ROI della sicurezza', icon: TrendingUp, color: 'text-blue-400' },
+                        { name: 'Dashboard SOC / Tecnica', desc: 'Eventi real-time, alert attivi, IP bloccati, regole triggered, log flow', icon: MonitorCheck, color: 'text-cyan-400' },
+                        { name: 'Dashboard Compliance', desc: 'Score GDPR/PCI-DSS, gap analysis, remediation progress, audit trail', icon: ShieldCheck, color: 'text-green-400' },
+                        { name: 'Dashboard per Reparto', desc: 'Viste personalizzate per IT, HR, Finance con metriche specifiche per ruolo', icon: BarChart3, color: 'text-purple-400' },
+                      ].map((dash, i) => (
+                        <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-blue-500/30 transition-colors">
+                          <dash.icon className={`w-5 h-5 ${dash.color} flex-shrink-0 mt-0.5`} />
+                          <div>
+                            <span className="text-white font-medium text-sm block">{dash.name}</span>
+                            <span className="text-gray-400 text-xs">{dash.desc}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Dashboard Preview Mini */}
+                    <div className="p-4 rounded-2xl bg-black/50 border border-blue-500/20">
+                      <p className="text-gray-500 text-xs uppercase tracking-wider mb-3 font-semibold">Esempio Dashboard Executive</p>
+                      <div className="grid grid-cols-3 gap-2">
+                        <div className="p-2 rounded-lg bg-white/5 text-center">
+                          <div className="text-lg font-bold text-green-400">A+</div>
+                          <div className="text-[10px] text-gray-500">Security Score</div>
+                        </div>
+                        <div className="p-2 rounded-lg bg-white/5 text-center">
+                          <div className="text-lg font-bold text-blue-400">99.9%</div>
+                          <div className="text-[10px] text-gray-500">Uptime</div>
+                        </div>
+                        <div className="p-2 rounded-lg bg-white/5 text-center">
+                          <div className="text-lg font-bold text-red-400">0</div>
+                          <div className="text-[10px] text-gray-500">Breach</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </MorphingSection>
 
             {/* Wazuh Dashboard Preview */}
             <MorphingSection delay={0.3}>
@@ -606,11 +745,11 @@ export default function SicurezzaInformatica() {
                     </h4>
                     <div className="space-y-3">
                       {[
-                        { name: 'Bandwidth In', value: '245 Mbps', max: '1 Gbps', pct: 24.5 },
-                        { name: 'Bandwidth Out', value: '128 Mbps', max: '1 Gbps', pct: 12.8 },
-                        { name: 'Latenza Media', value: '2.3 ms', max: '< 10 ms', pct: 23 },
-                        { name: 'Packet Loss', value: '0.01%', max: '< 0.1%', pct: 10 },
-                        { name: 'Connessioni Attive', value: '1,247', max: '10,000', pct: 12.5 },
+                        { name: 'Bandwidth In', value: '245 Mbps', pct: 24.5 },
+                        { name: 'Bandwidth Out', value: '128 Mbps', pct: 12.8 },
+                        { name: 'Latenza Media', value: '2.3 ms', pct: 23 },
+                        { name: 'Packet Loss', value: '0.01%', pct: 10 },
+                        { name: 'Connessioni Attive', value: '1,247', pct: 12.5 },
                       ].map((item, i) => (
                         <div key={i} className="flex items-center justify-between">
                           <span className="text-gray-400 text-sm w-40">{item.name}</span>
@@ -675,8 +814,8 @@ export default function SicurezzaInformatica() {
                     Wazuh + Zabbix: <span className="bg-gradient-to-r from-red-400 via-purple-400 to-green-400 bg-clip-text text-transparent">Monitoraggio Completo</span>
                   </h2>
                   <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-                    L'integrazione di Wazuh e Zabbix offre una visione a 360° della tua infrastruttura IT,
-                    combinando sicurezza e performance in un'unica strategia di monitoraggio.
+                    L&apos;integrazione di Wazuh e Zabbix offre una visione a 360° della tua infrastruttura IT,
+                    combinando sicurezza e performance in un&apos;unica strategia di monitoraggio.
                   </p>
                 </div>
 
@@ -694,6 +833,8 @@ export default function SicurezzaInformatica() {
                         'Vulnerability detection (CVE)',
                         'Compliance automatizzata',
                         'Incident response',
+                        'Active Response — Blocco automatico IP',
+                        'Dashboard personalizzate per ogni team',
                       ].map((item, i) => (
                         <li key={i} className="flex items-center gap-3 text-gray-300">
                           <Check className="w-4 h-4 text-red-400 flex-shrink-0" />
@@ -837,12 +978,12 @@ export default function SicurezzaInformatica() {
                     La sicurezza informatica è diventata una <strong className="text-white">priorità assoluta per ogni
                     azienda</strong>, indipendentemente dalle dimensioni. Gli attacchi informatici sono in costante
                     aumento e le conseguenze di una violazione possono essere devastanti: perdita di dati,
-                    interruzione dell'attività, danni reputazionali e sanzioni GDPR.
+                    interruzione dell&apos;attività, danni reputazionali e sanzioni GDPR.
                   </p>
 
                   <p>
                     Il nostro approccio alla cybersecurity è <strong className="text-white">multilivello e proattivo</strong>.
-                    Non ci limitiamo a installare un firewall: analizziamo l'intera superficie di attacco della tua
+                    Non ci limitiamo a installare un firewall: analizziamo l&apos;intera superficie di attacco della tua
                     azienda, identifichiamo le vulnerabilità e implementiamo una strategia di difesa completa.
                   </p>
 
@@ -850,21 +991,35 @@ export default function SicurezzaInformatica() {
                     Utilizziamo <strong className="text-white">Wazuh come piattaforma SIEM</strong> (Security Information
                     and Event Management) per il monitoraggio centralizzato di tutti gli eventi di sicurezza.
                     Questo ci permette di rilevare anomalie, tentativi di intrusione e comportamenti sospetti
-                    in tempo reale. Parallelamente, <strong className="text-white">Zabbix</strong> monitora le performance
-                    dell'infrastruttura — CPU, RAM, disco, rete, servizi — garantendo che ogni componente
+                    in tempo reale. Grazie al modulo <strong className="text-red-400">Active Response</strong>, Wazuh
+                    può bloccare automaticamente gli IP malevoli quando rileva attacchi come brute force,
+                    port scanning o tentativi di exploit, senza necessità di intervento manuale.
+                  </p>
+
+                  <p>
+                    Parallelamente, <strong className="text-white">Zabbix</strong> monitora le performance
+                    dell&apos;infrastruttura — CPU, RAM, disco, rete, servizi — garantendo che ogni componente
                     funzioni in modo ottimale e prevenendo downtime.
                   </p>
 
                   <p>
-                    L'integrazione di <strong className="text-red-400">Wazuh</strong> e <strong className="text-green-400">Zabbix</strong> ci
+                    Forniamo inoltre <strong className="text-white">dashboard personalizzate</strong> per ogni livello
+                    aziendale: pannelli executive con KPI di alto livello per il management, dashboard tecniche
+                    per il team SOC con eventi in tempo reale, e viste specifiche per reparto. Ogni dashboard
+                    è progettata su misura per le esigenze informative del destinatario.
+                  </p>
+
+                  <p>
+                    L&apos;integrazione di <strong className="text-red-400">Wazuh</strong> e <strong className="text-green-400">Zabbix</strong> ci
                     consente di correlare eventi di sicurezza con metriche di performance, identificando pattern
                     che singolarmente sarebbero invisibili. Ad esempio, un picco anomalo di CPU combinato con
-                    tentativi di login falliti può indicare un attacco in corso.
+                    tentativi di login falliti può indicare un attacco in corso — e il sistema reagisce
+                    automaticamente bloccando la sorgente dell&apos;attacco.
                   </p>
 
                   <p>
                     La <strong className="text-white">formazione del personale</strong> è un pilastro fondamentale della
-                    nostra strategia: il fattore umano è spesso l'anello debole della catena di sicurezza.
+                    nostra strategia: il fattore umano è spesso l&apos;anello debole della catena di sicurezza.
                     Organizziamo sessioni di awareness su phishing, social engineering e best practice quotidiane.
                   </p>
                 </div>
