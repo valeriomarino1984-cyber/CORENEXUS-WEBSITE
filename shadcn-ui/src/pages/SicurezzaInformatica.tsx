@@ -58,7 +58,7 @@ export default function SicurezzaInformatica() {
       {
         "@type": "Service",
         "name": "Sicurezza Informatica Aziendale",
-        "description": "Servizi di cybersecurity per aziende a Roma: firewall, monitoraggio SIEM Wazuh, Zabbix, vulnerability assessment, backup, compliance GDPR, Active Response e dashboard personalizzate",
+        "description": "Server Wazuh e server Zabbix a Roma: installazione, configurazione e gestione SIEM Wazuh, monitoraggio Zabbix, Active Response con blocco automatico IP, dashboard personalizzate, firewall, vulnerability assessment, compliance GDPR per aziende",
         "provider": {
           "@type": "Organization",
           "name": "CoreNexus Technology Solution",
@@ -191,24 +191,34 @@ export default function SicurezzaInformatica() {
   return (
     <>
       <SEO
-        title="Sicurezza Informatica Aziendale Roma | Wazuh & Zabbix Monitoring - CoreNexus Technology Solution"
-        description="Servizi di sicurezza informatica per aziende a Roma. Monitoraggio con Wazuh SIEM e Zabbix, Active Response con blocco automatico IP, dashboard personalizzate, firewall, vulnerability assessment, compliance GDPR."
+        title="Server Wazuh Roma | Server Zabbix Roma | Sicurezza Informatica Aziendale - CoreNexus Technology Solution"
+        description="Server Wazuh Roma e server Zabbix Roma per aziende. Installazione, configurazione e gestione server SIEM Wazuh e monitoraggio Zabbix a Roma. Active Response, blocco automatico IP, dashboard personalizzate, firewall, vulnerability assessment, compliance GDPR. Servizio gestito 24/7."
         keywords={[
-          'sicurezza informatica Roma',
-          'cybersecurity aziendale',
+          'server Wazuh Roma',
+          'server Zabbix Roma',
+          'installazione Wazuh Roma',
+          'installazione Zabbix Roma',
+          'configurazione server Wazuh',
+          'configurazione server Zabbix',
           'Wazuh SIEM Roma',
+          'Zabbix monitoring Roma',
+          'monitoraggio server Roma',
+          'sicurezza informatica Roma',
+          'cybersecurity aziendale Roma',
+          'SIEM Roma',
+          'server monitoraggio Roma',
           'Wazuh Active Response',
-          'blocco automatico IP',
-          'dashboard personalizzate sicurezza',
-          'Zabbix monitoring',
-          'monitoraggio infrastruttura IT',
+          'blocco automatico IP Wazuh',
+          'gestione server sicurezza Roma',
+          'SOC Roma',
+          'monitoraggio infrastruttura IT Roma',
           'firewall aziendale Roma',
-          'vulnerability assessment',
+          'vulnerability assessment Roma',
           'penetration test Roma',
-          'compliance GDPR',
-          'antivirus enterprise',
-          'protezione dati aziendali',
-          'monitoraggio rete aziendale',
+          'compliance GDPR Roma',
+          'dashboard Wazuh personalizzate',
+          'dashboard Zabbix personalizzate',
+          'monitoraggio rete aziendale Roma',
         ]}
         canonical="/sicurezza-informatica"
         schema={sicurezzaSchema}
