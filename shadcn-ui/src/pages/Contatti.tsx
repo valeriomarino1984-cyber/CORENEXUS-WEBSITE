@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import ContactSection from '@/components/ContactSection';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
 import SEO from '@/components/SEO';
+import GoogleReviews from '@/components/GoogleReviews';
 import { Phone, Mail, MapPin, Clock, MessageCircle, ArrowLeft, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { breadcrumbSchema, contactPageSchema, localBusinessSchema } from '@/utils/seoSchemas';
@@ -13,12 +14,68 @@ export default function Contatti() {
     { name: 'Contatti', url: '/contatti' },
   ]);
 
+  const localBusinessWithRating = {
+    ...localBusinessSchema,
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "bestRating": "5",
+      "worstRating": "1",
+      "ratingCount": "6",
+      "reviewCount": "6"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Marco R." },
+        "datePublished": "2026-04-27",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "Servizio eccellente! Hanno risolto un problema critico al nostro server aziendale in meno di 2 ore. Professionali e competenti."
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Laura B." },
+        "datePublished": "2026-04-11",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "Ci affidiamo a CoreNexus da oltre un anno per la gestione della nostra rete aziendale a Ostia. Sempre disponibili, anche per emergenze fuori orario."
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Giuseppe T." },
+        "datePublished": "2026-04-11",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "Installazione sistema di videosorveglianza impeccabile. Hanno curato ogni dettaglio, dalla progettazione al collaudo."
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Francesca D." },
+        "datePublished": "2026-03-11",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "Dopo aver provato diversi tecnici, finalmente abbiamo trovato CoreNexus. Assistenza remota velocissima."
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Andrea M." },
+        "datePublished": "2026-02-11",
+        "reviewRating": { "@type": "Rating", "ratingValue": "4", "bestRating": "5" },
+        "reviewBody": "Ottima consulenza per la migrazione dei nostri sistemi in cloud. Il team è preparato e ha saputo guidarci passo passo."
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Stefania C." },
+        "datePublished": "2026-02-11",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "Centralino VoIP installato nel nostro studio a Pomezia. Funziona perfettamente e ci ha fatto risparmiare molto."
+      }
+    ]
+  };
+
   const combinedSchema = {
     "@context": "https://schema.org",
     "@graph": [
       contactBreadcrumb,
       contactPageSchema,
-      localBusinessSchema,
+      localBusinessWithRating,
     ]
   };
 
@@ -83,8 +140,8 @@ export default function Contatti() {
       <div className="min-h-screen bg-black">
         <Header />
 
-        {/* Hero Section */}
-        <section className="relative overflow-hidden pt-32 pb-16 px-6">
+        {/* Hero Section - Compact */}
+        <section className="relative overflow-hidden pt-32 pb-10 px-6">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-950/30 via-black to-purple-950/20" />
           <div className="absolute top-20 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float" />
           <div className="absolute bottom-10 right-10 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
@@ -101,44 +158,46 @@ export default function Contatti() {
                 </Link>
               </div>
 
-              <div className="text-center space-y-6">
-                <h1 className="text-5xl md:text-7xl font-bold gradient-text leading-tight">
+              <div className="text-center space-y-4">
+                <h1 className="text-5xl md:text-6xl font-bold gradient-text leading-tight">
                   Contattaci
                 </h1>
-                <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
                   Siamo a tua disposizione per consulenze, preventivi e supporto tecnico.
-                  Rispondiamo rapidamente a tutte le richieste.
                 </p>
               </div>
             </MorphingSection>
           </div>
         </section>
 
-        {/* Contact Info Cards */}
-        <section className="py-16 px-6 relative">
+        {/* Contact Info Cards - Compact */}
+        <section className="py-10 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/30 to-black" />
           <div className="max-w-6xl mx-auto relative z-10">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {contactInfo.map((info, i) => (
-                <MorphingSection key={i} delay={i * 0.1}>
+                <MorphingSection key={i} delay={i * 0.05}>
                   <a
                     href={info.href}
                     target={info.href.startsWith('http') ? '_blank' : undefined}
                     rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="block p-6 rounded-2xl glass-effect border border-white/5 hover:border-blue-500/30 transition-all duration-300 group hover:bg-white/5 h-full"
+                    className="block p-5 rounded-2xl glass-effect border border-white/5 hover:border-blue-500/30 transition-all duration-300 group hover:bg-white/5 h-full"
                   >
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${info.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                      <info.icon className="w-6 h-6 text-white" />
+                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${info.gradient} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
+                      <info.icon className="w-5 h-5 text-white" />
                     </div>
-                    <h3 className="text-white font-semibold text-lg mb-1">{info.title}</h3>
-                    <p className="text-blue-400 font-medium mb-2">{info.value}</p>
-                    <p className="text-gray-400 text-sm">{info.description}</p>
+                    <h3 className="text-white font-semibold text-sm mb-1">{info.title}</h3>
+                    <p className="text-blue-400 font-medium text-sm mb-1">{info.value}</p>
+                    <p className="text-gray-400 text-xs hidden md:block">{info.description}</p>
                   </a>
                 </MorphingSection>
               ))}
             </div>
           </div>
         </section>
+
+        {/* Google Reviews Section */}
+        <GoogleReviews />
 
         {/* Google Business Profile + Trovaci Online */}
         <section className="py-12 px-6 relative">
@@ -147,7 +206,6 @@ export default function Contatti() {
               <div className="p-8 rounded-3xl glass-effect border border-white/5">
                 <h2 className="text-2xl font-bold text-white mb-6 text-center">Trovaci Online</h2>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {/* Google Business Profile */}
                   <a
                     href="https://www.google.com/maps/place/CoreNexus+Technology+Solution"
                     target="_blank"
@@ -164,7 +222,6 @@ export default function Contatti() {
                     <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-blue-400 transition-colors shrink-0 ml-auto" />
                   </a>
 
-                  {/* Facebook */}
                   <a
                     href="https://www.facebook.com/corenexus"
                     target="_blank"
@@ -181,7 +238,6 @@ export default function Contatti() {
                     <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-blue-400 transition-colors shrink-0 ml-auto" />
                   </a>
 
-                  {/* LinkedIn */}
                   <a
                     href="https://www.linkedin.com/company/corenexus"
                     target="_blank"
