@@ -20,6 +20,17 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    id: 'impianti-allarme-villa-infernetto',
+    title: 'Impianti di Allarme a Villa Infernetto e Dintorni: Guida alla Sicurezza della Tua Casa',
+    excerpt: 'Villa Infernetto, Axa, Casal Palocco, Infernetto: zone residenziali esclusive che meritano la massima protezione. Scopri come scegliere l\'impianto di allarme perfetto per la tua villa.',
+    content: '',
+    category: 'Sicurezza Fisica',
+    date: '20 Aprile 2026',
+    readTime: '8 min',
+    image: 'https://mgx-backend-cdn.metadl.com/generate/images/720946/2026-04-20/m6vlvxaaafhq/blog-allarme-villa-infernetto.png',
+    tags: ['Allarme', 'Antifurto', 'Villa Infernetto', 'Sicurezza Casa', 'Roma Sud']
+  },
+  {
     id: 'intelligenza-artificiale-azienda',
     title: 'Intelligenza Artificiale in Azienda: Come l\'AI Sta Trasformando il Business',
     excerpt: 'L\'intelligenza artificiale non è più fantascienza: è uno strumento concreto che sta rivoluzionando produttività, decisioni e competitività delle aziende. Scopri come integrarla nella tua impresa.',
