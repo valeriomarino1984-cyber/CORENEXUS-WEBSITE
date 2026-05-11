@@ -145,19 +145,21 @@ export default function ProjectManagement() {
   return (
     <>
       <SEO
-        title="IT & Cyber Security Project Management Roma | Project Manager - CoreNexus Technology Solution"
-        description="Servizi di Project Management IT e Cyber Security a Roma. I nostri Project Manager organizzano, gestiscono e supervisionano l'intero processo fino alla consegna con successo."
+        title="IT Project Management Roma EUR Ostia Fiumicino | Cyber Security PM - CoreNexus"
+        description="Servizi di Project Management IT e Cyber Security a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Project Manager dedicati per organizzare, gestire e supervisionare progetti IT fino alla consegna con successo."
         keywords={[
           'project management IT Roma',
-          'project manager cyber security',
-          'gestione progetti IT',
+          'project manager cyber security Roma',
+          'gestione progetti IT Roma EUR',
           'PM informatico Roma',
-          'coordinamento progetti IT',
-          'WBS GANTT PERT',
-          'stato avanzamento lavori IT',
-          'consulenza project management',
-          'program management Roma',
-          'gestione stakeholder IT',
+          'coordinamento progetti IT Roma',
+          'project management Ostia Lido',
+          'PM IT Fiumicino',
+          'gestione progetti Pomezia',
+          'project management Roma Sud',
+          'WBS GANTT PERT Roma',
+          'consulenza PM IT Roma',
+          'supervisione progetti IT Roma EUR',
         ]}
         canonical="/project-management"
         schema={pmSchema}

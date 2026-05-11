@@ -225,23 +225,28 @@ export default function ImpiantiAllarme() {
   return (
     <>
       <SEO
-        title="Impianti di Allarme e Videosorveglianza Roma | Hikvision Ajax Risco Dahua - CoreNexus Technology Solution"
-        description="Installazione impianti di allarme e videosorveglianza a Roma. Partner Hikvision, Ajax Systems, Risco, Dahua. Telecamere IP HD/4K, centrali antintrusione, controllo accessi per aziende e privati."
+        title="Impianti Allarme e Videosorveglianza Roma EUR Ostia Fiumicino | Hikvision Ajax - CoreNexus"
+        description="Installazione impianti di allarme e videosorveglianza a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Partner Hikvision, Ajax Systems, Risco, Dahua. Telecamere IP HD/4K, centrali antintrusione, controllo accessi."
         keywords={[
           'impianti allarme Roma',
-          'videosorveglianza Roma',
+          'videosorveglianza Roma EUR',
           'telecamere IP Roma',
           'TVCC Roma',
           'antintrusione Roma',
           'controllo accessi Roma',
-          'installazione allarme',
-          'telecamere 4K',
-          'sicurezza aziendale Roma',
-          'impianti sicurezza Roma',
+          'installazione allarme Roma',
           'Hikvision Roma',
           'Ajax Systems Roma',
-          'Risco Roma',
+          'impianti allarme Ostia Lido',
+          'videosorveglianza Fiumicino',
+          'allarme Pomezia',
+          'telecamere 4K Roma Sud',
+          'videosorveglianza aziendale Roma EUR',
+          'installazione TVCC Ostia Fiumicino',
           'Dahua Roma',
+          'Risco Roma',
+          'allarme casa Roma',
+          'sicurezza fisica Roma',
         ]}
         canonical="/impianti-allarme-videosorveglianza"
         schema={allarmeSchema}

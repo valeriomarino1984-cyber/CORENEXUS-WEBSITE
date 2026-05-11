@@ -166,23 +166,24 @@ export default function Index() {
   return (
     <>
       <SEO
-        title="Assistenza Informatica Roma EUR Ostia | Supporto IT Aziendale"
-        description="Assistenza informatica professionale a Roma EUR, Ostia Lido e Fiumicino. Supporto IT aziendale, gestione reti, cybersecurity, videosorveglianza Hikvision, server enterprise e centralini VoIP FreePBX. Servizi sistemistici per PMI."
+        title="Assistenza Informatica Roma EUR Ostia Fiumicino Pomezia | Supporto IT Aziendale - CoreNexus"
+        description="Assistenza informatica professionale a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Supporto IT aziendale, gestione reti, cybersecurity, server Wazuh e Zabbix, videosorveglianza Hikvision, centralini VoIP FreePBX. Interventi rapidi on-site e da remoto."
         keywords={[
+          'assistenza informatica Roma',
           'assistenza informatica Roma EUR',
           'supporto IT Ostia Lido',
-          'cybersecurity Roma sud',
-          'managed services Fiumicino',
+          'assistenza informatica Fiumicino',
+          'assistenza informatica Pomezia',
+          'supporto IT Roma Sud',
           'sistemista Roma EUR',
-          'assistenza server enterprise',
+          'cybersecurity Roma',
+          'assistenza server Roma',
           'videosorveglianza Hikvision Roma',
-          'centralino VoIP FreePBX',
-          'gestione reti aziendali',
-          'sicurezza informatica PMI',
-          'consulenza IT Roma',
-          'supporto sistemistico Ostia',
-          'backup aziendali cloud',
-          'manutenzione server Roma'
+          'centralino VoIP Roma',
+          'gestione reti aziendali Roma',
+          'tecnico informatico Roma',
+          'managed services Roma',
+          'assistenza IT aziendale Roma EUR Ostia Fiumicino',
         ]}
         canonical="/"
         schema={combinedSchema}

@@ -211,21 +211,21 @@ export default function Blog() {
   return (
     <>
       <SEO
-        title="Blog IT | Articoli su Sicurezza, Reti, Cloud, AI e Tecnologia - CoreNexus"
-        description="Leggi gli articoli del blog CoreNexus Technology Solution su cybersecurity, networking, cloud, intelligenza artificiale, GDPR, smart working, VPN e soluzioni IT per aziende a Roma."
+        title="Blog IT Roma | Articoli Cybersecurity, Reti, Cloud, AI - CoreNexus Technology Solution"
+        description="Articoli e guide su cybersecurity, networking, cloud, intelligenza artificiale, GDPR e soluzioni IT per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Blog CoreNexus Technology Solution."
         keywords={[
           'blog IT Roma',
-          'articoli cybersecurity',
+          'articoli cybersecurity Roma',
           'guide networking aziendale',
-          'migrazione cloud',
-          'intelligenza artificiale azienda',
-          'chatbot AI',
-          'GDPR protezione dati',
-          'manutenzione preventiva IT',
-          'smart working VPN',
-          'virtualizzazione server',
-          'VoIP FreePBX',
-          'videosorveglianza Hikvision',
+          'migrazione cloud Roma',
+          'intelligenza artificiale azienda Roma',
+          'GDPR protezione dati Roma',
+          'smart working Roma',
+          'VPN aziendale Roma',
+          'blog tecnologia Roma EUR',
+          'novità IT Ostia Fiumicino',
+          'guide informatiche Roma Sud',
+          'articoli sicurezza informatica Roma',
         ]}
         canonical="/blog"
       />

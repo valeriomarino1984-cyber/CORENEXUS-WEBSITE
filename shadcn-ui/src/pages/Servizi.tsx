@@ -255,19 +255,24 @@ export default function Servizi() {
   return (
     <>
       <SEO
-        title="Servizi IT per Aziende a Roma | CoreNexus"
-        description="Scopri tutti i servizi informatici di CoreNexus Technology Solution: consulenza sistemistica, gestione reti, cybersecurity, videosorveglianza Hikvision, server enterprise, centralini VoIP FreePBX e creazione siti web a Roma."
+        title="Servizi IT per Aziende Roma EUR Ostia Fiumicino | Assistenza Informatica - CoreNexus"
+        description="Tutti i servizi informatici per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia: consulenza sistemistica, gestione reti, cybersecurity Wazuh e Zabbix, videosorveglianza Hikvision, server enterprise, centralini VoIP FreePBX, creazione siti web."
         keywords={[
           'servizi IT Roma',
-          'assistenza informatica aziendale',
-          'gestione reti Roma',
-          'cybersecurity Roma',
-          'videosorveglianza Hikvision',
+          'servizi informatici Roma EUR',
+          'assistenza informatica aziendale Roma',
+          'gestione reti Roma Ostia Fiumicino',
+          'cybersecurity aziendale Roma',
+          'videosorveglianza Roma EUR',
           'server enterprise Roma',
-          'centralino VoIP FreePBX',
+          'centralino VoIP FreePBX Roma',
           'creazione siti web Roma',
-          'e-commerce Roma',
-          'monitoraggio Wazuh Zabbix',
+          'consulenza IT Pomezia',
+          'servizi IT Ostia Lido',
+          'assistenza sistemistica Fiumicino',
+          'automazione IT Roma',
+          'Kubernetes Docker Roma',
+          'contratti manutenzione IT Roma',
         ]}
         canonical="/servizi"
         schema={serviziSchema}

@@ -176,19 +176,24 @@ export default function AssistenzaSistemistica() {
   return (
     <>
       <SEO
-        title="Consulenza Sistemistica Roma | Supporto IT Aziendale - CoreNexus Technology Solution"
-        description="Consulenza sistemistica professionale per aziende a Roma. Manutenzione server, help desk, monitoraggio 24/7, backup, gestione infrastrutture IT. Supporto rapido e affidabile."
+        title="Consulenza Sistemistica Roma EUR Ostia Fiumicino | Supporto IT Aziendale - CoreNexus"
+        description="Consulenza sistemistica professionale per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Manutenzione server, help desk, monitoraggio 24/7, backup, gestione infrastrutture IT. Interventi rapidi on-site."
         keywords={[
           'consulenza sistemistica Roma',
-          'supporto IT aziendale',
-          'manutenzione server Roma',
-          'help desk aziendale',
-          'monitoraggio sistemi IT',
-          'backup aziendale Roma',
-          'gestione server',
           'sistemista Roma EUR',
-          'assistenza informatica Ostia',
-          'supporto tecnico Fiumicino',
+          'supporto IT aziendale Roma',
+          'manutenzione server Roma',
+          'help desk aziendale Roma',
+          'monitoraggio sistemi IT Roma',
+          'backup aziendale Roma',
+          'gestione server Roma EUR',
+          'assistenza sistemistica Ostia Lido',
+          'assistenza sistemistica Fiumicino',
+          'sistemista Pomezia',
+          'supporto IT Roma Sud',
+          'infrastruttura IT Roma',
+          'assistenza server Windows Linux Roma',
+          'intervento tecnico on-site Roma',
         ]}
         canonical="/assistenza-sistemistica"
         schema={assistenzaSchema}

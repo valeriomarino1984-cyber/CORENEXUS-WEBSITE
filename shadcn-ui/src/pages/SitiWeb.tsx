@@ -126,19 +126,24 @@ export default function SitiWeb() {
   return (
     <>
       <SEO
-        title="Creazione Siti Web ed E-commerce Roma | Web Design - CoreNexus Technology Solution"
-        description="Realizzazione siti web professionali, e-commerce e landing page a Roma. Design responsive, SEO ottimizzato, performance elevate. Preventivi personalizzati per la tua azienda."
+        title="Creazione Siti Web ed E-commerce Roma EUR Ostia Fiumicino | Web Design - CoreNexus"
+        description="Realizzazione siti web professionali, e-commerce e landing page a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Design responsive, SEO ottimizzato, performance elevate. Preventivi personalizzati per aziende."
         keywords={[
           'creazione siti web Roma',
-          'web design Roma',
+          'web design Roma EUR',
           'e-commerce Roma',
-          'siti web professionali',
-          'realizzazione siti internet',
+          'siti web professionali Roma',
+          'realizzazione siti internet Roma',
           'landing page Roma',
-          'sito responsive',
+          'sito responsive Roma',
+          'creazione siti web Ostia Lido',
+          'web design Fiumicino',
+          'siti web Pomezia',
+          'sviluppo web Roma Sud',
           'SEO Roma',
-          'negozio online Roma',
-          'web developer Roma',
+          'sito web aziendale Roma EUR',
+          'e-commerce Ostia Fiumicino',
+          'web agency Roma',
         ]}
         canonical="/siti-web"
         schema={sitiSchema}

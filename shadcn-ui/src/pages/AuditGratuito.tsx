@@ -179,21 +179,22 @@ export default function AuditGratuito() {
   return (
     <>
       <SEO
-        title="Audit IT Gratuito Roma | Analisi Infrastruttura Informatica Aziendale - CoreNexus"
-        description="Audit IT gratuito e senza impegno per aziende a Roma. Analizziamo la tua infrastruttura informatica: sicurezza, rete, server, backup. Individuiamo criticità e proponiamo soluzioni. Contattaci ora."
+        title="Audit IT Gratuito Roma EUR Ostia Fiumicino | Analisi Infrastruttura - CoreNexus"
+        description="Audit IT gratuito e senza impegno per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Analizziamo sicurezza, rete, server e backup della tua infrastruttura. Individuiamo criticità e proponiamo soluzioni."
         keywords={[
           'audit IT gratuito Roma',
-          'analisi infrastruttura informatica',
+          'analisi infrastruttura informatica Roma EUR',
           'audit sicurezza informatica Roma',
-          'verifica rete aziendale',
-          'analisi server aziendali',
+          'verifica rete aziendale Roma',
+          'analisi server aziendali Roma',
           'audit GDPR Roma',
-          'consulenza IT gratuita',
-          'check-up informatico aziendale',
-          'audit cybersecurity Roma',
-          'analisi backup aziendale',
-          'ottimizzazione IT Roma',
-          'audit IT PMI Roma',
+          'consulenza IT gratuita Roma',
+          'audit IT Ostia Lido',
+          'audit IT Fiumicino',
+          'audit IT Pomezia',
+          'audit IT Roma Sud',
+          'assessment infrastruttura IT Roma',
+          'check-up informatico gratuito Roma EUR',
         ]}
         canonical="/audit-gratuito"
         schema={combinedSchema}

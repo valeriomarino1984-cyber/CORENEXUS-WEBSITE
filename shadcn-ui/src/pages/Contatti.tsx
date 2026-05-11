@@ -60,21 +60,21 @@ export default function Contatti() {
   return (
     <>
       <SEO
-        title="Contatti CoreNexus Technology Solution | Assistenza IT Roma - Telefono, Email, WhatsApp"
-        description="Contatta CoreNexus Technology Solution per assistenza informatica a Roma. Telefono: +39 353 401 2055, Email: info@corenexus.it. Supporto IT rapido per aziende a Roma Sud, EUR, Ostia, Fiumicino."
+        title="Contatti CoreNexus | Assistenza IT Roma EUR Ostia Fiumicino Pomezia"
+        description="Contatta CoreNexus Technology Solution per assistenza informatica a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Tel: +39 353 401 2055, Email: info@corenexus.it. Supporto IT rapido per aziende e privati."
         keywords={[
-          'contatti CoreNexus',
+          'contatti CoreNexus Roma',
           'assistenza informatica Roma contatti',
           'supporto IT Roma telefono',
           'consulenza informatica Roma email',
-          'assistenza computer Roma',
+          'assistenza computer Roma EUR',
           'tecnico informatico Roma contatti',
           'supporto sistemistico Roma',
-          'CoreNexus telefono',
-          'CoreNexus email',
-          'assistenza IT Ostia',
-          'assistenza IT EUR',
-          'assistenza IT Fiumicino',
+          'contatti assistenza IT Ostia Lido',
+          'contatti assistenza IT Fiumicino',
+          'contatti assistenza IT Pomezia',
+          'assistenza IT Roma Sud contatti',
+          'CoreNexus telefono email WhatsApp',
         ]}
         canonical="/contatti"
         schema={combinedSchema}

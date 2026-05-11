@@ -159,21 +159,24 @@ export default function KubernetesContainer() {
   return (
     <>
       <SEO
-        title="Kubernetes e Container Roma | Docker, MicroK8s, Microservizi - CoreNexus"
-        description="Progettiamo e gestiamo cluster Kubernetes per aziende a Roma. Containerizzazione Docker, orchestrazione microservizi, soluzioni IoT con MicroK8s, deploy su Azure AKS. Migrazione da architetture monolitiche a container."
+        title="Kubernetes e Container Roma EUR Ostia Fiumicino | Docker MicroK8s - CoreNexus"
+        description="Progettazione e gestione cluster Kubernetes per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Containerizzazione Docker, orchestrazione microservizi, MicroK8s IoT, deploy Azure AKS. Migrazione a container."
         keywords={[
           'Kubernetes Roma',
-          'container Docker Roma',
+          'container Docker Roma EUR',
           'microservizi Roma',
-          'cluster Kubernetes aziende',
-          'MicroK8s IoT',
+          'cluster Kubernetes aziende Roma',
+          'MicroK8s IoT Roma',
           'Azure AKS Roma',
-          'containerizzazione applicazioni',
-          'orchestrazione container',
-          'DevOps Kubernetes',
+          'containerizzazione applicazioni Roma',
+          'Kubernetes Ostia Lido',
+          'Docker Fiumicino',
+          'container Pomezia',
+          'orchestrazione container Roma Sud',
+          'DevOps Kubernetes Roma',
           'migrazione container Roma',
-          'infrastruttura microservizi',
-          'Kubernetes on-premise',
+          'deploy microservizi Roma EUR',
+          'consulenza Kubernetes Roma',
         ]}
         canonical="/kubernetes-container"
         schema={kubernetesSchema}

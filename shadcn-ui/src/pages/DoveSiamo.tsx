@@ -153,11 +153,11 @@ export default function DoveSiamo() {
   return (
     <>
       <SEO
-        title="Dove Siamo | Zone di Copertura Assistenza IT Roma - CoreNexus Technology Solution"
-        description="CoreNexus Technology Solution opera a Roma Sud, EUR, Ostia, Fiumicino, Pomezia e provincia. Scopri le nostre zone di copertura per assistenza informatica, supporto IT aziendale e interventi on-site rapidi."
+        title="Dove Siamo | Assistenza IT Roma EUR Ostia Fiumicino Pomezia Acilia - CoreNexus"
+        description="CoreNexus Technology Solution opera a Roma, EUR, Ostia Lido, Fiumicino, Pomezia, Acilia, Casal Palocco e Roma Sud. Assistenza informatica, supporto IT aziendale e interventi on-site rapidi in tutta la zona."
         keywords={[
           'assistenza informatica Roma Sud',
-          'supporto IT Ostia',
+          'supporto IT Ostia Lido',
           'assistenza IT Fiumicino',
           'sistemista EUR Roma',
           'assistenza informatica Pomezia',
@@ -165,7 +165,12 @@ export default function DoveSiamo() {
           'assistenza computer Casal Palocco',
           'tecnico informatico Roma',
           'intervento IT on-site Roma',
-          'zone copertura assistenza IT',
+          'zone copertura assistenza IT Roma',
+          'assistenza IT Roma EUR',
+          'supporto informatico Ostia Antica',
+          'assistenza IT Infernetto',
+          'tecnico IT Axa Roma',
+          'assistenza informatica Torrino Roma',
         ]}
         canonical="/dove-siamo"
         schema={doveSiamoSchema}

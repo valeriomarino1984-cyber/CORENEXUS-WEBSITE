@@ -182,24 +182,24 @@ export default function CentraliniVoip() {
   return (
     <>
       <SEO
-        title="Centralini VoIP FreePBX con AI Roma | Telefonia Aziendale Intelligente - CoreNexus Technology Solution"
-        description="Installazione centralini VoIP FreePBX e Asterisk a Roma con integrazione AI. Trascrizione automatica, analisi sentiment, assistente vocale AI. Progetti AI personalizzabili per aziende."
+        title="Centralini VoIP FreePBX Roma EUR Ostia Fiumicino | Telefonia Aziendale AI - CoreNexus"
+        description="Installazione centralini VoIP FreePBX e Asterisk a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Integrazione AI, trascrizione automatica, assistente vocale. Telefonia aziendale professionale con progetti AI personalizzabili."
         keywords={[
           'centralino VoIP Roma',
           'FreePBX Roma',
-          'centralino telefonico aziendale',
+          'centralino telefonico aziendale Roma EUR',
           'Asterisk Roma',
-          'telefonia VoIP aziendale',
+          'telefonia VoIP aziendale Roma',
           'centralino IP Roma',
-          'PBX aziendale',
-          'centralino on-premise',
-          'IVR aziendale',
-          'telefonia IP Roma',
-          'centralino VoIP intelligenza artificiale',
-          'AI telefonia aziendale',
+          'PBX aziendale Roma',
+          'centralino VoIP Ostia Lido',
+          'centralino VoIP Fiumicino',
+          'centralino VoIP Pomezia',
+          'installazione centralino Roma Sud',
+          'VoIP AI Roma',
           'trascrizione chiamate AI',
-          'assistente vocale AI aziendale',
-          'progetti AI personalizzabili',
+          'assistente vocale aziendale',
+          'telefonia cloud Roma',
         ]}
         canonical="/centralini-voip"
         schema={voipSchema}

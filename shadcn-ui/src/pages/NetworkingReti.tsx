@@ -131,19 +131,24 @@ export default function NetworkingReti() {
   return (
     <>
       <SEO
-        title="Networking e Reti Aziendali Roma | Gestione Reti IT - CoreNexus Technology Solution"
-        description="Consulenza, implementazione e supporto per reti aziendali a Roma. Firewall, VPN, VLAN, Wi-Fi enterprise, cablaggio strutturato. Soluzioni networking professionali per PMI."
+        title="Networking e Reti Aziendali Roma EUR Ostia Fiumicino | Gestione Reti IT - CoreNexus"
+        description="Progettazione, implementazione e gestione reti aziendali a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Firewall, VPN, VLAN, Wi-Fi enterprise, cablaggio strutturato, switch e router professionali per PMI."
         keywords={[
           'networking Roma',
-          'reti aziendali Roma',
-          'gestione reti IT',
-          'firewall aziendale',
+          'reti aziendali Roma EUR',
+          'gestione reti IT Roma',
+          'firewall aziendale Roma',
           'VPN aziendale Roma',
           'cablaggio strutturato Roma',
-          'Wi-Fi enterprise',
-          'VLAN configurazione',
-          'switch managed',
-          'consulenza networking',
+          'Wi-Fi enterprise Roma',
+          'VLAN configurazione Roma',
+          'reti aziendali Ostia Lido',
+          'networking Fiumicino',
+          'reti aziendali Pomezia',
+          'switch router Roma',
+          'rete aziendale Roma Sud',
+          'installazione rete ufficio Roma EUR',
+          'consulenza networking Roma',
         ]}
         canonical="/networking-reti"
         schema={networkingSchema}

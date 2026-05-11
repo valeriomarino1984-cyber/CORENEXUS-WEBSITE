@@ -107,19 +107,24 @@ export default function AutomazioneProcessi() {
   return (
     <>
       <SEO
-        title="Automazione Processi IT Roma | DevOps & Automation - CoreNexus Technology Solution"
-        description="Progettiamo architetture di automazione su misura per ottimizzare i flussi di lavoro IT. Automazione infrastrutture, DevOps, integrazione sistemi e Infrastructure as Code a Roma."
+        title="Automazione Processi IT Roma EUR Ostia Fiumicino | DevOps & Automation - CoreNexus"
+        description="Automazione processi IT e DevOps per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Infrastructure as Code, CI/CD pipeline, orchestrazione IT, integrazione sistemi. Soluzioni su misura per PMI."
         keywords={[
           'automazione IT Roma',
-          'automazione processi IT',
+          'automazione processi IT Roma EUR',
           'DevOps Roma',
-          'Infrastructure as Code',
-          'automazione infrastrutture',
-          'CI/CD pipeline',
-          'orchestrazione IT',
-          'automazione server',
-          'integrazione API',
-          'containerizzazione Docker',
+          'Infrastructure as Code Roma',
+          'automazione infrastrutture Roma',
+          'CI/CD pipeline Roma',
+          'orchestrazione IT Roma',
+          'automazione IT Ostia Lido',
+          'DevOps Fiumicino',
+          'automazione IT Pomezia',
+          'integrazione sistemi Roma',
+          'Ansible Terraform Roma',
+          'automazione server Roma Sud',
+          'workflow automation Roma',
+          'consulenza DevOps Roma EUR',
         ]}
         canonical="/automazione-processi"
         schema={automazioneSchema}

@@ -174,25 +174,24 @@ export default function Tecnologie() {
   return (
     <>
       <SEO
-        title="Tecnologie IT | Stack Tecnologico Aziendale - CoreNexus Technology Solution"
-        description="Scopri le tecnologie utilizzate da CoreNexus Technology Solution: Linux, Windows Server, VMware, Proxmox, Cisco, Fortinet, MikroTik, pfSense, Veeam, Acronis e molto altro."
+        title="Tecnologie IT Roma | Stack Tecnologico Aziendale - CoreNexus Technology Solution"
+        description="Stack tecnologico CoreNexus per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia: Linux, Windows Server, VMware, Proxmox, Cisco, Fortinet, MikroTik, pfSense, Wazuh, Zabbix, Veeam, Acronis e molto altro."
         keywords={[
           'tecnologie IT Roma',
-          'stack tecnologico aziendale',
+          'stack tecnologico aziendale Roma',
           'Linux server Roma',
-          'Windows Server',
-          'VMware vSphere',
-          'Proxmox VE',
-          'Hyper-V',
-          'Cisco networking',
-          'Fortinet firewall',
-          'MikroTik router',
-          'pfSense firewall',
-          'OPNsense',
-          'Veeam backup',
-          'Acronis backup',
-          'virtualizzazione server',
-          'CoreNexus Technology Solution',
+          'Windows Server Roma',
+          'VMware vSphere Roma',
+          'Proxmox VE Roma',
+          'Cisco Roma',
+          'Fortinet Roma',
+          'MikroTik Roma',
+          'pfSense Roma',
+          'Wazuh Roma',
+          'Zabbix Roma',
+          'Veeam backup Roma',
+          'Acronis Roma',
+          'tecnologie IT Roma EUR Ostia Fiumicino',
         ]}
         canonicalUrl="https://corenexus.it/tecnologie"
         structuredData={tecnologieSchema}

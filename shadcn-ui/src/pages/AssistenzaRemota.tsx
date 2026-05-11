@@ -11,15 +11,19 @@ export default function AssistenzaRemota() {
   return (
     <>
       <SEO
-        title="Assistenza Remota | CoreNexus Technology Solution"
-        description="Ricevi supporto tecnico immediato con UltraViewer. Assistenza remota rapida, sicura e gratuita per risolvere i tuoi problemi informatici senza spostamenti."
+        title="Assistenza Remota Roma EUR Ostia Fiumicino | Supporto Tecnico Online - CoreNexus"
+        description="Assistenza remota rapida e sicura per aziende e privati a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Supporto tecnico immediato con UltraViewer, risoluzione problemi informatici senza spostamenti."
         keywords={[
           'assistenza remota Roma',
-          'supporto tecnico remoto',
+          'supporto tecnico remoto Roma EUR',
+          'teleassistenza informatica Roma',
+          'assistenza remota Ostia Lido',
+          'assistenza remota Fiumicino',
+          'supporto remoto aziendale Roma',
+          'assistenza PC remota Pomezia',
           'UltraViewer assistenza',
-          'teleassistenza informatica',
-          'supporto remoto aziendale',
-          'assistenza PC remota',
+          'supporto tecnico online Roma',
+          'assistenza informatica da remoto Roma Sud',
         ]}
         canonical="/assistenza-remota"
       />

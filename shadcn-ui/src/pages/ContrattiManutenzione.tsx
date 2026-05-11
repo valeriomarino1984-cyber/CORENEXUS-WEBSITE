@@ -182,19 +182,24 @@ export default function ContrattiManutenzione() {
   return (
     <>
       <SEO
-        title="Contratti di Manutenzione IT Roma | Assistenza Informatica - CoreNexus Technology Solution"
-        description="Contratti di assistenza e manutenzione informatica per aziende a Roma. Supporto continuativo, monitoraggio proattivo 24/7, SLA garantiti. Pacchetti personalizzabili per PMI."
+        title="Contratti Manutenzione IT Roma EUR Ostia Fiumicino | Assistenza Informatica - CoreNexus"
+        description="Contratti di assistenza e manutenzione informatica per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Supporto continuativo, monitoraggio proattivo 24/7, SLA garantiti. Pacchetti personalizzabili per PMI."
         keywords={[
           'contratti manutenzione IT Roma',
-          'assistenza informatica contratto',
+          'assistenza informatica contratto Roma EUR',
           'manutenzione server Roma',
-          'supporto IT aziendale',
-          'SLA informatica',
-          'monitoraggio IT 24/7',
+          'supporto IT aziendale Roma',
+          'SLA informatica Roma',
+          'monitoraggio IT 24/7 Roma',
           'assistenza remota Roma',
-          'manutenzione preventiva IT',
-          'contratto assistenza computer',
-          'supporto tecnico aziendale Roma',
+          'contratti IT Ostia Lido',
+          'manutenzione IT Fiumicino',
+          'contratti assistenza Pomezia',
+          'supporto IT Roma Sud',
+          'manutenzione preventiva IT Roma',
+          'assistenza continuativa Roma EUR',
+          'pacchetti assistenza IT Roma',
+          'help desk contratto Roma',
         ]}
         canonical="/contratti-manutenzione"
         schema={manutenzioneSchema}
