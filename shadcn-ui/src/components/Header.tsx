@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, Globe, FileText, Phone, Cog, Cpu, Briefcase, Monitor, BookOpen, Container } from 'lucide-react';
+import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, Globe, FileText, Phone, Cog, Cpu, Briefcase, Monitor, BookOpen, Container, Radar } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
@@ -25,6 +25,7 @@ export default function Header() {
     '/centralini-voip',
     '/automazione-processi',
     '/kubernetes-container',
+    '/soc-as-a-service',
   ].includes(location.pathname);
 
   useEffect(() => {
@@ -72,6 +73,7 @@ export default function Header() {
     { name: 'Project Management', path: '/project-management', icon: ClipboardList },
     { name: 'Networking e Reti', path: '/networking-reti', icon: Network },
     { name: 'Sicurezza Informatica', path: '/sicurezza-informatica', icon: ShieldCheck },
+    { name: 'Il Tuo Sistema SOC', path: '/soc-as-a-service', icon: Radar },
     { name: 'Allarme e Videosorveglianza', path: '/impianti-allarme-videosorveglianza', icon: Camera },
     { name: 'Siti Web & E-commerce', path: '/siti-web', icon: Globe },
     { name: 'Centralini VoIP', path: '/centralini-voip', icon: Phone },

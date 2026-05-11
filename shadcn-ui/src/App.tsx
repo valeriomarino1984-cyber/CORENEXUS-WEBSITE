@@ -18,6 +18,7 @@ import ContrattiManutenzione from './pages/ContrattiManutenzione';
 import CentraliniVoip from './pages/CentraliniVoip';
 import AutomazioneProcessi from './pages/AutomazioneProcessi';
 import KubernetesContainer from './pages/KubernetesContainer';
+import SocAsAService from './pages/SocAsAService';
 import Tecnologie from './pages/Tecnologie';
 import AssistenzaRemota from './pages/AssistenzaRemota';
 import AuditGratuito from './pages/AuditGratuito';
@@ -69,6 +70,7 @@ const AppContent = () => {
         <Route path="/centralini-voip" element={<CentraliniVoip />} />
         <Route path="/automazione-processi" element={<AutomazioneProcessi />} />
         <Route path="/kubernetes-container" element={<KubernetesContainer />} />
+        <Route path="/soc-as-a-service" element={<SocAsAService />} />
         <Route path="/tecnologie" element={<Tecnologie />} />
         <Route path="/assistenza-remota" element={<AssistenzaRemota />} />
         <Route path="/audit-gratuito" element={<AuditGratuito />} />
