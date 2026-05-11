@@ -16,7 +16,7 @@ import {
   Globe,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { breadcrumbSchema, standardAreaServed } from '@/utils/seoSchemas';
+import { breadcrumbSchema, standardAreaServed, standardSameAs } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 
 export default function DoveSiamo() {
@@ -48,7 +48,8 @@ export default function DoveSiamo() {
             "longitude": 12.375
           },
           "geoRadius": "30000"
-        }
+        },
+        "sameAs": standardSameAs
       }
     ]
   };

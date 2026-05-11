@@ -13,6 +13,13 @@ export const standardAreaServed = [
   { "@type": "State", "name": "Lazio" }
 ];
 
+// Link social e profili aziendali standard
+export const standardSameAs = [
+  "https://www.facebook.com/corenexus",
+  "https://www.linkedin.com/company/corenexus",
+  "https://www.google.com/maps/place/CoreNexus+Technology+Solution"
+];
+
 export const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
@@ -69,10 +76,7 @@ export const localBusinessSchema = {
       "closes": "18:00"
     }
   ],
-  "sameAs": [
-    "https://www.facebook.com/corenexus",
-    "https://www.linkedin.com/company/corenexus"
-  ]
+  "sameAs": standardSameAs
 };
 
 export const professionalServiceSchema = {
@@ -134,7 +138,8 @@ export const contactPageSchema = {
         "availableLanguage": ["Italian"],
         "areaServed": "IT"
       }
-    ]
+    ],
+    "sameAs": standardSameAs
   }
 };
 
@@ -240,8 +245,5 @@ export const localBusinessServiceSchema = (
       }
     ]
   },
-  "sameAs": [
-    "https://www.facebook.com/corenexus",
-    "https://www.linkedin.com/company/corenexus"
-  ]
+  "sameAs": standardSameAs
 });
