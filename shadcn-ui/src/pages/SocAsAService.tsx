@@ -32,31 +32,12 @@ import {
   ChevronRight,
   Terminal,
   Share2,
+  Check,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { breadcrumbSchema, localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 import { useState, useEffect, useRef } from 'react';
-
-/* ── Animated scan line ── */
-function ScanLine() {
-  return (
-    <div
-      className="absolute top-0 left-0 right-0 h-[2px] pointer-events-none z-10 opacity-40"
-      style={{
-        background: 'linear-gradient(90deg, transparent, #00d4ff, transparent)',
-        animation: 'socScan 6s ease-in-out infinite',
-      }}
-    />
-  );
-}
-
-/* ── Blinking dot ── */
-function BlinkDot({ color = 'bg-cyan-400' }: { color?: string }) {
-  return (
-    <span className={`inline-block w-1.5 h-1.5 rounded-full ${color} animate-pulse`} />
-  );
-}
 
 /* ── AI Terminal animation ── */
 function AITerminal() {
@@ -86,7 +67,6 @@ function AITerminal() {
     intervalRef.current = setInterval(() => {
       setVisibleLines((prev) => {
         if (prev >= lines.length) {
-          // Reset after a pause
           setTimeout(() => setVisibleLines(0), 2000);
           return prev;
         }
@@ -99,7 +79,7 @@ function AITerminal() {
   }, [lines.length]);
 
   return (
-    <div className="bg-[#0a0f14] border border-white/10 rounded-2xl p-6 font-mono text-xs leading-relaxed overflow-hidden">
+    <div className="p-6 rounded-2xl glass-effect border border-red-500/20 font-mono text-xs leading-relaxed overflow-hidden">
       <div className="text-gray-500 border-b border-white/10 pb-2 mb-3 text-[10px] tracking-wider uppercase">
         // AI ALERT ANALYSIS ENGINE · LIVE
       </div>
@@ -120,32 +100,6 @@ function AITerminal() {
         );
       })}
       <span className="inline-block w-2 h-3.5 bg-cyan-400 align-middle animate-pulse mt-1" />
-    </div>
-  );
-}
-
-/* ── Metric bar ── */
-function MetricBar({
-  label,
-  value,
-  pct,
-  color,
-}: {
-  label: string;
-  value: string;
-  pct: number;
-  color: string;
-}) {
-  return (
-    <div className="flex items-center gap-3">
-      <span className="font-mono text-[11px] text-gray-500 tracking-wide min-w-[180px]">{label}</span>
-      <div className="flex-1 h-1.5 bg-white/5 border border-white/10 rounded-full overflow-hidden">
-        <div
-          className={`h-full rounded-full ${color} shadow-lg`}
-          style={{ width: `${pct}%`, transition: 'width 1.8s ease-out' }}
-        />
-      </div>
-      <span className="font-mono text-[11px] text-white min-w-[36px] text-right">{value}</span>
     </div>
   );
 }
@@ -189,35 +143,35 @@ export default function SocAsAService() {
   };
 
   const stats = [
-    { num: '< 5', unit: 'min', label: 'MTTD — Mean Time to Detect' },
-    { num: '100+', unit: '', label: 'Agenti monitorati in tempo reale' },
-    { num: '99.9%', unit: '', label: 'Uptime SLA garantito' },
-    { num: '0-Day', unit: '', label: 'Threat intelligence feeds attivi' },
+    { num: '< 5 min', label: 'MTTD — Mean Time to Detect', icon: Clock, color: 'from-red-500 to-orange-500' },
+    { num: '100+', label: 'Agenti monitorati in tempo reale', icon: Server, color: 'from-orange-500 to-yellow-500' },
+    { num: '99.9%', label: 'Uptime SLA garantito', icon: MonitorCheck, color: 'from-yellow-500 to-red-500' },
+    { num: '0-Day', label: 'Threat intelligence feeds attivi', icon: Shield, color: 'from-red-500 to-pink-500' },
   ];
 
   const archLayer1 = [
-    { name: 'Wazuh Agents', desc: 'Log, FIM, SCA, rootkit', dot: 'bg-red-500 shadow-red-500/50' },
-    { name: 'Zabbix Agent', desc: 'Metriche infrastruttura', dot: 'bg-cyan-400 shadow-cyan-400/50' },
-    { name: 'Syslog / CEF', desc: 'Firewall, switch, AP', dot: 'bg-orange-500 shadow-orange-500/50' },
-    { name: 'Threat Intel Feeds', desc: 'Abuse.ch, OTX, CINS', dot: 'bg-green-400 shadow-green-400/50' },
+    { name: 'Wazuh Agents', desc: 'Log, FIM, SCA, rootkit', color: 'text-red-400' },
+    { name: 'Zabbix Agent', desc: 'Metriche infrastruttura', color: 'text-cyan-400' },
+    { name: 'Syslog / CEF', desc: 'Firewall, switch, AP', color: 'text-orange-400' },
+    { name: 'Threat Intel Feeds', desc: 'Abuse.ch, OTX, CINS', color: 'text-green-400' },
   ];
 
   const archLayer2 = [
-    { name: 'Wazuh Manager', desc: 'Rule engine, MITRE ATT&CK', dot: 'bg-red-500 shadow-red-500/50' },
-    { name: 'OpenSearch', desc: 'Dashboard & analytics', dot: 'bg-cyan-400 shadow-cyan-400/50' },
-    { name: 'AI Correlator', desc: 'Anomaly detection ML', dot: 'bg-orange-500 shadow-orange-500/50' },
+    { name: 'Wazuh Manager', desc: 'Rule engine, MITRE ATT&CK', color: 'text-red-400' },
+    { name: 'OpenSearch', desc: 'Dashboard & analytics', color: 'text-cyan-400' },
+    { name: 'AI Correlator', desc: 'Anomaly detection ML', color: 'text-orange-400' },
   ];
 
   const archLayer3 = [
-    { name: 'TheHive 5', desc: 'Case management IRP', dot: 'bg-red-500 shadow-red-500/50' },
-    { name: 'Cortex', desc: 'Analisi IoC automatizzata', dot: 'bg-cyan-400 shadow-cyan-400/50' },
-    { name: 'MISP', desc: 'Threat sharing platform', dot: 'bg-green-400 shadow-green-400/50' },
+    { name: 'TheHive 5', desc: 'Case management IRP', color: 'text-red-400' },
+    { name: 'Cortex', desc: 'Analisi IoC automatizzata', color: 'text-cyan-400' },
+    { name: 'MISP', desc: 'Threat sharing platform', color: 'text-green-400' },
   ];
 
   const archLayer4 = [
-    { name: 'Active Response', desc: 'IP block, quarantena host', dot: 'bg-red-500 shadow-red-500/50' },
-    { name: 'AI Playbook', desc: 'Remediation guidata LLM', dot: 'bg-orange-500 shadow-orange-500/50' },
-    { name: 'Report & GRC', desc: 'Compliance automatica', dot: 'bg-cyan-400 shadow-cyan-400/50' },
+    { name: 'Active Response', desc: 'IP block, quarantena host', color: 'text-red-400' },
+    { name: 'AI Playbook', desc: 'Remediation guidata LLM', color: 'text-orange-400' },
+    { name: 'Report & GRC', desc: 'Compliance automatica', color: 'text-cyan-400' },
   ];
 
   const components = [
@@ -232,8 +186,8 @@ export default function SocAsAService() {
         'Dashboard OpenSearch personalizzate',
         'Supporto PCI-DSS, ISO 27001, NIS2',
       ],
-      gradient: 'from-red-500 to-red-700',
-      borderColor: 'hover:border-red-500/40',
+      gradient: 'from-red-500 to-orange-500',
+      borderColor: 'hover:border-red-500/30',
       accentColor: 'text-red-400',
     },
     {
@@ -248,7 +202,7 @@ export default function SocAsAService() {
         'Notifiche email/Slack su escalation',
       ],
       gradient: 'from-orange-500 to-amber-600',
-      borderColor: 'hover:border-orange-500/40',
+      borderColor: 'hover:border-orange-500/30',
       accentColor: 'text-orange-400',
     },
     {
@@ -263,14 +217,14 @@ export default function SocAsAService() {
         'Report IoC allegati ai casi TheHive',
       ],
       gradient: 'from-cyan-500 to-blue-600',
-      borderColor: 'hover:border-cyan-500/40',
+      borderColor: 'hover:border-cyan-500/30',
       accentColor: 'text-cyan-400',
     },
     {
       icon: BarChart3,
       name: 'Zabbix',
       role: 'Infrastructure Monitoring · Dashboard',
-      desc: 'Monitoraggio completo dell\'infrastruttura: server, switch, firewall, applicazioni. Dashboard real-time con alerting su soglie e anomalie.',
+      desc: "Monitoraggio completo dell'infrastruttura: server, switch, firewall, applicazioni. Dashboard real-time con alerting su soglie e anomalie.",
       features: [
         'Metriche CPU, RAM, disco, rete in tempo reale',
         'Trigger intelligenti con escalation multi-livello',
@@ -278,7 +232,7 @@ export default function SocAsAService() {
         'Integrazione alert → TheHive per correlazione',
       ],
       gradient: 'from-green-500 to-emerald-600',
-      borderColor: 'hover:border-green-500/40',
+      borderColor: 'hover:border-green-500/30',
       accentColor: 'text-green-400',
     },
     {
@@ -293,32 +247,60 @@ export default function SocAsAService() {
         'Apprendimento su pattern storici client-specifici',
       ],
       gradient: 'from-red-500 to-purple-600',
-      borderColor: 'hover:border-red-500/40',
+      borderColor: 'hover:border-red-500/30',
       accentColor: 'text-red-400',
     },
   ];
 
   const aiFeatures = [
     'Classificazione automatica degli alert per severità e tipologia (brute force, lateral movement, exfiltration) tramite modello LLM fine-tuned su log di sicurezza.',
-    'Correlazione cross-source: l\'IA mette in relazione eventi Wazuh, anomalie Zabbix e IoC Cortex per ricostruire la kill chain completa.',
+    "Correlazione cross-source: l'IA mette in relazione eventi Wazuh, anomalie Zabbix e IoC Cortex per ricostruire la kill chain completa.",
     'Generazione automatica del report incidente in italiano, pronto per il responsabile sicurezza e conforme NIS2/ISO 27001.',
     'Esecuzione guidata del playbook: blocco IP, isolamento host, revoca credenziali — con approvazione umana opzionale per azioni ad alto impatto.',
-    'Feedback loop: ogni decisione dell\'analista migliora il modello nel tempo, adattandosi al contesto specifico del cliente.',
+    "Feedback loop: ogni decisione dell'analista migliora il modello nel tempo, adattandosi al contesto specifico del cliente.",
+  ];
+
+  const monitoringFeatures = [
+    'Monitoraggio agentless SNMP per dispositivi di rete',
+    'Alert predittivi su tendenze di saturazione',
+    'SLA tracking per servizi critici',
+    'Integrazione webhook → Teams / Slack / Email',
+    'Correlazione metriche infra ↔ alert sicurezza',
+  ];
+
+  const monitoringMetrics = [
+    { label: 'CPU Load (avg 5min)', value: '72%', pct: 72, color: 'bg-gradient-to-r from-cyan-500 to-cyan-400' },
+    { label: 'RAM Utilizzo', value: '61%', pct: 61, color: 'bg-gradient-to-r from-green-500 to-green-400' },
+    { label: 'Disco /var/log', value: '88%', pct: 88, color: 'bg-gradient-to-r from-red-500 to-red-400' },
+    { label: 'Network Throughput', value: '43%', pct: 43, color: 'bg-gradient-to-r from-cyan-500 to-cyan-400' },
+    { label: 'Wazuh Agents Online', value: '97%', pct: 97, color: 'bg-gradient-to-r from-green-500 to-green-400' },
+    { label: 'Active Response Fired', value: '3', pct: 15, color: 'bg-gradient-to-r from-orange-500 to-orange-400' },
+    { label: 'Open TheHive Cases', value: '4', pct: 20, color: 'bg-gradient-to-r from-red-500 to-red-400' },
   ];
 
   const processSteps = [
-    { num: '01', title: 'Assessment', desc: 'Analisi dell\'infrastruttura, asset inventory, gap analysis NIS2/ISO 27001' },
-    { num: '02', title: 'Design', desc: 'Architettura SOC su misura, sizing server, piano di deployment' },
-    { num: '03', title: 'Deploy', desc: 'Installazione Wazuh, TheHive, Cortex, Zabbix. Tuning regole e soglie' },
-    { num: '04', title: 'Integrazione AI', desc: 'Attivazione autoresponder, calibrazione modello, test playbook' },
-    { num: '05', title: 'Go-Live & MDR', desc: 'Operatività, reportistica mensile, miglioramento continuo' },
+    { num: '01', title: 'Assessment', desc: "Analisi dell'infrastruttura, asset inventory, gap analysis NIS2/ISO 27001", gradient: 'from-red-500 to-orange-500' },
+    { num: '02', title: 'Design', desc: 'Architettura SOC su misura, sizing server, piano di deployment', gradient: 'from-orange-500 to-yellow-500' },
+    { num: '03', title: 'Deploy', desc: 'Installazione Wazuh, TheHive, Cortex, Zabbix. Tuning regole e soglie', gradient: 'from-yellow-500 to-red-500' },
+    { num: '04', title: 'Integrazione AI', desc: 'Attivazione autoresponder, calibrazione modello, test playbook', gradient: 'from-red-500 to-purple-500' },
+    { num: '05', title: 'Go-Live & MDR', desc: 'Operatività, reportistica mensile, miglioramento continuo', gradient: 'from-purple-500 to-red-500' },
   ];
 
-  const ArchTool = ({ name, desc, dot }: { name: string; desc: string; dot: string }) => (
-    <div className="flex items-center gap-3 p-3 bg-white/[0.02] border border-white/10 hover:border-cyan-500/30 hover:bg-cyan-500/[0.04] transition-all duration-200 rounded-lg">
-      <div className={`w-2 h-2 rounded-full ${dot} shadow-sm flex-shrink-0`} />
-      <span className="text-white font-semibold text-sm tracking-wide">{name}</span>
-      <span className="text-gray-500 text-xs ml-auto text-right max-w-[140px] leading-tight hidden sm:block">{desc}</span>
+  const keyPoints = [
+    'Rilevazione, analisi e risposta agli incidenti 24/7',
+    'Ecosistema integrato: Wazuh SIEM, TheHive, Cortex, Zabbix',
+    'Autoresponders potenziati dall\'Intelligenza Artificiale',
+    'Blocco automatico degli IP malevoli con Active Response',
+    'Report e compliance NIS2/ISO 27001 automatizzati',
+  ];
+
+  const ArchTool = ({ name, desc, color }: { name: string; desc: string; color: string }) => (
+    <div className="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-red-500/20 transition-colors">
+      <Check className={`w-4 h-4 ${color} flex-shrink-0 mt-0.5`} />
+      <div>
+        <span className="text-white font-medium text-sm block">{name}</span>
+        <span className="text-gray-400 text-xs">{desc}</span>
+      </div>
     </div>
   );
 
@@ -348,27 +330,16 @@ export default function SocAsAService() {
         schema={socSchema}
       />
 
-      {/* Inject keyframe for scan animation */}
-      <style>{`
-        @keyframes socScan {
-          0%   { top: 0; opacity: 0; }
-          10%  { opacity: 0.4; }
-          90%  { opacity: 0.4; }
-          100% { top: 100%; opacity: 0; }
-        }
-      `}</style>
-
       <div className="min-h-screen bg-black">
         <Header />
 
         {/* ══════════════ HERO ══════════════ */}
-        <section className="relative overflow-hidden pt-32 pb-20 px-6 min-h-[90vh] flex items-center">
-          <ScanLine />
-          <div className="absolute inset-0 bg-gradient-to-br from-red-950/30 via-black to-cyan-950/10" />
-          <div className="absolute top-1/2 left-[60%] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-red-500/[0.06] blur-3xl pointer-events-none" />
-          <div className="absolute top-20 left-10 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl animate-float" />
+        <section className="relative overflow-hidden pt-32 pb-20 px-6">
+          <div className="absolute inset-0 bg-gradient-to-br from-red-950/30 via-black to-orange-950/20" />
+          <div className="absolute top-20 left-10 w-96 h-96 bg-red-500/10 rounded-full blur-3xl animate-float" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
 
-          <div className="max-w-7xl mx-auto relative z-10 w-full">
+          <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
               <div className="mb-6">
                 <Link
@@ -380,99 +351,140 @@ export default function SocAsAService() {
                 </Link>
               </div>
 
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-sm border border-cyan-500/30 text-cyan-400 font-mono text-xs tracking-wider mb-8">
-                <BlinkDot color="bg-cyan-400" />
-                SOC as a Service · Powered by Open Source &amp; AI
-              </div>
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <div className="space-y-8">
+                  <div className="inline-block">
+                    <span className="px-4 py-2 rounded-full glass-effect text-red-400 text-sm font-semibold tracking-wide flex items-center gap-2">
+                      <Shield className="w-4 h-4" />
+                      SOC as a Service · Powered by Open Source &amp; AI
+                    </span>
+                  </div>
 
-              <h1 className="text-6xl md:text-8xl lg:text-9xl font-black leading-[0.95] tracking-tight text-white mb-6">
-                Security<br />
-                Operations<br />
-                <span className="text-red-500">Center</span>{' '}
-                <span className="text-cyan-400">24/7</span>
-              </h1>
+                  <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+                    <span className="bg-gradient-to-r from-red-400 via-orange-400 to-red-500 bg-clip-text text-transparent">
+                      Security Operations Center
+                    </span>
+                    <br />
+                    <span className="text-white">24/7</span>
+                  </h1>
 
-              <p className="text-lg md:text-xl text-gray-500 font-light max-w-xl leading-relaxed mb-10">
-                Rilevazione, analisi e risposta agli incidenti con un ecosistema integrato:
-                Wazuh SIEM, TheHive, Cortex, Zabbix e autoresponders potenziati dall&apos;Intelligenza Artificiale.
-              </p>
+                  <p className="text-xl text-gray-400 leading-relaxed">
+                    Rilevazione, analisi e risposta agli incidenti con un ecosistema integrato:
+                    <strong className="text-white"> Wazuh SIEM</strong>, <strong className="text-white">TheHive</strong>,{' '}
+                    <strong className="text-white">Cortex</strong>, <strong className="text-white">Zabbix</strong> e
+                    autoresponders potenziati dall&apos;Intelligenza Artificiale.
+                  </p>
 
-              <div className="flex gap-4 flex-wrap">
-                <a
-                  href="mailto:info@corenexus.it?subject=Richiesta%20Demo%20SOC%20Wazuh"
-                  className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-sm uppercase tracking-widest px-8 py-4 transition-all duration-200 hover:-translate-y-0.5"
-                >
-                  Richiedi una Demo
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-                <a
-                  href="#architettura"
-                  className="inline-flex items-center gap-2 border border-white/10 hover:border-cyan-500/50 text-gray-300 hover:text-cyan-400 font-semibold text-sm uppercase tracking-widest px-8 py-4 transition-all duration-200"
-                >
-                  Scopri l&apos;Architettura
-                </a>
+                  <div className="space-y-4">
+                    {keyPoints.map((point, index) => (
+                      <div key={index} className="flex items-start gap-3 group">
+                        <div className="w-6 h-6 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
+                          <Check className="w-3.5 h-3.5 text-white" />
+                        </div>
+                        <span className="text-gray-300 text-lg">{point}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-4 flex-wrap">
+                    <Button
+                      size="lg"
+                      onClick={() => window.location.href = 'mailto:info@corenexus.it?subject=Richiesta%20Demo%20SOC%20Wazuh'}
+                      className="group bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white px-10 py-7 text-lg rounded-2xl font-semibold shadow-lg shadow-red-500/20"
+                    >
+                      Richiedi una Demo
+                      <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                    </Button>
+                    <a href="#architettura">
+                      <Button
+                        size="lg"
+                        variant="outline"
+                        className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-10 py-7 text-lg rounded-2xl font-semibold"
+                      >
+                        Scopri l&apos;Architettura
+                      </Button>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Right side - Visual element */}
+                <div className="hidden lg:flex justify-center">
+                  <div className="relative">
+                    <div className="w-80 h-80 rounded-3xl glass-effect border border-red-500/20 p-8 flex flex-col items-center justify-center gap-6">
+                      <div className="grid grid-cols-3 gap-4">
+                        {[Shield, Eye, Activity, Brain, Search, Cpu, BarChart3, Ban, Bell].map((Icon, i) => (
+                          <div
+                            key={i}
+                            className="w-16 h-16 rounded-2xl glass-effect flex items-center justify-center hover:bg-red-500/20 transition-all duration-300 hover:scale-110"
+                          >
+                            <Icon className="w-7 h-7 text-red-400" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="absolute -inset-4 bg-gradient-to-br from-red-500/20 to-orange-500/20 rounded-3xl blur-xl -z-10" />
+                  </div>
+                </div>
               </div>
             </MorphingSection>
           </div>
         </section>
 
         {/* ══════════════ STAT BAR ══════════════ */}
-        <section className="border-y border-white/10 bg-[#0d1117]">
-          <div className="grid grid-cols-2 lg:grid-cols-4">
-            {stats.map((s, i) => (
-              <div key={i} className="p-8 border-r border-white/10 last:border-r-0">
-                <div className="text-4xl md:text-5xl font-black text-white leading-none mb-1.5 tracking-tight">
-                  {s.num.includes('<') ? (
-                    <>
-                      &lt; <span className="text-red-500">5</span>min
-                    </>
-                  ) : s.num.includes('+') ? (
-                    <>
-                      <span className="text-red-500">100</span>+
-                    </>
-                  ) : s.num.includes('%') ? (
-                    <>
-                      <span className="text-red-500">99.9</span>%
-                    </>
-                  ) : (
-                    <>
-                      <span className="text-red-500">0</span>-Day
-                    </>
-                  )}
-                </div>
-                <div className="font-mono text-[11px] text-gray-500 tracking-wider uppercase">{s.label}</div>
+        <section className="py-16 px-6 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-red-950/10 to-black" />
+          <div className="max-w-7xl mx-auto relative z-10">
+            <MorphingSection>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {stats.map((s, i) => (
+                  <div key={i} className="p-6 rounded-2xl glass-effect border border-white/5 hover:border-red-500/30 transition-all duration-300 text-center group hover:scale-105">
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${s.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
+                      <s.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div className={`text-3xl font-bold bg-gradient-to-r ${s.color} bg-clip-text text-transparent mb-2`}>
+                      {s.num}
+                    </div>
+                    <div className="text-gray-400 text-sm">{s.label}</div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </MorphingSection>
           </div>
         </section>
 
         {/* ══════════════ ARCHITETTURA ══════════════ */}
         <section id="architettura" className="py-24 px-6 relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-cyan-950/5 to-black" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-cyan-950/10 to-black" />
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
-              <div className="font-mono text-[11px] text-red-500 tracking-widest uppercase mb-4">// Architettura</div>
-              <h2 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-5 tracking-tight">
-                Stack tecnico <span className="text-red-500">integrato</span>
-              </h2>
-              <p className="text-gray-500 text-lg max-w-xl leading-relaxed mb-16">
-                Un ecosistema open-source di livello enterprise orchestrato per rilevare, correlare e rispondere
-                alle minacce in modo automatizzato e scalabile.
-              </p>
+              <div className="text-center space-y-6 mb-16">
+                <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass-effect border border-red-500/30">
+                  <Eye className="w-5 h-5 text-red-400" />
+                  <span className="text-red-400 font-semibold text-sm uppercase tracking-wider">Architettura</span>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">
+                  Stack tecnico <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">integrato</span>
+                </h2>
+                <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                  Un ecosistema open-source di livello enterprise orchestrato per rilevare, correlare e rispondere
+                  alle minacce in modo automatizzato e scalabile.
+                </p>
+              </div>
             </MorphingSection>
 
             <MorphingSection delay={0.1}>
-              <div className="bg-[#0d1117] border border-white/10 p-6 md:p-10 rounded-2xl">
-                <div className="font-mono text-[11px] text-cyan-400 tracking-wider uppercase mb-8 flex items-center gap-3">
-                  Flusso operativo SOC
-                  <div className="flex-1 h-px bg-white/10" />
-                </div>
+              <div className="p-8 rounded-3xl glass-effect border border-red-500/20">
+                <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                  <Activity className="w-6 h-6 text-red-400" />
+                  Flusso Operativo SOC
+                </h3>
 
-                {/* Row 1: Raccolta → Analisi */}
-                <div className="grid md:grid-cols-3 gap-1 mb-1">
-                  <div className="bg-[#111820] border border-white/10 p-5 rounded-xl">
-                    <div className="font-mono text-[10px] text-gray-500 tracking-wider uppercase mb-4 pb-3 border-b border-white/10">
-                      01 · Raccolta &amp; Telemetria
+                <div className="grid md:grid-cols-2 gap-8">
+                  {/* Layer 1 */}
+                  <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-gray-400 text-sm font-medium">01 · Raccolta &amp; Telemetria</span>
+                      <span className="text-xs px-2 py-1 rounded-full bg-red-500/20 text-red-400">Input</span>
                     </div>
                     <div className="space-y-2">
                       {archLayer1.map((t, i) => (
@@ -481,17 +493,11 @@ export default function SocAsAService() {
                     </div>
                   </div>
 
-                  <div className="hidden md:flex flex-col items-center justify-center gap-2 p-4">
-                    <div className="text-2xl text-red-500 animate-pulse">⟶</div>
-                    <div className="font-mono text-[10px] text-gray-500 tracking-wider text-center leading-relaxed">
-                      CORRELAZIONE<br />&amp;<br />ANALISI
-                    </div>
-                    <div className="text-2xl text-red-500 animate-pulse">⟶</div>
-                  </div>
-
-                  <div className="bg-[#111820] border border-white/10 p-5 rounded-xl">
-                    <div className="font-mono text-[10px] text-gray-500 tracking-wider uppercase mb-4 pb-3 border-b border-white/10">
-                      02 · SIEM &amp; Analisi
+                  {/* Layer 2 */}
+                  <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-gray-400 text-sm font-medium">02 · SIEM &amp; Analisi</span>
+                      <span className="text-xs px-2 py-1 rounded-full bg-orange-500/20 text-orange-400">Correlazione</span>
                     </div>
                     <div className="space-y-2">
                       {archLayer2.map((t, i) => (
@@ -499,15 +505,12 @@ export default function SocAsAService() {
                       ))}
                     </div>
                   </div>
-                </div>
 
-                <div className="h-px bg-white/10 my-1" />
-
-                {/* Row 2: Gestione Incidenti → Risposta */}
-                <div className="grid md:grid-cols-3 gap-1">
-                  <div className="bg-[#111820] border border-white/10 p-5 rounded-xl">
-                    <div className="font-mono text-[10px] text-gray-500 tracking-wider uppercase mb-4 pb-3 border-b border-white/10">
-                      03 · Gestione Incidenti
+                  {/* Layer 3 */}
+                  <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-gray-400 text-sm font-medium">03 · Gestione Incidenti</span>
+                      <span className="text-xs px-2 py-1 rounded-full bg-cyan-500/20 text-cyan-400">IRP</span>
                     </div>
                     <div className="space-y-2">
                       {archLayer3.map((t, i) => (
@@ -516,17 +519,11 @@ export default function SocAsAService() {
                     </div>
                   </div>
 
-                  <div className="hidden md:flex flex-col items-center justify-center gap-2 p-4">
-                    <div className="text-2xl text-red-500 animate-pulse">⟵</div>
-                    <div className="font-mono text-[10px] text-gray-500 tracking-wider text-center leading-relaxed">
-                      RISPOSTA<br />AUTOMATICA
-                    </div>
-                    <div className="text-2xl text-red-500 animate-pulse">⟵</div>
-                  </div>
-
-                  <div className="bg-[#111820] border border-white/10 p-5 rounded-xl">
-                    <div className="font-mono text-[10px] text-gray-500 tracking-wider uppercase mb-4 pb-3 border-b border-white/10">
-                      04 · Risposta &amp; Remediation
+                  {/* Layer 4 */}
+                  <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-gray-400 text-sm font-medium">04 · Risposta &amp; Remediation</span>
+                      <span className="text-xs px-2 py-1 rounded-full bg-green-500/20 text-green-400">Output</span>
                     </div>
                     <div className="space-y-2">
                       {archLayer4.map((t, i) => (
@@ -541,53 +538,50 @@ export default function SocAsAService() {
         </section>
 
         {/* ══════════════ COMPONENTI ══════════════ */}
-        <section id="componenti" className="py-24 px-6 relative bg-[#0d1117] border-y border-white/10">
+        <section id="componenti" className="py-24 px-6 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-red-950/15 to-black" />
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
-              <div className="font-mono text-[11px] text-red-500 tracking-widest uppercase mb-4">// Componenti</div>
-              <h2 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-5 tracking-tight">
-                Le piattaforme <span className="text-red-500">al centro</span> del SOC
-              </h2>
-              <p className="text-gray-500 text-lg max-w-xl leading-relaxed mb-16">
-                Ogni strumento è scelto per robustezza, licenza open-source e integrabilità.
-                CoreNexus li orchestra in un unico ecosistema coerente.
-              </p>
+              <div className="text-center space-y-6 mb-16">
+                <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass-effect border border-red-500/30">
+                  <Cpu className="w-5 h-5 text-red-400" />
+                  <span className="text-red-400 font-semibold text-sm uppercase tracking-wider">Componenti</span>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">
+                  Le piattaforme <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">al centro</span> del SOC
+                </h2>
+                <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                  Ogni strumento è scelto per robustezza, licenza open-source e integrabilità.
+                  CoreNexus li orchestra in un unico ecosistema coerente.
+                </p>
+              </div>
             </MorphingSection>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-[2px]">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {components.map((comp, i) => (
                 <MorphingSection key={i} delay={i * 0.08}>
                   <div
-                    className={`bg-[#0d1117] border border-white/10 ${comp.borderColor} p-8 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group h-full rounded-xl`}
+                    className={`p-6 rounded-2xl glass-effect border border-white/5 ${comp.borderColor} transition-all duration-500 group hover:bg-white/5 h-full`}
                   >
-                    {/* Top accent line */}
-                    <div
-                      className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${comp.gradient} scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300`}
-                    />
-
-                    <div className="relative z-10">
-                      <div className="w-12 h-12 bg-[#111820] border border-white/10 flex items-center justify-center mb-5 rounded-lg relative">
-                        <comp.icon className={`w-6 h-6 ${comp.accentColor}`} />
-                        <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full bg-gradient-to-br ${comp.gradient} shadow-lg animate-pulse`} />
+                    <div className="flex flex-col items-start gap-4">
+                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${comp.gradient} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}>
+                        <comp.icon className="w-6 h-6 text-white" />
                       </div>
-
-                      <h3 className="text-xl font-bold text-white tracking-wide mb-1">{comp.name}</h3>
-                      <div className={`font-mono text-[10px] ${comp.accentColor} tracking-widest uppercase mb-4`}>
-                        {comp.role}
+                      <div>
+                        <h4 className="text-white font-semibold text-lg mb-1">{comp.name}</h4>
+                        <div className={`text-xs ${comp.accentColor} font-medium uppercase tracking-wider mb-3`}>
+                          {comp.role}
+                        </div>
+                        <p className="text-gray-400 text-sm leading-relaxed mb-4">{comp.desc}</p>
+                        <ul className="space-y-2">
+                          {comp.features.map((f, j) => (
+                            <li key={j} className="flex items-start gap-2 text-gray-400 text-sm">
+                              <Check className={`w-4 h-4 ${comp.accentColor} flex-shrink-0 mt-0.5`} />
+                              {f}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                      <p className="text-gray-500 text-sm leading-relaxed mb-5">{comp.desc}</p>
-
-                      <ul className="space-y-0">
-                        {comp.features.map((f, j) => (
-                          <li
-                            key={j}
-                            className="flex items-center gap-2 py-2 border-t border-white/5 text-gray-500 text-[13px]"
-                          >
-                            <ChevronRight className={`w-3 h-3 ${comp.accentColor} flex-shrink-0`} />
-                            {f}
-                          </li>
-                        ))}
-                      </ul>
                     </div>
                   </div>
                 </MorphingSection>
@@ -601,36 +595,35 @@ export default function SocAsAService() {
           <div className="absolute inset-0 bg-gradient-to-b from-black via-red-950/10 to-black" />
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
-              <div className="font-mono text-[11px] text-red-500 tracking-widest uppercase mb-4">// Intelligenza Artificiale</div>
-              <h2 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-10 tracking-tight">
-                Risposta <span className="text-red-500">autonoma</span> potenziata dall&apos;IA
-              </h2>
+              <div className="text-center space-y-6 mb-16">
+                <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass-effect border border-red-500/30">
+                  <Brain className="w-5 h-5 text-red-400" />
+                  <span className="text-red-400 font-semibold text-sm uppercase tracking-wider">Intelligenza Artificiale</span>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">
+                  Risposta <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">autonoma</span> potenziata dall&apos;IA
+                </h2>
+                <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                  Il layer AI di CoreNexus si integra con Wazuh e TheHive per analizzare ogni alert
+                  in contesto, ridurre i falsi positivi e attivare risposte automatiche proporzionate alla minaccia.
+                </p>
+              </div>
             </MorphingSection>
 
             <MorphingSection delay={0.1}>
-              <div className="bg-gradient-to-br from-[#0d1117] to-[#111820] border border-white/10 p-8 md:p-12 rounded-2xl relative overflow-hidden">
-                {/* Big AI watermark */}
-                <div className="absolute -right-5 -top-5 text-[160px] font-black text-red-500/[0.04] leading-none pointer-events-none select-none">
-                  AI
-                </div>
-
-                <div className="grid lg:grid-cols-2 gap-12 items-start relative z-10">
+              <div className="p-8 rounded-3xl glass-effect border border-red-500/20">
+                <div className="grid lg:grid-cols-2 gap-12 items-start">
                   <div>
-                    <p className="text-gray-500 text-[15px] leading-relaxed mb-6">
-                      Il layer AI di CoreNexus si integra con Wazuh e TheHive per analizzare ogni alert
-                      in contesto, ridurre i falsi positivi e attivare risposte automatiche proporzionate alla minaccia.
-                    </p>
-
-                    <ul className="space-y-0">
+                    <div className="space-y-0">
                       {aiFeatures.map((feat, i) => (
-                        <li key={i} className="flex items-start gap-4 py-4 border-b border-white/5 last:border-b-0">
-                          <span className="font-mono text-[11px] text-red-500 min-w-[24px] pt-0.5">
-                            {String(i + 1).padStart(2, '0')}
-                          </span>
-                          <span className="text-gray-500 text-sm leading-relaxed">{feat}</span>
-                        </li>
+                        <div key={i} className="flex items-start gap-4 py-4 border-b border-white/5 last:border-b-0">
+                          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span className="text-white text-xs font-bold">{String(i + 1).padStart(2, '0')}</span>
+                          </div>
+                          <span className="text-gray-400 text-sm leading-relaxed">{feat}</span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
 
                   <div>
@@ -643,60 +636,72 @@ export default function SocAsAService() {
         </section>
 
         {/* ══════════════ MONITORING ZABBIX ══════════════ */}
-        <section id="monitoring" className="py-24 px-6 relative bg-[#0d1117] border-y border-white/10">
+        <section id="monitoring" className="py-24 px-6 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-green-950/15 to-black" />
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
-              <div className="font-mono text-[11px] text-red-500 tracking-widest uppercase mb-4">// Monitoring</div>
-              <h2 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-5 tracking-tight">
-                Visibilità <span className="text-red-500">totale</span> sull&apos;infrastruttura
-              </h2>
-              <p className="text-gray-500 text-lg max-w-xl leading-relaxed mb-16">
-                Zabbix garantisce il controllo in tempo reale di ogni componente.
-                Dashboard custom, alert predittivi e correlazione con gli eventi di sicurezza Wazuh.
-              </p>
+              <div className="text-center space-y-6 mb-16">
+                <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass-effect border border-green-500/30">
+                  <Activity className="w-5 h-5 text-green-400" />
+                  <span className="text-green-400 font-semibold text-sm uppercase tracking-wider">Monitoring</span>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">
+                  Visibilità <span className="bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">totale</span> sull&apos;infrastruttura
+                </h2>
+                <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                  Zabbix garantisce il controllo in tempo reale di ogni componente.
+                  Dashboard custom, alert predittivi e correlazione con gli eventi di sicurezza Wazuh.
+                </p>
+              </div>
             </MorphingSection>
 
             <MorphingSection delay={0.1}>
-              <div className="grid lg:grid-cols-2 gap-[2px] bg-[#0d1117] border border-white/10 rounded-2xl overflow-hidden">
-                {/* Left: Info */}
-                <div className="p-8 md:p-10 border-r border-white/10">
-                  <div className="font-mono text-[10px] text-green-400 tracking-widest uppercase mb-5">
-                    Dashboard Zabbix · Infrastruttura Cliente
-                  </div>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-6">
-                    Ogni deployment CoreNexus include dashboard Zabbix personalizzate per il cliente,
-                    con viste separate per IT manager, sistemisti e security team.
-                    Alert su soglie critiche integrati direttamente in TheHive come alert di supporto.
-                  </p>
-                  <ul className="space-y-0">
-                    {[
-                      'Monitoraggio agentless SNMP per dispositivi di rete',
-                      'Alert predittivi su tendenze di saturazione',
-                      'SLA tracking per servizi critici',
-                      'Integrazione webhook → Teams / Slack / Email',
-                      'Correlazione metriche infra ↔ alert sicurezza',
-                    ].map((f, i) => (
-                      <li key={i} className="flex items-center gap-2 py-2 border-t border-white/5 text-gray-500 text-[13px]">
-                        <ChevronRight className="w-3 h-3 text-green-400 flex-shrink-0" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <div className="p-8 rounded-3xl glass-effect border border-green-500/20">
+                <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                  <Gauge className="w-6 h-6 text-green-400" />
+                  Dashboard Zabbix — Infrastruttura Cliente
+                </h3>
 
-                {/* Right: Metrics */}
-                <div className="p-8 md:p-10">
-                  <div className="font-mono text-[10px] text-cyan-400 tracking-widest uppercase mb-6">
-                    Esempio metriche monitorate
+                <div className="grid lg:grid-cols-2 gap-8">
+                  {/* Left: Info */}
+                  <div>
+                    <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                      Ogni deployment CoreNexus include dashboard Zabbix personalizzate per il cliente,
+                      con viste separate per IT manager, sistemisti e security team.
+                      Alert su soglie critiche integrati direttamente in TheHive come alert di supporto.
+                    </p>
+                    <ul className="space-y-3">
+                      {monitoringFeatures.map((f, i) => (
+                        <li key={i} className="flex items-center gap-3 text-gray-300">
+                          <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <div className="space-y-4">
-                    <MetricBar label="CPU Load (avg 5min)" value="72%" pct={72} color="bg-cyan-400 shadow-cyan-400/30" />
-                    <MetricBar label="RAM Utilizzo" value="61%" pct={61} color="bg-green-400 shadow-green-400/30" />
-                    <MetricBar label="Disco /var/log" value="88%" pct={88} color="bg-red-500 shadow-red-500/30" />
-                    <MetricBar label="Network Throughput" value="43%" pct={43} color="bg-cyan-400 shadow-cyan-400/30" />
-                    <MetricBar label="Wazuh Agents Online" value="97%" pct={97} color="bg-green-400 shadow-green-400/30" />
-                    <MetricBar label="Active Response Fired" value="3" pct={15} color="bg-orange-500 shadow-orange-500/30" />
-                    <MetricBar label="Open TheHive Cases" value="4" pct={20} color="bg-red-500 shadow-red-500/30" />
+
+                  {/* Right: Metrics */}
+                  <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-gray-400 text-sm font-medium">Esempio metriche monitorate</span>
+                      <span className="text-xs px-2 py-1 rounded-full bg-green-500/20 text-green-400">Live</span>
+                    </div>
+                    <div className="space-y-4">
+                      {monitoringMetrics.map((m, i) => (
+                        <div key={i}>
+                          <div className="flex justify-between text-xs mb-1">
+                            <span className="text-gray-400">{m.label}</span>
+                            <span className={m.pct > 80 ? 'text-red-400' : m.pct > 60 ? 'text-yellow-400' : 'text-green-400'}>{m.value}</span>
+                          </div>
+                          <div className="w-full bg-white/10 rounded-full h-2">
+                            <div
+                              className={`h-2 rounded-full ${m.color}`}
+                              style={{ width: `${m.pct}%`, transition: 'width 1.8s ease-out' }}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -709,63 +714,67 @@ export default function SocAsAService() {
           <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/30 to-black" />
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
-              <div className="font-mono text-[11px] text-red-500 tracking-widest uppercase mb-4">// Metodologia</div>
-              <h2 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-5 tracking-tight">
-                Come <span className="text-red-500">lavoriamo</span>
-              </h2>
-              <p className="text-gray-500 text-lg max-w-xl leading-relaxed mb-16">
-                Dal primo assessment all&apos;operatività completa in meno di 30 giorni,
-                con un processo strutturato e documentato in ogni fase.
-              </p>
+              <div className="text-center space-y-6 mb-16">
+                <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass-effect border border-red-500/30">
+                  <Target className="w-5 h-5 text-red-400" />
+                  <span className="text-red-400 font-semibold text-sm uppercase tracking-wider">Metodologia</span>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">
+                  Come <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">lavoriamo</span>
+                </h2>
+                <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                  Dal primo assessment all&apos;operatività completa in meno di 30 giorni,
+                  con un processo strutturato e documentato in ogni fase.
+                </p>
+              </div>
             </MorphingSection>
 
             <MorphingSection delay={0.1}>
-              <div className="relative">
-                {/* Connecting line (desktop) */}
-                <div className="hidden lg:block absolute top-7 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-
-                <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-0">
-                  {processSteps.map((step, i) => (
-                    <div key={i} className="text-center px-2 lg:px-4 relative z-10 group">
-                      <div className="w-14 h-14 bg-[#0d1117] border border-white/10 rounded-full flex items-center justify-center mx-auto mb-5 font-mono text-sm font-bold text-red-500 group-hover:border-red-500/50 group-hover:shadow-lg group-hover:shadow-red-500/20 transition-all duration-300">
-                        {step.num}
-                      </div>
-                      <h4 className="text-white font-bold text-base tracking-wide mb-2">{step.title}</h4>
-                      <p className="text-gray-500 text-xs leading-relaxed">{step.desc}</p>
+              <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
+                {processSteps.map((step, i) => (
+                  <div key={i} className="text-center group">
+                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${step.gradient} flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                      <span className="text-white text-lg font-bold">{step.num}</span>
                     </div>
-                  ))}
-                </div>
+                    <h4 className="text-white font-bold text-base mb-2">{step.title}</h4>
+                    <p className="text-gray-400 text-xs leading-relaxed">{step.desc}</p>
+                  </div>
+                ))}
               </div>
             </MorphingSection>
           </div>
         </section>
 
         {/* ══════════════ CTA ══════════════ */}
-        <section className="py-20 px-6 relative border-t border-white/10">
-          <div className="max-w-5xl mx-auto relative z-10">
+        <section className="py-24 px-6 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-red-950/20 to-black" />
+          <div className="max-w-4xl mx-auto relative z-10 text-center">
             <MorphingSection>
-              <div className="bg-[#0d1117] border border-white/10 border-l-[3px] border-l-red-500 p-10 md:p-14 flex flex-col lg:flex-row items-center justify-between gap-10 rounded-2xl">
-                <div>
-                  <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-3 tracking-tight">
-                    Pronto a proteggere<br />la tua infrastruttura?
-                  </h3>
-                  <p className="text-gray-500 text-[15px] max-w-md leading-relaxed">
-                    Parliamo della tua situazione. Offriamo una sessione di assessment gratuita
-                    per analizzare la tua infrastruttura e progettare il SOC più adatto alle tue esigenze.
-                  </p>
-                </div>
-                <div className="flex gap-4 flex-wrap shrink-0">
-                  <a
-                    href="mailto:info@corenexus.it?subject=Richiesta%20Demo%20SOC%20Wazuh"
-                    className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-sm uppercase tracking-widest px-8 py-4 transition-all duration-200 hover:-translate-y-0.5"
+              <div className="p-12 rounded-3xl glass-effect border border-red-500/20 space-y-8">
+                <h2 className="text-4xl md:text-5xl font-bold text-white">
+                  Pronto a proteggere la tua infrastruttura?
+                </h2>
+                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                  Parliamo della tua situazione. Offriamo una sessione di assessment gratuita
+                  per analizzare la tua infrastruttura e progettare il SOC più adatto alle tue esigenze.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button
+                    size="lg"
+                    onClick={() => window.location.href = 'mailto:info@corenexus.it?subject=Richiesta%20Demo%20SOC%20Wazuh'}
+                    className="group bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white px-10 py-7 text-lg rounded-2xl font-semibold shadow-lg shadow-red-500/20"
                   >
                     Prenota una Demo
-                  </a>
-                  <a
-                    href="tel:+393534012055"
-                    className="inline-flex items-center gap-2 border border-white/10 hover:border-cyan-500/50 text-gray-300 hover:text-cyan-400 font-semibold text-sm uppercase tracking-widest px-8 py-4 transition-all duration-200"
-                  >
-                    Chiama ora
+                    <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+                  </Button>
+                  <a href="tel:+393534012055">
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-10 py-7 text-lg rounded-2xl font-semibold"
+                    >
+                      Chiama Ora
+                    </Button>
                   </a>
                 </div>
               </div>
@@ -774,17 +783,12 @@ export default function SocAsAService() {
         </section>
 
         {/* Footer */}
-        <footer className="bg-[#0d1117] border-t border-white/10 py-10 px-6">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="text-white font-bold tracking-widest text-lg">
-              CORE<span className="text-red-500">NEXUS</span> Technology Solution
-            </div>
-            <p className="font-mono text-[10px] text-gray-500 tracking-wider">
-              Roma Sud · Ostia · Fiumicino · EUR · Acilia · Pomezia
+        <footer className="bg-black border-t border-white/10 py-12 px-6">
+          <div className="max-w-7xl mx-auto text-center space-y-4">
+            <p className="text-gray-400 text-sm">
+              © 2026 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</Link> - Tutti i diritti riservati.
             </p>
-            <p className="font-mono text-[10px] text-gray-500 tracking-wider">
-              © 2026 CoreNexus. Tutti i diritti riservati.
-            </p>
+            <p className="text-xs text-gray-600">v2.0 - 25/03/2026</p>
           </div>
         </footer>
 
