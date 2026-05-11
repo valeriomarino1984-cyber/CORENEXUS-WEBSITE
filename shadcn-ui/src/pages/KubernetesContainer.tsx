@@ -25,7 +25,7 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { breadcrumbSchema, faqSchema } from '@/utils/seoSchemas';
+import { breadcrumbSchema, faqSchema , localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 
 export default function KubernetesContainer() {
@@ -70,6 +70,8 @@ export default function KubernetesContainer() {
   const kubernetesSchema = {
     "@context": "https://schema.org",
     "@graph": [
+      localBusinessServiceSchema("Kubernetes e Container Roma EUR Ostia Fiumicino", "Progettazione e gestione cluster Kubernetes per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Docker, MicroK8s, microservizi, Azure AKS.", "/kubernetes-container", "Kubernetes e Container"),
+     
       kubernetesBreadcrumb,
       faqSchema(faqs),
       {
@@ -81,10 +83,7 @@ export default function KubernetesContainer() {
           "name": "CoreNexus Technology Solution",
           "url": "https://corenexus.it"
         },
-        "areaServed": {
-          "@type": "City",
-          "name": "Roma"
-        },
+        "areaServed": standardAreaServed,
         "serviceType": "Kubernetes Container Orchestration"
       }
     ]

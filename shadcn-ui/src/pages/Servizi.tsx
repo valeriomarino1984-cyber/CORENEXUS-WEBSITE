@@ -25,7 +25,7 @@ import {
   Palette,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { breadcrumbSchema } from '@/utils/seoSchemas';
+import { breadcrumbSchema, localBusinessServiceSchema } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 import TiltCard from '@/components/TiltCard';
 
@@ -43,6 +43,7 @@ export default function Servizi() {
   const serviziSchema = {
     "@context": "https://schema.org",
     "@graph": [
+      localBusinessServiceSchema("Servizi IT Aziendali Roma EUR Ostia Fiumicino", "Servizi informatici professionali per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Consulenza sistemistica, networking, cybersecurity, VoIP, web design.", "/servizi", "Servizi IT Aziendali"),
       serviziBreadcrumb,
       {
         "@context": "https://schema.org",

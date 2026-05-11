@@ -16,7 +16,7 @@ import {
   Globe,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { breadcrumbSchema } from '@/utils/seoSchemas';
+import { breadcrumbSchema, standardAreaServed } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 
 export default function DoveSiamo() {
@@ -39,12 +39,7 @@ export default function DoveSiamo() {
         "name": "CoreNexus Technology Solution",
         "description": "Assistenza informatica professionale a Roma Sud, EUR, Ostia, Fiumicino e provincia. Supporto IT aziendale, gestione reti, cybersecurity e videosorveglianza.",
         "url": "https://corenexus.it",
-        "areaServed": [
-          { "@type": "City", "name": "Roma" },
-          { "@type": "City", "name": "Fiumicino" },
-          { "@type": "City", "name": "Pomezia" },
-          { "@type": "City", "name": "Ardea" }
-        ],
+        "areaServed": standardAreaServed,
         "serviceArea": {
           "@type": "GeoCircle",
           "geoMidpoint": {

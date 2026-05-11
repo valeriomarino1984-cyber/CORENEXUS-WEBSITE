@@ -20,7 +20,7 @@ import {
   Users,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { breadcrumbSchema } from '@/utils/seoSchemas';
+import { breadcrumbSchema , localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 import FAQSection from '@/components/FAQSection';
 
@@ -65,6 +65,8 @@ export default function ContrattiManutenzione() {
   const manutenzioneSchema = {
     "@context": "https://schema.org",
     "@graph": [
+      localBusinessServiceSchema("Contratti Manutenzione IT Roma EUR Ostia Fiumicino", "Contratti di assistenza e manutenzione informatica per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Monitoraggio proattivo 24/7, SLA garantiti.", "/contratti-manutenzione", "Contratti Manutenzione IT"),
+     
       manutenzioneBreadcrumb,
       {
         "@type": "Service",
@@ -75,10 +77,7 @@ export default function ContrattiManutenzione() {
           "name": "CoreNexus Technology Solution",
           "url": "https://corenexus.it"
         },
-        "areaServed": {
-          "@type": "City",
-          "name": "Roma"
-        },
+        "areaServed": standardAreaServed,
         "serviceType": "IT Maintenance"
       },
       faqSchemaData

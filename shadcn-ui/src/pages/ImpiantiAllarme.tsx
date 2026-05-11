@@ -26,7 +26,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { breadcrumbSchema } from '@/utils/seoSchemas';
+import { breadcrumbSchema , localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 import FAQSection from '@/components/FAQSection';
 
@@ -71,6 +71,8 @@ export default function ImpiantiAllarme() {
   const allarmeSchema = {
     "@context": "https://schema.org",
     "@graph": [
+      localBusinessServiceSchema("Impianti Allarme e Videosorveglianza Roma EUR Ostia Fiumicino", "Installazione impianti allarme e videosorveglianza a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Hikvision, Ajax Systems, Risco, Dahua. Telecamere IP HD/4K.", "/impianti-allarme-videosorveglianza", "Impianti Allarme e Videosorveglianza"),
+     
       allarmeBreadcrumb,
       {
         "@type": "Service",
@@ -81,10 +83,7 @@ export default function ImpiantiAllarme() {
           "name": "CoreNexus Technology Solution",
           "url": "https://corenexus.it"
         },
-        "areaServed": {
-          "@type": "City",
-          "name": "Roma"
-        },
+        "areaServed": standardAreaServed,
         "serviceType": "Impianti di Sicurezza"
       },
       faqSchemaData

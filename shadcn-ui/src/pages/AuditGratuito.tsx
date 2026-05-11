@@ -6,7 +6,7 @@ import FAQSection from '@/components/FAQSection';
 import MorphingSection from '@/components/MorphingSection';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { breadcrumbSchema, faqSchema, localBusinessSchema, serviceSchema } from '@/utils/seoSchemas';
+import { breadcrumbSchema, faqSchema, localBusinessSchema, localBusinessServiceSchema, serviceSchema } from '@/utils/seoSchemas';
 import {
   ArrowLeft,
   ArrowRight,
@@ -73,7 +73,7 @@ export default function AuditGratuito() {
 
   const combinedSchema = {
     '@context': 'https://schema.org',
-    '@graph': [auditBreadcrumb, auditServiceSchema, auditFaqSchema, localBusinessSchema],
+    '@graph': [localBusinessServiceSchema('Audit IT Gratuito Roma EUR Ostia Fiumicino', 'Audit IT gratuito per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Analisi infrastruttura informatica, report dettagliato e raccomandazioni.', '/audit-gratuito', 'Audit IT Gratuito'), auditBreadcrumb, auditServiceSchema, auditFaqSchema, localBusinessSchema],
   };
 
   const scrollToContact = () => {

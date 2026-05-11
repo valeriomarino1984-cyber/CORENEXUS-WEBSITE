@@ -24,7 +24,7 @@ import {
   TrendingUp,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { breadcrumbSchema } from '@/utils/seoSchemas';
+import { breadcrumbSchema , localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 import { useToast } from '@/hooks/use-toast';
 
@@ -52,6 +52,8 @@ export default function ProjectManagement() {
   const pmSchema = {
     "@context": "https://schema.org",
     "@graph": [
+      localBusinessServiceSchema("IT Project Management Roma EUR Ostia Fiumicino", "Servizi di Project Management IT e Cyber Security a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Project Manager dedicati per gestire progetti IT.", "/project-management", "Project Management IT"),
+     
       pmBreadcrumb,
       {
         "@type": "Service",
@@ -62,10 +64,7 @@ export default function ProjectManagement() {
           "name": "CoreNexus Technology Solution",
           "url": "https://corenexus.it"
         },
-        "areaServed": {
-          "@type": "City",
-          "name": "Roma"
-        },
+        "areaServed": standardAreaServed,
         "serviceType": "Project Management"
       }
     ]

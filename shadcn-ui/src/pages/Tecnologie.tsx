@@ -14,7 +14,7 @@ import {
   Check,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { breadcrumbSchema } from '@/utils/seoSchemas';
+import { breadcrumbSchema, localBusinessServiceSchema } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 
 interface TechItem {
@@ -45,6 +45,7 @@ export default function Tecnologie() {
   const tecnologieSchema = {
     "@context": "https://schema.org",
     "@graph": [
+      localBusinessServiceSchema("Tecnologie IT Roma EUR Ostia Fiumicino", "Tecnologie e strumenti IT utilizzati da CoreNexus a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Wazuh, Zabbix, Proxmox, VMware, Kubernetes, pfSense.", "/tecnologie", "Tecnologie IT"),
       tecnologieBreadcrumb,
       {
         "@type": "ItemList",

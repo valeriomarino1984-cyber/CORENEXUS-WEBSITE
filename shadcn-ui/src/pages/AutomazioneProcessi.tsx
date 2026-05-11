@@ -24,7 +24,7 @@ import {
   DollarSign,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { breadcrumbSchema } from '@/utils/seoSchemas';
+import { breadcrumbSchema , localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 
 export default function AutomazioneProcessi() {
@@ -42,6 +42,8 @@ export default function AutomazioneProcessi() {
   const automazioneSchema = {
     "@context": "https://schema.org",
     "@graph": [
+      localBusinessServiceSchema("Automazione Processi IT Roma EUR Ostia Fiumicino", "Automazione processi IT e DevOps per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Infrastructure as Code, CI/CD, orchestrazione IT.", "/automazione-processi", "Automazione IT e DevOps"),
+     
       automazioneBreadcrumb,
       {
         "@type": "Service",
@@ -52,10 +54,7 @@ export default function AutomazioneProcessi() {
           "name": "CoreNexus Technology Solution",
           "url": "https://corenexus.it"
         },
-        "areaServed": {
-          "@type": "City",
-          "name": "Roma"
-        },
+        "areaServed": standardAreaServed,
         "serviceType": "IT Process Automation"
       }
     ]

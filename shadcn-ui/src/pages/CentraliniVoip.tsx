@@ -26,7 +26,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { breadcrumbSchema } from '@/utils/seoSchemas';
+import { breadcrumbSchema , localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 
 export default function CentraliniVoip() {
@@ -44,6 +44,8 @@ export default function CentraliniVoip() {
   const voipSchema = {
     "@context": "https://schema.org",
     "@graph": [
+      localBusinessServiceSchema("Centralini VoIP FreePBX Roma EUR Ostia Fiumicino", "Installazione centralini VoIP FreePBX e Asterisk a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Integrazione AI, trascrizione automatica, telefonia aziendale professionale.", "/centralini-voip", "Centralini VoIP"),
+     
       voipBreadcrumb,
       {
         "@type": "Service",
@@ -54,10 +56,7 @@ export default function CentraliniVoip() {
           "name": "CoreNexus Technology Solution",
           "url": "https://corenexus.it"
         },
-        "areaServed": {
-          "@type": "City",
-          "name": "Roma"
-        },
+        "areaServed": standardAreaServed,
         "serviceType": "VoIP PBX con AI"
       }
     ]

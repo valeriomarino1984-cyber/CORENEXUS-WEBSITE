@@ -19,7 +19,7 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { breadcrumbSchema } from '@/utils/seoSchemas';
+import { breadcrumbSchema , localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 import FAQSection from '@/components/FAQSection';
 
@@ -64,6 +64,8 @@ export default function AssistenzaSistemistica() {
   const assistenzaSchema = {
     "@context": "https://schema.org",
     "@graph": [
+      localBusinessServiceSchema("Consulenza Sistemistica Roma EUR Ostia Fiumicino", "Consulenza sistemistica professionale per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Manutenzione server, help desk, monitoraggio 24/7, backup e gestione infrastrutture IT.", "/assistenza-sistemistica", "Consulenza Sistemistica"),
+     
       assistenzaBreadcrumb,
       {
         "@type": "Service",
@@ -74,10 +76,7 @@ export default function AssistenzaSistemistica() {
           "name": "CoreNexus Technology Solution",
           "url": "https://corenexus.it"
         },
-        "areaServed": {
-          "@type": "City",
-          "name": "Roma"
-        },
+        "areaServed": standardAreaServed,
         "serviceType": "Consulenza Sistemistica"
       },
       faqSchemaData

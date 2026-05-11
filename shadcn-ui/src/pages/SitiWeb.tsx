@@ -21,7 +21,7 @@ import {
   Layers,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { breadcrumbSchema } from '@/utils/seoSchemas';
+import { breadcrumbSchema , localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 
 export default function SitiWeb() {
@@ -39,6 +39,8 @@ export default function SitiWeb() {
   const sitiSchema = {
     "@context": "https://schema.org",
     "@graph": [
+      localBusinessServiceSchema("Creazione Siti Web ed E-commerce Roma EUR Ostia Fiumicino", "Realizzazione siti web professionali, e-commerce e landing page a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Design responsive, SEO ottimizzato.", "/siti-web", "Web Design e Sviluppo"),
+     
       sitiBreadcrumb,
       {
         "@type": "Service",
@@ -49,10 +51,7 @@ export default function SitiWeb() {
           "name": "CoreNexus Technology Solution",
           "url": "https://corenexus.it"
         },
-        "areaServed": {
-          "@type": "City",
-          "name": "Roma"
-        },
+        "areaServed": standardAreaServed,
         "serviceType": "Web Development"
       }
     ]

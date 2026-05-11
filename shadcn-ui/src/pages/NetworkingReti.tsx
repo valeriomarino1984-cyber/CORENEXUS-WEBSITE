@@ -17,7 +17,7 @@ import {
   Lock,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { breadcrumbSchema } from '@/utils/seoSchemas';
+import { breadcrumbSchema , localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 
 export default function NetworkingReti() {
@@ -35,6 +35,8 @@ export default function NetworkingReti() {
   const networkingSchema = {
     "@context": "https://schema.org",
     "@graph": [
+      localBusinessServiceSchema("Networking e Reti Aziendali Roma EUR Ostia Fiumicino", "Progettazione, implementazione e gestione reti aziendali a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Firewall, VPN, VLAN, Wi-Fi enterprise, cablaggio strutturato.", "/networking-reti", "Networking e Reti"),
+     
       networkingBreadcrumb,
       {
         "@type": "Service",
@@ -45,10 +47,7 @@ export default function NetworkingReti() {
           "name": "CoreNexus Technology Solution",
           "url": "https://corenexus.it"
         },
-        "areaServed": {
-          "@type": "City",
-          "name": "Roma"
-        },
+        "areaServed": standardAreaServed,
         "serviceType": "Networking e Reti"
       }
     ]

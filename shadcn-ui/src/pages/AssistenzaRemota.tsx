@@ -1,4 +1,5 @@
 import Header from '@/components/Header';
+import { breadcrumbSchema, localBusinessServiceSchema } from '@/utils/seoSchemas';
 import SEO from '@/components/SEO';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
 import { Button } from '@/components/ui/button';
@@ -7,6 +8,24 @@ import { useNavigate } from 'react-router-dom';
 
 export default function AssistenzaRemota() {
   const navigate = useNavigate();
+
+  const remotaBreadcrumb = breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Assistenza Remota', url: '/assistenza-remota' },
+  ]);
+
+  const remotaSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      localBusinessServiceSchema(
+        "Assistenza Remota Roma EUR Ostia Fiumicino",
+        "Assistenza remota rapida e sicura per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Supporto tecnico immediato con UltraViewer, risoluzione problemi senza spostamenti.",
+        "/assistenza-remota",
+        "Assistenza Remota"
+      ),
+      remotaBreadcrumb,
+    ]
+  };
 
   return (
     <>
@@ -26,6 +45,7 @@ export default function AssistenzaRemota() {
           'assistenza informatica da remoto Roma Sud',
         ]}
         canonical="/assistenza-remota"
+        schema={remotaSchema}
       />
 
       <div className="min-h-screen bg-black">

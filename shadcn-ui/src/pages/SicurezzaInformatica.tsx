@@ -35,7 +35,7 @@ import {
   LayoutDashboard,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { breadcrumbSchema } from '@/utils/seoSchemas';
+import { breadcrumbSchema , localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 import ActiveResponseDemo from '@/components/ActiveResponseDemo';
 
@@ -54,6 +54,8 @@ export default function SicurezzaInformatica() {
   const sicurezzaSchema = {
     "@context": "https://schema.org",
     "@graph": [
+      localBusinessServiceSchema("Sicurezza Informatica Roma EUR Ostia Fiumicino", "Cybersecurity professionale per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Server Wazuh, Zabbix, firewall, penetration testing, GDPR compliance.", "/sicurezza-informatica", "Sicurezza Informatica"),
+     
       sicurezzaBreadcrumb,
       {
         "@type": "Service",
@@ -64,10 +66,7 @@ export default function SicurezzaInformatica() {
           "name": "CoreNexus Technology Solution",
           "url": "https://corenexus.it"
         },
-        "areaServed": {
-          "@type": "City",
-          "name": "Roma"
-        },
+        "areaServed": standardAreaServed,
         "serviceType": "Sicurezza Informatica"
       }
     ]
