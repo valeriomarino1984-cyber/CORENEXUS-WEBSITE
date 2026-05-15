@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, LogIn, Shield, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, Globe, FileText, Phone, Cog, Cpu, Briefcase, Monitor, BookOpen, Container, Radar } from 'lucide-react';
+import { Menu, X, LogIn, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, Globe, FileText, Phone, Cog, Cpu, Briefcase, Monitor, BookOpen, Container, Radar } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
@@ -177,20 +177,12 @@ export default function Header() {
             </button>
 
             <Button
-              onClick={() => navigate('/login')}
+              onClick={() => window.open('https://ticket.corenexus.it/', '_blank')}
               variant="outline"
               className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-3 xl:px-4 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap"
             >
               <LogIn className="w-3.5 h-3.5 mr-1" />
-              Area Clienti
-            </Button>
-            <Button
-              onClick={() => navigate('/admin/login')}
-              variant="outline"
-              className="glass-effect border-red-500/30 hover:border-red-500/50 text-red-500 hover:bg-red-500/10 px-3 xl:px-4 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap"
-            >
-              <Shield className="w-3.5 h-3.5 mr-1" />
-              Area Admin
+              Area Riservata Clienti
             </Button>
           </nav>
         </div>
@@ -334,20 +326,12 @@ export default function Header() {
             </button>
             <div className="pt-2 space-y-2">
               <Button
-                onClick={() => navigate('/login')}
+                onClick={() => window.open('https://ticket.corenexus.it/', '_blank')}
                 variant="outline"
                 className="w-full glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-6 py-3 rounded-xl text-sm font-semibold"
               >
                 <LogIn className="w-4 h-4 mr-2" />
                 Area Riservata Clienti
-              </Button>
-              <Button
-                onClick={() => navigate('/admin/login')}
-                variant="outline"
-                className="w-full glass-effect border-red-500/30 hover:border-red-500/50 text-red-500 hover:bg-red-500/10 px-6 py-3 rounded-xl text-sm font-semibold"
-              >
-                <Shield className="w-4 h-4 mr-2" />
-                Area Riservata Admin
               </Button>
               <Button
                 onClick={() => {
