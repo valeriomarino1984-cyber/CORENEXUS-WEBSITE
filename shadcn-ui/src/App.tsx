@@ -26,19 +26,6 @@ import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import DoveSiamo from './pages/DoveSiamo';
 import Contatti from './pages/Contatti';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import NewTicket from './pages/NewTicket';
-import TicketDetail from './pages/TicketDetail';
-import AdminLogin from './pages/AdminLogin';
-import AdminDashboard from './pages/AdminDashboard';
-import AdminNewTicket from './pages/AdminNewTicket';
-import AdminTicketDetail from './pages/AdminTicketDetail';
-import AdminUsers from './pages/AdminUsers';
-import AdminNewUser from './pages/AdminNewUser';
-import AdminEditUser from './pages/AdminEditUser';
-import AdminUserManagement from './pages/AdminUserManagement';
-import Setup from './pages/Setup';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookiePolicy from './pages/CookiePolicy';
 import TermsOfService from './pages/TermsOfService';
@@ -78,19 +65,6 @@ const AppContent = () => {
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/dove-siamo" element={<DoveSiamo />} />
         <Route path="/contatti" element={<Contatti />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/new-ticket" element={<NewTicket />} />
-        <Route path="/ticket/:id" element={<TicketDetail />} />
-        <Route path="/setup" element={<Setup />} />
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/new-ticket" element={<AdminNewTicket />} />
-        <Route path="/admin/ticket/:id" element={<AdminTicketDetail />} />
-        <Route path="/admin/users" element={<AdminUsers />} />
-        <Route path="/admin/users/new" element={<AdminNewUser />} />
-        <Route path="/admin/users/edit/:id" element={<AdminEditUser />} />
-        <Route path="/admin/user-management" element={<AdminUserManagement />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
