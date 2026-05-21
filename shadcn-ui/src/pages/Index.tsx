@@ -23,7 +23,6 @@ export default function Index() {
   const orb3Ref = useRef<HTMLDivElement>(null);
   const orb4Ref = useRef<HTMLDivElement>(null);
 
-  // Handle hash-based scrolling when navigating from other pages
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace('#', '');
@@ -37,10 +36,8 @@ export default function Index() {
     }
   }, [location.hash]);
 
-  // Parallax effect on orbs based on scroll position
   const handleParallax = useCallback(() => {
     const scrollY = window.scrollY;
-
     if (orb1Ref.current) {
       orb1Ref.current.style.transform = `translateY(${scrollY * 0.3}px) translateX(${Math.sin(scrollY * 0.002) * 30}px)`;
     }
@@ -70,7 +67,6 @@ export default function Index() {
     return () => window.removeEventListener('scroll', onScroll);
   }, [handleParallax]);
 
-  // Scroll-triggered reveal for sections — include tutte le varianti
   useEffect(() => {
     const revealElements = document.querySelectorAll('.reveal-on-scroll, .reveal-left, .reveal-right');
     const observer = new IntersectionObserver(
@@ -84,7 +80,6 @@ export default function Index() {
       },
       { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
     );
-
     revealElements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
@@ -195,7 +190,10 @@ export default function Index() {
         {/* Hero Section */}
         <section className="relative overflow-hidden pt-32 pb-24 px-6 premium-gradient">
           <div className="absolute inset-0 [mask-image:linear-gradient(0deg,transparent,rgba(255,255,255,0.1),transparent)]" />
-          
+
+          {/* Laser scan effect */}
+          <div className="laser-scan pointer-events-none" />
+
           {/* Parallax Floating Orbs */}
           <div
             ref={orb1Ref}
@@ -217,10 +215,9 @@ export default function Index() {
             className="absolute bottom-[30%] left-[15%] w-[350px] h-[350px] bg-indigo-500/10 rounded-full blur-3xl animate-orb-1 pointer-events-none"
             style={{ transition: 'transform 0.1s linear', animationDelay: '3s' }}
           />
-          
+
           <div className="max-w-7xl mx-auto relative z-10 animate-hero-zoom">
             <div className="space-y-8 text-center text-[#F5F5F7]">
-              {/* Badge */}
               <div className="inline-block hero-stagger-1">
                 <span className="px-6 py-3 rounded-full glass-effect text-blue-400 text-sm font-semibold tracking-wide flex items-center gap-2 animate-pulse-glow">
                   <Sparkles className="w-4 h-4" />
@@ -228,7 +225,6 @@ export default function Index() {
                 </span>
               </div>
 
-              {/* H1 */}
               <h1
                 className="text-6xl md:text-8xl font-bold glitch-text leading-tight tracking-tight hero-stagger-2"
                 data-text={heroTitle}
@@ -236,17 +232,14 @@ export default function Index() {
                 {heroTitle}
               </h1>
 
-              {/* Subtitle */}
               <p className="text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto leading-relaxed font-light hero-stagger-3">
                 Aiutiamo le aziende a lavorare senza interruzioni grazie a servizi informatici affidabili: gestione delle reti aziendali, sicurezza informatica, server e sistemi di comunicazione.
               </p>
-              
-              {/* Location */}
+
               <p className="text-lg md:text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed hero-stagger-4">
                 Operiamo a Roma Sud, EUR, Ostia, Fiumicino e provincia, con supporto rapido e soluzioni su misura.
               </p>
 
-              {/* CTA */}
               <div className="pt-8 flex flex-col sm:flex-row gap-4 justify-center items-center hero-stagger-5">
                 <Button
                   size="lg"
@@ -272,8 +265,6 @@ export default function Index() {
           <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/50 to-black" />
           <div className="max-w-6xl mx-auto relative z-10">
             <div className="text-center space-y-8">
-
-              {/* Titolo — slide dall'alto */}
               <div className="reveal-on-scroll">
                 <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">Cosa Facciamo</h2>
                 <p className="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto">
@@ -281,7 +272,6 @@ export default function Index() {
                 </p>
               </div>
 
-              {/* Card — alternanza sinistra/centro/destra */}
               <div className="pt-8 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 {cosaFacciamo.map((item, index) => (
                   <article
@@ -295,14 +285,11 @@ export default function Index() {
                       <item.icon className="w-10 h-10 text-white" />
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
-                    <p className="text-gray-300 leading-relaxed text-lg">
-                      {item.description}
-                    </p>
+                    <p className="text-gray-300 leading-relaxed text-lg">{item.description}</p>
                   </article>
                 ))}
               </div>
 
-              {/* Perché sceglierci */}
               <div className="pt-16 reveal-on-scroll">
                 <h3 className="text-3xl md:text-4xl font-semibold text-white mb-10">
                   Perché scegliere CoreNexus Technology Solution
@@ -319,15 +306,12 @@ export default function Index() {
                       <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-emerald-500/20">
                         <CheckCircle className="w-5 h-5 text-white" />
                       </div>
-                      <p className="text-gray-200 font-medium leading-relaxed text-left">
-                        {item}
-                      </p>
+                      <p className="text-gray-200 font-medium leading-relaxed text-left">{item}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* CTA */}
               <div className="pt-10 reveal-on-scroll">
                 <Button
                   size="lg"
@@ -367,9 +351,7 @@ export default function Index() {
                     <audience.icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-4">{audience.title}</h3>
-                  <p className="text-gray-300 leading-relaxed">
-                    {audience.description}
-                  </p>
+                  <p className="text-gray-300 leading-relaxed">{audience.description}</p>
                 </article>
               ))}
             </div>
@@ -393,26 +375,22 @@ export default function Index() {
           <div className="absolute inset-0 bg-gradient-to-b from-black via-emerald-950/20 to-black" />
           <div className="absolute top-10 right-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-orb-2" />
           <div className="absolute bottom-10 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl animate-orb-1" style={{ animationDelay: '1.5s' }} />
-          
+
           <div className="max-w-4xl mx-auto relative z-10">
             <div className="text-center reveal-on-scroll">
               <div className="p-12 rounded-3xl glass-effect border border-emerald-500/30 hover:border-emerald-500/50 transition-all duration-500">
                 <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center mb-8 mx-auto shadow-lg shadow-emerald-500/30">
                   <Gift className="w-10 h-10 text-white" />
                 </div>
-                
                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                   🎁 Audit IT gratuito
                 </h2>
-                
                 <p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-2xl mx-auto mb-4">
                   Valutiamo l'infrastruttura, individuiamo criticità e opportunità di miglioramento.
                 </p>
-                
                 <p className="text-lg text-emerald-400 font-semibold mb-10">
                   Senza impegno.
                 </p>
-                
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button
                     size="lg"
@@ -500,7 +478,7 @@ export default function Index() {
                 </p>
                 <p className="text-xs text-gray-500">
                   Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus Technology Solution</a>
-</p>
+                </p>
                 <p className="text-xs text-gray-600">
                   v2.2 - 21/05/2026
                 </p>
