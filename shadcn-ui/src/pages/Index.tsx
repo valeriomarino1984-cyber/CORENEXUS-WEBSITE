@@ -10,7 +10,6 @@ import CoverageSection from '@/components/CoverageSection';
 import ContactSection from '@/components/ContactSection';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
 import SEO from '@/components/SEO';
-import TypewriterTitle from '@/components/TypewriterTitle';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles, Building2, Rocket, Scale, Factory, Gift, Server, ShieldCheck, Cog, CheckCircle } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -152,7 +151,7 @@ export default function Index() {
                 className="text-6xl md:text-8xl font-bold glitch-text leading-tight tracking-tight hero-stagger-2"
                 data-text={heroTitle}
               >
-                <TypewriterTitle text={heroTitle} speed={35} delay={500} />
+                {heroTitle}
               </h1>
 
               <p className="text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto leading-relaxed font-light hero-stagger-3">
@@ -266,11 +265,11 @@ export default function Index() {
                 <p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-2xl mx-auto mb-4">Valutiamo l'infrastruttura, individuiamo criticità e opportunità di miglioramento.</p>
                 <p className="text-lg text-emerald-400 font-semibold mb-10">Senza impegno.</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" onClick={() => navigate('/audit-gratuito')} className="group bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-12 py-7 text-lg rounded-2xl font-semibold shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 transition-all duration-300" aria-label="Scopri di più sull'audit gratuito">
+                  <Button size="lg" onClick={() => navigate('/audit-gratuito')} className="group bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-12 py-7 text-lg rounded-2xl font-semibold shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 transition-all duration-300">
                     Scopri di più
                     <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                   </Button>
-                  <Button size="lg" onClick={scrollToContact} variant="outline" className="group glass-effect border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 px-12 py-7 text-lg rounded-2xl font-semibold transition-all duration-300" aria-label="Prenota l'audit gratuito">
+                  <Button size="lg" onClick={scrollToContact} variant="outline" className="group glass-effect border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 px-12 py-7 text-lg rounded-2xl font-semibold transition-all duration-300">
                     Prenota ora
                     <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                   </Button>
@@ -331,7 +330,7 @@ export default function Index() {
                 </div>
                 <p className="text-xs text-gray-500">Assistenza informatica Roma | Assistenza informatica Ostia | Assistenza informatica Fiumicino | Assistenza informatica EUR | Assistenza informatica Acilia | Assistenza informatica Mostacciano</p>
                 <p className="text-xs text-gray-500">Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus Technology Solution</a></p>
-                <p className="text-xs text-gray-600">v2.4 - 21/05/2026</p>
+                <p className="text-xs text-gray-600">v2.5 - 21/05/2026</p>
               </div>
             </div>
           </div>
