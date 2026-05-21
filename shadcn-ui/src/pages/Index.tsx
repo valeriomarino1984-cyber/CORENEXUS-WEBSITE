@@ -70,9 +70,9 @@ export default function Index() {
     return () => window.removeEventListener('scroll', onScroll);
   }, [handleParallax]);
 
-  // Scroll-triggered reveal for sections
+  // Scroll-triggered reveal for sections — include tutte le varianti
   useEffect(() => {
-    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    const revealElements = document.querySelectorAll('.reveal-on-scroll, .reveal-left, .reveal-right');
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -192,9 +192,9 @@ export default function Index() {
       <div className="min-h-screen bg-black">
         <Header />
 
-        {/* Hero Section - Fade-in Zoom + Parallax Orbs */}
+        {/* Hero Section */}
         <section className="relative overflow-hidden pt-32 pb-24 px-6 premium-gradient">
-          <div className="absolute inset-0 [mask-image:linear-gradient(0deg,transparent,rgba(255,255,255,0.1),transparent)] mt-[0px] mr-[0px] mb-[0px] ml-[0px] pt-[0px] pr-[0px] pb-[0px] pl-[0px] rounded-none text-[16px] font-normal text-[#F5F5F7] bg-[#00000000] opacity-100" />
+          <div className="absolute inset-0 [mask-image:linear-gradient(0deg,transparent,rgba(255,255,255,0.1),transparent)]" />
           
           {/* Parallax Floating Orbs */}
           <div
@@ -218,9 +218,8 @@ export default function Index() {
             style={{ transition: 'transform 0.1s linear', animationDelay: '3s' }}
           />
           
-          {/* Hero content - zoom on wrapper, stagger on children */}
           <div className="max-w-7xl mx-auto relative z-10 animate-hero-zoom">
-            <div className="space-y-8 mt-[0px] mr-[0px] mb-[0px] ml-[0px] pt-[0px] pr-[0px] pb-[0px] pl-[0px] rounded-none text-[16px] font-normal text-center text-[#F5F5F7] bg-[#00000000] opacity-100">
+            <div className="space-y-8 text-center text-[#F5F5F7]">
               {/* Badge */}
               <div className="inline-block hero-stagger-1">
                 <span className="px-6 py-3 rounded-full glass-effect text-blue-400 text-sm font-semibold tracking-wide flex items-center gap-2 animate-pulse-glow">
@@ -229,7 +228,7 @@ export default function Index() {
                 </span>
               </div>
 
-              {/* H1 - Glitch Effect with multi-layer overlay */}
+              {/* H1 */}
               <h1
                 className="text-6xl md:text-8xl font-bold glitch-text leading-tight tracking-tight hero-stagger-2"
                 data-text={heroTitle}
@@ -242,12 +241,12 @@ export default function Index() {
                 Aiutiamo le aziende a lavorare senza interruzioni grazie a servizi informatici affidabili: gestione delle reti aziendali, sicurezza informatica, server e sistemi di comunicazione.
               </p>
               
-              {/* Location text */}
+              {/* Location */}
               <p className="text-lg md:text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed hero-stagger-4">
                 Operiamo a Roma Sud, EUR, Ostia, Fiumicino e provincia, con supporto rapido e soluzioni su misura.
               </p>
 
-              {/* CTA Button */}
+              {/* CTA */}
               <div className="pt-8 flex flex-col sm:flex-row gap-4 justify-center items-center hero-stagger-5">
                 <Button
                   size="lg"
@@ -268,23 +267,28 @@ export default function Index() {
           </div>
         </section>
 
-        {/* Cosa Facciamo Section - Scroll Reveal */}
+        {/* Cosa Facciamo Section */}
         <section id="about" className="py-24 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/50 to-black" />
           <div className="max-w-6xl mx-auto relative z-10">
-            <div className="text-center space-y-8 reveal-on-scroll">
-              <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">Cosa Facciamo</h2>
-              
-              <p className="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto">
-                Offriamo soluzioni IT complete per garantire sicurezza, efficienza e continuità operativa alla tua azienda.
-              </p>
+            <div className="text-center space-y-8">
 
-              {/* Tre blocchi principali */}
+              {/* Titolo — slide dall'alto */}
+              <div className="reveal-on-scroll">
+                <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">Cosa Facciamo</h2>
+                <p className="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto">
+                  Offriamo soluzioni IT complete per garantire sicurezza, efficienza e continuità operativa alla tua azienda.
+                </p>
+              </div>
+
+              {/* Card — alternanza sinistra/centro/destra */}
               <div className="pt-8 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 {cosaFacciamo.map((item, index) => (
-                  <article 
+                  <article
                     key={index}
-                    className="p-10 rounded-3xl glass-effect hover:bg-white/10 transition-all duration-500 card-hover group text-center reveal-on-scroll"
+                    className={`p-10 rounded-3xl glass-effect hover:bg-white/10 transition-all duration-500 card-hover group text-center ${
+                      index === 0 ? 'reveal-left' : index === 2 ? 'reveal-right' : 'reveal-on-scroll'
+                    }`}
                     style={{ transitionDelay: `${index * 150}ms` }}
                   >
                     <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
@@ -298,16 +302,18 @@ export default function Index() {
                 ))}
               </div>
 
-              {/* Perché scegliere CoreNexus Technology Solution */}
+              {/* Perché sceglierci */}
               <div className="pt-16 reveal-on-scroll">
                 <h3 className="text-3xl md:text-4xl font-semibold text-white mb-10">
                   Perché scegliere CoreNexus Technology Solution
                 </h3>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
                   {percheSceglierci.map((item, index) => (
-                    <div 
+                    <div
                       key={index}
-                      className="flex items-center gap-4 p-6 rounded-2xl glass-effect hover:bg-white/10 transition-all duration-500 group"
+                      className={`flex items-center gap-4 p-6 rounded-2xl glass-effect hover:bg-white/10 transition-all duration-500 group ${
+                        index % 2 === 0 ? 'reveal-left' : 'reveal-right'
+                      }`}
                       style={{ transitionDelay: `${index * 100}ms` }}
                     >
                       <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-emerald-500/20">
@@ -322,7 +328,7 @@ export default function Index() {
               </div>
 
               {/* CTA */}
-              <div className="pt-10">
+              <div className="pt-10 reveal-on-scroll">
                 <Button
                   size="lg"
                   onClick={scrollToContact}
@@ -337,7 +343,7 @@ export default function Index() {
           </div>
         </section>
 
-        {/* A Chi Ci Rivolgiamo Section - Scroll Reveal */}
+        {/* A Chi Ci Rivolgiamo Section */}
         <section id="target-audience" className="py-24 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-blue-950/20 to-black" />
           <div className="max-w-7xl mx-auto relative z-10">
@@ -350,9 +356,11 @@ export default function Index() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
               {targetAudiences.map((audience, index) => (
-                <article 
+                <article
                   key={index}
-                  className="p-8 rounded-3xl glass-effect hover:bg-white/10 transition-all duration-500 card-hover group text-center reveal-on-scroll"
+                  className={`p-8 rounded-3xl glass-effect hover:bg-white/10 transition-all duration-500 card-hover group text-center ${
+                    index % 2 === 0 ? 'reveal-left' : 'reveal-right'
+                  }`}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${audience.gradient} flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
@@ -380,11 +388,9 @@ export default function Index() {
           </div>
         </section>
 
-        {/* Audit IT Gratuito Section - Scroll Reveal */}
+        {/* Audit IT Gratuito Section */}
         <section id="audit" className="py-24 px-6 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-emerald-950/20 to-black" />
-          
-          {/* Decorative elements */}
           <div className="absolute top-10 right-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-orb-2" />
           <div className="absolute bottom-10 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl animate-orb-1" style={{ animationDelay: '1.5s' }} />
           
@@ -443,12 +449,11 @@ export default function Index() {
         <ContactSection />
         <WhatsAppWidget />
 
-        {/* Footer - Premium Dark with Legal Links */}
+        {/* Footer */}
         <footer className="bg-black border-t border-white/10 py-16 px-6">
           <div className="max-w-7xl mx-auto">
             <div className="grid md:grid-cols-3 gap-12 mb-12">
-              {/* Company Info */}
-              <div className="space-y-4">
+              <div className="space-y-4 reveal-left">
                 <h3 className="text-xl font-bold text-white">CoreNexus Technology Solution</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   Assistenza informatica professionale e supporto sistemistico per aziende a Roma Sud, Ostia, Fiumicino, EUR e provincia.
@@ -460,62 +465,24 @@ export default function Index() {
                 </address>
               </div>
 
-              {/* Quick Links */}
-              <nav className="space-y-4" aria-label="Link rapidi">
+              <nav className="space-y-4 reveal-on-scroll" aria-label="Link rapidi">
                 <h4 className="text-lg font-semibold text-white">Link Utili</h4>
                 <ul className="space-y-2">
-                  <li>
-                    <Link to="/servizi" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
-                      Servizi IT
-                    </Link>
-                  </li>
-                  <li>
-                    <a href="#about" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
-                      Cosa Facciamo
-                    </a>
-                  </li>
-                  <li>
-                    <Link to="/audit-gratuito" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
-                      🎁 Audit IT Gratuito
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/dove-siamo" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
-                      Dove Siamo
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/contatti" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
-                      Contatti
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/blog" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
-                      Blog
-                    </Link>
-                  </li>
+                  <li><Link to="/servizi" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">Servizi IT</Link></li>
+                  <li><a href="#about" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">Cosa Facciamo</a></li>
+                  <li><Link to="/audit-gratuito" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">🎁 Audit IT Gratuito</Link></li>
+                  <li><Link to="/dove-siamo" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">Dove Siamo</Link></li>
+                  <li><Link to="/contatti" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">Contatti</Link></li>
+                  <li><Link to="/blog" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">Blog</Link></li>
                 </ul>
               </nav>
 
-              {/* Legal Links */}
-              <nav className="space-y-4" aria-label="Informazioni legali">
+              <nav className="space-y-4 reveal-right" aria-label="Informazioni legali">
                 <h4 className="text-lg font-semibold text-white">Informazioni Legali</h4>
                 <ul className="space-y-2">
-                  <li>
-                    <Link to="/privacy-policy" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
-                      Privacy Policy
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/cookie-policy" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
-                      Cookie Policy
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/terms-of-service" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
-                      Termini e Condizioni
-                    </Link>
-                  </li>
+                  <li><Link to="/privacy-policy" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">Privacy Policy</Link></li>
+                  <li><Link to="/cookie-policy" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">Cookie Policy</Link></li>
+                  <li><Link to="/terms-of-service" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">Termini e Condizioni</Link></li>
                 </ul>
               </nav>
             </div>
@@ -533,9 +500,9 @@ export default function Index() {
                 </p>
                 <p className="text-xs text-gray-500">
                   Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus Technology Solution</a>
-                </p>
+</p>
                 <p className="text-xs text-gray-600">
-                  v2.1 - 16/04/2026
+                  v2.2 - 21/05/2026
                 </p>
               </div>
             </div>
