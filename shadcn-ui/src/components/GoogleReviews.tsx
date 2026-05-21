@@ -54,7 +54,7 @@ const reviews: Review[] = [
   },
 ];
 
-const GOOGLE_BUSINESS_URL = 'https://www.google.com/maps/place/CoreNexus+Technology+Solution';
+const GOOGLE_BUSINESS_URL = 'https://maps.app.goo.gl/3bh7osZikLeCAzVf8';
 const AVERAGE_RATING = 4.9;
 const TOTAL_REVIEWS = reviews.length;
 
