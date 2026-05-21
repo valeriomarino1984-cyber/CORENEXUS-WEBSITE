@@ -191,8 +191,7 @@ export default function Index() {
         <section className="relative overflow-hidden pt-32 pb-24 px-6 premium-gradient">
           <div className="absolute inset-0 [mask-image:linear-gradient(0deg,transparent,rgba(255,255,255,0.1),transparent)]" />
 
-          {/* Laser scan effect */}
-          <div className="laser-scan pointer-events-none" />
+          
 
           {/* Parallax Floating Orbs */}
           <div
