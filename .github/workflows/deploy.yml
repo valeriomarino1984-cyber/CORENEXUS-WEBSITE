@@ -19,7 +19,7 @@ jobs:
       - name: Installa dipendenze
         run: |
           cd shadcn-ui
-          npm install
+          npm install --legacy-peer-deps
 
       - name: Build
         run: |
@@ -32,7 +32,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist-corenexus/
+          local-dir: ./shadcn-ui/dist/
           server-dir: /
           protocol: ftps
           port: 21
