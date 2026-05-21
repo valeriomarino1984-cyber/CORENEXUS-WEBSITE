@@ -785,16 +785,16 @@ html {
     rgba(59, 130, 246, 0.0) 80%,
     transparent 100%
   );
-  box-shadow:
-    0 0 8px rgba(59, 130, 246, 0.6),
-    0 0 20px rgba(59, 130, 246, 0.3);
-  animation: laser-scan 3s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+  animation: laser-scan 3s linear infinite;
   z-index: 5;
   pointer-events: none;
+  will-change: top;
+  transform: translateZ(0);
 }
 
 @keyframes laser-scan {
-  0%   { top: 0%; opacity: 0; }
+  0%   { top: -2px; opacity: 0; }
   5%   { opacity: 1; }
   95%  { opacity: 1; }
   100% { top: 100%; opacity: 0; }
