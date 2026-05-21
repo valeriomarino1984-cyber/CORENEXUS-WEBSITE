@@ -20,13 +20,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'
-          cache-dependency-path: shadcn-ui/pnpm-lock.yaml
 
       - name: Installa dipendenze
         run: |
           cd shadcn-ui
-          pnpm install
+          pnpm install --no-frozen-lockfile
 
       - name: Build
         run: |
