@@ -223,7 +223,7 @@ export default function Contatti() {
                   </a>
 
                   <a
-                    href="https://www.facebook.com/corenexus"
+                    href="https://www.facebook.com/share/18iUMnHFg7/?mibextid=wwXIfr"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-4 p-5 rounded-2xl border border-white/5 hover:border-blue-500/30 transition-all duration-300 group hover:bg-white/5"

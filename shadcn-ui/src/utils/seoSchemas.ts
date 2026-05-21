@@ -15,7 +15,7 @@ export const standardAreaServed = [
 
 // Link social e profili aziendali standard
 export const standardSameAs = [
-  "https://www.facebook.com/corenexus",
+  "https://www.facebook.com/share/18iUMnHFg7/?mibextid=wwXIfr",
   "https://www.linkedin.com/company/corenexus",
   "https://www.google.com/maps/place/CoreNexus+Technology+Solution"
 ];
