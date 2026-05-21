@@ -11,20 +11,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'pnpm'
+          cache-dependency-path: shadcn-ui/pnpm-lock.yaml
 
       - name: Installa dipendenze
         run: |
           cd shadcn-ui
-          npm install --legacy-peer-deps
+          pnpm install
 
       - name: Build
         run: |
           cd shadcn-ui
-          npm run build
+          pnpm run build
 
       - name: Deploy FTP su Aruba
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
