@@ -10,6 +10,7 @@ import CoverageSection from '@/components/CoverageSection';
 import ContactSection from '@/components/ContactSection';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
 import SEO from '@/components/SEO';
+import StatsSection from '@/components/StatsSection';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles, Building2, Rocket, Scale, Factory, Gift, Server, ShieldCheck, Cog, CheckCircle } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -176,6 +177,9 @@ export default function Index() {
             </div>
           </div>
         </section>
+
+        {/* Stats Section */}
+        <StatsSection />
 
         {/* Cosa Facciamo */}
         <section id="about" className="py-24 px-6 relative">
