@@ -10,7 +10,6 @@ import CoverageSection from '@/components/CoverageSection';
 import ContactSection from '@/components/ContactSection';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
 import SEO from '@/components/SEO';
-import ParticlesBackground from '@/components/ParticlesBackground';
 import TypewriterTitle from '@/components/TypewriterTitle';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles, Building2, Rocket, Scale, Factory, Gift, Server, ShieldCheck, Cog, CheckCircle } from 'lucide-react';
@@ -128,8 +127,10 @@ export default function Index() {
         {/* Hero Section */}
         <section className="relative overflow-hidden pt-32 pb-24 px-6 premium-gradient">
 
-          {/* Particles network */}
-          <ParticlesBackground />
+          {/* Ambient glow CSS-only */}
+          <div className="hero-ambient-1" />
+          <div className="hero-ambient-2" />
+          <div className="hero-ambient-3" />
 
           {/* Parallax Floating Orbs */}
           <div ref={orb1Ref} className="absolute top-10 left-[5%] w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-3xl animate-orb-1 pointer-events-none" style={{ transition: 'transform 0.1s linear' }} />
@@ -140,7 +141,6 @@ export default function Index() {
           <div className="max-w-7xl mx-auto relative z-10 animate-hero-zoom">
             <div className="space-y-8 text-center text-[#F5F5F7]">
 
-              {/* Badge */}
               <div className="inline-block hero-stagger-1">
                 <span className="px-6 py-3 rounded-full glass-effect text-blue-400 text-sm font-semibold tracking-wide flex items-center gap-2 animate-pulse-glow">
                   <Sparkles className="w-4 h-4" />
@@ -148,7 +148,6 @@ export default function Index() {
                 </span>
               </div>
 
-              {/* H1 con Typewriter */}
               <h1
                 className="text-6xl md:text-8xl font-bold glitch-text leading-tight tracking-tight hero-stagger-2"
                 data-text={heroTitle}
@@ -179,7 +178,7 @@ export default function Index() {
           </div>
         </section>
 
-        {/* Cosa Facciamo Section */}
+        {/* Cosa Facciamo */}
         <section id="about" className="py-24 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/50 to-black" />
           <div className="max-w-6xl mx-auto relative z-10">
@@ -190,7 +189,6 @@ export default function Index() {
                   Offriamo soluzioni IT complete per garantire sicurezza, efficienza e continuità operativa alla tua azienda.
                 </p>
               </div>
-
               <div className="pt-8 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 {cosaFacciamo.map((item, index) => (
                   <article key={index} className={`p-10 rounded-3xl glass-effect hover:bg-white/10 transition-all duration-500 card-hover group text-center ${index === 0 ? 'reveal-left' : index === 2 ? 'reveal-right' : 'reveal-on-scroll'}`} style={{ transitionDelay: `${index * 150}ms` }}>
@@ -202,7 +200,6 @@ export default function Index() {
                   </article>
                 ))}
               </div>
-
               <div className="pt-16 reveal-on-scroll">
                 <h3 className="text-3xl md:text-4xl font-semibold text-white mb-10">Perché scegliere CoreNexus Technology Solution</h3>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
@@ -216,7 +213,6 @@ export default function Index() {
                   ))}
                 </div>
               </div>
-
               <div className="pt-10 reveal-on-scroll">
                 <Button size="lg" onClick={scrollToContact} className="group premium-button text-white px-12 py-7 text-lg rounded-2xl font-semibold" aria-label="Scopri come possiamo aiutarti">
                   Scopri come possiamo aiutarti
@@ -335,7 +331,7 @@ export default function Index() {
                 </div>
                 <p className="text-xs text-gray-500">Assistenza informatica Roma | Assistenza informatica Ostia | Assistenza informatica Fiumicino | Assistenza informatica EUR | Assistenza informatica Acilia | Assistenza informatica Mostacciano</p>
                 <p className="text-xs text-gray-500">Sito realizzato da <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors">CoreNexus Technology Solution</a></p>
-                <p className="text-xs text-gray-600">v2.3 - 21/05/2026</p>
+                <p className="text-xs text-gray-600">v2.4 - 21/05/2026</p>
               </div>
             </div>
           </div>
