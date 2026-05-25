@@ -19,11 +19,35 @@ import { Link, useNavigate } from 'react-router-dom';
 import { breadcrumbSchema, standardAreaServed, standardSameAs } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 
+const mapBadges = [
+  // Zona Litorale Romano — blu
+  { name: 'Ostia', top: '72%', left: '18%', color: '#3b82f6' },
+  { name: 'Fiumicino', top: '45%', left: '8%', color: '#3b82f6' },
+  { name: 'Ostia Antica', top: '65%', left: '28%', color: '#3b82f6' },
+  // Zona Sud-Ovest — viola
+  { name: 'Acilia', top: '58%', left: '33%', color: '#a855f7' },
+  { name: 'Casal Palocco', top: '70%', left: '38%', color: '#a855f7' },
+  { name: 'Dragona', top: '50%', left: '24%', color: '#a855f7' },
+  // Zona Sud — arancio
+  { name: 'Mostacciano', top: '52%', left: '52%', color: '#f97316' },
+  { name: 'Torrino', top: '58%', left: '56%', color: '#f97316' },
+  { name: 'Spinaceto', top: '65%', left: '52%', color: '#f97316' },
+  // Zona EUR — verde
+  { name: 'EUR', top: '44%', left: '56%', color: '#10b981' },
+  { name: 'Pomezia', top: '78%', left: '58%', color: '#10b981' },
+  { name: 'Ardea', top: '88%', left: '62%', color: '#10b981' },
+];
+
+const mapLegend = [
+  { label: 'Zona Litorale Romano', color: '#3b82f6' },
+  { label: 'Zona Sud-Ovest', color: '#a855f7' },
+  { label: 'Zona Sud', color: '#f97316' },
+  { label: 'Zona EUR e Industriale', color: '#10b981' },
+];
+
 export default function DoveSiamo() {
   const navigate = useNavigate();
-  const scrollToContact = () => {
-    navigate('/#contact');
-  };
+  const scrollToContact = () => { navigate('/#contact'); };
 
   const doveSiamoBreadcrumb = breadcrumbSchema([
     { name: 'Home', url: '/' },
@@ -37,7 +61,7 @@ export default function DoveSiamo() {
       {
         "@type": "LocalBusiness",
         "name": "CoreNexus Technology Solution",
-        "description": "Assistenza informatica professionale a Roma Sud, EUR, Ostia, Fiumicino e provincia. Supporto IT aziendale, gestione reti, cybersecurity e videosorveglianza.",
+        "description": "Assistenza informatica professionale a Roma Sud, EUR, Ostia, Fiumicino e provincia.",
         "url": "https://corenexus.it",
         "areaServed": standardAreaServed,
         "serviceArea": {
@@ -190,18 +214,14 @@ export default function DoveSiamo() {
                     Copertura Territoriale
                   </span>
                 </div>
-
                 <h1 className="text-5xl md:text-7xl font-bold leading-tight">
                   <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500 bg-clip-text text-transparent">
                     Dove Siamo
                   </span>
                 </h1>
-
                 <p className="text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto">
-                  Operiamo nel quadrante sud di Roma e provincia con interventi on-site rapidi
-                  e assistenza remota per tutta Italia. Scopri le nostre zone di copertura.
+                  Operiamo nel quadrante sud di Roma e provincia con interventi on-site rapidi e assistenza remota per tutta Italia.
                 </p>
-
                 <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                   <Button
                     size="lg"
@@ -217,23 +237,59 @@ export default function DoveSiamo() {
           </div>
         </section>
 
-        {/* Map Section */}
+        {/* Map Section con badge */}
         <section className="py-16 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/30 to-black" />
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
-              <div className="rounded-3xl glass-effect border border-white/10 overflow-hidden">
-                <div className="relative w-full" style={{ height: '500px' }}>
+              <div className="rounded-3xl glass-effect border border-white/10 overflow-hidden p-4">
+
+                {/* Legenda */}
+                <div className="flex flex-wrap gap-4 mb-4 px-2">
+                  {mapLegend.map((item, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <div
+                        className="w-3 h-3 rounded-full border-2 border-white flex-shrink-0"
+                        style={{ background: item.color, boxShadow: `0 0 6px ${item.color}` }}
+                      />
+                      <span className="text-gray-400 text-sm">{item.label}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Mappa + badge sovrapposti */}
+                <div className="relative w-full rounded-xl overflow-hidden" style={{ height: '480px' }}>
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d95386.38555866488!2d12.374999999999998!3d41.7519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13258a111bd74ac3%3A0x3094f9ab2388100!2sOstia%2C%20Roma%2C%20Italy!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
                     width="100%"
-                    height="500"
-                    style={{ border: 0, display: 'block' }}
+                    height="100%"
+                    style={{ border: 0, display: 'block', position: 'absolute', inset: 0 }}
                     allowFullScreen={true}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     title="Zone di Copertura CoreNexus Technology Solution - Assistenza IT Roma Sud e Litorale"
                   />
+
+                  {/* Badge sovrapposti */}
+                  {mapBadges.map((badge, idx) => (
+                    <div
+                      key={idx}
+                      className="absolute flex items-center gap-1 px-2 py-1 rounded-full text-white text-xs font-semibold pointer-events-none"
+                      style={{
+                        top: badge.top,
+                        left: badge.left,
+                        background: badge.color + 'dd',
+                        border: `1px solid ${badge.color}`,
+                        boxShadow: `0 0 8px ${badge.color}88`,
+                        zIndex: 10,
+                        transform: 'translate(-50%, -50%)',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      <div className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0" />
+                      {badge.name}
+                    </div>
+                  ))}
                 </div>
               </div>
             </MorphingSection>
@@ -246,9 +302,7 @@ export default function DoveSiamo() {
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
               <div className="text-center space-y-6 mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Le Nostre Zone di Copertura
-                </h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">Le Nostre Zone di Copertura</h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
                   Assistenza informatica professionale con tempi di intervento garantiti in tutte le principali zone di Roma Sud e provincia.
                 </p>
@@ -258,11 +312,8 @@ export default function DoveSiamo() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {coverageZones.map((zone, index) => (
                 <MorphingSection key={index} delay={index * 0.1}>
-                  <div
-                    className={`relative p-8 rounded-3xl glass-effect border ${zone.borderColor} transition-all duration-500 hover:scale-105 h-full flex flex-col`}
-                  >
+                  <div className={`relative p-8 rounded-3xl glass-effect border ${zone.borderColor} transition-all duration-500 hover:scale-105 h-full flex flex-col`}>
                     <div className={`absolute top-0 right-0 w-32 h-32 ${zone.bgGlow} rounded-full blur-2xl -z-10`} />
-
                     <div className="flex items-center gap-4 mb-4">
                       <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${zone.gradient} flex items-center justify-center flex-shrink-0`}>
                         <MapPin className="w-6 h-6 text-white" />
@@ -275,11 +326,7 @@ export default function DoveSiamo() {
                         </div>
                       </div>
                     </div>
-
-                    <p className="text-gray-400 text-sm mb-5 leading-relaxed">
-                      {zone.description}
-                    </p>
-
+                    <p className="text-gray-400 text-sm mb-5 leading-relaxed">{zone.description}</p>
                     <div className="space-y-2 flex-1">
                       {zone.locations.map((location, i) => (
                         <div key={i} className="flex items-center gap-2.5">
@@ -295,21 +342,18 @@ export default function DoveSiamo() {
           </div>
         </section>
 
-        {/* Advantages Section */}
+        {/* Advantages */}
         <section className="py-24 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/10 to-black" />
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
               <div className="text-center space-y-6 mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Perché Scegliere un Partner Locale
-                </h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">Perché Scegliere un Partner Locale</h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
                   Essere vicini ai nostri clienti ci permette di offrire un servizio più rapido, efficiente e personalizzato.
                 </p>
               </div>
             </MorphingSection>
-
             <div className="grid md:grid-cols-2 gap-8">
               {advantages.map((adv, index) => (
                 <MorphingSection key={index} delay={index * 0.15}>
@@ -330,19 +374,16 @@ export default function DoveSiamo() {
           </div>
         </section>
 
-        {/* How to Reach Us */}
+        {/* Come Raggiungerci */}
         <section className="py-24 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/30 to-black" />
           <div className="max-w-5xl mx-auto relative z-10">
             <MorphingSection>
               <div className="text-center space-y-6 mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Come Raggiungerci
-                </h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">Come Raggiungerci</h2>
                 <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
               </div>
             </MorphingSection>
-
             <div className="grid md:grid-cols-3 gap-8">
               <MorphingSection delay={0.1}>
                 <div className="p-8 rounded-3xl glass-effect border border-white/10 text-center space-y-4 h-full">
@@ -355,7 +396,6 @@ export default function DoveSiamo() {
                   </p>
                 </div>
               </MorphingSection>
-
               <MorphingSection delay={0.2}>
                 <div className="p-8 rounded-3xl glass-effect border border-white/10 text-center space-y-4 h-full">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mx-auto">
@@ -367,7 +407,6 @@ export default function DoveSiamo() {
                   </p>
                 </div>
               </MorphingSection>
-
               <MorphingSection delay={0.3}>
                 <div className="p-8 rounded-3xl glass-effect border border-white/10 text-center space-y-4 h-full">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center mx-auto">
@@ -383,7 +422,7 @@ export default function DoveSiamo() {
           </div>
         </section>
 
-        {/* Remote Assistance Info */}
+        {/* Assistenza remota */}
         <section className="py-16 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black to-black" />
           <div className="max-w-5xl mx-auto relative z-10">
@@ -404,15 +443,13 @@ export default function DoveSiamo() {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* CTA */}
         <section className="py-24 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-blue-950/20 to-black" />
           <div className="max-w-4xl mx-auto relative z-10 text-center">
             <MorphingSection>
               <div className="p-12 rounded-3xl glass-effect border border-blue-500/20 space-y-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Hai bisogno di assistenza nella tua zona?
-                </h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">Hai bisogno di assistenza nella tua zona?</h2>
                 <p className="text-xl text-gray-400 max-w-2xl mx-auto">
                   Contattaci per verificare la disponibilità del servizio e ricevere un preventivo personalizzato per la tua area.
                 </p>
@@ -440,13 +477,12 @@ export default function DoveSiamo() {
           </div>
         </section>
 
-        {/* Footer */}
         <footer className="bg-black border-t border-white/10 py-12 px-6">
           <div className="max-w-7xl mx-auto text-center space-y-4">
             <p className="text-gray-400 text-sm">
               © 2026 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</Link> - Tutti i diritti riservati.
             </p>
-            <p className="text-xs text-gray-600">v2.0 - 25/03/2026</p>
+            <p className="text-xs text-gray-600">v2.1 - 25/05/2026</p>
           </div>
         </footer>
 
