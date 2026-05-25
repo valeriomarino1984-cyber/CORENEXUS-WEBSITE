@@ -19,6 +19,26 @@ interface BlogPostData {
 }
 
 const blogPostsData: Record<string, BlogPostData> = {
+  'contratto-assistenza-informatica-roma': {
+    id: 'contratto-assistenza-informatica-roma',
+    title: 'Contratto di Assistenza Informatica a Roma: Perché la Tua Azienda Ne Ha Bisogno',
+    excerpt: 'Tempi di attesa infiniti, costi imprevedibili, guasti nel momento peggiore: scopri perché un contratto di assistenza informatica con CoreNexus è la scelta giusta per le PMI di Roma, EUR, Ostia e Fiumicino.',
+    category: 'Manutenzione',
+    date: '25 Maggio 2026',
+    readTime: '7 min',
+    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80',
+    tags: ['Contratto Assistenza', 'Manutenzione IT', 'Roma', 'PMI', 'SLA'],
+    sections: [
+      { heading: "Il problema dell'assistenza a chiamata", content: "Molte aziende gestiscono l'IT con un approccio reattivo: chiamano un tecnico solo quando qualcosa si rompe. I costi nascosti sono enormi. Senza un contratto attivo sei un cliente occasionale — la priorità va ai clienti abituali. Puoi aspettare ore o giorni mentre la tua azienda è ferma. Ogni intervento è fatturato a ore con tariffe maggiorate per urgenza. Un guasto al server di venerdì pomeriggio può costare il triplo del normale. Senza manutenzione programmata i problemi si accumulano silenziosamente finché non esplodono nel momento peggiore." },
+      { heading: "Tempi di intervento garantiti", content: "Con un contratto CoreNexus attivo, la tua richiesta viene presa in carico entro 1 ora lavorativa. Per i contratti premium, garantiamo interventi on-site entro 4 ore per le zone di Roma Sud, EUR, Ostia, Fiumicino e Acilia. Non aspetti in coda — sei prioritario. Questo fa la differenza tra un problema risolto in mattinata e un'intera giornata di fermo operativo." },
+      { heading: "Manutenzione preventiva inclusa", content: "Ogni mese i nostri tecnici eseguono controlli programmati sulla tua infrastruttura: aggiornamenti di sicurezza, verifica dei backup, monitoraggio delle performance, test dei sistemi critici. In media, la manutenzione preventiva riduce i guasti imprevisti del 70%. Meno problemi, meno stress, meno costi straordinari. Prevenire è sempre meno costoso che riparare." },
+      { heading: "Costi fissi e prevedibili", content: "Il canone mensile del contratto è fisso. Sai esattamente quanto spendi ogni mese per l'IT, puoi pianificarlo a budget e non hai brutte sorprese a fine anno. Per molte PMI romane, il contratto CoreNexus costa meno di un singolo intervento urgente non pianificato. È un investimento che si ripaga da solo al primo guasto evitato." },
+      { heading: "Un team che conosce la tua infrastruttura", content: "Con un contratto continuativo, i nostri tecnici conoscono la tua rete, i tuoi server, i tuoi software. Non perdi tempo a spiegare ogni volta come è fatto il tuo sistema — interveniamo subito, efficacemente. Questo vale doppio in caso di emergenza: sappiamo già dove guardare e come risolvere senza perdere tempo in analisi preliminari." },
+      { heading: "Monitoraggio 24/7 e supporto remoto illimitato", content: "I nostri sistemi di monitoraggio controllano la tua infrastruttura in tempo reale, anche quando i tuoi uffici sono chiusi. Se un server va in anomalia alle 3 di notte, lo sappiamo prima che tu arrivi in ufficio la mattina. Per la maggior parte dei problemi non serve un intervento fisico: con accesso remoto sicuro risolviamo in pochi minuti. Il supporto remoto è incluso nel contratto senza limiti di chiamate." },
+      { heading: "A chi si rivolge il contratto CoreNexus", content: "I nostri contratti di assistenza informatica sono pensati per PMI con 5-50 dipendenti che non hanno un reparto IT interno, studi professionali dove la perdita di dati ha conseguenze gravi, aziende con sedi nel quadrante sud di Roma — EUR, Ostia, Fiumicino, Acilia, Pomezia — e negozi e attività commerciali con sistemi di cassa, videosorveglianza e reti Wi-Fi che devono funzionare sempre." },
+      { heading: "Come funziona l'attivazione", content: "Il processo è semplice: sopralluogo gratuito presso la tua sede per analizzare l'infrastruttura esistente, proposta su misura con SLA chiari e costi trasparenti, attivazione immediata dal giorno successivo. Nessun vincolo pluriennale, nessuna clausola nascosta. Se dopo 3 mesi non sei soddisfatto, puoi uscire senza penali. Contattaci oggi per scoprire il contratto più adatto alla tua azienda a Roma." }
+    ]
+  },
   'impianti-allarme-villa-infernetto': {
     id: 'impianti-allarme-villa-infernetto',
     title: 'Impianti di Allarme a Villa Infernetto e Dintorni: Guida alla Sicurezza della Tua Casa',
