@@ -263,7 +263,28 @@ const blogPostsData: Record<string, BlogPostData> = {
       { heading: "CoreNexus: reti aziendali a Roma, EUR, Ostia e Fiumicino", content: "CoreNexus Technology Solution progetta, installa e gestisce reti aziendali per PMI, studi professionali e aziende nel quadrante sud di Roma. Operiamo quotidianamente a EUR, Ostia Lido, Ostia Antica, Fiumicino, Isola Sacra, Acilia, Casal Palocco, Infernetto, Dragona, Axa, Malafede, Mostacciano, Torrino, Laurentina, Spinaceto, Pomezia, Ardea, Santa Palomba e Castel Romano. Ogni progetto include analisi dei bisogni, progettazione su misura, installazione con apparati certificati, test del cablaggio, formazione del personale e supporto post-installazione. Contattaci per un sopralluogo gratuito." }
     ]
   },
-    'virtualizzazione-server-vantaggi': {
+    'proxmox-alternativa-vmware': {
+    id: 'proxmox-alternativa-vmware',
+    title: "Proxmox: l'alternativa a VMware che le PMI italiane stanno scegliendo",
+    excerpt: "Dopo l'acquisizione di VMware da parte di Broadcom, i costi delle licenze sono aumentati fino al 500%. Scopri perche migliaia di aziende stanno passando a Proxmox e quanto puoi risparmiare.",
+    category: 'Infrastruttura',
+    date: '25 Maggio 2026',
+    readTime: '8 min',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+    tags: ['Proxmox', 'VMware', 'Virtualizzazione', 'Risparmio', 'Open Source'],
+    sections: [
+      { heading: "Cosa e successo con VMware", content: "VMware e stata per anni la soluzione di virtualizzazione di riferimento per le aziende di tutte le dimensioni. Nel 2023 Broadcom ha acquisito VMware e ha radicalmente cambiato il modello di licenza. Il risultato? Aumenti di prezzo che in molti casi superano il 300-500% rispetto a prima. Per una PMI con 5-10 server virtualizzati, si puo passare da poche migliaia di euro l'anno a decine di migliaia. Una cifra difficile da giustificare quando esistono alternative solide e gratuite." },
+      { heading: "Cos'e Proxmox e perche funziona", content: "Proxmox VE (Virtual Environment) e una piattaforma di virtualizzazione open source sviluppata da una azienda austriaca. E gratuita, stabile, usata in produzione da migliaia di aziende nel mondo, incluse banche, ospedali e pubbliche amministrazioni. Fa esattamente quello che fa VMware: permette di creare e gestire server virtuali su macchine fisiche. Ma lo fa senza costi di licenza." },
+      { heading: "Cosa puoi fare con Proxmox", content: "Con Proxmox puoi creare e gestire macchine virtuali con Windows Server, Linux o qualsiasi altro sistema operativo. Puoi fare backup automatici dei server anche mentre sono accesi, ripristinare un server in pochi minuti, gestire tutto da una interfaccia web intuitiva e creare cluster ad alta disponibilita: se un server fisico si guasta, le macchine virtuali si spostano automaticamente su un altro." },
+      { heading: "Proxmox vs VMware: cosa cambia davvero", content: "La differenza principale non e tecnica, e economica. VMware post-Broadcom ha costi molto alti e in forte aumento, mentre Proxmox e completamente gratuito con supporto opzionale a pagamento. Affidabilita, facilita di gestione e funzionalita per una PMI sono praticamente identiche. Quello che cambia e quanto paghi ogni anno per averle." },
+      { heading: "Quanto si risparmia concretamente", content: "Una azienda con 8 server virtualizzati su VMware paga mediamente tra i 15.000 e i 30.000 euro l'anno di licenze, dopo i recenti aumenti. Con Proxmox: zero euro di licenza software, da 1.000 a 3.000 euro di supporto professionale opzionale, e una migrazione una tantum. Il risparmio nel primo anno puo facilmente superare i 20.000 euro." },
+      { heading: "La migrazione e complicata?", content: "Nella maggior parte dei casi per una PMI la migrazione si completa in 1-3 giorni lavorativi, senza interruzioni significative della operativita. Il processo e: analisi della infrastruttura esistente, installazione di Proxmox, migrazione delle macchine virtuali una alla volta, test e formazione del personale. Durante la migrazione i server VMware rimangono attivi." },
+      { heading: "Chi sta gia usando Proxmox", content: "Proxmox non e una soluzione di ripiego. E usata da istituti bancari europei, universita, provider di hosting e migliaia di PMI in tutta Europa. La community e attiva, la documentazione eccellente e gli aggiornamenti costanti. E un ecosistema maturo e in crescita." },
+      { heading: "Quando ha senso valutare la migrazione", content: "Proxmox e la scelta giusta se stai per rinnovare il contratto VMware con aumenti significativi, se stai costruendo una nuova infrastruttura, o se vuoi ridurre i costi IT senza sacrificare affidabilita. Non e la scelta giusta se dipendi da funzionalita VMware molto specifiche o hai un contratto in corso conveniente." },
+      { heading: "CoreNexus puo aiutarti", content: "In CoreNexus abbiamo gia gestito diverse migrazioni da VMware a Proxmox per PMI del territorio romano. Conosciamo le criticita e sappiamo come gestire la transizione senza bloccare la operativita aziendale. Contattaci per una analisi gratuita della tua situazione attuale e scopri quanto potresti risparmiare. Visita la nostra pagina dedicata alla Ottimizzazione IT per scoprire tutti i servizi di migrazione e risparmio disponibili." }
+    ]
+  },
+  'virtualizzazione-server-vantaggi': {
     id: 'virtualizzazione-server-vantaggi',
     title: 'Virtualizzazione dei Server: Vantaggi e Best Practice per le Aziende',
     excerpt: 'La virtualizzazione riduce i costi hardware e migliora la flessibilità IT.',
