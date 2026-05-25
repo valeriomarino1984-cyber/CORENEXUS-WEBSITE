@@ -141,6 +141,17 @@ const blogPosts: BlogPost[] = [
     tags: ['Networking', 'Switch', 'VLAN', 'Wi-Fi']
   },
   {
+    id: 'proxmox-alternativa-vmware',
+    title: 'Proxmox: l\'alternativa a VMware che le PMI italiane stanno scegliendo',
+    excerpt: 'Dopo l\'acquisizione di VMware da parte di Broadcom, i costi delle licenze sono aumentati fino al 500%. Scopri perché migliaia di aziende stanno passando a Proxmox e quanto puoi risparmiare.',
+    content: '',
+    category: 'Infrastruttura',
+    date: '25 Maggio 2026',
+    readTime: '8 min',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+    tags: ['Proxmox', 'VMware', 'Virtualizzazione', 'Risparmio', 'Open Source']
+  },
+  {
     id: 'virtualizzazione-server-vantaggi',
     title: 'Virtualizzazione dei Server: Vantaggi e Best Practice per le Aziende',
     excerpt: 'La virtualizzazione riduce i costi hardware e migliora la flessibilità IT. Scopri come implementarla nella tua azienda.',
@@ -233,21 +244,16 @@ export default function Blog() {
       <div className="min-h-screen bg-black">
         <Header />
 
-        {/* Hero Section */}
         <section className="relative overflow-hidden pt-32 pb-16 px-6">
           <div className="absolute inset-0 bg-gradient-to-b from-blue-950/30 via-black to-black" />
           <div className="absolute top-20 left-[10%] w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-10 right-[10%] w-[350px] h-[350px] bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="max-w-6xl mx-auto relative z-10 text-center space-y-6">
-            <h1 className="text-5xl md:text-7xl font-bold gradient-text leading-tight">
-              Blog
-            </h1>
+            <h1 className="text-5xl md:text-7xl font-bold gradient-text leading-tight">Blog</h1>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
               Approfondimenti, guide e novità dal mondo IT per aiutare la tua azienda a restare sicura, efficiente e competitiva.
             </p>
-
-            {/* Search Bar */}
             <div className="max-w-xl mx-auto pt-4">
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
@@ -263,7 +269,6 @@ export default function Blog() {
           </div>
         </section>
 
-        {/* Category Filters */}
         <section className="px-6 pb-8">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-wrap gap-3 justify-center">
@@ -284,17 +289,13 @@ export default function Blog() {
           </div>
         </section>
 
-        {/* Blog Posts Grid */}
         <section className="px-6 pb-24">
           <div className="max-w-6xl mx-auto">
             {filteredPosts.length === 0 ? (
               <div className="text-center py-20">
                 <p className="text-gray-400 text-lg">Nessun articolo trovato per la tua ricerca.</p>
                 <button
-                  onClick={() => {
-                    setSearchQuery('');
-                    setSelectedCategory('Tutti');
-                  }}
+                  onClick={() => { setSearchQuery(''); setSelectedCategory('Tutti'); }}
                   className="mt-4 text-blue-400 hover:text-blue-300 transition-colors text-sm font-medium"
                 >
                   Mostra tutti gli articoli
@@ -308,7 +309,6 @@ export default function Blog() {
                     className="group rounded-3xl glass-effect overflow-hidden hover:bg-white/10 transition-all duration-500 card-hover flex flex-col"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
-                    {/* Image */}
                     <div className="relative h-48 overflow-hidden">
                       <img
                         src={post.image}
@@ -317,57 +317,27 @@ export default function Blog() {
                         loading="lazy"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                      <span
-                        className={`absolute top-4 left-4 px-3 py-1 rounded-lg text-xs font-semibold text-white bg-gradient-to-r ${
-                          categoryGradients[post.category] || 'from-blue-500 to-purple-500'
-                        }`}
-                      >
+                      <span className={`absolute top-4 left-4 px-3 py-1 rounded-lg text-xs font-semibold text-white bg-gradient-to-r ${categoryGradients[post.category] || 'from-blue-500 to-purple-500'}`}>
                         {post.category}
                       </span>
                     </div>
-
-                    {/* Content */}
                     <div className="p-6 flex flex-col flex-grow">
-                      {/* Meta */}
                       <div className="flex items-center gap-4 text-xs text-gray-500 mb-3">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3" />
-                          {post.date}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          {post.readTime}
-                        </span>
+                        <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />{post.date}</span>
+                        <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{post.readTime}</span>
                       </div>
-
-                      {/* Title */}
                       <h2 className="text-lg font-bold text-white mb-3 group-hover:text-blue-400 transition-colors duration-300 line-clamp-2">
                         {post.title}
                       </h2>
-
-                      {/* Excerpt */}
-                      <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-grow line-clamp-3">
-                        {post.excerpt}
-                      </p>
-
-                      {/* Tags */}
+                      <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-grow line-clamp-3">{post.excerpt}</p>
                       <div className="flex flex-wrap gap-2 mb-4">
                         {post.tags.slice(0, 3).map((tag) => (
-                          <span
-                            key={tag}
-                            className="flex items-center gap-1 px-2 py-1 rounded-md text-xs text-gray-500 bg-white/5"
-                          >
-                            <Tag className="w-3 h-3" />
-                            {tag}
+                          <span key={tag} className="flex items-center gap-1 px-2 py-1 rounded-md text-xs text-gray-500 bg-white/5">
+                            <Tag className="w-3 h-3" />{tag}
                           </span>
                         ))}
                       </div>
-
-                      {/* Read More */}
-                      <Link
-                        to={`/blog/${post.id}`}
-                        className="flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-semibold transition-colors duration-300 group/link"
-                      >
+                      <Link to={`/blog/${post.id}`} className="flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-semibold transition-colors duration-300 group/link">
                         Leggi l'articolo
                         <ChevronRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-300" />
                       </Link>
@@ -379,21 +349,12 @@ export default function Blog() {
           </div>
         </section>
 
-        {/* CTA Section */}
         <section className="px-6 pb-24">
           <div className="max-w-4xl mx-auto">
             <div className="p-12 rounded-3xl glass-effect border border-blue-500/20 text-center space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-white">
-                Hai bisogno di supporto IT?
-              </h2>
-              <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-                Il nostro team è pronto ad aiutarti con soluzioni personalizzate per la tua azienda.
-              </p>
-              <Button
-                size="lg"
-                onClick={scrollToContact}
-                className="group premium-button text-white px-10 py-7 text-lg rounded-2xl font-semibold"
-              >
+              <h2 className="text-3xl md:text-4xl font-bold text-white">Hai bisogno di supporto IT?</h2>
+              <p className="text-lg text-gray-400 max-w-2xl mx-auto">Il nostro team è pronto ad aiutarti con soluzioni personalizzate per la tua azienda.</p>
+              <Button size="lg" onClick={scrollToContact} className="group premium-button text-white px-10 py-7 text-lg rounded-2xl font-semibold">
                 Contattaci ora
                 <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
               </Button>
@@ -403,20 +364,15 @@ export default function Blog() {
 
         <WhatsAppWidget />
 
-        {/* Footer */}
         <footer className="bg-black border-t border-white/10 py-12 px-6">
           <div className="max-w-7xl mx-auto text-center space-y-4">
             <div className="flex items-center justify-center gap-2">
               <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
               <p className="text-gray-400 text-sm">
-                © 2026{' '}
-                <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">
-                  CoreNexus Technology Solution
-                </a>{' '}
-                - Tutti i diritti riservati.
+                © 2026 <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</a> - Tutti i diritti riservati.
               </p>
             </div>
-            <p className="text-xs text-gray-600">v2.0 - 25/03/2026</p>
+            <p className="text-xs text-gray-600">v2.1 - 25/05/2026</p>
           </div>
         </footer>
       </div>
