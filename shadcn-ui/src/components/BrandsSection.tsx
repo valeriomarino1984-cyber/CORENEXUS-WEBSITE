@@ -1,62 +1,104 @@
-import TiltCard from './TiltCard';
-import MorphingSection from './MorphingSection';
-
 const CDN = 'https://cdn.jsdelivr.net/gh/valeriomarino1984-cyber/CORENEXUS-WEBSITE@latest/shadcn-ui/public/assets';
 
-export default function BrandsSection() {
-  const brands = [
-    { name: 'Zabbix', logo: `${CDN}/zabbix-logo.png`, description: 'Monitoraggio infrastrutture' },
-    { name: 'Proxmox', logo: `${CDN}/proxmox-logo.png`, description: 'Virtualizzazione' },
-    { name: 'Hikvision', logo: `${CDN}/hikvision-logo.png`, description: 'Videosorveglianza' },
-    { name: 'FreePBX', logo: `${CDN}/freepbx-logo.png`, description: 'Centralini VoIP' },
-    { name: 'pfSense', logo: `${CDN}/pfsense-logo.png`, description: 'Firewall e routing' },
-    { name: 'Cisco', logo: `${CDN}/cisco-logo.png`, description: 'Networking e sicurezza' },
-    { name: 'Wazuh', logo: `${CDN}/wazuh-logo.png`, description: 'Security monitoring' },
-    { name: 'VMware', logo: `${CDN}/vmware-logo.png`, description: 'Virtualizzazione enterprise' },
-    { name: 'Microsoft', logo: `${CDN}/microsoft-logo.png`, description: 'Soluzioni enterprise' },
-    { name: 'Azure', logo: `${CDN}/azure-logo.png`, description: 'Cloud computing' },
-    { name: 'Red Hat', logo: `${CDN}/redhat-logo.png`, description: 'Enterprise Linux' },
-    { name: 'Ubuntu Server', logo: `${CDN}/ubuntu-server-logo.png`, description: 'Server Linux' },
-  ];
+const brands = [
+  { name: 'Zabbix', logo: `${CDN}/zabbix-logo.png`, description: 'Monitoraggio' },
+  { name: 'Proxmox', logo: `${CDN}/proxmox-logo.png`, description: 'Virtualizzazione' },
+  { name: 'Hikvision', logo: `${CDN}/hikvision-logo.png`, description: 'Videosorveglianza' },
+  { name: 'FreePBX', logo: `${CDN}/freepbx-logo.png`, description: 'Centralini VoIP' },
+  { name: 'pfSense', logo: `${CDN}/pfsense-logo.png`, description: 'Firewall' },
+  { name: 'Cisco', logo: `${CDN}/cisco-logo.png`, description: 'Networking' },
+  { name: 'Wazuh', logo: `${CDN}/wazuh-logo.png`, description: 'Security' },
+  { name: 'VMware', logo: `${CDN}/vmware-logo.png`, description: 'Virtualizzazione' },
+  { name: 'Microsoft', logo: `${CDN}/microsoft-logo.png`, description: 'Enterprise' },
+  { name: 'Azure', logo: `${CDN}/azure-logo.png`, description: 'Cloud' },
+  { name: 'Red Hat', logo: `${CDN}/redhat-logo.png`, description: 'Linux Enterprise' },
+  { name: 'Ubuntu Server', logo: `${CDN}/ubuntu-server-logo.png`, description: 'Server Linux' },
+];
 
+export default function BrandsSection() {
   return (
-    <section className="py-24 px-6 relative bg-gradient-to-b from-black via-gray-900/50 to-black">
+    <section className="py-24 px-6 relative bg-gradient-to-b from-black via-gray-900/50 to-black overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
-        <MorphingSection className="text-center space-y-6 mb-16">
+
+        <div className="text-center space-y-6 mb-16 reveal-on-scroll">
           <h2 className="text-5xl md:text-6xl font-bold text-white">Tecnologie e Partner</h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto font-light">
             Lavoriamo con le migliori tecnologie del settore per garantire soluzioni affidabili e performanti
           </p>
-        </MorphingSection>
+        </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {brands.map((brand, index) => (
-            <MorphingSection key={index} delay={index * 0.05}>
-              <TiltCard tiltIntensity={6} glareEffect={false}>
-                <div className="group relative p-8 rounded-3xl border border-white/10 hover:border-white/20 transition-all duration-500 h-full" style={{ background: '#111827' }}>
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/0 via-purple-500/0 to-blue-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/10 group-hover:to-blue-500/10 transition-all duration-500" />
-                  <div className="relative z-10 flex flex-col items-center justify-center space-y-4">
-                    <div className="w-full h-24 flex items-center justify-center rounded-xl group-hover:scale-110 transition-transform duration-500" style={{ background: '#1f2937', padding: '12px' }}>
-                      <img
-                        src={brand.logo}
-                        alt={`${brand.name} logo`}
-                        className="max-w-full max-h-full object-contain group-hover:brightness-110 transition-all duration-500"
-                      />
-                    </div>
-                    <div className="text-center space-y-1">
-                      <h3 className="text-lg font-semibold text-white">{brand.name}</h3>
-                      <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">{brand.description}</p>
-                    </div>
-                  </div>
-                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-transparent via-white/5 to-transparent" />
-                  </div>
+        {/* Wrapper con scan line */}
+        <div className="relative rounded-2xl overflow-hidden reveal-on-scroll" style={{ background: '#050505', padding: '32px' }}>
+
+          {/* Neon scan line */}
+          <div className="brands-scanline pointer-events-none" />
+
+          {/* Grid loghi */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {brands.map((brand, index) => (
+              <div
+                key={index}
+                className="brands-card relative flex flex-col items-center gap-3 p-5 rounded-xl transition-all duration-300"
+                style={{ background: '#0d0d0d', border: '1px solid rgba(255,255,255,0.06)' }}
+              >
+                <div
+                  className="w-full h-16 flex items-center justify-center rounded-lg p-2"
+                  style={{ background: '#161616' }}
+                >
+                  <img
+                    src={brand.logo}
+                    alt={brand.name}
+                    className="max-w-full max-h-full object-contain"
+                  />
                 </div>
-              </TiltCard>
-            </MorphingSection>
-          ))}
+                <div className="text-center">
+                  <p className="text-gray-200 text-sm font-semibold">{brand.name}</p>
+                  <p className="text-gray-600 text-xs">{brand.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+
+      <style>{`
+        .brands-scanline {
+          position: absolute;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(0, 200, 255, 0.0) 10%,
+            rgba(0, 200, 255, 0.8) 40%,
+            rgba(150, 255, 255, 1) 50%,
+            rgba(0, 200, 255, 0.8) 60%,
+            rgba(0, 200, 255, 0.0) 90%,
+            transparent 100%
+          );
+          box-shadow:
+            0 0 6px rgba(0, 200, 255, 0.9),
+            0 0 20px rgba(0, 200, 255, 0.5),
+            0 0 40px rgba(0, 200, 255, 0.2);
+          z-index: 10;
+          animation: brandsScan 3s ease-in-out infinite;
+          top: 0;
+        }
+
+        @keyframes brandsScan {
+          0%   { top: 0px; opacity: 0; }
+          5%   { opacity: 1; }
+          95%  { opacity: 1; }
+          100% { top: 100%; opacity: 0; }
+        }
+
+        .brands-card:hover {
+          border-color: rgba(0, 200, 255, 0.4) !important;
+          box-shadow: 0 0 20px rgba(0, 200, 255, 0.15);
+          transform: translateY(-3px);
+        }
+      `}</style>
     </section>
   );
 }
