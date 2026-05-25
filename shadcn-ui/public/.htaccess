@@ -1,6 +1,12 @@
 Options -MultiViews
 RewriteEngine On
 RewriteBase /
+
+# Redirect www -> non-www
+RewriteCond %{HTTP_HOST} ^www\.corenexus\.it [NC]
+RewriteRule ^(.*)$ https://corenexus.it/$1 [R=301,L]
+
+# React Router fallback
 RewriteRule ^index\.html$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
