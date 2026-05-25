@@ -1,18 +1,18 @@
-const CDN = 'https://cdn.jsdelivr.net/gh/valeriomarino1984-cyber/CORENEXUS-WEBSITE@latest/shadcn-ui/public/assets';
+const CDN = 'https://cdn.jsdelivr.net/gh/valeriomarino1984-cyber/CORENEXUS-WEBSITE@2847183/shadcn-ui/public/assets';
 
 const brands = [
   { name: 'Zabbix', logo: `${CDN}/zabbix-logo.png`, description: 'Monitoraggio' },
-  { name: 'Proxmox', logo: `${CDN}/proxmox-logo.png`, description: 'Virtualizzazione' },
+  { name: 'Proxmox', logo: `${CDN}/Proxmox.jpg`, description: 'Virtualizzazione' },
   { name: 'Hikvision', logo: `${CDN}/hikvision-logo.png`, description: 'Videosorveglianza' },
   { name: 'FreePBX', logo: `${CDN}/freepbx-logo.png`, description: 'Centralini VoIP' },
   { name: 'pfSense', logo: `${CDN}/pfsense-logo.png`, description: 'Firewall' },
   { name: 'Cisco', logo: `${CDN}/cisco-logo.png`, description: 'Networking' },
-  { name: 'Wazuh', logo: `${CDN}/wazuh-logo.png`, description: 'Security' },
-  { name: 'VMware', logo: `${CDN}/vmware-logo.png`, description: 'Virtualizzazione' },
-  { name: 'Microsoft', logo: `${CDN}/microsoft-logo.png`, description: 'Enterprise' },
-  { name: 'Azure', logo: `${CDN}/azure-logo.png`, description: 'Cloud' },
-  { name: 'Red Hat', logo: `${CDN}/redhat-logo.png`, description: 'Linux Enterprise' },
-  { name: 'Ubuntu Server', logo: `${CDN}/ubuntu-server-logo.png`, description: 'Server Linux' },
+  { name: 'Wazuh', logo: `${CDN}/Wazuh.jpg`, description: 'Security' },
+  { name: 'VMware', logo: `${CDN}/vmware-logo.jpg`, description: 'Virtualizzazione' },
+  { name: 'Microsoft', logo: `${CDN}/microsoft.jpg`, description: 'Enterprise' },
+  { name: 'Azure', logo: `${CDN}/Azure.jpg`, description: 'Cloud' },
+  { name: 'Red Hat', logo: `${CDN}/RedHat.svg`, description: 'Linux Enterprise' },
+  { name: 'Ubuntu Server', logo: `${CDN}/ubuntu-logo6.png`, description: 'Server Linux' },
 ];
 
 export default function BrandsSection() {
@@ -27,13 +27,10 @@ export default function BrandsSection() {
           </p>
         </div>
 
-        {/* Wrapper con scan line */}
         <div className="relative rounded-2xl overflow-hidden reveal-on-scroll" style={{ background: '#050505', padding: '32px' }}>
 
-          {/* Neon scan line */}
           <div className="brands-scanline pointer-events-none" />
 
-          {/* Grid loghi */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {brands.map((brand, index) => (
               <div
