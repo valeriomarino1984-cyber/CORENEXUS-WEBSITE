@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Header from '@/components/Header';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
 import SEO from '@/components/SEO';
@@ -10,7 +11,7 @@ const services = [
     icon: Server,
     title: 'Migrazione VMware → Proxmox',
     gradient: 'from-blue-500 to-indigo-600',
-    description: 'Dopo l\'acquisizione di VMware da parte di Broadcom, i costi delle licenze sono aumentati fino al 500%. Proxmox VE è la soluzione open source enterprise-grade che ti permette di mantenere le stesse funzionalità a costo zero.',
+    description: "Dopo l'acquisizione di VMware da parte di Broadcom, i costi delle licenze sono aumentati fino al 500%. Proxmox VE è la soluzione open source enterprise-grade che ti permette di mantenere le stesse funzionalità a costo zero.",
     benefits: [
       'Risparmio medio di 15.000-30.000€/anno',
       'Migrazione senza downtime in 1-3 giorni',
@@ -24,7 +25,7 @@ const services = [
     icon: Server,
     title: 'Ottimizzazione e Consolidamento Server',
     gradient: 'from-purple-500 to-violet-600',
-    description: 'La maggior parte delle aziende utilizza i propri server fisici al 15-20% della capacità. Attraverso la virtualizzazione e il consolidamento, riduciamo i costi hardware, energetici e di manutenzione.',
+    description: "La maggior parte delle aziende utilizza i propri server fisici al 15-20% della capacità. Attraverso la virtualizzazione e il consolidamento, riduciamo i costi hardware, energetici e di manutenzione.",
     benefits: [
       'Riduzione hardware fino al 60%',
       'Taglio dei consumi energetici',
@@ -38,7 +39,7 @@ const services = [
     icon: Mail,
     title: 'Migrazione Email Aziendale',
     gradient: 'from-emerald-500 to-teal-600',
-    description: 'Exchange on-premise, provider costosi o soluzioni datate: migriamo la tua posta aziendale verso soluzioni moderne, sicure e con costi prevedibili. Zero perdita di dati, zero interruzioni.',
+    description: "Exchange on-premise, provider costosi o soluzioni datate: migriamo la tua posta aziendale verso soluzioni moderne, sicure e con costi prevedibili. Zero perdita di dati, zero interruzioni.",
     benefits: [
       'Migrazione completa senza perdita email',
       'Continuità operativa garantita',
@@ -52,7 +53,7 @@ const services = [
     icon: BarChart3,
     title: 'Audit dei Costi IT',
     gradient: 'from-amber-500 to-orange-600',
-    description: 'Analizziamo tutta la tua infrastruttura IT per identificare sprechi, licenze inutilizzate, contratti ridondanti e opportunità di risparmio. In media troviamo il 30-40% di costi eliminabili.',
+    description: "Analizziamo tutta la tua infrastruttura IT per identificare sprechi, licenze inutilizzate, contratti ridondanti e opportunità di risparmio. In media troviamo il 30-40% di costi eliminabili.",
     benefits: [
       'Analisi completa di licenze e contratti',
       'Identificazione di sprechi e ridondanze',
@@ -73,6 +74,23 @@ const savings = [
 
 export default function OttimizzazioneIT() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const revealElements = document.querySelectorAll('.reveal-on-scroll, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+    revealElements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   const scrollToContact = () => {
     navigate('/#contact');
@@ -129,7 +147,7 @@ export default function OttimizzazioneIT() {
                 onClick={scrollToContact}
                 className="group premium-button text-white px-10 py-7 text-lg rounded-2xl font-semibold"
               >
-                Richiedi un\'analisi gratuita
+                Richiedi un'analisi gratuita
                 <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
               </Button>
             </div>
@@ -147,7 +165,11 @@ export default function OttimizzazioneIT() {
           <div className="max-w-5xl mx-auto relative z-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {savings.map((item, index) => (
-                <div key={index} className="text-center p-6 rounded-2xl glass-effect reveal-on-scroll" style={{ transitionDelay: `${index * 100}ms` }}>
+                <div
+                  key={index}
+                  className="text-center p-6 rounded-2xl glass-effect reveal-on-scroll"
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                >
                   <div className="text-4xl md:text-5xl font-bold gradient-text mb-2">{item.value}</div>
                   <div className="text-white font-semibold text-sm mb-1">{item.label}</div>
                   <div className="text-gray-500 text-xs">{item.desc}</div>
@@ -219,7 +241,7 @@ export default function OttimizzazioneIT() {
                 Scopri quanto puoi risparmiare
               </h2>
               <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-                Contattaci per un\'analisi gratuita della tua infrastruttura IT. In media identifichiamo il 30-40% di costi eliminabili senza impattare l\'operatività aziendale.
+                Contattaci per un'analisi gratuita della tua infrastruttura IT. In media identifichiamo il 30-40% di costi eliminabili senza impattare l'operatività aziendale.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                 <Button
@@ -236,7 +258,7 @@ export default function OttimizzazioneIT() {
                   onClick={() => navigate('/blog/proxmox-alternativa-vmware')}
                   className="group glass-effect border-white/20 text-white hover:bg-white/10 px-12 py-7 text-lg rounded-2xl font-semibold"
                 >
-                  Leggi l\'articolo su Proxmox
+                  Leggi l'articolo su Proxmox
                   <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                 </Button>
               </div>
