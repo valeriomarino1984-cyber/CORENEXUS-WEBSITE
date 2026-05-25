@@ -142,14 +142,14 @@ const blogPosts: BlogPost[] = [
   },
   {
     id: 'rete-aziendale-performante',
-    title: 'Come Progettare una Rete Aziendale Performante e Sicura',
-    excerpt: 'Una rete ben progettata è la base di ogni infrastruttura IT. Scopri i principi fondamentali per creare una rete aziendale affidabile.',
+    title: 'Come Progettare una Rete Aziendale Performante e Sicura a Roma',
+    excerpt: 'Una rete aziendale mal progettata costa cara: rallentamenti, interruzioni, rischi di sicurezza. Scopri come progettare una rete aziendale performante per la tua PMI a Roma, EUR, Ostia e Fiumicino — errori da evitare, VLAN, Wi-Fi enterprise e firewall.',
     content: '',
     category: 'Networking',
-    date: '28 Febbraio 2026',
-    readTime: '7 min',
+    date: '25 Maggio 2026',
+    readTime: '9 min',
     image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80',
-    tags: ['Networking', 'Switch', 'VLAN', 'Wi-Fi']
+    tags: ['Rete Aziendale', 'Networking Roma', 'VLAN', 'Wi-Fi Enterprise', 'Switch Managed']
   },
   {
     id: 'proxmox-alternativa-vmware',
