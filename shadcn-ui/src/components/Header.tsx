@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, LogIn, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, Globe, FileText, Phone, Cog, Cpu, Briefcase, Monitor, BookOpen, Container, Radar } from 'lucide-react';
+import { Menu, X, LogIn, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, Globe, FileText, Phone, Cog, Cpu, Briefcase, Monitor, BookOpen, Container, Radar, TrendingDown } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
@@ -29,9 +29,7 @@ export default function Header() {
   ].includes(location.pathname);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => { setIsScrolled(window.scrollY > 20); };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -84,27 +82,18 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? 'glass-effect shadow-2xl' : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'glass-effect shadow-2xl' : 'bg-transparent'}`}
       style={{ border: 'none' }}
     >
       <div className="max-w-[1400px] mx-auto px-4 lg:px-6 py-3">
-        {/* Desktop: Two rows, both centered */}
+        {/* Desktop */}
         <div className="hidden lg:flex flex-col items-center gap-2">
-          {/* Row 1: Logo centered */}
-          <div
-            className="text-xl xl:text-2xl font-bold gradient-text cursor-pointer whitespace-nowrap"
-            onClick={goHome}
-          >
+          <div className="text-xl xl:text-2xl font-bold gradient-text cursor-pointer whitespace-nowrap" onClick={goHome}>
             CoreNexus Technology Solution
           </div>
 
-          {/* Row 2: Nav links + buttons, all centered */}
           <nav className="flex items-center justify-center gap-3 xl:gap-4">
-            <button onClick={goHome} className={navLinkClass(false)}>
-              Home
-            </button>
+            <button onClick={goHome} className={navLinkClass(false)}>Home</button>
 
             {/* Services Dropdown */}
             <div ref={servicesRef} className="relative">
@@ -121,14 +110,9 @@ export default function Header() {
                   {serviceLinks.map((link, index) => (
                     <button
                       key={index}
-                      onClick={() => {
-                        navigate(link.path);
-                        setIsServicesOpen(false);
-                      }}
+                      onClick={() => { navigate(link.path); setIsServicesOpen(false); }}
                       className={`w-full flex items-center gap-3 px-5 py-3.5 text-left text-sm transition-all duration-200 ${
-                        location.pathname === link.path
-                          ? 'text-white bg-white/10'
-                          : 'text-gray-400 hover:text-white hover:bg-white/5'
+                        location.pathname === link.path ? 'text-white bg-white/10' : 'text-gray-400 hover:text-white hover:bg-white/5'
                       } ${index === 0 ? 'border-b border-white/10 font-semibold' : ''}`}
                     >
                       {link.icon && <link.icon className="w-4 h-4 text-blue-400" />}
@@ -139,40 +123,28 @@ export default function Header() {
               )}
             </div>
 
-            <button
-              onClick={() => navigate('/tecnologie')}
-              className={navLinkClass(location.pathname === '/tecnologie')}
-            >
+            <button onClick={() => navigate('/tecnologie')} className={navLinkClass(location.pathname === '/tecnologie')}>
               Tecnologie
             </button>
-            <button
-              onClick={() => scrollToSection('about')}
-              className={navLinkClass(false)}
-            >
+            <button onClick={() => scrollToSection('about')} className={navLinkClass(false)}>
               Cosa Facciamo
             </button>
             <button
-              onClick={() => navigate('/blog')}
-              className={navLinkClass(location.pathname.startsWith('/blog'))}
+              onClick={() => navigate('/ottimizzazione-it')}
+              className={navLinkClass(location.pathname === '/ottimizzazione-it')}
             >
+              Ottimizzazione IT
+            </button>
+            <button onClick={() => navigate('/blog')} className={navLinkClass(location.pathname.startsWith('/blog'))}>
               Blog
             </button>
-            <button
-              onClick={() => navigate('/dove-siamo')}
-              className={navLinkClass(location.pathname === '/dove-siamo')}
-            >
+            <button onClick={() => navigate('/dove-siamo')} className={navLinkClass(location.pathname === '/dove-siamo')}>
               Dove Siamo
             </button>
-            <button
-              onClick={() => navigate('/contatti')}
-              className={navLinkClass(location.pathname === '/contatti')}
-            >
+            <button onClick={() => navigate('/contatti')} className={navLinkClass(location.pathname === '/contatti')}>
               Contatti
             </button>
-            <button
-              onClick={() => navigate('/assistenza-remota')}
-              className={navLinkClass(location.pathname === '/assistenza-remota')}
-            >
+            <button onClick={() => navigate('/assistenza-remota')} className={navLinkClass(location.pathname === '/assistenza-remota')}>
               Assistenza Remota
             </button>
 
@@ -187,19 +159,12 @@ export default function Header() {
           </nav>
         </div>
 
-        {/* Mobile: logo + hamburger */}
+        {/* Mobile */}
         <div className="flex lg:hidden items-center justify-between">
-          <div
-            className="text-lg font-bold gradient-text cursor-pointer whitespace-nowrap flex-shrink-0"
-            onClick={goHome}
-          >
+          <div className="text-lg font-bold gradient-text cursor-pointer whitespace-nowrap flex-shrink-0" onClick={goHome}>
             CoreNexus Technology Solution
           </div>
-
-          <button
-            className="text-white p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
+          <button className="text-white p-2" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -207,14 +172,10 @@ export default function Header() {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <nav className="lg:hidden mt-4 pb-4 space-y-2 glass-effect rounded-2xl p-6 animate-fade-in-up">
-            <button
-              onClick={goHome}
-              className="block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2"
-            >
+            <button onClick={goHome} className="block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2">
               Home
             </button>
 
-            {/* Mobile Services Accordion */}
             <div>
               <button
                 onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
@@ -229,15 +190,9 @@ export default function Header() {
                   {serviceLinks.map((link, index) => (
                     <button
                       key={index}
-                      onClick={() => {
-                        navigate(link.path);
-                        setIsMobileMenuOpen(false);
-                        setIsMobileServicesOpen(false);
-                      }}
+                      onClick={() => { navigate(link.path); setIsMobileMenuOpen(false); setIsMobileServicesOpen(false); }}
                       className={`block w-full text-left py-2 px-3 rounded-lg text-sm transition-all duration-200 ${
-                        location.pathname === link.path
-                          ? 'text-white bg-white/10'
-                          : 'text-gray-400 hover:text-white hover:bg-white/5'
+                        location.pathname === link.path ? 'text-white bg-white/10' : 'text-gray-400 hover:text-white hover:bg-white/5'
                       }`}
                     >
                       <span className="flex items-center gap-2">
@@ -251,79 +206,51 @@ export default function Header() {
             </div>
 
             <button
-              onClick={() => {
-                navigate('/tecnologie');
-                setIsMobileMenuOpen(false);
-              }}
-              className={`block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2 ${
-                location.pathname === '/tecnologie' ? 'text-white' : ''
-              }`}
+              onClick={() => { navigate('/tecnologie'); setIsMobileMenuOpen(false); }}
+              className={`block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2 ${location.pathname === '/tecnologie' ? 'text-white' : ''}`}
             >
-              <span className="flex items-center gap-2">
-                <Cpu className="w-4 h-4 text-blue-400" />
-                Tecnologie
-              </span>
+              <span className="flex items-center gap-2"><Cpu className="w-4 h-4 text-blue-400" />Tecnologie</span>
             </button>
+
+            <button onClick={() => scrollToSection('about')} className="block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2">
+              <span className="flex items-center gap-2"><Briefcase className="w-4 h-4 text-blue-400" />Cosa Facciamo</span>
+            </button>
+
             <button
-              onClick={() => scrollToSection('about')}
-              className="block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2"
+              onClick={() => { navigate('/ottimizzazione-it'); setIsMobileMenuOpen(false); }}
+              className={`block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2 ${location.pathname === '/ottimizzazione-it' ? 'text-white' : ''}`}
             >
-              <span className="flex items-center gap-2">
-                <Briefcase className="w-4 h-4 text-blue-400" />
-                Cosa Facciamo
-              </span>
+              <span className="flex items-center gap-2"><TrendingDown className="w-4 h-4 text-emerald-400" />Ottimizzazione IT</span>
             </button>
+
             <button
-              onClick={() => {
-                navigate('/blog');
-                setIsMobileMenuOpen(false);
-              }}
-              className={`block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2 ${
-                location.pathname.startsWith('/blog') ? 'text-white' : ''
-              }`}
+              onClick={() => { navigate('/blog'); setIsMobileMenuOpen(false); }}
+              className={`block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2 ${location.pathname.startsWith('/blog') ? 'text-white' : ''}`}
             >
-              <span className="flex items-center gap-2">
-                <BookOpen className="w-4 h-4 text-blue-400" />
-                Blog
-              </span>
+              <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-blue-400" />Blog</span>
             </button>
+
             <button
-              onClick={() => {
-                navigate('/dove-siamo');
-                setIsMobileMenuOpen(false);
-              }}
+              onClick={() => { navigate('/dove-siamo'); setIsMobileMenuOpen(false); }}
               className="block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2"
             >
               Dove Siamo
             </button>
+
             <button
-              onClick={() => {
-                navigate('/contatti');
-                setIsMobileMenuOpen(false);
-              }}
-              className={`block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2 ${
-                location.pathname === '/contatti' ? 'text-white' : ''
-              }`}
+              onClick={() => { navigate('/contatti'); setIsMobileMenuOpen(false); }}
+              className={`block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2 ${location.pathname === '/contatti' ? 'text-white' : ''}`}
             >
-              <span className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-blue-400" />
-                Contatti
-              </span>
+              <span className="flex items-center gap-2"><Phone className="w-4 h-4 text-blue-400" />Contatti</span>
             </button>
+
             <button
-              onClick={() => {
-                navigate('/assistenza-remota');
-                setIsMobileMenuOpen(false);
-              }}
-              className={`block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2 ${
-                location.pathname === '/assistenza-remota' ? 'text-white' : ''
-              }`}
+              onClick={() => { navigate('/assistenza-remota'); setIsMobileMenuOpen(false); }}
+              className={`block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium uppercase tracking-wider py-2 ${location.pathname === '/assistenza-remota' ? 'text-white' : ''}`}
             >
-              <span className="flex items-center gap-2">
-                <Monitor className="w-4 h-4 text-cyan-400" />
-                Assistenza Remota
-              </span>
+              <span className="flex items-center gap-2"><Monitor className="w-4 h-4 text-cyan-400" />Assistenza Remota</span>
             </button>
+
             <div className="pt-2 space-y-2">
               <Button
                 onClick={() => window.open('https://ticket.corenexus.it/', '_blank')}
@@ -334,10 +261,7 @@ export default function Header() {
                 Area Riservata Clienti
               </Button>
               <Button
-                onClick={() => {
-                  navigate('/contatti');
-                  setIsMobileMenuOpen(false);
-                }}
+                onClick={() => { navigate('/contatti'); setIsMobileMenuOpen(false); }}
                 className="w-full premium-button text-white px-6 py-3 rounded-xl text-sm font-semibold"
               >
                 Richiedi Preventivo
