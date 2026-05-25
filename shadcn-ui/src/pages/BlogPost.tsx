@@ -29,290 +29,140 @@ const blogPostsData: Record<string, BlogPostData> = {
     image: 'https://mgx-backend-cdn.metadl.com/generate/images/720946/2026-04-20/m6vlvxaaafhq/blog-allarme-villa-infernetto.png',
     tags: ['Allarme', 'Antifurto', 'Villa Infernetto', 'Sicurezza Casa', 'Roma Sud'],
     sections: [
-      {
-        heading: 'Villa Infernetto e dintorni: un contesto residenziale unico',
-        content: 'L\'Infernetto, Axa, Casal Palocco, Malafede, Acilia e le zone limitrofe del litorale romano rappresentano uno dei contesti residenziali più ambiti della Capitale. Ville indipendenti, villette a schiera immerse nel verde, ampi giardini e tanta tranquillità: uno stile di vita di qualità che purtroppo attira anche l\'attenzione dei malintenzionati. La presenza di pinete, strade poco illuminate e vie di fuga rapide verso la Cristoforo Colombo e il GRA rende queste zone particolarmente sensibili ai furti in abitazione. Proteggere la propria villa con un impianto di allarme moderno non è più un lusso, ma una necessità concreta per dormire sonni tranquilli.'
-      },
-      {
-        heading: 'I dati sui furti nelle zone di Roma Sud',
-        content: 'Secondo i dati delle forze dell\'ordine, le zone residenziali del X Municipio (Infernetto, Axa, Casal Palocco) e dell\'area di Ostia registrano una concentrazione di furti in abitazione superiore alla media romana, soprattutto nei periodi estivi e festivi quando molte famiglie si allontanano da casa. I ladri agiscono spesso in gruppi organizzati, studiano le abitudini dei residenti e sfruttano la conformazione delle ville (ampie pertinenze, finestre accessibili, assenza di vicini ravvicinati). Un impianto di allarme professionale, correttamente dimensionato e monitorato, riduce drasticamente il rischio di intrusione e, nella maggior parte dei casi, dissuade i ladri ancora prima di tentare l\'ingresso.'
-      },
-      {
-        heading: 'Quali tipologie di allarme scegliere per una villa',
-        content: 'Per una villa indipendente o una villetta a schiera consigliamo un impianto multi-livello che integri diverse tecnologie: 1) Contatti magnetici su porte e finestre per rilevare aperture non autorizzate. 2) Sensori volumetrici IR+MW (doppia tecnologia) all\'interno degli ambienti, immuni ai falsi allarmi causati da animali domestici. 3) Barriere perimetrali a infrarossi o microonde sul perimetro del giardino per intercettare gli intrusi prima ancora che raggiungano la casa. 4) Sensori da esterno dual-tech con funzione pet-immune per proteggere portoni, cancelli e aree sensibili. 5) Sirene interne ed esterne autoalimentate con batteria tampone. 6) Combinatore GSM/IP per notifiche immediate su smartphone e collegamento con istituti di vigilanza.'
-      },
-      {
-        heading: 'Sistemi filari, wireless o ibridi?',
-        content: 'La scelta dipende dalle caratteristiche dell\'immobile. Negli impianti di nuova costruzione o durante ristrutturazioni importanti, il cablaggio tradizionale (filare) resta la soluzione più affidabile e a prova di sabotaggio. Negli immobili già finiti, i sistemi wireless di ultima generazione (bidirezionali, crittografati, con doppia frequenza) offrono un\'installazione rapida e pulita senza opere murarie, con un livello di sicurezza paragonabile al filare. Spesso la soluzione migliore è un impianto ibrido: centrale filare per le zone accessibili durante l\'installazione e moduli wireless per piani superiori, dependance e locali tecnici. Marchi come Bentel, Inim, AVS Electronics e Hikvision offrono soluzioni professionali certificate EN 50131 di grado 2 e 3, ideali per il contesto residenziale di pregio.'
-      },
-      {
-        heading: 'Protezione perimetrale: la prima linea di difesa',
-        content: 'In una villa con giardino, la vera differenza la fa la protezione perimetrale. Intercettare l\'intruso sul confine della proprietà, quando ancora non è entrato in casa, permette di gestire l\'allarme con maggiore serenità e senza il rischio di contatto diretto. Le barriere a infrarossi attivi (IR attivi) con portate fino a 100 metri e canali multipli sono la scelta professionale per villini e ville. In alternativa, i sensori da esterno dual-tech con analisi antimascheramento e anti-strisciamento rappresentano un ottimo compromesso tra efficacia e budget. Si possono integrare con illuminazione a LED attivata dal movimento e videocamere di videoverifica per confermare l\'allarme in tempo reale.'
-      },
-      {
-        heading: 'Videosorveglianza integrata e videoverifica',
-        content: 'L\'impianto di allarme moderno non è più isolato: si integra con la videosorveglianza per offrire la videoverifica dell\'allarme. Quando un sensore scatta, la centrale avvia automaticamente la registrazione delle telecamere interessate e invia clip video allo smartphone del proprietario o all\'istituto di vigilanza. Questo permette di distinguere immediatamente un falso allarme (es. vento, animali) da un\'intrusione reale, riducendo interventi inutili e aumentando la rapidità di risposta. Le telecamere Hikvision AcuSense con AI integrata riconoscono persone e veicoli, eliminando falsi allarmi causati da foglie, pioggia o piccoli animali. Il tutto gestibile da app con notifiche push in tempo reale.'
-      },
-      {
-        heading: 'App, domotica e controllo da remoto',
-        content: 'Gli impianti di allarme professionali di oggi si gestiscono comodamente dallo smartphone. Attraverso app dedicate (Inim Air2, Bentel BW, Hik-Connect) è possibile: armare e disarmare l\'impianto a distanza, ricevere notifiche immediate di allarme o anomalie, visualizzare in tempo reale le telecamere, controllare lo stato di porte, finestre e sensori, gestire utenti e codici, automatizzare scenari (es. armamento automatico quando tutti lasciano casa grazie alla geolocalizzazione). L\'integrazione con sistemi domotici (KNX, Google Home, Alexa, Apple Home) permette di far dialogare l\'allarme con luci, tapparelle, irrigazione e clima, creando una vera smart home sicura.'
-      },
-      {
-        heading: 'Collegamento a istituti di vigilanza',
-        content: 'Per chi desidera il massimo della tranquillità, consigliamo il collegamento dell\'impianto a un istituto di vigilanza privato. In caso di allarme, la centrale operativa riceve immediatamente il segnale (via IP con backup GSM), visualizza le telecamere per la videoverifica e invia una pattuglia sul posto. Questo servizio, con un canone mensile contenuto, garantisce un intervento rapido anche quando si è in vacanza o lontani da casa. A Infernetto, Axa, Casal Palocco e dintorni operano diversi istituti di vigilanza con tempi di risposta certificati entro pochi minuti. L\'impianto deve essere certificato e configurato correttamente per dialogare con la centrale operativa.'
-      },
-      {
-        heading: 'Manutenzione: un impianto trascurato è un impianto inutile',
-        content: 'Un impianto di allarme, anche il più avanzato, richiede manutenzione periodica per restare efficiente. Le batterie tampone si esauriscono dopo 3-4 anni, i sensori da esterno accumulano polvere e ragnatele, i tempi e le configurazioni vanno riadattati al variare delle abitudini familiari. Consigliamo una verifica annuale completa con test di tutti i sensori, controllo delle sirene, sostituzione preventiva delle batterie e aggiornamento firmware. Un contratto di manutenzione con un installatore certificato garantisce che l\'impianto funzioni quando serve davvero. CoreNexus offre contratti di manutenzione dedicati con interventi programmati e reperibilità per emergenze.'
-      },
-      {
-        heading: 'CoreNexus: installazione allarmi a Villa Infernetto e Roma Sud',
-        content: 'CoreNexus Technology Solution è specializzata nell\'installazione e manutenzione di impianti di allarme e videosorveglianza per ville e villini nelle zone di Villa Infernetto, Axa, Casal Palocco, Infernetto, Acilia, Ostia, Casal Bernocchi e dintorni. Il nostro servizio include: sopralluogo gratuito e analisi dei rischi, progettazione personalizzata dell\'impianto in base alla conformazione della villa e alle esigenze della famiglia, installazione con marchi professionali certificati (Inim, Bentel, AVS Electronics, Hikvision), integrazione con videosorveglianza e smart home, collegamento a istituti di vigilanza, formazione all\'uso dell\'app e del sistema, contratti di manutenzione con reperibilità. Ogni impianto è conforme alle normative CEI 79-3 ed EN 50131. Contattaci per un sopralluogo gratuito: ti aiuteremo a proteggere la tua villa con la soluzione più adatta al tuo contesto e al tuo budget.'
-      }
+      { heading: 'Villa Infernetto e dintorni: un contesto residenziale unico', content: 'L\'Infernetto, Axa, Casal Palocco, Malafede, Acilia e le zone limitrofe del litorale romano rappresentano uno dei contesti residenziali più ambiti della Capitale. Ville indipendenti, villette a schiera immerse nel verde, ampi giardini e tanta tranquillità: uno stile di vita di qualità che purtroppo attira anche l\'attenzione dei malintenzionati. La presenza di pinete, strade poco illuminate e vie di fuga rapide verso la Cristoforo Colombo e il GRA rende queste zone particolarmente sensibili ai furti in abitazione. Proteggere la propria villa con un impianto di allarme moderno non è più un lusso, ma una necessità concreta per dormire sonni tranquilli.' },
+      { heading: 'I dati sui furti nelle zone di Roma Sud', content: 'Secondo i dati delle forze dell\'ordine, le zone residenziali del X Municipio (Infernetto, Axa, Casal Palocco) e dell\'area di Ostia registrano una concentrazione di furti in abitazione superiore alla media romana, soprattutto nei periodi estivi e festivi quando molte famiglie si allontanano da casa. I ladri agiscono spesso in gruppi organizzati, studiano le abitudini dei residenti e sfruttano la conformazione delle ville (ampie pertinenze, finestre accessibili, assenza di vicini ravvicinati). Un impianto di allarme professionale, correttamente dimensionato e monitorato, riduce drasticamente il rischio di intrusione e, nella maggior parte dei casi, dissuade i ladri ancora prima di tentare l\'ingresso.' },
+      { heading: 'Quali tipologie di allarme scegliere per una villa', content: 'Per una villa indipendente o una villetta a schiera consigliamo un impianto multi-livello che integri diverse tecnologie: contatti magnetici su porte e finestre per rilevare aperture non autorizzate, sensori volumetrici IR+MW a doppia tecnologia all\'interno degli ambienti, barriere perimetrali a infrarossi sul perimetro del giardino, sirene interne ed esterne autoalimentate con batteria tampone, e combinatore GSM/IP per notifiche immediate su smartphone.' },
+      { heading: 'Sistemi filari, wireless o ibridi?', content: 'La scelta dipende dalle caratteristiche dell\'immobile. Negli impianti di nuova costruzione, il cablaggio tradizionale resta la soluzione più affidabile. Negli immobili già finiti, i sistemi wireless di ultima generazione offrono un\'installazione rapida e pulita. Spesso la soluzione migliore è un impianto ibrido. Marchi come Bentel, Inim, AVS Electronics e Hikvision offrono soluzioni professionali certificate EN 50131.' },
+      { heading: 'Protezione perimetrale: la prima linea di difesa', content: 'In una villa con giardino, la vera differenza la fa la protezione perimetrale. Intercettare l\'intruso sul confine della proprietà permette di gestire l\'allarme con maggiore serenità. Le barriere a infrarossi attivi con portate fino a 100 metri sono la scelta professionale per villini e ville.' },
+      { heading: 'Videosorveglianza integrata e videoverifica', content: 'L\'impianto di allarme moderno si integra con la videosorveglianza per offrire la videoverifica dell\'allarme. Quando un sensore scatta, la centrale avvia automaticamente la registrazione delle telecamere interessate e invia clip video allo smartphone del proprietario o all\'istituto di vigilanza.' },
+      { heading: 'App, domotica e controllo da remoto', content: 'Gli impianti di allarme professionali si gestiscono comodamente dallo smartphone. Attraverso app dedicate è possibile armare e disarmare l\'impianto a distanza, ricevere notifiche immediate di allarme, visualizzare in tempo reale le telecamere e controllare lo stato di porte e finestre.' },
+      { heading: 'Collegamento a istituti di vigilanza', content: 'Per chi desidera il massimo della tranquillità, consigliamo il collegamento dell\'impianto a un istituto di vigilanza privato. In caso di allarme, la centrale operativa riceve immediatamente il segnale, visualizza le telecamere per la videoverifica e invia una pattuglia sul posto.' },
+      { heading: 'Manutenzione: un impianto trascurato è un impianto inutile', content: 'Un impianto di allarme richiede manutenzione periodica per restare efficiente. Le batterie tampone si esauriscono dopo 3-4 anni, i sensori da esterno accumulano polvere. Consigliamo una verifica annuale completa con test di tutti i sensori e aggiornamento firmware.' },
+      { heading: 'CoreNexus: installazione allarmi a Villa Infernetto e Roma Sud', content: 'CoreNexus Technology Solution è specializzata nell\'installazione e manutenzione di impianti di allarme e videosorveglianza per ville e villini nelle zone di Villa Infernetto, Axa, Casal Palocco, Acilia, Ostia e dintorni. Il nostro servizio include sopralluogo gratuito, progettazione personalizzata e installazione con marchi professionali certificati.' }
     ]
   },
   'intelligenza-artificiale-azienda': {
     id: 'intelligenza-artificiale-azienda',
     title: 'Intelligenza Artificiale in Azienda: Come l\'AI Sta Trasformando il Business',
-    excerpt: 'L\'intelligenza artificiale non è più fantascienza: è uno strumento concreto che sta rivoluzionando produttività, decisioni e competitività delle aziende. Scopri come integrarla nella tua impresa.',
+    excerpt: 'L\'intelligenza artificiale non è più fantascienza: è uno strumento concreto che sta rivoluzionando produttività, decisioni e competitività delle aziende.',
     category: 'Intelligenza Artificiale',
     date: '5 Aprile 2026',
     readTime: '9 min',
     image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
     tags: ['AI', 'Machine Learning', 'Automazione', 'Business', 'Innovazione'],
     sections: [
-      {
-        heading: 'L\'AI non è il futuro: è il presente',
-        content: 'Nel 2026, l\'intelligenza artificiale è diventata uno strumento quotidiano per milioni di aziende in tutto il mondo. Dai modelli linguistici avanzati come GPT e Claude, fino ai sistemi di computer vision e analisi predittiva, l\'AI sta trasformando radicalmente il modo in cui le imprese operano. Secondo McKinsey, le aziende che adottano l\'AI registrano un aumento medio della produttività del 40%. Non si tratta più di chiedersi "se" adottare l\'AI, ma "come" farlo nel modo più efficace per il proprio business.'
-      },
-      {
-        heading: 'Automazione dei processi ripetitivi',
-        content: 'Una delle applicazioni più immediate dell\'AI in azienda è l\'automazione dei processi ripetitivi. Fatturazione, gestione email, classificazione documenti, data entry, reportistica: tutte attività che consumano ore preziose e che l\'AI può svolgere in pochi secondi con una precisione superiore all\'operatore umano. Strumenti come Microsoft Copilot, Google Gemini e soluzioni custom basate su API permettono di automatizzare workflow complessi, liberando il personale per attività a maggior valore aggiunto come la strategia, la creatività e le relazioni con i clienti.'
-      },
-      {
-        heading: 'Analisi predittiva e decisioni data-driven',
-        content: 'L\'AI eccelle nell\'analizzare grandi volumi di dati e identificare pattern invisibili all\'occhio umano. Le aziende possono sfruttare il machine learning per prevedere la domanda di mercato, ottimizzare la supply chain, identificare clienti a rischio di abbandono (churn prediction) e personalizzare le offerte commerciali. Un esempio concreto: un\'azienda manifatturiera può utilizzare sensori IoT combinati con algoritmi di AI per prevedere guasti alle macchine prima che si verifichino (manutenzione predittiva), riducendo i fermi produttivi fino al 50%.'
-      },
-      {
-        heading: 'AI generativa: contenuti, codice e creatività',
-        content: 'L\'AI generativa ha aperto possibilità impensabili fino a pochi anni fa. Le aziende la utilizzano per generare contenuti marketing (testi, immagini, video), scrivere e revisionare codice software, creare presentazioni, tradurre documenti in tempo reale e persino progettare prodotti. Tuttavia, è fondamentale mantenere il controllo umano: l\'AI è uno strumento potente ma richiede supervisione, verifica dei risultati e una strategia chiara di implementazione. Il "prompt engineering" — la capacità di comunicare efficacemente con i modelli AI — sta diventando una competenza aziendale fondamentale.'
-      },
-      {
-        heading: 'Sicurezza e AI: un\'arma a doppio taglio',
-        content: 'L\'intelligenza artificiale sta rivoluzionando anche la cybersecurity. I sistemi di AI possono analizzare milioni di eventi di sicurezza in tempo reale, identificare anomalie comportamentali e bloccare minacce prima che causino danni. Tuttavia, anche i cybercriminali utilizzano l\'AI per creare attacchi più sofisticati: email di phishing indistinguibili da quelle reali, deepfake per frodi di identità e malware che si adatta per evitare il rilevamento. La sfida per le aziende è adottare soluzioni di sicurezza AI-powered restando aggiornati sulle nuove minacce.'
-      },
-      {
-        heading: 'Come iniziare: i passi concreti',
-        content: 'Per integrare l\'AI nella propria azienda consigliamo un approccio graduale: 1) Identificare i processi più ripetitivi e time-consuming. 2) Iniziare con progetti pilota a basso rischio (es. chatbot per FAQ, automazione email). 3) Misurare i risultati con KPI chiari. 4) Formare il personale sull\'utilizzo degli strumenti AI. 5) Scalare progressivamente le soluzioni che funzionano. Non serve essere una big tech per beneficiare dell\'AI: anche una PMI con 10 dipendenti può ottenere vantaggi significativi con gli strumenti giusti.'
-      },
-      {
-        heading: 'CoreNexus: il tuo partner per l\'AI aziendale',
-        content: 'CoreNexus Technology Solution aiuta le aziende a integrare l\'intelligenza artificiale nei propri processi: dalla consulenza strategica alla scelta degli strumenti, dall\'implementazione di soluzioni custom alla formazione del personale. Offriamo servizi di automazione con AI, integrazione di chatbot e assistenti virtuali, analisi dati con machine learning e consulenza sulla sicurezza AI. Contattaci per una consulenza gratuita e scopri come l\'AI può trasformare la tua azienda.'
-      }
+      { heading: 'L\'AI non è il futuro: è il presente', content: 'Nel 2026, l\'intelligenza artificiale è diventata uno strumento quotidiano per milioni di aziende. Dai modelli linguistici avanzati come GPT e Claude, fino ai sistemi di computer vision e analisi predittiva, l\'AI sta trasformando radicalmente il modo in cui le imprese operano. Secondo McKinsey, le aziende che adottano l\'AI registrano un aumento medio della produttività del 40%.' },
+      { heading: 'Automazione dei processi ripetitivi', content: 'Una delle applicazioni più immediate dell\'AI in azienda è l\'automazione dei processi ripetitivi. Fatturazione, gestione email, classificazione documenti, data entry, reportistica: tutte attività che consumano ore preziose e che l\'AI può svolgere in pochi secondi con precisione superiore all\'operatore umano.' },
+      { heading: 'Analisi predittiva e decisioni data-driven', content: 'L\'AI eccelle nell\'analizzare grandi volumi di dati e identificare pattern invisibili all\'occhio umano. Le aziende possono sfruttare il machine learning per prevedere la domanda di mercato, ottimizzare la supply chain e identificare clienti a rischio di abbandono.' },
+      { heading: 'AI generativa: contenuti, codice e creatività', content: 'L\'AI generativa ha aperto possibilità impensabili. Le aziende la utilizzano per generare contenuti marketing, scrivere e revisionare codice software, creare presentazioni e tradurre documenti in tempo reale.' },
+      { heading: 'Sicurezza e AI: un\'arma a doppio taglio', content: 'L\'intelligenza artificiale sta rivoluzionando anche la cybersecurity. I sistemi di AI possono analizzare milioni di eventi di sicurezza in tempo reale. Tuttavia, anche i cybercriminali utilizzano l\'AI per creare attacchi più sofisticati.' },
+      { heading: 'Come iniziare: i passi concreti', content: 'Per integrare l\'AI consigliamo un approccio graduale: identificare i processi più ripetitivi, iniziare con progetti pilota a basso rischio, misurare i risultati, formare il personale e scalare progressivamente le soluzioni che funzionano.' },
+      { heading: 'CoreNexus: il tuo partner per l\'AI aziendale', content: 'CoreNexus Technology Solution aiuta le aziende a integrare l\'intelligenza artificiale nei propri processi. Offriamo servizi di automazione con AI, integrazione di chatbot e assistenti virtuali, analisi dati con machine learning e consulenza sulla sicurezza AI.' }
     ]
   },
   'chatbot-assistenti-virtuali-ai': {
     id: 'chatbot-assistenti-virtuali-ai',
     title: 'Chatbot e Assistenti Virtuali: Come l\'AI Migliora il Servizio Clienti',
-    excerpt: 'I chatbot basati su intelligenza artificiale stanno rivoluzionando il customer service. Scopri come implementarli per offrire assistenza 24/7 e ridurre i costi operativi.',
+    excerpt: 'I chatbot basati su intelligenza artificiale stanno rivoluzionando il customer service.',
     category: 'Intelligenza Artificiale',
     date: '1 Aprile 2026',
     readTime: '8 min',
     image: 'https://mgx-backend-cdn.metadl.com/generate/images/720946/2026-04-20/m6vge7iaafiq/blog-chatbot-ai.png',
     tags: ['Chatbot', 'AI', 'Customer Service', 'NLP', 'Automazione'],
     sections: [
-      {
-        heading: 'La rivoluzione del customer service',
-        content: 'Il servizio clienti è uno dei settori più trasformati dall\'intelligenza artificiale. I chatbot di nuova generazione, basati su modelli di linguaggio avanzati (LLM), non sono più i bot rigidi e frustranti di qualche anno fa. Oggi sono in grado di comprendere il contesto, gestire conversazioni complesse, rispondere in modo naturale e persino percepire il tono emotivo del cliente. Secondo Gartner, entro il 2027 i chatbot AI gestiranno il 75% delle interazioni di primo livello con i clienti, con un tasso di soddisfazione paragonabile agli operatori umani.'
-      },
-      {
-        heading: 'Come funzionano i chatbot moderni',
-        content: 'I chatbot AI moderni si basano su tre tecnologie chiave: il Natural Language Processing (NLP) per comprendere il linguaggio umano, il Natural Language Generation (NLG) per produrre risposte coerenti e naturali, e il Retrieval-Augmented Generation (RAG) per accedere a basi di conoscenza aziendali specifiche. Grazie al RAG, un chatbot può rispondere con precisione a domande sui prodotti, sulle policy aziendali, sullo stato degli ordini e su qualsiasi informazione contenuta nei documenti interni, senza necessità di programmazione manuale per ogni possibile domanda.'
-      },
-      {
-        heading: 'Vantaggi concreti per le aziende',
-        content: 'I benefici dell\'implementazione di un chatbot AI sono misurabili e significativi: disponibilità 24/7 senza costi aggiuntivi di personale notturno, riduzione dei tempi di attesa da minuti a secondi, gestione simultanea di centinaia di conversazioni, riduzione del carico sul team di supporto del 40-60%, raccolta automatica di dati e feedback dei clienti, e coerenza nelle risposte (niente più informazioni contraddittorie tra operatori diversi). Per le PMI, un chatbot ben configurato equivale ad avere un team di supporto sempre disponibile a una frazione del costo.'
-      },
-      {
-        heading: 'Casi d\'uso: oltre il semplice FAQ',
-        content: 'I chatbot AI moderni vanno ben oltre le semplici FAQ. Ecco alcuni casi d\'uso avanzati: assistente alle vendite che guida il cliente nella scelta del prodotto giusto, sistema di prenotazione appuntamenti integrato con il calendario aziendale, supporto tecnico di primo livello con escalation automatica ai tecnici umani per problemi complessi, onboarding automatizzato per nuovi clienti, raccolta lead qualificati con domande intelligenti, e assistente interno per i dipendenti (HR bot per ferie, policy, procedure). Ogni chatbot può essere personalizzato con il tono di voce del brand e integrato con i sistemi aziendali esistenti (CRM, ERP, ticketing).'
-      },
-      {
-        heading: 'Integrazione con i canali di comunicazione',
-        content: 'Un chatbot efficace deve essere presente dove sono i clienti. Le piattaforme moderne permettono di deployare lo stesso chatbot su molteplici canali: sito web aziendale (widget di chat), WhatsApp Business, Facebook Messenger, Instagram DM, Telegram, email e persino telefono (voice bot). L\'integrazione multicanale garantisce un\'esperienza coerente indipendentemente dal canale scelto dal cliente, con una cronologia unificata delle conversazioni. Questo approccio omnicanale è fondamentale per le aziende che vogliono offrire un servizio clienti moderno e accessibile.'
-      },
-      {
-        heading: 'Privacy, GDPR e trasparenza',
-        content: 'L\'implementazione di chatbot AI deve rispettare rigorosamente il GDPR e le normative sulla privacy. È obbligatorio informare l\'utente che sta interagendo con un sistema automatizzato, raccogliere il consenso per il trattamento dei dati, garantire la possibilità di parlare con un operatore umano, e proteggere i dati delle conversazioni con crittografia adeguata. Inoltre, è fondamentale che il chatbot non "inventi" informazioni (hallucination): le risposte devono essere basate su dati verificati e il sistema deve saper dire "non lo so" quando necessario, indirizzando il cliente al supporto umano.'
-      },
-      {
-        heading: 'CoreNexus: chatbot AI su misura per la tua azienda',
-        content: 'CoreNexus Technology Solution progetta e implementa chatbot e assistenti virtuali personalizzati per le aziende. Il nostro approccio include: analisi delle esigenze e dei flussi di comunicazione, progettazione della knowledge base aziendale, sviluppo e training del chatbot con i dati specifici del cliente, integrazione con i canali di comunicazione e i sistemi aziendali (CRM, ticketing, ERP), monitoraggio delle performance e ottimizzazione continua. Offriamo soluzioni scalabili adatte sia alle PMI che alle grandi aziende. Contattaci per una demo gratuita e scopri come un chatbot AI può trasformare il tuo servizio clienti.'
-      }
+      { heading: 'La rivoluzione del customer service', content: 'Il servizio clienti è uno dei settori più trasformati dall\'intelligenza artificiale. I chatbot di nuova generazione non sono più i bot rigidi di qualche anno fa. Oggi sono in grado di comprendere il contesto, gestire conversazioni complesse e rispondere in modo naturale.' },
+      { heading: 'Come funzionano i chatbot moderni', content: 'I chatbot AI moderni si basano su Natural Language Processing (NLP), Natural Language Generation (NLG) e Retrieval-Augmented Generation (RAG) per accedere a basi di conoscenza aziendali specifiche.' },
+      { heading: 'Vantaggi concreti per le aziende', content: 'I benefici includono: disponibilità 24/7 senza costi aggiuntivi, riduzione dei tempi di attesa da minuti a secondi, gestione simultanea di centinaia di conversazioni e riduzione del carico sul team di supporto del 40-60%.' },
+      { heading: 'Casi d\'uso: oltre il semplice FAQ', content: 'I chatbot AI moderni vanno ben oltre le semplici FAQ: assistente alle vendite, sistema di prenotazione appuntamenti, supporto tecnico di primo livello, onboarding automatizzato e raccolta lead qualificati.' },
+      { heading: 'Integrazione con i canali di comunicazione', content: 'Un chatbot efficace deve essere presente dove sono i clienti: sito web, WhatsApp Business, Facebook Messenger, Instagram, Telegram ed email. L\'integrazione multicanale garantisce un\'esperienza coerente.' },
+      { heading: 'Privacy, GDPR e trasparenza', content: 'L\'implementazione di chatbot AI deve rispettare rigorosamente il GDPR. È obbligatorio informare l\'utente che sta interagendo con un sistema automatizzato e garantire la possibilità di parlare con un operatore umano.' },
+      { heading: 'CoreNexus: chatbot AI su misura per la tua azienda', content: 'CoreNexus Technology Solution progetta e implementa chatbot e assistenti virtuali personalizzati. Il nostro approccio include analisi delle esigenze, sviluppo e training del chatbot, integrazione con i canali di comunicazione e monitoraggio continuo.' }
     ]
   },
   'migrazione-cloud-aziendale': {
     id: 'migrazione-cloud-aziendale',
     title: 'Migrazione al Cloud: Guida Completa per le Aziende che Vogliono Innovare',
-    excerpt: 'Migrare al cloud non è solo spostare dati: è trasformare il modo in cui la tua azienda lavora. Scopri strategie, vantaggi e rischi da evitare.',
+    excerpt: 'Migrare al cloud non è solo spostare dati: è trasformare il modo in cui la tua azienda lavora.',
     category: 'Cloud',
     date: '22 Marzo 2026',
     readTime: '8 min',
     image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80',
     tags: ['Cloud', 'Migrazione', 'AWS', 'Azure', 'Infrastruttura'],
     sections: [
-      {
-        heading: 'Perché migrare al cloud nel 2026',
-        content: 'Il cloud computing non è più una tendenza: è lo standard. Le aziende che ancora dipendono esclusivamente da server fisici on-premise affrontano costi crescenti di manutenzione, limitazioni di scalabilità e rischi di obsolescenza. La migrazione al cloud offre flessibilità, riduzione dei costi operativi e accesso a tecnologie all\'avanguardia come l\'intelligenza artificiale e il machine learning.'
-      },
-      {
-        heading: 'Le strategie di migrazione: le 6 R',
-        content: 'Esistono sei approcci principali alla migrazione cloud, noti come le "6 R": Rehost (lift-and-shift, spostamento diretto), Replatform (ottimizzazione parziale), Refactor (riscrittura per il cloud), Repurchase (sostituzione con SaaS), Retire (dismissione) e Retain (mantenimento on-premise). La scelta dipende dalla complessità dell\'applicazione, dal budget e dagli obiettivi aziendali.'
-      },
-      {
-        heading: 'Cloud pubblico, privato o ibrido?',
-        content: 'Il cloud pubblico (AWS, Azure, Google Cloud) offre scalabilità illimitata e costi variabili. Il cloud privato garantisce controllo totale e conformità normativa. Il cloud ibrido combina i vantaggi di entrambi, permettendo di mantenere i dati sensibili on-premise mentre si sfrutta la potenza del cloud pubblico per carichi di lavoro variabili. Per le PMI italiane, il cloud ibrido è spesso la scelta più equilibrata.'
-      },
-      {
-        heading: 'I rischi da evitare',
-        content: 'I principali rischi della migrazione cloud includono: sottovalutare i costi di banda e trasferimento dati, non pianificare adeguatamente la sicurezza, ignorare la conformità GDPR per i dati ospitati fuori dall\'UE, e non formare il personale sulle nuove piattaforme. Un assessment iniziale approfondito e un piano di migrazione graduale sono essenziali per il successo.'
-      },
-      {
-        heading: 'CoreNexus: il tuo partner per la migrazione cloud',
-        content: 'CoreNexus Technology Solution accompagna le aziende in ogni fase della migrazione: dall\'assessment iniziale dell\'infrastruttura alla scelta della piattaforma, dalla migrazione dei dati e delle applicazioni alla formazione del personale. Garantiamo zero downtime e supporto continuo post-migrazione.'
-      }
+      { heading: 'Perché migrare al cloud nel 2026', content: 'Il cloud computing non è più una tendenza: è lo standard. Le aziende che ancora dipendono esclusivamente da server fisici on-premise affrontano costi crescenti di manutenzione e limitazioni di scalabilità.' },
+      { heading: 'Le strategie di migrazione: le 6 R', content: 'Esistono sei approcci principali: Rehost, Replatform, Refactor, Repurchase, Retire e Retain. La scelta dipende dalla complessità dell\'applicazione, dal budget e dagli obiettivi aziendali.' },
+      { heading: 'Cloud pubblico, privato o ibrido?', content: 'Il cloud pubblico offre scalabilità illimitata. Il cloud privato garantisce controllo totale. Il cloud ibrido combina i vantaggi di entrambi. Per le PMI italiane, il cloud ibrido è spesso la scelta più equilibrata.' },
+      { heading: 'I rischi da evitare', content: 'I principali rischi includono: sottovalutare i costi di banda, non pianificare adeguatamente la sicurezza, ignorare la conformità GDPR e non formare il personale sulle nuove piattaforme.' },
+      { heading: 'CoreNexus: il tuo partner per la migrazione cloud', content: 'CoreNexus Technology Solution accompagna le aziende in ogni fase della migrazione: dall\'assessment iniziale alla scelta della piattaforma, dalla migrazione dei dati alla formazione del personale.' }
     ]
   },
   'gdpr-protezione-dati-aziende': {
     id: 'gdpr-protezione-dati-aziende',
     title: 'GDPR e Protezione Dati: Cosa Devono Sapere le Aziende nel 2026',
-    excerpt: 'Il GDPR non è solo burocrazia: è un\'opportunità per costruire fiducia con i clienti. Ecco come adeguarsi e proteggere i dati aziendali.',
+    excerpt: 'Il GDPR non è solo burocrazia: è un\'opportunità per costruire fiducia con i clienti.',
     category: 'Compliance',
     date: '18 Marzo 2026',
     readTime: '7 min',
     image: 'https://mgx-backend-cdn.metadl.com/generate/images/720946/2026-04-20/m6vg2vyaafha/blog-gdpr-privacy.png',
     tags: ['GDPR', 'Privacy', 'Protezione Dati', 'Compliance'],
     sections: [
-      {
-        heading: 'Il GDPR nel 2026: cosa è cambiato',
-        content: 'Dal 2018 il GDPR ha rivoluzionato la gestione dei dati personali in Europa. Nel 2026, le sanzioni sono diventate più frequenti e severe, con il Garante italiano particolarmente attivo. Le aziende che non si sono ancora adeguate rischiano multe fino al 4% del fatturato annuo globale o 20 milioni di euro, oltre a danni reputazionali incalcolabili.'
-      },
-      {
-        heading: 'I principi fondamentali da rispettare',
-        content: 'Il GDPR si basa su principi chiave: liceità e trasparenza del trattamento, limitazione delle finalità, minimizzazione dei dati (raccogliere solo ciò che serve), esattezza, limitazione della conservazione, integrità e riservatezza. Ogni azienda deve documentare come applica questi principi attraverso il Registro dei Trattamenti.'
-      },
-      {
-        heading: 'Misure tecniche obbligatorie',
-        content: 'Dal punto di vista IT, il GDPR richiede: crittografia dei dati a riposo e in transito, controllo degli accessi basato su ruoli, log di audit per tracciare chi accede ai dati, backup regolari con test di ripristino, procedure di notifica breach entro 72 ore e valutazione d\'impatto (DPIA) per trattamenti ad alto rischio.'
-      },
-      {
-        heading: 'Il DPO: serve davvero?',
-        content: 'Il Data Protection Officer (DPO) è obbligatorio per enti pubblici, aziende che trattano dati su larga scala e aziende che trattano categorie particolari di dati. Anche quando non obbligatorio, nominare un DPO (anche esterno) dimostra accountability e facilita la gestione della compliance. È un investimento che ripaga in tranquillità e credibilità.'
-      },
-      {
-        heading: 'Come CoreNexus può aiutarti',
-        content: 'CoreNexus offre consulenza GDPR completa per le aziende: audit dell\'infrastruttura IT, implementazione delle misure tecniche richieste (crittografia, backup, access control), configurazione di sistemi di log e monitoraggio, e supporto nella redazione della documentazione obbligatoria. Proteggiamo i tuoi dati e la tua conformità.'
-      }
+      { heading: 'Il GDPR nel 2026: cosa è cambiato', content: 'Dal 2018 il GDPR ha rivoluzionato la gestione dei dati personali in Europa. Nel 2026 le sanzioni sono diventate più frequenti e severe, con il Garante italiano particolarmente attivo.' },
+      { heading: 'I principi fondamentali da rispettare', content: 'Il GDPR si basa su: liceità e trasparenza, limitazione delle finalità, minimizzazione dei dati, esattezza, limitazione della conservazione, integrità e riservatezza.' },
+      { heading: 'Misure tecniche obbligatorie', content: 'Il GDPR richiede: crittografia dei dati, controllo degli accessi basato su ruoli, log di audit, backup regolari con test di ripristino e procedure di notifica breach entro 72 ore.' },
+      { heading: 'Il DPO: serve davvero?', content: 'Il Data Protection Officer è obbligatorio per enti pubblici e aziende che trattano dati su larga scala. Anche quando non obbligatorio, nominare un DPO dimostra accountability.' },
+      { heading: 'Come CoreNexus può aiutarti', content: 'CoreNexus offre consulenza GDPR completa: audit dell\'infrastruttura IT, implementazione delle misure tecniche richieste, configurazione di sistemi di log e monitoraggio.' }
     ]
   },
   'manutenzione-preventiva-it': {
     id: 'manutenzione-preventiva-it',
     title: 'Manutenzione Preventiva IT: Come Evitare Guasti e Ridurre i Costi',
-    excerpt: 'Prevenire è meglio che curare, anche nell\'IT. Scopri come un piano di manutenzione preventiva può salvare la tua azienda da costosi fermi.',
+    excerpt: 'Prevenire è meglio che curare, anche nell\'IT.',
     category: 'Manutenzione',
     date: '14 Marzo 2026',
     readTime: '6 min',
     image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80',
     tags: ['Manutenzione', 'Preventiva', 'Server', 'Monitoraggio'],
     sections: [
-      {
-        heading: 'Il costo nascosto della manutenzione reattiva',
-        content: 'Aspettare che qualcosa si rompa per intervenire è l\'approccio più costoso possibile. Un server che si guasta di venerdì pomeriggio può significare un intero weekend di fermo, con costi che includono: perdita di produttività, straordinari del personale IT, possibile perdita di dati, e danni alla reputazione con i clienti. Studi dimostrano che la manutenzione preventiva riduce i costi IT del 25-30%.'
-      },
-      {
-        heading: 'Cosa include un piano di manutenzione preventiva',
-        content: 'Un piano efficace comprende: aggiornamenti regolari di sistemi operativi e firmware, controllo dello stato di salute degli hard disk (SMART monitoring), pulizia fisica dei server e delle apparecchiature, verifica dei backup e test di ripristino, controllo delle performance di rete, revisione delle policy di sicurezza e aggiornamento antivirus/firewall.'
-      },
-      {
-        heading: 'Monitoraggio proattivo 24/7',
-        content: 'I moderni sistemi di monitoraggio (Zabbix, PRTG, Nagios) permettono di rilevare anomalie prima che diventino guasti. Temperature elevate, spazio disco in esaurimento, errori di memoria, latenza di rete anomala: tutti segnali che, se intercettati in tempo, permettono di intervenire preventivamente evitando interruzioni del servizio.'
-      },
-      {
-        heading: 'La frequenza ideale degli interventi',
-        content: 'Consigliamo: controlli settimanali automatizzati (script di monitoraggio), interventi mensili di verifica e ottimizzazione, manutenzione trimestrale approfondita con test di disaster recovery, e revisione annuale completa dell\'infrastruttura con pianificazione degli aggiornamenti hardware. Ogni azienda ha esigenze diverse: il piano va personalizzato.'
-      },
-      {
-        heading: 'I contratti di manutenzione CoreNexus',
-        content: 'CoreNexus offre contratti di manutenzione preventiva su misura: dal monitoraggio 24/7 agli interventi programmati, dalla gestione degli aggiornamenti al supporto remoto e on-site. I nostri contratti includono SLA garantiti, tempi di risposta certi e report mensili sullo stato dell\'infrastruttura.'
-      }
+      { heading: 'Il costo nascosto della manutenzione reattiva', content: 'Aspettare che qualcosa si rompa è l\'approccio più costoso possibile. Un server che si guasta di venerdì pomeriggio può significare un intero weekend di fermo. La manutenzione preventiva riduce i costi IT del 25-30%.' },
+      { heading: 'Cosa include un piano di manutenzione preventiva', content: 'Un piano efficace comprende: aggiornamenti regolari, controllo dello stato di salute degli hard disk, pulizia fisica dei server, verifica dei backup e revisione delle policy di sicurezza.' },
+      { heading: 'Monitoraggio proattivo 24/7', content: 'I moderni sistemi di monitoraggio come Zabbix, PRTG e Nagios permettono di rilevare anomalie prima che diventino guasti: temperature elevate, spazio disco in esaurimento, errori di memoria.' },
+      { heading: 'La frequenza ideale degli interventi', content: 'Consigliamo: controlli settimanali automatizzati, interventi mensili di verifica, manutenzione trimestrale approfondita e revisione annuale completa dell\'infrastruttura.' },
+      { heading: 'I contratti di manutenzione CoreNexus', content: 'CoreNexus offre contratti di manutenzione preventiva su misura: dal monitoraggio 24/7 agli interventi programmati, con SLA garantiti e report mensili sullo stato dell\'infrastruttura.' }
     ]
   },
   'smart-working-vpn-aziendale': {
     id: 'smart-working-vpn-aziendale',
     title: 'Smart Working e VPN Aziendale: Lavorare da Remoto in Sicurezza',
-    excerpt: 'Lo smart working è qui per restare. Scopri come configurare una VPN aziendale sicura per proteggere i dati anche fuori dall\'ufficio.',
+    excerpt: 'Lo smart working è qui per restare. Scopri come configurare una VPN aziendale sicura.',
     category: 'Networking',
     date: '12 Marzo 2026',
     readTime: '7 min',
     image: 'https://images.unsplash.com/photo-1585974738771-84483dd9f89f?w=800&q=80',
     tags: ['Smart Working', 'VPN', 'Sicurezza', 'Lavoro Remoto'],
     sections: [
-      {
-        heading: 'Lo smart working nel 2026: numeri e tendenze',
-        content: 'Dopo la pandemia, lo smart working si è consolidato come modalità di lavoro standard. In Italia, oltre il 50% delle aziende offre almeno 2 giorni di lavoro remoto a settimana. Ma lavorare da casa senza adeguate misure di sicurezza espone l\'azienda a rischi significativi: reti Wi-Fi domestiche non protette, dispositivi personali vulnerabili e accessi non controllati ai dati aziendali.'
-      },
-      {
-        heading: 'VPN: cos\'è e perché è indispensabile',
-        content: 'Una VPN (Virtual Private Network) crea un tunnel crittografato tra il dispositivo del dipendente e la rete aziendale. Tutto il traffico passa attraverso questo tunnel, rendendo impossibile l\'intercettazione dei dati anche su reti Wi-Fi pubbliche. Le VPN moderne supportano protocolli come WireGuard e OpenVPN, offrendo velocità elevate e sicurezza di livello militare.'
-      },
-      {
-        heading: 'Soluzioni VPN per le aziende',
-        content: 'Per le PMI consigliamo soluzioni come: pfSense/OPNsense con OpenVPN integrato (open-source, affidabile), FortiGate con FortiClient VPN (enterprise, gestione centralizzata), o WireGuard per configurazioni leggere e performanti. La scelta dipende dal numero di utenti, dalla complessità della rete e dal budget. Tutte le soluzioni supportano l\'autenticazione a due fattori (2FA).'
-      },
-      {
-        heading: 'Oltre la VPN: sicurezza completa per il lavoro remoto',
-        content: 'La VPN è solo il primo passo. Una strategia completa di smart working sicuro include: endpoint protection su tutti i dispositivi, gestione centralizzata dei dispositivi (MDM), policy di accesso Zero Trust (verificare sempre, non fidarsi mai), segmentazione della rete per limitare l\'accesso solo alle risorse necessarie, e formazione continua dei dipendenti sulle best practice di sicurezza.'
-      },
-      {
-        heading: 'CoreNexus: smart working sicuro chiavi in mano',
-        content: 'CoreNexus progetta e implementa soluzioni complete per lo smart working: dalla configurazione della VPN aziendale alla protezione degli endpoint, dalla formazione del personale al monitoraggio continuo. Garantiamo che i tuoi dipendenti possano lavorare da qualsiasi luogo in totale sicurezza.'
-      }
+      { heading: 'Lo smart working nel 2026', content: 'Dopo la pandemia, lo smart working si è consolidato come modalità di lavoro standard. Lavorare da casa senza adeguate misure di sicurezza espone l\'azienda a rischi significativi.' },
+      { heading: 'VPN: cos\'è e perché è indispensabile', content: 'Una VPN crea un tunnel crittografato tra il dispositivo del dipendente e la rete aziendale, rendendo impossibile l\'intercettazione dei dati anche su reti Wi-Fi pubbliche.' },
+      { heading: 'Soluzioni VPN per le aziende', content: 'Per le PMI consigliamo: pfSense/OPNsense con OpenVPN, FortiGate con FortiClient VPN, o WireGuard per configurazioni leggere. Tutte supportano l\'autenticazione a due fattori.' },
+      { heading: 'Oltre la VPN: sicurezza completa', content: 'Una strategia completa include: endpoint protection, gestione centralizzata dei dispositivi, policy di accesso Zero Trust e formazione continua dei dipendenti.' },
+      { heading: 'CoreNexus: smart working sicuro chiavi in mano', content: 'CoreNexus progetta e implementa soluzioni complete per lo smart working: dalla configurazione della VPN alla protezione degli endpoint, dalla formazione al monitoraggio continuo.' }
     ]
   },
   'disaster-recovery-piano-aziendale': {
     id: 'disaster-recovery-piano-aziendale',
     title: 'Disaster Recovery: Come Creare un Piano che Funziona Davvero',
-    excerpt: 'Un piano di disaster recovery ben progettato è la differenza tra un\'interruzione temporanea e una catastrofe aziendale. Ecco come crearlo.',
+    excerpt: 'Un piano di disaster recovery ben progettato è la differenza tra un\'interruzione temporanea e una catastrofe aziendale.',
     category: 'Sicurezza',
     date: '11 Marzo 2026',
     readTime: '8 min',
     image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80',
     tags: ['Disaster Recovery', 'Business Continuity', 'Backup', 'RTO'],
     sections: [
-      {
-        heading: 'Disaster Recovery vs Business Continuity',
-        content: 'Spesso confusi, sono concetti complementari. Il Business Continuity Plan (BCP) definisce come l\'azienda continua a operare durante un\'emergenza. Il Disaster Recovery Plan (DRP) si concentra specificamente sul ripristino dei sistemi IT dopo un disastro. Entrambi sono essenziali: il BCP senza DRP è incompleto, e viceversa.'
-      },
-      {
-        heading: 'RTO e RPO: i parametri chiave',
-        content: 'Il Recovery Time Objective (RTO) è il tempo massimo accettabile per ripristinare i sistemi dopo un guasto. Il Recovery Point Objective (RPO) è la quantità massima di dati che l\'azienda può permettersi di perdere, misurata in tempo. Un RPO di 1 ora significa che i backup devono essere eseguiti almeno ogni ora. Definire RTO e RPO realistici è il primo passo per un DRP efficace.'
-      },
-      {
-        heading: 'Scenari di disastro da considerare',
-        content: 'Un buon DRP copre molteplici scenari: guasto hardware (server, storage, rete), attacco ransomware, errore umano (cancellazione accidentale), disastro naturale (incendio, allagamento), interruzione prolungata dell\'energia elettrica, e guasto del provider di servizi. Per ogni scenario, il piano deve definire procedure specifiche, responsabilità e tempi di ripristino.'
-      },
-      {
-        heading: 'Implementazione tecnica',
-        content: 'Le soluzioni tecniche includono: replica in tempo reale su sito secondario (per RTO vicini a zero), backup incrementali frequenti su storage off-site o cloud, snapshot delle macchine virtuali, documentazione dettagliata delle configurazioni, e automazione delle procedure di ripristino. Strumenti come Veeam, Acronis e Zerto semplificano enormemente l\'implementazione.'
-      },
-      {
-        heading: 'Test periodici: la chiave del successo',
-        content: 'Un piano di disaster recovery non testato è un piano che non funziona. Consigliamo test completi almeno due volte l\'anno, simulando scenari reali: spegnimento del server principale, ripristino da backup, failover sul sito secondario. Ogni test deve essere documentato con tempi effettivi di ripristino e eventuali problemi riscontrati.'
-      },
-      {
-        heading: 'CoreNexus: protezione totale',
-        content: 'CoreNexus progetta piani di disaster recovery personalizzati: analisi dei rischi, definizione di RTO/RPO, implementazione delle soluzioni tecniche, documentazione completa e test periodici. Proteggiamo la continuità operativa della tua azienda.'
-      }
+      { heading: 'Disaster Recovery vs Business Continuity', content: 'Il Business Continuity Plan definisce come l\'azienda continua a operare durante un\'emergenza. Il Disaster Recovery Plan si concentra sul ripristino dei sistemi IT dopo un disastro.' },
+      { heading: 'RTO e RPO: i parametri chiave', content: 'Il Recovery Time Objective è il tempo massimo accettabile per ripristinare i sistemi. Il Recovery Point Objective è la quantità massima di dati che l\'azienda può permettersi di perdere.' },
+      { heading: 'Scenari di disastro da considerare', content: 'Un buon DRP copre: guasto hardware, attacco ransomware, errore umano, disastro naturale, interruzione dell\'energia e guasto del provider di servizi.' },
+      { heading: 'Implementazione tecnica', content: 'Le soluzioni includono: replica in tempo reale su sito secondario, backup incrementali frequenti, snapshot delle macchine virtuali e automazione delle procedure di ripristino.' },
+      { heading: 'Test periodici: la chiave del successo', content: 'Un piano non testato è un piano che non funziona. Consigliamo test completi almeno due volte l\'anno, simulando scenari reali.' },
+      { heading: 'CoreNexus: protezione totale', content: 'CoreNexus progetta piani di disaster recovery personalizzati: analisi dei rischi, definizione di RTO/RPO, implementazione delle soluzioni tecniche e test periodici.' }
     ]
   },
   'backup-aziendali-strategie-2025': {
@@ -325,26 +175,11 @@ const blogPostsData: Record<string, BlogPostData> = {
     image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
     tags: ['Backup', 'Cloud', 'Sicurezza Dati', 'Disaster Recovery'],
     sections: [
-      {
-        heading: 'Perché il backup è fondamentale',
-        content: 'Ogni giorno le aziende generano enormi quantità di dati critici. Un guasto hardware, un attacco ransomware o un semplice errore umano possono causare la perdita irreversibile di informazioni vitali. Il backup non è un\'opzione, è una necessità strategica per la continuità operativa.'
-      },
-      {
-        heading: 'La regola 3-2-1',
-        content: 'La regola d\'oro del backup prevede: 3 copie dei dati, su 2 supporti diversi, con 1 copia off-site. Questa strategia garantisce che, anche in caso di disastro fisico (incendio, allagamento), i dati rimangano accessibili da una posizione remota. È il punto di partenza per qualsiasi piano di protezione dati serio.'
-      },
-      {
-        heading: 'Backup in cloud ibrido',
-        content: 'La soluzione più moderna combina backup locale (NAS, server dedicato) con backup in cloud. Il backup locale garantisce velocità di ripristino, mentre il cloud offre protezione geografica. Soluzioni come Veeam, Acronis e Synology Active Backup permettono di automatizzare l\'intero processo con crittografia end-to-end.'
-      },
-      {
-        heading: 'Test di ripristino: il passaggio dimenticato',
-        content: 'Un backup non testato è un backup inutile. Consigliamo di eseguire test di ripristino almeno ogni trimestre per verificare l\'integrità dei dati e la velocità di recovery. Il tempo di ripristino (RTO) e il punto di ripristino (RPO) devono essere definiti in base alle esigenze aziendali.'
-      },
-      {
-        heading: 'Come possiamo aiutarti',
-        content: 'CoreNexus Technology Solution progetta e implementa soluzioni di backup personalizzate per PMI e aziende a Roma. Dalla consulenza iniziale alla configurazione, dal monitoraggio continuo ai test periodici, garantiamo che i tuoi dati siano sempre protetti e recuperabili.'
-      }
+      { heading: 'Perché il backup è fondamentale', content: 'Un guasto hardware, un attacco ransomware o un semplice errore umano possono causare la perdita irreversibile di informazioni vitali. Il backup non è un\'opzione, è una necessità strategica.' },
+      { heading: 'La regola 3-2-1', content: 'La regola d\'oro prevede: 3 copie dei dati, su 2 supporti diversi, con 1 copia off-site. Questa strategia garantisce che, anche in caso di disastro fisico, i dati rimangano accessibili.' },
+      { heading: 'Backup in cloud ibrido', content: 'La soluzione più moderna combina backup locale con backup in cloud. Soluzioni come Veeam, Acronis e Synology Active Backup permettono di automatizzare l\'intero processo con crittografia end-to-end.' },
+      { heading: 'Test di ripristino: il passaggio dimenticato', content: 'Un backup non testato è un backup inutile. Consigliamo test di ripristino almeno ogni trimestre per verificare l\'integrità dei dati e la velocità di recovery.' },
+      { heading: 'Come possiamo aiutarti', content: 'CoreNexus Technology Solution progetta e implementa soluzioni di backup personalizzate per PMI e aziende a Roma, dalla consulenza iniziale al monitoraggio continuo.' }
     ]
   },
   'cybersecurity-pmi-guida': {
@@ -357,26 +192,11 @@ const blogPostsData: Record<string, BlogPostData> = {
     image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80',
     tags: ['Cybersecurity', 'PMI', 'Firewall', 'Phishing'],
     sections: [
-      {
-        heading: 'Le PMI nel mirino degli hacker',
-        content: 'Il 43% degli attacchi informatici colpisce le piccole e medie imprese. Spesso le PMI non dispongono di risorse dedicate alla sicurezza IT, rendendole bersagli facili. Un singolo attacco ransomware può costare decine di migliaia di euro tra riscatto, fermo operativo e danni reputazionali.'
-      },
-      {
-        heading: 'Le 5 misure essenziali',
-        content: '1. Firewall di nuova generazione (NGFW) per filtrare il traffico di rete. 2. Antivirus endpoint con protezione comportamentale. 3. Autenticazione a due fattori (2FA) su tutti gli account critici. 4. Aggiornamenti regolari di sistemi operativi e software. 5. Formazione del personale sul riconoscimento delle email di phishing.'
-      },
-      {
-        heading: 'Il phishing: la minaccia numero uno',
-        content: 'Il 91% degli attacchi inizia con un\'email di phishing. Formare i dipendenti a riconoscere email sospette è la difesa più efficace e meno costosa. Simulazioni periodiche di phishing aiutano a mantenere alta l\'attenzione e a misurare il livello di consapevolezza aziendale.'
-      },
-      {
-        heading: 'Monitoraggio e risposta agli incidenti',
-        content: 'Un sistema di monitoraggio 24/7 permette di rilevare attività sospette in tempo reale. Avere un piano di risposta agli incidenti (Incident Response Plan) documentato e testato riduce drasticamente i tempi di reazione e i danni in caso di violazione.'
-      },
-      {
-        heading: 'La nostra soluzione',
-        content: 'CoreNexus offre pacchetti di cybersecurity su misura per PMI: audit di sicurezza, implementazione firewall, configurazione endpoint protection, formazione del personale e monitoraggio continuo. Proteggiamo la tua azienda 24/7.'
-      }
+      { heading: 'Le PMI nel mirino degli hacker', content: 'Il 43% degli attacchi informatici colpisce le piccole e medie imprese. Spesso le PMI non dispongono di risorse dedicate alla sicurezza IT, rendendole bersagli facili.' },
+      { heading: 'Le 5 misure essenziali', content: 'Firewall di nuova generazione, antivirus endpoint con protezione comportamentale, autenticazione a due fattori, aggiornamenti regolari e formazione del personale sul riconoscimento del phishing.' },
+      { heading: 'Il phishing: la minaccia numero uno', content: 'Il 91% degli attacchi inizia con un\'email di phishing. Formare i dipendenti a riconoscere email sospette è la difesa più efficace e meno costosa.' },
+      { heading: 'Monitoraggio e risposta agli incidenti', content: 'Un sistema di monitoraggio 24/7 permette di rilevare attività sospette in tempo reale. Avere un piano di risposta agli incidenti documentato riduce drasticamente i tempi di reazione.' },
+      { heading: 'La nostra soluzione', content: 'CoreNexus offre pacchetti di cybersecurity su misura per PMI: audit di sicurezza, implementazione firewall, configurazione endpoint protection, formazione e monitoraggio continuo.' }
     ]
   },
   'rete-aziendale-performante': {
@@ -389,26 +209,32 @@ const blogPostsData: Record<string, BlogPostData> = {
     image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80',
     tags: ['Networking', 'Switch', 'VLAN', 'Wi-Fi'],
     sections: [
-      {
-        heading: 'L\'importanza di una rete ben progettata',
-        content: 'La rete è il sistema nervoso dell\'azienda. Una rete lenta, instabile o mal configurata impatta direttamente sulla produttività. Investire nella progettazione corretta della rete significa ridurre i tempi di inattività e migliorare le prestazioni di tutti i servizi aziendali.'
-      },
-      {
-        heading: 'Segmentazione con VLAN',
-        content: 'Le VLAN (Virtual LAN) permettono di separare logicamente il traffico di rete: dati aziendali, telefonia VoIP, videosorveglianza e ospiti su reti diverse. Questo migliora sia le prestazioni che la sicurezza, limitando la propagazione di eventuali minacce.'
-      },
-      {
-        heading: 'Switch managed e PoE',
-        content: 'Gli switch managed offrono controllo granulare sul traffico di rete, QoS per prioritizzare applicazioni critiche e monitoraggio avanzato. La tecnologia PoE (Power over Ethernet) semplifica l\'installazione di access point Wi-Fi, telecamere IP e telefoni VoIP alimentandoli direttamente dal cavo di rete.'
-      },
-      {
-        heading: 'Wi-Fi enterprise',
-        content: 'Un sistema Wi-Fi enterprise con access point gestiti centralmente garantisce copertura uniforme, roaming seamless e sicurezza WPA3. Soluzioni come UniFi di Ubiquiti offrono un eccellente rapporto qualità-prezzo per le PMI.'
-      },
-      {
-        heading: 'Affidati a noi',
-        content: 'CoreNexus progetta e implementa reti aziendali complete: cablaggio strutturato, switch managed, Wi-Fi enterprise e firewall. Ogni progetto include documentazione tecnica dettagliata e supporto post-installazione.'
-      }
+      { heading: 'L\'importanza di una rete ben progettata', content: 'La rete è il sistema nervoso dell\'azienda. Una rete lenta o mal configurata impatta direttamente sulla produttività. Investire nella progettazione corretta significa ridurre i tempi di inattività.' },
+      { heading: 'Segmentazione con VLAN', content: 'Le VLAN permettono di separare logicamente il traffico di rete: dati aziendali, telefonia VoIP, videosorveglianza e ospiti su reti diverse, migliorando prestazioni e sicurezza.' },
+      { heading: 'Switch managed e PoE', content: 'Gli switch managed offrono controllo granulare sul traffico, QoS per prioritizzare applicazioni critiche e monitoraggio avanzato. La tecnologia PoE alimenta access point e telecamere direttamente dal cavo.' },
+      { heading: 'Wi-Fi enterprise', content: 'Un sistema Wi-Fi enterprise con access point gestiti centralmente garantisce copertura uniforme, roaming seamless e sicurezza WPA3. Soluzioni come UniFi di Ubiquiti sono eccellenti per le PMI.' },
+      { heading: 'Affidati a noi', content: 'CoreNexus progetta e implementa reti aziendali complete: cablaggio strutturato, switch managed, Wi-Fi enterprise e firewall, con documentazione tecnica e supporto post-installazione.' }
+    ]
+  },
+  'proxmox-alternativa-vmware': {
+    id: 'proxmox-alternativa-vmware',
+    title: 'Proxmox: l\'alternativa a VMware che le PMI italiane stanno scegliendo',
+    excerpt: 'Dopo l\'acquisizione di VMware da parte di Broadcom, i costi delle licenze sono aumentati fino al 500%. Scopri perché migliaia di aziende stanno passando a Proxmox e quanto puoi risparmiare.',
+    category: 'Infrastruttura',
+    date: '25 Maggio 2026',
+    readTime: '8 min',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+    tags: ['Proxmox', 'VMware', 'Virtualizzazione', 'Risparmio', 'Open Source'],
+    sections: [
+      { heading: 'Cosa è successo con VMware', content: 'VMware è stata per anni la soluzione di virtualizzazione di riferimento per le aziende di tutte le dimensioni. Nel 2023 Broadcom ha acquisito VMware e ha radicalmente cambiato il modello di licenza. Il risultato? Aumenti di prezzo che in molti casi superano il 300-500% rispetto a prima. Per una PMI con 5-10 server virtualizzati, si può passare da poche migliaia di euro l\'anno a decine di migliaia. Una cifra difficile da giustificare quando esistono alternative solide e gratuite.' },
+      { heading: 'Cos\'è Proxmox e perché funziona', content: 'Proxmox VE (Virtual Environment) è una piattaforma di virtualizzazione open source sviluppata da un\'azienda austriaca. È gratuita, stabile, usata in produzione da migliaia di aziende nel mondo — incluse banche, ospedali e pubbliche amministrazioni. Fa esattamente quello che fa VMware: permette di creare e gestire server virtuali su macchine fisiche. Ma lo fa senza costi di licenza.' },
+      { heading: 'Cosa puoi fare con Proxmox', content: 'Con Proxmox puoi creare e gestire macchine virtuali con Windows Server, Linux o qualsiasi altro sistema operativo. Puoi fare backup automatici dei server anche mentre sono accesi, ripristinare un server in pochi minuti, gestire tutto da un\'interfaccia web intuitiva e creare cluster ad alta disponibilità — se un server fisico si guasta, le macchine virtuali si spostano automaticamente su un altro.' },
+      { heading: 'Proxmox vs VMware: cosa cambia davvero', content: 'La differenza principale non è tecnica — è economica. VMware (post-Broadcom) ha costi molto alti e in forte aumento, mentre Proxmox è completamente gratuito con supporto opzionale a pagamento. Affidabilità, facilità di gestione e funzionalità per una PMI sono praticamente identiche. Quello che cambia è quanto paghi ogni anno per averle.' },
+      { heading: 'Quanto si risparmia concretamente', content: 'Un\'azienda con 8 server virtualizzati su VMware paga mediamente tra i 15.000 e i 30.000 euro l\'anno di licenze, dopo i recenti aumenti. Con Proxmox: zero euro di licenza software, da 1.000 a 3.000 euro di supporto professionale opzionale, e una migrazione una tantum. Il risparmio nel primo anno può facilmente superare i 20.000 euro.' },
+      { heading: 'La migrazione è complicata?', content: 'Nella maggior parte dei casi per una PMI la migrazione si completa in 1-3 giorni lavorativi, senza interruzioni significative dell\'operatività. Il processo è: analisi dell\'infrastruttura esistente, installazione di Proxmox, migrazione delle macchine virtuali una alla volta, test e formazione del personale. Durante la migrazione i server VMware rimangono attivi.' },
+      { heading: 'Chi sta già usando Proxmox', content: 'Proxmox non è una soluzione di ripiego. È usata da istituti bancari europei, università, provider di hosting e migliaia di PMI in tutta Europa. La community è attiva, la documentazione eccellente e gli aggiornamenti costanti. È un ecosistema maturo e in crescita.' },
+      { heading: 'Quando ha senso valutare la migrazione', content: 'Proxmox è la scelta giusta se stai per rinnovare il contratto VMware con aumenti significativi, se stai costruendo una nuova infrastruttura, o se vuoi ridurre i costi IT senza sacrificare affidabilità. Non è la scelta giusta se dipendi da funzionalità VMware molto specifiche o hai un contratto in corso conveniente.' },
+      { heading: 'CoreNexus può aiutarti', content: 'In CoreNexus abbiamo già gestito diverse migrazioni da VMware a Proxmox per PMI del territorio romano. Conosciamo le criticità e sappiamo come gestire la transizione senza bloccare l\'operatività aziendale. Contattaci per un\'analisi gratuita della tua situazione attuale e scopri quanto potresti risparmiare.' }
     ]
   },
   'virtualizzazione-server-vantaggi': {
@@ -421,22 +247,10 @@ const blogPostsData: Record<string, BlogPostData> = {
     image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
     tags: ['Virtualizzazione', 'Server', 'VMware', 'Proxmox'],
     sections: [
-      {
-        heading: 'Cos\'è la virtualizzazione',
-        content: 'La virtualizzazione permette di eseguire più sistemi operativi e applicazioni su un singolo server fisico, creando macchine virtuali (VM) indipendenti. Questo ottimizza l\'utilizzo delle risorse hardware, che tipicamente nelle aziende è sfruttato solo al 15-20%.'
-      },
-      {
-        heading: 'Vantaggi principali',
-        content: 'Riduzione dei costi hardware fino al 50%, consolidamento dei server, backup e snapshot istantanei, migrazione live delle VM senza downtime, disaster recovery semplificato e riduzione dei consumi energetici. La virtualizzazione è il primo passo verso un\'infrastruttura IT moderna.'
-      },
-      {
-        heading: 'Proxmox vs VMware',
-        content: 'Proxmox VE è una piattaforma open-source che offre virtualizzazione KVM e container LXC con un\'interfaccia web intuitiva. VMware vSphere è lo standard enterprise con funzionalità avanzate. Per le PMI, Proxmox rappresenta spesso la scelta migliore per il rapporto costo-funzionalità.'
-      },
-      {
-        heading: 'La nostra esperienza',
-        content: 'CoreNexus implementa soluzioni di virtualizzazione su misura: dalla scelta dell\'hardware alla configurazione dell\'hypervisor, dalla migrazione dei servizi esistenti al monitoraggio continuo delle performance.'
-      }
+      { heading: 'Cos\'è la virtualizzazione', content: 'La virtualizzazione permette di eseguire più sistemi operativi su un singolo server fisico, creando macchine virtuali indipendenti. Ottimizza l\'utilizzo delle risorse hardware, tipicamente sfruttato solo al 15-20% nelle aziende.' },
+      { heading: 'Vantaggi principali', content: 'Riduzione dei costi hardware fino al 50%, consolidamento dei server, backup e snapshot istantanei, migrazione live senza downtime, disaster recovery semplificato e riduzione dei consumi energetici.' },
+      { heading: 'Proxmox vs VMware', content: 'Proxmox VE è una piattaforma open-source che offre virtualizzazione KVM con interfaccia web intuitiva. VMware vSphere è lo standard enterprise. Per le PMI, Proxmox rappresenta spesso la scelta migliore per il rapporto costo-funzionalità.' },
+      { heading: 'La nostra esperienza', content: 'CoreNexus implementa soluzioni di virtualizzazione su misura: dalla scelta dell\'hardware alla configurazione dell\'hypervisor, dalla migrazione dei servizi al monitoraggio continuo delle performance.' }
     ]
   },
   'voip-freepbx-centralino': {
@@ -449,22 +263,10 @@ const blogPostsData: Record<string, BlogPostData> = {
     image: 'https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=800&q=80',
     tags: ['VoIP', 'FreePBX', 'Centralino', 'Telefonia'],
     sections: [
-      {
-        heading: 'Addio alle linee tradizionali',
-        content: 'La telefonia tradizionale (ISDN, analogica) è ormai obsoleta e costosa. Il VoIP (Voice over IP) utilizza la connessione internet per le chiamate, riducendo drasticamente i costi e offrendo funzionalità avanzate impossibili con i sistemi tradizionali.'
-      },
-      {
-        heading: 'FreePBX: il centralino open-source',
-        content: 'FreePBX è la piattaforma open-source più diffusa al mondo per la gestione dei centralini VoIP. Offre IVR (risponditore automatico), code di chiamata, registrazione chiamate, conferenze, fax-to-email e integrazione con CRM. Il tutto senza costi di licenza.'
-      },
-      {
-        heading: 'Risparmio concreto',
-        content: 'Un\'azienda con 20 interni può risparmiare fino al 60% sui costi telefonici passando al VoIP. Le chiamate tra sedi sono gratuite, le tariffe nazionali e internazionali sono significativamente inferiori e la manutenzione è ridotta al minimo.'
-      },
-      {
-        heading: 'Implementazione CoreNexus',
-        content: 'Progettiamo e installiamo centralini VoIP FreePBX chiavi in mano: analisi delle esigenze, configurazione del server, setup dei trunk SIP, programmazione IVR e formazione del personale. Supporto tecnico incluso.'
-      }
+      { heading: 'Addio alle linee tradizionali', content: 'La telefonia tradizionale è ormai obsoleta e costosa. Il VoIP utilizza la connessione internet per le chiamate, riducendo drasticamente i costi e offrendo funzionalità avanzate impossibili con i sistemi tradizionali.' },
+      { heading: 'FreePBX: il centralino open-source', content: 'FreePBX è la piattaforma open-source più diffusa al mondo per centralini VoIP. Offre IVR, code di chiamata, registrazione chiamate, conferenze, fax-to-email e integrazione con CRM, senza costi di licenza.' },
+      { heading: 'Risparmio concreto', content: 'Un\'azienda con 20 interni può risparmiare fino al 60% sui costi telefonici passando al VoIP. Le chiamate tra sedi sono gratuite e le tariffe nazionali e internazionali sono significativamente inferiori.' },
+      { heading: 'Implementazione CoreNexus', content: 'Progettiamo e installiamo centralini VoIP FreePBX chiavi in mano: analisi delle esigenze, configurazione del server, setup dei trunk SIP, programmazione IVR e formazione del personale.' }
     ]
   },
   'videosorveglianza-hikvision-guida': {
@@ -477,22 +279,10 @@ const blogPostsData: Record<string, BlogPostData> = {
     image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=800&q=80',
     tags: ['Videosorveglianza', 'Hikvision', 'CCTV', 'NVR'],
     sections: [
-      {
-        heading: 'Perché Hikvision',
-        content: 'Hikvision è il leader mondiale nella videosorveglianza con oltre il 25% di quota di mercato globale. I suoi prodotti offrono qualità d\'immagine eccellente, intelligenza artificiale integrata (rilevamento persone, veicoli, intrusione) e un rapporto qualità-prezzo imbattibile.'
-      },
-      {
-        heading: 'Telecamere IP vs analogiche',
-        content: 'Le telecamere IP offrono risoluzioni fino a 4K, alimentazione PoE, analisi video intelligente e accesso remoto da smartphone. Le telecamere analogiche HD-TVI sono ancora valide per installazioni semplici dove si vuole riutilizzare il cablaggio coassiale esistente.'
-      },
-      {
-        heading: 'NVR e storage',
-        content: 'Il Network Video Recorder (NVR) è il cuore del sistema. Hikvision offre NVR da 4 a 64 canali con supporto per hard disk fino a 10TB. La scelta dipende dal numero di telecamere, dalla risoluzione e dai giorni di registrazione richiesti.'
-      },
-      {
-        heading: 'Installazione professionale',
-        content: 'CoreNexus è installatore certificato Hikvision. Progettiamo sistemi di videosorveglianza su misura: sopralluogo, progettazione, installazione, configurazione dell\'accesso remoto e manutenzione periodica. Conformità GDPR garantita.'
-      }
+      { heading: 'Perché Hikvision', content: 'Hikvision è il leader mondiale nella videosorveglianza con oltre il 25% di quota di mercato globale. I suoi prodotti offrono qualità d\'immagine eccellente, intelligenza artificiale integrata e un rapporto qualità-prezzo imbattibile.' },
+      { heading: 'Telecamere IP vs analogiche', content: 'Le telecamere IP offrono risoluzioni fino a 4K, alimentazione PoE e analisi video intelligente. Le telecamere analogiche HD-TVI sono ancora valide per installazioni semplici con cablaggio coassiale esistente.' },
+      { heading: 'NVR e storage', content: 'Il Network Video Recorder è il cuore del sistema. Hikvision offre NVR da 4 a 64 canali con supporto per hard disk fino a 10TB. La scelta dipende dal numero di telecamere e dai giorni di registrazione richiesti.' },
+      { heading: 'Installazione professionale', content: 'CoreNexus è installatore certificato Hikvision. Progettiamo sistemi di videosorveglianza su misura: sopralluogo, progettazione, installazione, configurazione dell\'accesso remoto e manutenzione periodica.' }
     ]
   }
 };
@@ -554,11 +344,7 @@ export default function BlogPost() {
 
   const handleShare = async () => {
     if (navigator.share) {
-      await navigator.share({
-        title: post.title,
-        text: post.excerpt,
-        url: window.location.href,
-      });
+      await navigator.share({ title: post.title, text: post.excerpt, url: window.location.href });
     } else {
       await navigator.clipboard.writeText(window.location.href);
     }
@@ -573,7 +359,6 @@ export default function BlogPost() {
         canonical={`/blog/${post.id}`}
       />
 
-      {/* Reading Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-1 z-[9999] bg-transparent">
         <div
           className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-blue-400 transition-[width] duration-150 ease-out shadow-[0_0_10px_rgba(59,130,246,0.5)]"
@@ -584,69 +369,36 @@ export default function BlogPost() {
       <div className="min-h-screen bg-black">
         <Header />
 
-        {/* Hero Image */}
         <section className="relative pt-24">
           <div className="h-[40vh] md:h-[50vh] relative overflow-hidden">
-            <img
-              src={post.image}
-              alt={post.title}
-              className="w-full h-full object-cover"
-            />
+            <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30" />
           </div>
         </section>
 
-        {/* Article Content */}
         <section className="px-6 -mt-32 relative z-10 pb-24">
           <article className="max-w-3xl mx-auto">
-            {/* Back link */}
-            <Link
-              to="/blog"
-              className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-medium mb-8 transition-colors"
-            >
+            <Link to="/blog" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-medium mb-8 transition-colors">
               <ArrowLeft className="w-4 h-4" />
               Torna al Blog
             </Link>
 
-            {/* Category badge */}
-            <span
-              className={`inline-block px-4 py-1.5 rounded-lg text-xs font-semibold text-white bg-gradient-to-r ${
-                categoryGradient[post.category] || 'from-blue-500 to-purple-500'
-              } mb-4`}
-            >
+            <span className={`inline-block px-4 py-1.5 rounded-lg text-xs font-semibold text-white bg-gradient-to-r ${categoryGradient[post.category] || 'from-blue-500 to-purple-500'} mb-4`}>
               {post.category}
             </span>
 
-            {/* Title */}
-            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
-              {post.title}
-            </h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">{post.title}</h1>
 
-            {/* Meta */}
             <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500 mb-8 pb-8 border-b border-white/10">
-              <span className="flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
-                {post.date}
-              </span>
-              <span className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
-                {post.readTime} di lettura
-              </span>
-              <button
-                onClick={handleShare}
-                className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors ml-auto"
-              >
-                <Share2 className="w-4 h-4" />
-                Condividi
+              <span className="flex items-center gap-2"><Calendar className="w-4 h-4" />{post.date}</span>
+              <span className="flex items-center gap-2"><Clock className="w-4 h-4" />{post.readTime} di lettura</span>
+              <button onClick={handleShare} className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors ml-auto">
+                <Share2 className="w-4 h-4" />Condividi
               </button>
             </div>
 
-            {/* Excerpt */}
-            <p className="text-xl text-gray-300 leading-relaxed mb-12 font-light">
-              {post.excerpt}
-            </p>
+            <p className="text-xl text-gray-300 leading-relaxed mb-12 font-light">{post.excerpt}</p>
 
-            {/* Sections */}
             <div className="space-y-10">
               {post.sections.map((section, index) => (
                 <div key={index}>
@@ -656,60 +408,35 @@ export default function BlogPost() {
               ))}
             </div>
 
-            {/* Tags */}
             <div className="mt-12 pt-8 border-t border-white/10">
               <div className="flex flex-wrap gap-2">
                 {post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs text-gray-400 bg-white/5 border border-white/10"
-                  >
-                    <Tag className="w-3 h-3" />
-                    {tag}
+                  <span key={tag} className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs text-gray-400 bg-white/5 border border-white/10">
+                    <Tag className="w-3 h-3" />{tag}
                   </span>
                 ))}
               </div>
             </div>
 
-            {/* Navigation */}
             <div className="mt-12 grid md:grid-cols-2 gap-4">
               {prevPost && (
-                <Link
-                  to={`/blog/${prevPost.id}`}
-                  className="p-6 rounded-2xl glass-effect hover:bg-white/10 transition-all duration-300 group"
-                >
+                <Link to={`/blog/${prevPost.id}`} className="p-6 rounded-2xl glass-effect hover:bg-white/10 transition-all duration-300 group">
                   <span className="text-xs text-gray-500 uppercase tracking-wider">Articolo precedente</span>
-                  <p className="text-white font-semibold mt-2 group-hover:text-blue-400 transition-colors line-clamp-2">
-                    {prevPost.title}
-                  </p>
+                  <p className="text-white font-semibold mt-2 group-hover:text-blue-400 transition-colors line-clamp-2">{prevPost.title}</p>
                 </Link>
               )}
               {nextPost && (
-                <Link
-                  to={`/blog/${nextPost.id}`}
-                  className="p-6 rounded-2xl glass-effect hover:bg-white/10 transition-all duration-300 group text-right md:col-start-2"
-                >
+                <Link to={`/blog/${nextPost.id}`} className="p-6 rounded-2xl glass-effect hover:bg-white/10 transition-all duration-300 group text-right md:col-start-2">
                   <span className="text-xs text-gray-500 uppercase tracking-wider">Articolo successivo</span>
-                  <p className="text-white font-semibold mt-2 group-hover:text-blue-400 transition-colors line-clamp-2">
-                    {nextPost.title}
-                  </p>
+                  <p className="text-white font-semibold mt-2 group-hover:text-blue-400 transition-colors line-clamp-2">{nextPost.title}</p>
                 </Link>
               )}
             </div>
 
-            {/* CTA */}
             <div className="mt-16 p-10 rounded-3xl glass-effect border border-blue-500/20 text-center space-y-6">
-              <h3 className="text-2xl font-bold text-white">
-                Hai bisogno di assistenza su questo argomento?
-              </h3>
-              <p className="text-gray-400">
-                Il nostro team è pronto ad aiutarti con soluzioni personalizzate.
-              </p>
-              <Button
-                size="lg"
-                onClick={() => { window.location.href = '/#contact'; }}
-                className="group premium-button text-white px-10 py-6 text-lg rounded-2xl font-semibold"
-              >
+              <h3 className="text-2xl font-bold text-white">Hai bisogno di assistenza su questo argomento?</h3>
+              <p className="text-gray-400">Il nostro team è pronto ad aiutarti con soluzioni personalizzate.</p>
+              <Button size="lg" onClick={() => { window.location.href = '/#contact'; }} className="group premium-button text-white px-10 py-6 text-lg rounded-2xl font-semibold">
                 Contattaci ora
                 <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
               </Button>
@@ -719,20 +446,15 @@ export default function BlogPost() {
 
         <WhatsAppWidget />
 
-        {/* Footer */}
         <footer className="bg-black border-t border-white/10 py-12 px-6">
           <div className="max-w-7xl mx-auto text-center space-y-4">
             <div className="flex items-center justify-center gap-2">
               <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
               <p className="text-gray-400 text-sm">
-                © 2026{' '}
-                <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">
-                  CoreNexus Technology Solution
-                </a>{' '}
-                - Tutti i diritti riservati.
+                © 2026 <a href="https://corenexus.it" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</a> - Tutti i diritti riservati.
               </p>
             </div>
-            <p className="text-xs text-gray-600">v2.0 - 25/03/2026</p>
+            <p className="text-xs text-gray-600">v2.1 - 25/05/2026</p>
           </div>
         </footer>
       </div>
