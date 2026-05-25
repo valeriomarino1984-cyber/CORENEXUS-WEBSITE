@@ -20,6 +20,17 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    id: 'consulenza-informatica-eur-roma',
+    title: "Consulenza Informatica EUR Roma: Assistenza IT per Aziende e Studi Professionali",
+    excerpt: "Cerchi un partner IT affidabile al quartiere EUR di Roma? CoreNexus offre consulenza informatica professionale per aziende, studi e uffici direzionali al EUR. Interventi rapidi, contratti su misura, assistenza on-site.",
+    content: '',
+    category: 'Infrastruttura',
+    date: '25 Maggio 2026',
+    readTime: '8 min',
+    image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
+    tags: ['Consulenza Informatica EUR', 'Assistenza IT Roma', 'PMI EUR', 'Roma Sud']
+  },
+  {
     id: 'contratto-assistenza-informatica-roma',
     title: 'Contratto di Assistenza Informatica a Roma: Perché la Tua Azienda Ne Ha Bisogno',
     excerpt: 'Tempi di attesa infiniti, costi imprevedibili, guasti nel momento peggiore: scopri perché un contratto di assistenza informatica con CoreNexus è la scelta giusta per le PMI di Roma, EUR, Ostia e Fiumicino.',
