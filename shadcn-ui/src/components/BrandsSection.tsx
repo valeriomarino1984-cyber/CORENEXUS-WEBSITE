@@ -35,17 +35,32 @@ export default function BrandsSection() {
             {brands.map((brand, index) => (
               <div
                 key={index}
-                className="brands-card relative flex flex-col items-center gap-3 p-5 rounded-xl transition-all duration-300"
+                className="brands-card flex flex-col items-center gap-3 p-5 rounded-xl transition-all duration-300"
                 style={{ background: '#0d0d0d', border: '1px solid rgba(255,255,255,0.06)' }}
               >
+                {/* Box logo dimensione fissa uguale per tutti */}
                 <div
-                  className="w-full h-16 flex items-center justify-center rounded-lg p-2"
-                  style={{ background: '#161616' }}
+                  style={{
+                    width: '100%',
+                    height: '80px',
+                    background: '#1a1a1a',
+                    borderRadius: '10px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '12px',
+                    overflow: 'hidden',
+                  }}
                 >
                   <img
                     src={brand.logo}
                     alt={brand.name}
-                    className="max-w-full max-h-full object-contain"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'contain',
+                      objectPosition: 'center',
+                    }}
                   />
                 </div>
                 <div className="text-center">
