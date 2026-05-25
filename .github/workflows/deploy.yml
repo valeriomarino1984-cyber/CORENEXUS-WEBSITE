@@ -42,5 +42,3 @@ jobs:
           protocol: ftps
           port: 21
           dangerous-clean-slate: true
-          use-provider-modified-time: true
-
