@@ -20,6 +20,17 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    id: 'contratto-assistenza-informatica-roma',
+    title: 'Contratto di Assistenza Informatica a Roma: Perché la Tua Azienda Ne Ha Bisogno',
+    excerpt: 'Tempi di attesa infiniti, costi imprevedibili, guasti nel momento peggiore: scopri perché un contratto di assistenza informatica con CoreNexus è la scelta giusta per le PMI di Roma, EUR, Ostia e Fiumicino.',
+    content: '',
+    category: 'Manutenzione',
+    date: '25 Maggio 2026',
+    readTime: '7 min',
+    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80',
+    tags: ['Contratto Assistenza', 'Manutenzione IT', 'Roma', 'PMI', 'SLA']
+  },
+  {
     id: 'impianti-allarme-villa-infernetto',
     title: 'Impianti di Allarme a Villa Infernetto e Dintorni: Guida alla Sicurezza della Tua Casa',
     excerpt: 'Villa Infernetto, Axa, Casal Palocco, Infernetto: zone residenziali esclusive che meritano la massima protezione. Scopri come scegliere l\'impianto di allarme perfetto per la tua villa.',
