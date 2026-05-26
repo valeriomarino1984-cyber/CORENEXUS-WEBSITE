@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
-
+ 
+# Blocca pagine non utili per SEO
+Disallow: /privacy-policy
+Disallow: /cookie-policy
+Disallow: /terms-of-service
+ 
+# Sitemap
 Sitemap: https://corenexus.it/sitemap.xml
