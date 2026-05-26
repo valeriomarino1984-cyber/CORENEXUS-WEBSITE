@@ -20,6 +20,17 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    id: 'supporto-tecnico-proxmox-roma',
+    title: "Supporto Tecnico Proxmox a Roma: Installazione, Migrazione e Assistenza",
+    excerpt: "Cerchi un tecnico Proxmox a Roma? CoreNexus offre supporto tecnico professionale per Proxmox VE: installazione, configurazione, migrazione da VMware e assistenza continuativa per PMI di Roma, EUR, Ostia e Fiumicino.",
+    content: '',
+    category: 'Infrastruttura',
+    date: '26 Maggio 2026',
+    readTime: '7 min',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+    tags: ['Supporto Proxmox Roma', 'Tecnico Proxmox', 'Proxmox VE', 'Virtualizzazione Roma']
+  },
+  {
     id: 'consulenza-informatica-eur-roma',
     title: "Consulenza Informatica EUR Roma: Assistenza IT per Aziende e Studi Professionali",
     excerpt: "Cerchi un partner IT affidabile al quartiere EUR di Roma? CoreNexus offre consulenza informatica professionale per aziende, studi e uffici direzionali al EUR. Interventi rapidi, contratti su misura, assistenza on-site.",
