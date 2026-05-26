@@ -144,7 +144,7 @@ export default function Index() {
               <div className="inline-block hero-stagger-1">
                 <span className="px-6 py-3 rounded-full glass-effect text-blue-400 text-sm font-semibold tracking-wide flex items-center gap-2 animate-pulse-glow">
                   <Sparkles className="w-4 h-4" />
-                  Tecnologia e innovazione al servizio della tua impresa
+                  Consulenza informatica e assistenza IT per aziende a Roma
                 </span>
               </div>
 
@@ -204,7 +204,7 @@ export default function Index() {
                 ))}
               </div>
               <div className="pt-16 reveal-on-scroll">
-                <h3 className="text-3xl md:text-4xl font-semibold text-white mb-10">Perché scegliere CoreNexus Technology Solution</h3>
+                <h3 className="text-3xl md:text-4xl font-semibold text-white mb-10">Perché scegliere CoreNexus per la consulenza informatica a Roma</h3>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
                   {percheSceglierci.map((item, index) => (
                     <div key={index} className={`flex items-center gap-4 p-6 rounded-2xl glass-effect hover:bg-white/10 transition-all duration-500 group ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`} style={{ transitionDelay: `${index * 100}ms` }}>
@@ -343,4 +343,3 @@ export default function Index() {
     </>
   );
 }
-
