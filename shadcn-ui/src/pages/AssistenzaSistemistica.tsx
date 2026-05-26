@@ -17,17 +17,16 @@ import {
   Headphones,
   Clock,
   RefreshCw,
+  MapPin,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { breadcrumbSchema , localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
+import { breadcrumbSchema, localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 import FAQSection from '@/components/FAQSection';
 
 export default function AssistenzaSistemistica() {
   const navigate = useNavigate();
-  const scrollToContact = () => {
-    navigate('/#contact');
-  };
+  const scrollToContact = () => { navigate('/#contact'); };
 
   const assistenzaBreadcrumb = breadcrumbSchema([
     { name: 'Home', url: '/' },
@@ -37,40 +36,64 @@ export default function AssistenzaSistemistica() {
 
   const faqSchemaData = {
     "@type": "FAQPage",
-    "mainEntity": [{
-      "@type": "Question",
-      "name": "Cosa si intende per monitoraggio proattivo dei sistemi IT?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Utilizziamo tecnologie avanzate come Zabbix e Wazuh per monitorare h24 server e reti. Riceviamo avvisi in tempo reale su anomalie, intervenendo spesso prima che l'utente riscontri un blocco operativo."
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Cosa si intende per consulenza sistemistica?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La consulenza sistemistica e il servizio professionale di gestione, manutenzione e ottimizzazione delle infrastrutture IT aziendali. Include la gestione di server, reti, backup, sicurezza e supporto agli utenti."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Cosa si intende per monitoraggio proattivo dei sistemi IT?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Utilizziamo tecnologie avanzate come Zabbix e Wazuh per monitorare h24 server e reti. Riceviamo avvisi in tempo reale su anomalie, intervenendo spesso prima che l'utente riscontri un blocco operativo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Forneite supporto per infrastrutture virtualizzate Proxmox e VMware a Roma?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Si, siamo specializzati nella progettazione e gestione di ambienti virtuali complessi Proxmox e VMware, garantendo alta affidabilita e disaster recovery per le aziende a Roma Sud, EUR e Ostia."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Intervenite anche su server Linux e ambienti Open Source?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Assolutamente. La nostra esperienza copre distribuzioni Enterprise come Ubuntu Server e Red Hat, oltre alla gestione di firewall pfSense e centralini VoIP FreePBX."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "In quali zone di Roma operate per la consulenza sistemistica?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Operiamo in tutto il quadrante sud di Roma: EUR, Ostia, Fiumicino, Acilia, Casal Palocco, Pomezia, Ardea, Mostacciano, Torrino, Laurentina, Spinaceto e zone limitrofe."
+        }
       }
-    }, {
-      "@type": "Question",
-      "name": "Forneite supporto per infrastrutture virtualizzate Proxmox e VMware a Roma?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sì, siamo specializzati nella progettazione e gestione di ambienti virtuali complessi Proxmox e VMware, garantendo alta affidabilità e disaster recovery per le aziende a Roma Sud, EUR e Ostia."
-      }
-    }, {
-      "@type": "Question",
-      "name": "Intervenite anche su server Linux e ambienti Open Source?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Assolutamente. La nostra esperienza copre distribuzioni Enterprise come Ubuntu Server e Red Hat, oltre alla gestione di firewall pfSense e centralini VoIP FreePBX."
-      }
-    }]
+    ]
   };
 
   const assistenzaSchema = {
     "@context": "https://schema.org",
     "@graph": [
-      localBusinessServiceSchema("Consulenza Sistemistica Roma EUR Ostia Fiumicino", "Consulenza sistemistica professionale per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Manutenzione server, help desk, monitoraggio 24/7, backup e gestione infrastrutture IT.", "/assistenza-sistemistica", "Consulenza Sistemistica"),
-     
+      localBusinessServiceSchema(
+        "Consulenza Sistemistica Roma EUR Ostia Fiumicino",
+        "Consulenza sistemistica professionale per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Manutenzione server, help desk, monitoraggio 24/7, backup e gestione infrastrutture IT.",
+        "/assistenza-sistemistica",
+        "Consulenza Sistemistica"
+      ),
       assistenzaBreadcrumb,
       {
         "@type": "Service",
-        "name": "Consulenza Sistemistica Professionale",
-        "description": "Supporto IT completo per aziende a Roma: manutenzione server, help desk, backup, gestione infrastrutture, monitoraggio sistemi",
+        "name": "Consulenza Sistemistica Professionale Roma",
+        "description": "Supporto IT completo per aziende a Roma: manutenzione server, help desk, backup, gestione infrastrutture, monitoraggio sistemi. Specializzati in consulenza sistemistica per PMI di Roma Sud, EUR, Ostia e Fiumicino.",
         "provider": {
           "@type": "Organization",
           "name": "CoreNexus Technology Solution",
@@ -159,27 +182,45 @@ export default function AssistenzaSistemistica() {
 
   const faqs = [
     {
-      question: 'Cosa si intende per monitoraggio proattivo dei sistemi IT?',
-      answer: 'Utilizziamo tecnologie avanzate come Zabbix e Wazuh per monitorare h24 server e reti. Riceviamo avvisi in tempo reale su anomalie, intervenendo spesso prima che l\'utente riscontri un blocco operativo.',
+      question: "Cosa si intende per consulenza sistemistica?",
+      answer: "La consulenza sistemistica e il servizio professionale di gestione, manutenzione e ottimizzazione delle infrastrutture IT aziendali. Include la gestione di server, reti, backup, sicurezza informatica e supporto tecnico agli utenti. Per le aziende di Roma, EUR, Ostia e Fiumicino offriamo consulenza sistemistica sia on-site che da remoto.",
     },
     {
-      question: 'Forneite supporto per infrastrutture virtualizzate Proxmox e VMware a Roma?',
-      answer: 'Sì, siamo specializzati nella progettazione e gestione di ambienti virtuali complessi Proxmox e VMware, garantendo alta affidabilità e disaster recovery per le aziende a Roma Sud, EUR e Ostia.',
+      question: "Cosa si intende per monitoraggio proattivo dei sistemi IT?",
+      answer: "Utilizziamo tecnologie avanzate come Zabbix e Wazuh per monitorare h24 server e reti. Riceviamo avvisi in tempo reale su anomalie, intervenendo spesso prima che l'utente riscontri un blocco operativo.",
     },
     {
-      question: 'Intervenite anche su server Linux e ambienti Open Source?',
-      answer: 'Assolutamente. La nostra esperienza copre distribuzioni Enterprise come Ubuntu Server e Red Hat, oltre alla gestione di firewall pfSense e centralini VoIP FreePBX.',
+      question: "Forneite supporto per infrastrutture virtualizzate Proxmox e VMware a Roma?",
+      answer: "Si, siamo specializzati nella progettazione e gestione di ambienti virtuali complessi Proxmox e VMware, garantendo alta affidabilita e disaster recovery per le aziende a Roma Sud, EUR e Ostia.",
     },
+    {
+      question: "Intervenite anche su server Linux e ambienti Open Source?",
+      answer: "Assolutamente. La nostra esperienza copre distribuzioni Enterprise come Ubuntu Server e Red Hat, oltre alla gestione di firewall pfSense e centralini VoIP FreePBX.",
+    },
+    {
+      question: "In quali zone di Roma operate per la consulenza sistemistica?",
+      answer: "Operiamo in tutto il quadrante sud di Roma con interventi on-site: EUR, Ostia Lido, Ostia Antica, Fiumicino, Acilia, Casal Palocco, Infernetto, Axa, Mostacciano, Torrino, Laurentina, Spinaceto, Pomezia, Ardea e zone limitrofe. Per le zone piu distanti offriamo assistenza remota.",
+    },
+  ];
+
+  const coverageAreas = [
+    'EUR', 'Ostia Lido', 'Ostia Antica', 'Fiumicino', 'Isola Sacra',
+    'Acilia', 'Casal Palocco', 'Infernetto', 'Axa', 'Malafede',
+    'Mostacciano', 'Torrino', 'Laurentina', 'Spinaceto', 'Mezzocammino',
+    'Pomezia', 'Ardea', 'Santa Palomba', 'Castel Romano', 'Garbatella',
+    'Ostiense', 'Marconi', 'Magliana', 'San Paolo',
   ];
 
   return (
     <>
       <SEO
-        title="Consulenza Sistemistica Roma EUR Ostia Fiumicino | Supporto IT Aziendale - CoreNexus"
-        description="Consulenza sistemistica professionale per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Manutenzione server, help desk, monitoraggio 24/7, backup, gestione infrastrutture IT. Interventi rapidi on-site."
+        title="Consulenza Sistemistica Roma | Sistemista Aziendale EUR Ostia Fiumicino - CoreNexus"
+        description="Consulenza sistemistica professionale per aziende a Roma, EUR, Ostia, Fiumicino e Pomezia. Sistemista aziendale con interventi rapidi on-site. Manutenzione server, help desk 24/7, backup, gestione infrastrutture IT. Preventivo gratuito."
         keywords={[
           'consulenza sistemistica Roma',
-          'sistemista Roma EUR',
+          'consulenza sistemistica',
+          'sistemista Roma',
+          'sistemista aziendale Roma',
           'supporto IT aziendale Roma',
           'manutenzione server Roma',
           'help desk aziendale Roma',
@@ -190,9 +231,8 @@ export default function AssistenzaSistemistica() {
           'assistenza sistemistica Fiumicino',
           'sistemista Pomezia',
           'supporto IT Roma Sud',
-          'infrastruttura IT Roma',
-          'assistenza server Windows Linux Roma',
-          'intervento tecnico on-site Roma',
+          'consulenza sistemistica aziende Roma',
+          'sistemista EUR Roma',
         ]}
         canonical="/assistenza-sistemistica"
         schema={assistenzaSchema}
@@ -210,10 +250,7 @@ export default function AssistenzaSistemistica() {
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
               <div className="mb-6">
-                <Link
-                  to="/servizi"
-                  className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors text-sm font-medium"
-                >
+                <Link to="/servizi" className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors text-sm font-medium">
                   <ArrowLeft className="w-4 h-4" />
                   Torna ai Servizi
                 </Link>
@@ -232,11 +269,13 @@ export default function AssistenzaSistemistica() {
                     <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 bg-clip-text text-transparent">
                       Consulenza Sistemistica
                     </span>
+                    <span className="block text-3xl md:text-4xl text-gray-400 mt-2 font-normal">
+                      a Roma, EUR, Ostia e Fiumicino
+                    </span>
                   </h1>
 
                   <p className="text-xl text-gray-400 leading-relaxed">
-                    Supporto IT completo e professionale per la tua azienda. Dalla manutenzione quotidiana
-                    alla gestione di infrastrutture complesse, siamo il tuo reparto IT dedicato.
+                    Il tuo reparto IT dedicato. Dalla manutenzione quotidiana alla gestione di infrastrutture complesse — supporto tecnico professionale per PMI e aziende nel quadrante sud di Roma.
                   </p>
 
                   <div className="space-y-4">
@@ -260,16 +299,12 @@ export default function AssistenzaSistemistica() {
                   </Button>
                 </div>
 
-                {/* Right side - Visual element */}
                 <div className="hidden lg:flex justify-center">
                   <div className="relative">
                     <div className="w-80 h-80 rounded-3xl glass-effect border border-emerald-500/20 p-8 flex flex-col items-center justify-center gap-6">
                       <div className="grid grid-cols-3 gap-4">
                         {[Wrench, Monitor, HardDrive, Server, Cloud, Database, Cpu, Settings, Headphones].map((Icon, i) => (
-                          <div
-                            key={i}
-                            className="w-16 h-16 rounded-2xl glass-effect flex items-center justify-center hover:bg-emerald-500/20 transition-all duration-300 hover:scale-110"
-                          >
+                          <div key={i} className="w-16 h-16 rounded-2xl glass-effect flex items-center justify-center hover:bg-emerald-500/20 transition-all duration-300 hover:scale-110">
                             <Icon className="w-7 h-7 text-emerald-400" />
                           </div>
                         ))}
@@ -289,9 +324,7 @@ export default function AssistenzaSistemistica() {
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
               <div className="text-center space-y-6 mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Pacchetti di Consulenza Sistemistica
-                </h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">Pacchetti di Consulenza Sistemistica</h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
                   Pacchetti flessibili per ogni esigenza: dal supporto occasionale alla gestione completa dell'infrastruttura IT.
                 </p>
@@ -301,29 +334,19 @@ export default function AssistenzaSistemistica() {
             <div className="grid md:grid-cols-3 gap-8">
               {packages.map((pkg, index) => (
                 <MorphingSection key={index} delay={index * 0.15}>
-                  <div
-                    className={`relative p-8 rounded-3xl glass-effect border transition-all duration-500 hover:scale-105 h-full flex flex-col ${
-                      pkg.highlighted
-                        ? 'border-emerald-500/50 shadow-lg shadow-emerald-500/20'
-                        : 'border-white/10 hover:border-white/20'
-                    }`}
-                  >
+                  <div className={`relative p-8 rounded-3xl glass-effect border transition-all duration-500 hover:scale-105 h-full flex flex-col ${pkg.highlighted ? 'border-emerald-500/50 shadow-lg shadow-emerald-500/20' : 'border-white/10 hover:border-white/20'}`}>
                     {pkg.highlighted && (
                       <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                         <span className="px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-bold uppercase tracking-wider">
-                          Più Richiesto
+                          Piu Richiesto
                         </span>
                       </div>
                     )}
-
                     <div className="text-center space-y-4 mb-8">
                       <h3 className="text-2xl font-bold text-white">{pkg.name}</h3>
-                      <div className={`text-4xl font-bold bg-gradient-to-r ${pkg.gradient} bg-clip-text text-transparent`}>
-                        {pkg.hours}
-                      </div>
+                      <div className={`text-4xl font-bold bg-gradient-to-r ${pkg.gradient} bg-clip-text text-transparent`}>{pkg.hours}</div>
                       <p className="text-gray-400 text-sm">{pkg.ideal}</p>
                     </div>
-
                     <div className="space-y-3 mb-8 flex-1">
                       {pkg.features.map((feature, i) => (
                         <div key={i} className="flex items-start gap-3">
@@ -332,18 +355,13 @@ export default function AssistenzaSistemistica() {
                         </div>
                       ))}
                     </div>
-
                     <div className="text-center space-y-4">
                       <div className="inline-block px-4 py-2 rounded-full glass-effect">
                         <span className="text-emerald-400 font-bold text-lg">Sconto del {pkg.discount}</span>
                       </div>
                       <Button
                         onClick={scrollToContact}
-                        className={`w-full py-6 rounded-2xl font-semibold text-white ${
-                          pkg.highlighted
-                            ? 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700'
-                            : 'glass-effect border border-white/20 hover:bg-white/10'
-                        }`}
+                        className={`w-full py-6 rounded-2xl font-semibold text-white ${pkg.highlighted ? 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700' : 'glass-effect border border-white/20 hover:bg-white/10'}`}
                       >
                         Richiedi Preventivo
                         <ArrowRight className="ml-2 w-4 h-4" />
@@ -363,42 +381,22 @@ export default function AssistenzaSistemistica() {
             <MorphingSection>
               <div className="space-y-12">
                 <div className="text-center space-y-6">
-                  <h2 className="text-4xl md:text-5xl font-bold text-white">
-                    Consulenza Sistemistica nel Dettaglio
-                  </h2>
+                  <h2 className="text-4xl md:text-5xl font-bold text-white">Consulenza Sistemistica nel Dettaglio</h2>
                   <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 to-teal-500 mx-auto rounded-full" />
                 </div>
 
                 <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
                   <p>
-                    La consulenza sistemistica è il <strong className="text-white">cuore pulsante di ogni infrastruttura IT
-                    aziendale</strong>. Senza un supporto tecnico competente e tempestivo, anche la migliore
-                    tecnologia può diventare un ostacolo invece che un vantaggio competitivo.
+                    La consulenza sistemistica e il <strong className="text-white">cuore pulsante di ogni infrastruttura IT aziendale</strong>. Senza un supporto tecnico competente e tempestivo, anche la migliore tecnologia puo diventare un ostacolo invece che un vantaggio competitivo.
                   </p>
-
                   <p>
-                    Il nostro servizio di consulenza sistemistica copre <strong className="text-white">l'intero ciclo di vita
-                    dei sistemi IT</strong>: dalla progettazione e installazione, alla configurazione, monitoraggio,
-                    manutenzione preventiva e risoluzione dei problemi.
+                    Il nostro servizio di consulenza sistemistica copre <strong className="text-white">l'intero ciclo di vita dei sistemi IT</strong>: dalla progettazione e installazione, alla configurazione, monitoraggio, manutenzione preventiva e risoluzione dei problemi. Operiamo come sistemisti dedicati per PMI e aziende di Roma, EUR, Ostia, Fiumicino e tutto il quadrante sud della capitale.
                   </p>
-
                   <p>
-                    Grazie al <strong className="text-white">monitoraggio proattivo con Zabbix</strong>, siamo in grado di
-                    individuare e risolvere potenziali problemi prima che impattino sulla produttività della tua
-                    azienda. Riceviamo alert in tempo reale su performance, spazio disco, carico CPU, stato dei
-                    servizi e molto altro.
+                    Grazie al <strong className="text-white">monitoraggio proattivo con Zabbix</strong>, siamo in grado di individuare e risolvere potenziali problemi prima che impattino sulla produttivita della tua azienda. Riceviamo alert in tempo reale su performance, spazio disco, carico CPU, stato dei servizi e molto altro.
                   </p>
-
                   <p>
-                    Operiamo come il <strong className="text-white">tuo reparto IT dedicato</strong>: ci occupiamo di tutto,
-                    dalla gestione quotidiana delle workstation e delle stampanti, alla manutenzione dei server
-                    enterprise, passando per la gestione degli account utente e delle policy di sicurezza.
-                  </p>
-
-                  <p>
-                    Il nostro team è specializzato in ambienti <strong className="text-white">Windows Server e Linux</strong>,
-                    con competenze avanzate su Active Directory, virtualizzazione (Proxmox, VMware), backup
-                    (Veeam, Acronis) e cloud (Microsoft 365, Google Workspace).
+                    Il nostro team e specializzato in ambienti <strong className="text-white">Windows Server e Linux</strong>, con competenze avanzate su Active Directory, virtualizzazione (Proxmox, VMware), backup (Veeam, Acronis) e cloud (Microsoft 365, Google Workspace).
                   </p>
                 </div>
               </div>
@@ -407,19 +405,11 @@ export default function AssistenzaSistemistica() {
             {/* Technologies Grid */}
             <MorphingSection delay={0.2}>
               <div className="mt-16">
-                <h3 className="text-3xl font-bold text-white text-center mb-4">
-                  I Nostri Servizi di Assistenza
-                </h3>
-                <p className="text-gray-400 text-center mb-12 text-lg">
-                  Competenze e tecnologie per una gestione IT completa e affidabile
-                </p>
-
+                <h3 className="text-3xl font-bold text-white text-center mb-4">I Nostri Servizi di Assistenza</h3>
+                <p className="text-gray-400 text-center mb-12 text-lg">Competenze e tecnologie per una gestione IT completa e affidabile</p>
                 <div className="grid md:grid-cols-2 gap-6">
                   {technologies.map((tech, index) => (
-                    <div
-                      key={index}
-                      className="p-6 rounded-2xl glass-effect border border-white/5 hover:border-emerald-500/30 transition-all duration-300 group hover:bg-white/5"
-                    >
+                    <div key={index} className="p-6 rounded-2xl glass-effect border border-white/5 hover:border-emerald-500/30 transition-all duration-300 group hover:bg-white/5">
                       <div className="flex items-start gap-4">
                         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                           <tech.icon className="w-5 h-5 text-white" />
@@ -457,6 +447,39 @@ export default function AssistenzaSistemistica() {
           </div>
         </section>
 
+        {/* Zone di copertura */}
+        <section className="py-20 px-6 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-emerald-950/10 to-black" />
+          <div className="max-w-5xl mx-auto relative z-10">
+            <MorphingSection>
+              <div className="p-10 rounded-3xl glass-effect border border-emerald-500/20">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
+                    <MapPin className="w-5 h-5 text-white" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-white">Consulenza Sistemistica a Roma Sud: le zone coperte</h2>
+                </div>
+                <p className="text-gray-400 mb-8 text-lg leading-relaxed">
+                  Siamo il punto di riferimento per la consulenza sistemistica nel quadrante sud di Roma. Interveniamo on-site in tempi certi in tutte le principali zone:
+                </p>
+                <div className="flex flex-wrap gap-3 mb-8">
+                  {coverageAreas.map((area, index) => (
+                    <span
+                      key={index}
+                      className="px-4 py-2 rounded-full glass-effect border border-emerald-500/20 text-emerald-400 text-sm font-medium"
+                    >
+                      {area}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-gray-400 text-sm">
+                  Per le zone non elencate offriamo assistenza sistemistica da remoto in tutta Italia.
+                </p>
+              </div>
+            </MorphingSection>
+          </div>
+        </section>
+
         {/* FAQ Section */}
         <FAQSection faqs={faqs} accentColor="emerald" gradientFrom="emerald-500" gradientTo="teal-500" />
 
@@ -466,12 +489,9 @@ export default function AssistenzaSistemistica() {
           <div className="max-w-4xl mx-auto relative z-10 text-center">
             <MorphingSection>
               <div className="p-12 rounded-3xl glass-effect border border-emerald-500/20 space-y-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Hai bisogno di assistenza IT?
-                </h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">Hai bisogno di un sistemista a Roma?</h2>
                 <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                  Contattaci per un audit gratuito della tua infrastruttura. Ti mostreremo come
-                  possiamo migliorare l'efficienza e ridurre i costi IT della tua azienda.
+                  Contattaci per un audit gratuito della tua infrastruttura. Ti mostreremo come possiamo migliorare l'efficienza e ridurre i costi IT della tua azienda a Roma, EUR, Ostia e Fiumicino.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button
@@ -483,11 +503,7 @@ export default function AssistenzaSistemistica() {
                     <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                   </Button>
                   <Link to="/servizi">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-10 py-7 text-lg rounded-2xl font-semibold"
-                    >
+                    <Button size="lg" variant="outline" className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-10 py-7 text-lg rounded-2xl font-semibold">
                       Vedi tutti i servizi
                     </Button>
                   </Link>
@@ -497,13 +513,12 @@ export default function AssistenzaSistemistica() {
           </div>
         </section>
 
-        {/* Footer */}
         <footer className="bg-black border-t border-white/10 py-12 px-6">
           <div className="max-w-7xl mx-auto text-center space-y-4">
             <p className="text-gray-400 text-sm">
               © 2026 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</Link> - Tutti i diritti riservati.
             </p>
-            <p className="text-xs text-gray-600">v2.0 - 25/03/2026</p>
+            <p className="text-xs text-gray-600">v2.1 - 25/05/2026</p>
           </div>
         </footer>
 
