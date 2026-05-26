@@ -41,4 +41,8 @@ jobs:
           server-dir: /www.corenexus.it/
           protocol: ftps
           port: 21
-          dangerous-clean-slate: true
+
+      - name: Notifica IndexNow a Bing
+        run: |
+          curl -s "https://www.bing.com/indexnow?url=https://corenexus.it/sitemap.xml&key=08b3b16f60a6482c86b440bc30806266" || true
+          curl -s "https://api.indexnow.org/indexnow?url=https://corenexus.it/sitemap.xml&key=08b3b16f60a6482c86b440bc30806266" || true
