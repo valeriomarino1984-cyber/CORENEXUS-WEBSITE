@@ -107,19 +107,47 @@ export default function Header() {
               </button>
 
               {isServicesOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 glass-effect rounded-2xl border border-white/10 shadow-2xl overflow-hidden animate-fade-in-up">
-                  {serviceLinks.map((link, index) => (
-                    <button
-                      key={index}
-                      onClick={() => { navigate(link.path); setIsServicesOpen(false); }}
-                      className={`w-full flex items-center gap-3 px-5 py-3.5 text-left text-sm transition-all duration-200 ${
-                        location.pathname === link.path ? 'text-white bg-white/10' : 'text-gray-400 hover:text-white hover:bg-white/5'
-                      } ${index === 0 ? 'border-b border-white/10 font-semibold' : ''}`}
-                    >
-                      {link.icon && <link.icon className="w-4 h-4 text-blue-400" />}
-                      {link.name}
-                    </button>
-                  ))}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[580px] glass-effect rounded-2xl border border-white/10 shadow-2xl overflow-hidden animate-fade-in-up">
+                  {/* Tutti i servizi - riga intera */}
+                  <button
+                    onClick={() => { navigate('/servizi'); setIsServicesOpen(false); }}
+                    className={`w-full flex items-center gap-3 px-5 py-3.5 text-left text-sm font-semibold border-b border-white/10 transition-all duration-200 ${
+                      location.pathname === '/servizi' ? 'text-white bg-white/10' : 'text-gray-300 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    Tutti i Servizi
+                  </button>
+                  {/* Griglia 2 colonne */}
+                  <div className="grid grid-cols-2 divide-x divide-white/5">
+                    <div>
+                      {serviceLinks.slice(1, Math.ceil((serviceLinks.length) / 2) + 1).map((link, index) => (
+                        <button
+                          key={index}
+                          onClick={() => { navigate(link.path); setIsServicesOpen(false); }}
+                          className={`w-full flex items-center gap-3 px-4 py-3 text-left text-sm transition-all duration-200 ${
+                            location.pathname === link.path ? 'text-white bg-white/10' : 'text-gray-400 hover:text-white hover:bg-white/5'
+                          }`}
+                        >
+                          {link.icon && <link.icon className="w-4 h-4 text-blue-400 flex-shrink-0" />}
+                          <span className="truncate">{link.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                    <div>
+                      {serviceLinks.slice(Math.ceil((serviceLinks.length) / 2) + 1).map((link, index) => (
+                        <button
+                          key={index}
+                          onClick={() => { navigate(link.path); setIsServicesOpen(false); }}
+                          className={`w-full flex items-center gap-3 px-4 py-3 text-left text-sm transition-all duration-200 ${
+                            location.pathname === link.path ? 'text-white bg-white/10' : 'text-gray-400 hover:text-white hover:bg-white/5'
+                          }`}
+                        >
+                          {link.icon && <link.icon className="w-4 h-4 text-blue-400 flex-shrink-0" />}
+                          <span className="truncate">{link.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
