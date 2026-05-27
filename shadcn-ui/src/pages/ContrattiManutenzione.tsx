@@ -248,7 +248,7 @@ export default function ContrattiManutenzione() {
         <Header />
 
         {/* Hero Section */}
-        <section className="relative overflow-hidden pt-32 pb-20 px-6">
+        <section className="relative overflow-hidden pt-32 pb-20 px-6 premium-gradient">
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/30 via-black to-blue-950/30" />
           <div className="absolute top-20 left-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-float" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
