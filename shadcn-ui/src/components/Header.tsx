@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, LogIn, ChevronDown, Network, ShieldCheck, Wrench, ClipboardList, Camera, Globe, FileText, Phone, Cog, Cpu, Briefcase, Monitor, BookOpen, Container, Radar, TrendingDown } from 'lucide-react';
+import { Menu, X, LogIn, ChevronDown, Network, ShieldCheck, ShieldAlert, Wrench, ClipboardList, Camera, Globe, FileText, Phone, Cog, Cpu, Briefcase, Monitor, BookOpen, Container, Radar, TrendingDown } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
@@ -66,16 +66,16 @@ export default function Header() {
     { name: 'Tutti i Servizi', path: '/servizi', icon: null },
     { name: 'Contratti di Manutenzione', path: '/contratti-manutenzione', icon: FileText },
     { name: 'Consulenza Sistemistica', path: '/assistenza-sistemistica', icon: Wrench },
+    { name: 'Networking e Reti', path: '/networking-reti', icon: Network },
+    { name: 'Sicurezza Informatica', path: '/sicurezza-informatica', icon: ShieldCheck },
+    { name: 'Prevenzione Virus e Ransomware', path: '/prevenzione-virus-ransomware', icon: ShieldAlert },
     { name: 'Automazione Processi IT', path: '/automazione-processi', icon: Cog },
     { name: 'Kubernetes e Container', path: '/kubernetes-container', icon: Container },
     { name: 'Project Management', path: '/project-management', icon: ClipboardList },
-    { name: 'Networking e Reti', path: '/networking-reti', icon: Network },
-    { name: 'Sicurezza Informatica', path: '/sicurezza-informatica', icon: ShieldCheck },
     { name: 'Il Tuo Sistema SOC', path: '/soc-as-a-service', icon: Radar },
     { name: 'Allarme e Videosorveglianza', path: '/impianti-allarme-videosorveglianza', icon: Camera },
     { name: 'Siti Web & E-commerce', path: '/siti-web', icon: Globe },
     { name: 'Centralini VoIP', path: '/centralini-voip', icon: Phone },
-    { name: 'Prevenzione Virus e Ransomware', path: '/prevenzione-virus-ransomware', icon: ShieldCheck },
   ];
 
   const navLinkClass = (isActive: boolean) =>
@@ -117,10 +117,10 @@ export default function Header() {
                   >
                     Tutti i Servizi
                   </button>
-                  {/* Griglia 2 colonne */}
+                  {/* Griglia 2 colonne 5+5 */}
                   <div className="grid grid-cols-2 divide-x divide-white/5">
                     <div>
-                      {serviceLinks.slice(1, Math.ceil((serviceLinks.length) / 2) + 1).map((link, index) => (
+                      {serviceLinks.slice(1, 6).map((link, index) => (
                         <button
                           key={index}
                           onClick={() => { navigate(link.path); setIsServicesOpen(false); }}
@@ -134,7 +134,7 @@ export default function Header() {
                       ))}
                     </div>
                     <div>
-                      {serviceLinks.slice(Math.ceil((serviceLinks.length) / 2) + 1).map((link, index) => (
+                      {serviceLinks.slice(6).map((link, index) => (
                         <button
                           key={index}
                           onClick={() => { navigate(link.path); setIsServicesOpen(false); }}
