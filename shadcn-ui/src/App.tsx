@@ -23,6 +23,7 @@ import Tecnologie from './pages/Tecnologie';
 import AssistenzaRemota from './pages/AssistenzaRemota';
 import AuditGratuito from './pages/AuditGratuito';
 import OttimizzazioneIT from './pages/OttimizzazioneIT';
+import PrevenzioneVirus from './pages/PrevenzioneVirus';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import DoveSiamo from './pages/DoveSiamo';
@@ -63,6 +64,7 @@ const AppContent = () => {
         <Route path="/assistenza-remota" element={<AssistenzaRemota />} />
         <Route path="/audit-gratuito" element={<AuditGratuito />} />
         <Route path="/ottimizzazione-it" element={<OttimizzazioneIT />} />
+        <Route path="/prevenzione-virus-ransomware" element={<PrevenzioneVirus />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/dove-siamo" element={<DoveSiamo />} />
