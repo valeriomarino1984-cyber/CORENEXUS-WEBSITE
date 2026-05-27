@@ -24,17 +24,16 @@ import {
   Award,
   Globe,
   ShieldCheck,
+  MapPin,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { breadcrumbSchema , localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
+import { breadcrumbSchema, localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
 import FAQSection from '@/components/FAQSection';
 
 export default function ImpiantiAllarme() {
   const navigate = useNavigate();
-  const scrollToContact = () => {
-    navigate('/#contact');
-  };
+  const scrollToContact = () => { navigate('/#contact'); };
 
   const allarmeBreadcrumb = breadcrumbSchema([
     { name: 'Home', url: '/' },
@@ -44,40 +43,64 @@ export default function ImpiantiAllarme() {
 
   const faqSchemaData = {
     "@type": "FAQPage",
-    "mainEntity": [{
-      "@type": "Question",
-      "name": "Gli impianti di videosorveglianza Hikvision sono a norma GDPR?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sì, i nostri sistemi Hikvision sono configurati seguendo le normative sulla privacy, con gestione dei log di accesso e oscuramento delle aree pubbliche per la piena conformità legale a Roma."
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Quanto costa installare un impianto di videosorveglianza a Roma?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Il costo dipende dal numero di telecamere, dalla tipologia e dalla complessita dell'installazione. Un sistema base per un ufficio o negozio a Roma con 4 telecamere Hikvision parte da poche centinaia di euro. Offriamo sopralluogo e preventivo gratuito senza impegno."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Gli impianti di videosorveglianza Hikvision sono a norma GDPR?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Si, i nostri sistemi Hikvision sono configurati seguendo le normative sulla privacy, con gestione dei log di accesso e oscuramento delle aree pubbliche per la piena conformita legale a Roma."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "E possibile integrare l'allarme con la videosorveglianza su smartphone?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Certamente. Integriamo telecamere e sensori in una unica app, permettendo di ricevere notifiche push con video-verifica immediata in caso di intrusione, ovunque ti trovi."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Effettuate installazioni di videosorveglianza ad Ostia, Fiumicino e Roma Sud?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Si, operiamo su tutto il territorio di Roma Sud e provincia: EUR, Ostia, Fiumicino, Acilia, Casal Palocco, Pomezia, Ardea e zone limitrofe. Realizziamo sopralluoghi gratuiti e progettiamo impianti su misura."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quale sistema di allarme consigliate per un negozio o ufficio a Roma?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Per negozi e uffici a Roma consigliamo sistemi Hikvision AX PRO o Ajax Systems, che combinano affidabilita certificata, gestione da smartphone e integrazione con videosorveglianza. Il pacchetto Business di CoreNexus include tutto il necessario."
+        }
       }
-    }, {
-      "@type": "Question",
-      "name": "È possibile integrare l'allarme con la videosorveglianza su smartphone?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Certamente. Integriamo telecamere e sensori in un'unica app, permettendo di ricevere notifiche push con video-verifica immediata in caso di intrusione, ovunque ti trovi."
-      }
-    }, {
-      "@type": "Question",
-      "name": "Effettuate installazioni di videosorveglianza ad Ostia, Fiumicino e Roma Sud?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sì, operiamo su tutto il territorio di Roma Sud e provincia, realizzando sopralluoghi gratuiti e progettando impianti su misura per uffici, magazzini e aree industriali."
-      }
-    }]
+    ]
   };
 
   const allarmeSchema = {
     "@context": "https://schema.org",
     "@graph": [
-      localBusinessServiceSchema("Impianti Allarme e Videosorveglianza Roma EUR Ostia Fiumicino", "Installazione impianti allarme e videosorveglianza a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Hikvision, Ajax Systems, Risco, Dahua. Telecamere IP HD/4K.", "/impianti-allarme-videosorveglianza", "Impianti Allarme e Videosorveglianza"),
-     
+      localBusinessServiceSchema(
+        "Impianti Allarme e Videosorveglianza Roma EUR Ostia Fiumicino",
+        "Installazione impianti allarme e videosorveglianza a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Hikvision, Ajax Systems, Risco, Dahua. Telecamere IP HD/4K, antintrusione, controllo accessi.",
+        "/impianti-allarme-videosorveglianza",
+        "Impianti Allarme e Videosorveglianza"
+      ),
       allarmeBreadcrumb,
       {
         "@type": "Service",
-        "name": "Impianti di Allarme e Videosorveglianza",
-        "description": "Installazione e manutenzione impianti di allarme e videosorveglianza a Roma. Sistemi antintrusione, TVCC, controllo accessi per aziende e privati. Partner ufficiali Hikvision, Ajax, Risco, Dahua.",
+        "name": "Impianti di Allarme e Videosorveglianza Roma",
+        "description": "Installazione e manutenzione impianti di allarme e videosorveglianza a Roma, EUR, Ostia, Fiumicino e Pomezia. Sistemi antintrusione, TVCC, controllo accessi per aziende e privati. Partner ufficiali Hikvision, Ajax, Risco, Dahua.",
         "provider": {
           "@type": "Organization",
           "name": "CoreNexus Technology Solution",
@@ -89,6 +112,14 @@ export default function ImpiantiAllarme() {
       faqSchemaData
     ]
   };
+
+  const coverageAreas = [
+    'EUR', 'Ostia Lido', 'Ostia Antica', 'Fiumicino', 'Isola Sacra',
+    'Acilia', 'Casal Palocco', 'Infernetto', 'Axa', 'Malafede',
+    'Mostacciano', 'Torrino', 'Laurentina', 'Spinaceto', 'Mezzocammino',
+    'Pomezia', 'Ardea', 'Santa Palomba', 'Castel Romano', 'Torvaianica',
+    'Garbatella', 'Ostiense', 'Magliana', 'San Paolo',
+  ];
 
   const keyPoints = [
     'Progettiamo e installiamo impianti di allarme su misura per la tua esigenza',
@@ -104,20 +135,20 @@ export default function ImpiantiAllarme() {
       name: 'Hikvision',
       logo: '/assets/brands/hikvision-logo.png',
       description: 'Leader mondiale nella produzione di sistemi di sicurezza. Hikvision offre centrali di allarme ibride con tecnologia AX PRO, sensori wireless avanzati e integrazione completa con i sistemi di videosorveglianza.',
-      highlights: ['Centrali AX PRO wireless', 'Sensori PIR con immunità animali', 'Integrazione TVCC nativa', 'App Hik-Connect'],
+      highlights: ['Centrali AX PRO wireless', 'Sensori PIR con immunita animali', 'Integrazione TVCC nativa', 'App Hik-Connect'],
       category: 'Allarme & Videosorveglianza',
     },
     {
       name: 'Ajax Systems',
       logo: '/assets/brands/ajax-logo.jpg',
-      description: 'Il sistema di allarme wireless più premiato d\'Europa. Ajax combina design elegante, tecnologia proprietaria Jeweller e affidabilità certificata di grado 2 per una protezione senza compromessi.',
+      description: 'Il sistema di allarme wireless piu premiato d\'Europa. Ajax combina design elegante, tecnologia proprietaria Jeweller e affidabilita certificata di grado 2 per una protezione senza compromessi.',
       highlights: ['Tecnologia Jeweller fino a 2km', 'Grado 2 certificato EN 50131', 'Verifica foto allarme', 'Batterie fino a 7 anni'],
       category: 'Allarme',
     },
     {
       name: 'Risco',
       logo: '/assets/brands/risco-logo.jpg',
-      description: 'Soluzioni professionali di sicurezza dal 1978. Risco è sinonimo di affidabilità con le sue centrali LightSYS e ProSYS, ideali per installazioni residenziali e commerciali di ogni dimensione.',
+      description: 'Soluzioni professionali di sicurezza dal 1978. Risco e sinonimo di affidabilita con le sue centrali LightSYS e ProSYS, ideali per installazioni residenziali e commerciali di ogni dimensione.',
       highlights: ['Centrali LightSYS & ProSYS', 'Rilevatori VDT anti-mascheramento', 'Cloud RISCO per gestione remota', 'Oltre 45 anni di esperienza'],
       category: 'Allarme',
     },
@@ -146,7 +177,7 @@ export default function ImpiantiAllarme() {
     { name: 'Sensori Perimetrali', desc: 'Rilevatori volumetrici, contatti magnetici, barriere IR e sensori di vibrazione', icon: Radio },
     { name: 'Videoregistratori NVR', desc: 'Network Video Recorder con storage locale e backup cloud per registrazioni continue', icon: HardDrive },
     { name: 'Controllo Accessi', desc: 'Sistemi di accesso con badge, biometria, PIN e integrazione con impianto di allarme', icon: Lock },
-    { name: 'App Mobile', desc: 'Gestione completa dell\'impianto da smartphone: live view, notifiche push, arma/disarma', icon: Smartphone },
+    { name: 'App Mobile', desc: "Gestione completa dell'impianto da smartphone: live view, notifiche push, arma/disarma", icon: Smartphone },
     { name: 'Analisi Video AI', desc: 'Rilevamento intelligente di intrusioni, riconoscimento targhe e analisi comportamentale', icon: ScanLine },
     { name: 'Cloud & Backup', desc: 'Archiviazione cloud delle registrazioni con accesso sicuro e crittografia end-to-end', icon: Cloud },
     { name: 'Monitoraggio Remoto', desc: 'Sorveglianza 24/7 con collegamento a centrali operative e intervento rapido', icon: MonitorPlay },
@@ -173,7 +204,7 @@ export default function ImpiantiAllarme() {
     {
       name: 'Pacchetto Business',
       subtitle: 'Aziendale',
-      ideal: 'Per uffici, negozi e attività commerciali che necessitano di sicurezza professionale',
+      ideal: 'Per uffici, negozi e attivita commerciali che necessitano di sicurezza professionale',
       features: [
         'Tutto del pacchetto Casa',
         'Centrale di allarme filare/ibrida Risco ProSYS',
@@ -208,44 +239,54 @@ export default function ImpiantiAllarme() {
 
   const faqs = [
     {
-      question: 'Gli impianti di videosorveglianza Hikvision sono a norma GDPR?',
-      answer: 'Sì, i nostri sistemi Hikvision sono configurati seguendo le normative sulla privacy, con gestione dei log di accesso e oscuramento delle aree pubbliche per la piena conformità legale a Roma.',
+      question: "Quanto costa installare un impianto di videosorveglianza a Roma?",
+      answer: "Il costo dipende dal numero di telecamere, dalla tipologia e dalla complessita dell'installazione. Un sistema base per un ufficio o negozio a Roma con 4 telecamere Hikvision parte da poche centinaia di euro. Offriamo sopralluogo e preventivo gratuito senza impegno per tutte le zone di Roma, EUR, Ostia e Fiumicino.",
     },
     {
-      question: 'È possibile integrare l\'allarme con la videosorveglianza su smartphone?',
-      answer: 'Certamente. Integriamo telecamere e sensori in un\'unica app, permettendo di ricevere notifiche push con video-verifica immediata in caso di intrusione, ovunque ti trovi.',
+      question: "Gli impianti di videosorveglianza Hikvision sono a norma GDPR?",
+      answer: "Si, i nostri sistemi Hikvision sono configurati seguendo le normative sulla privacy, con gestione dei log di accesso e oscuramento delle aree pubbliche per la piena conformita legale a Roma.",
     },
     {
-      question: 'Effettuate installazioni di videosorveglianza ad Ostia, Fiumicino e Roma Sud?',
-      answer: 'Sì, operiamo su tutto il territorio di Roma Sud e provincia, realizzando sopralluoghi gratuiti e progettando impianti su misura per uffici, magazzini e aree industriali.',
+      question: "E possibile integrare l'allarme con la videosorveglianza su smartphone?",
+      answer: "Certamente. Integriamo telecamere e sensori in una unica app, permettendo di ricevere notifiche push con video-verifica immediata in caso di intrusione, ovunque ti trovi.",
+    },
+    {
+      question: "Effettuate installazioni di videosorveglianza ad Ostia, Fiumicino e Roma Sud?",
+      answer: "Si, operiamo su tutto il territorio di Roma Sud e provincia: EUR, Ostia, Fiumicino, Acilia, Casal Palocco, Pomezia, Ardea e zone limitrofe. Realizziamo sopralluoghi gratuiti e progettiamo impianti su misura per uffici, negozi e aree industriali.",
+    },
+    {
+      question: "Quale sistema di allarme consigliate per un negozio o ufficio a Roma?",
+      answer: "Per negozi e uffici a Roma consigliamo sistemi Hikvision AX PRO o Ajax Systems, che combinano affidabilita certificata di grado 2, gestione da smartphone e integrazione nativa con la videosorveglianza. Il pacchetto Business di CoreNexus include tutto il necessario.",
     },
   ];
 
   return (
     <>
       <SEO
-        title="Impianti Allarme e Videosorveglianza Roma EUR Ostia Fiumicino | Hikvision Ajax - CoreNexus"
-        description="Installazione impianti di allarme e videosorveglianza a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Partner Hikvision, Ajax Systems, Risco, Dahua. Telecamere IP HD/4K, centrali antintrusione, controllo accessi."
+        title="Impianti Allarme e Videosorveglianza Roma | Hikvision Ajax EUR Ostia Fiumicino - CoreNexus"
+        description="Installazione impianti di allarme e videosorveglianza a Roma, EUR, Ostia, Fiumicino e Pomezia. Partner Hikvision, Ajax Systems, Risco, Dahua. Telecamere IP HD/4K, antintrusione, controllo accessi. Sopralluogo gratuito."
         keywords={[
           'impianti allarme Roma',
-          'videosorveglianza Roma EUR',
+          'videosorveglianza Roma',
           'telecamere IP Roma',
+          'impianti allarme videosorveglianza Roma',
           'TVCC Roma',
           'antintrusione Roma',
-          'controllo accessi Roma',
           'installazione allarme Roma',
+          'videosorveglianza aziendale Roma',
           'Hikvision Roma',
           'Ajax Systems Roma',
-          'impianti allarme Ostia Lido',
-          'videosorveglianza Fiumicino',
+          'impianti allarme EUR Roma',
+          'videosorveglianza Ostia',
+          'impianti allarme Fiumicino',
+          'telecamere sicurezza Roma Sud',
+          'videosorveglianza Acilia',
           'allarme Pomezia',
-          'telecamere 4K Roma Sud',
-          'videosorveglianza aziendale Roma EUR',
-          'installazione TVCC Ostia Fiumicino',
+          'telecamere 4K Roma',
+          'controllo accessi Roma',
+          'impianti sicurezza Roma',
           'Dahua Roma',
           'Risco Roma',
-          'allarme casa Roma',
-          'sicurezza fisica Roma',
         ]}
         canonical="/impianti-allarme-videosorveglianza"
         schema={allarmeSchema}
@@ -263,10 +304,7 @@ export default function ImpiantiAllarme() {
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
               <div className="mb-6">
-                <Link
-                  to="/servizi"
-                  className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors text-sm font-medium"
-                >
+                <Link to="/servizi" className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors text-sm font-medium">
                   <ArrowLeft className="w-4 h-4" />
                   Torna ai Servizi
                 </Link>
@@ -285,12 +323,13 @@ export default function ImpiantiAllarme() {
                     <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 bg-clip-text text-transparent">
                       Impianti di Allarme e Videosorveglianza
                     </span>
+                    <span className="block text-3xl md:text-4xl text-gray-400 mt-2 font-normal">
+                      a Roma, EUR, Ostia e Fiumicino
+                    </span>
                   </h1>
 
                   <p className="text-xl text-gray-400 leading-relaxed">
-                    Progettiamo, installiamo e manuteniamo impianti di allarme e sistemi di videosorveglianza
-                    professionali per aziende e privati a Roma e provincia. Lavoriamo con i{' '}
-                    <strong className="text-emerald-400">maggiori marchi mondiali</strong> del settore sicurezza.
+                    Progettiamo, installiamo e manuteniamo impianti di allarme e sistemi di videosorveglianza professionali per aziende e privati a Roma, EUR, Ostia, Fiumicino e tutta la zona sud della capitale. Lavoriamo con i <strong className="text-emerald-400">maggiori marchi mondiali</strong> del settore sicurezza.
                   </p>
 
                   <div className="space-y-4">
@@ -304,26 +343,18 @@ export default function ImpiantiAllarme() {
                     ))}
                   </div>
 
-                  <Button
-                    size="lg"
-                    onClick={scrollToContact}
-                    className="group bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-10 py-7 text-lg rounded-2xl font-semibold shadow-lg shadow-emerald-500/20"
-                  >
+                  <Button size="lg" onClick={scrollToContact} className="group bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-10 py-7 text-lg rounded-2xl font-semibold shadow-lg shadow-emerald-500/20">
                     Richiedi un sopralluogo gratuito
                     <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                   </Button>
                 </div>
 
-                {/* Right side - Visual element */}
                 <div className="hidden lg:flex justify-center">
                   <div className="relative">
                     <div className="w-80 h-80 rounded-3xl glass-effect border border-emerald-500/20 p-8 flex flex-col items-center justify-center gap-6">
                       <div className="grid grid-cols-3 gap-4">
                         {[Camera, Bell, Shield, Wifi, Smartphone, Eye, Lock, Radio, Sun].map((Icon, i) => (
-                          <div
-                            key={i}
-                            className="w-16 h-16 rounded-2xl glass-effect flex items-center justify-center hover:bg-emerald-500/20 transition-all duration-300 hover:scale-110"
-                          >
+                          <div key={i} className="w-16 h-16 rounded-2xl glass-effect flex items-center justify-center hover:bg-emerald-500/20 transition-all duration-300 hover:scale-110">
                             <Icon className="w-7 h-7 text-emerald-400" />
                           </div>
                         ))}
@@ -347,17 +378,13 @@ export default function ImpiantiAllarme() {
                   <Award className="w-4 h-4" />
                   Partner Ufficiali
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  I Marchi Leader Mondiali
-                </h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">I Marchi Leader Mondiali</h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                  Collaboriamo con i <strong className="text-white">più grandi produttori mondiali</strong> di sistemi
-                  di allarme e videosorveglianza per garantirti prodotti affidabili, certificati e all'avanguardia.
+                  Collaboriamo con i <strong className="text-white">piu grandi produttori mondiali</strong> di sistemi di allarme e videosorveglianza per garantirti prodotti affidabili, certificati e all'avanguardia.
                 </p>
               </div>
             </MorphingSection>
 
-            {/* Alarm Brands */}
             <MorphingSection delay={0.1}>
               <div className="mb-16">
                 <div className="flex items-center gap-3 mb-8">
@@ -367,26 +394,16 @@ export default function ImpiantiAllarme() {
                   <h3 className="text-2xl font-bold text-white">Sistemi di Allarme</h3>
                   <div className="flex-1 h-px bg-gradient-to-r from-white/20 to-transparent" />
                 </div>
-
                 <div className="grid md:grid-cols-3 gap-8">
                   {alarmBrands.map((brand, index) => (
-                    <div
-                      key={index}
-                      className="group p-6 rounded-3xl glass-effect border border-white/10 hover:border-emerald-500/30 transition-all duration-500 hover:scale-[1.02]"
-                    >
+                    <div key={index} className="group p-6 rounded-3xl glass-effect border border-white/10 hover:border-emerald-500/30 transition-all duration-500 hover:scale-[1.02]">
                       <div className="h-24 mb-6 flex items-center justify-center rounded-2xl bg-white/5 group-hover:bg-white/10 transition-colors overflow-hidden p-4">
-                        <img
-                          src={brand.logo}
-                          alt={`${brand.name} logo`}
-                          className="max-h-16 max-w-full object-contain filter brightness-90 group-hover:brightness-110 transition-all"
-                        />
+                        <img src={brand.logo} alt={`${brand.name} logo`} className="max-h-16 max-w-full object-contain filter brightness-90 group-hover:brightness-110 transition-all" />
                       </div>
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
                           <h4 className="text-xl font-bold text-white">{brand.name}</h4>
-                          <span className="text-xs px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-medium">
-                            {brand.category}
-                          </span>
+                          <span className="text-xs px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-medium">{brand.category}</span>
                         </div>
                         <p className="text-gray-400 text-sm leading-relaxed">{brand.description}</p>
                         <div className="pt-3 space-y-2">
@@ -404,7 +421,6 @@ export default function ImpiantiAllarme() {
               </div>
             </MorphingSection>
 
-            {/* CCTV Brands */}
             <MorphingSection delay={0.2}>
               <div>
                 <div className="flex items-center gap-3 mb-8">
@@ -414,27 +430,17 @@ export default function ImpiantiAllarme() {
                   <h3 className="text-2xl font-bold text-white">Videosorveglianza</h3>
                   <div className="flex-1 h-px bg-gradient-to-r from-white/20 to-transparent" />
                 </div>
-
                 <div className="grid md:grid-cols-2 gap-8">
                   {cctvBrands.map((brand, index) => (
-                    <div
-                      key={index}
-                      className="group p-8 rounded-3xl glass-effect border border-white/10 hover:border-blue-500/30 transition-all duration-500 hover:scale-[1.02]"
-                    >
+                    <div key={index} className="group p-8 rounded-3xl glass-effect border border-white/10 hover:border-blue-500/30 transition-all duration-500 hover:scale-[1.02]">
                       <div className="flex flex-col md:flex-row gap-6">
                         <div className="w-full md:w-40 h-24 flex items-center justify-center rounded-2xl bg-white/5 group-hover:bg-white/10 transition-colors overflow-hidden p-4 flex-shrink-0">
-                          <img
-                            src={brand.logo}
-                            alt={`${brand.name} logo`}
-                            className="max-h-16 max-w-full object-contain filter brightness-90 group-hover:brightness-110 transition-all"
-                          />
+                          <img src={brand.logo} alt={`${brand.name} logo`} className="max-h-16 max-w-full object-contain filter brightness-90 group-hover:brightness-110 transition-all" />
                         </div>
                         <div className="space-y-3 flex-1">
                           <div className="flex items-center justify-between">
                             <h4 className="text-xl font-bold text-white">{brand.name}</h4>
-                            <span className="text-xs px-2 py-1 rounded-full bg-blue-500/20 text-blue-400 font-medium">
-                              {brand.category}
-                            </span>
+                            <span className="text-xs px-2 py-1 rounded-full bg-blue-500/20 text-blue-400 font-medium">{brand.category}</span>
                           </div>
                           <p className="text-gray-400 text-sm leading-relaxed">{brand.description}</p>
                           <div className="pt-2 grid grid-cols-2 gap-2">
@@ -453,7 +459,6 @@ export default function ImpiantiAllarme() {
               </div>
             </MorphingSection>
 
-            {/* Brand Trust Banner */}
             <MorphingSection delay={0.3}>
               <div className="mt-16 p-8 rounded-3xl glass-effect border border-emerald-500/20 bg-gradient-to-r from-emerald-950/30 to-teal-950/30">
                 <div className="flex flex-col md:flex-row items-center gap-8">
@@ -462,27 +467,21 @@ export default function ImpiantiAllarme() {
                       <Globe className="w-8 h-8 text-white" />
                     </div>
                     <div>
-                      <h4 className="text-white font-bold text-xl">Perché scegliamo questi brand?</h4>
-                      <p className="text-gray-400 text-sm mt-1">Qualità, affidabilità e innovazione certificata</p>
+                      <h4 className="text-white font-bold text-xl">Perche scegliamo questi brand?</h4>
+                      <p className="text-gray-400 text-sm mt-1">Qualita, affidabilita e innovazione certificata</p>
                     </div>
                   </div>
                   <div className="flex-1 grid sm:grid-cols-3 gap-6">
                     <div className="text-center">
-                      <div className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                        4+
-                      </div>
+                      <div className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">4+</div>
                       <p className="text-gray-400 text-sm mt-1">Brand leader mondiali</p>
                     </div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                        100%
-                      </div>
+                      <div className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">100%</div>
                       <p className="text-gray-400 text-sm mt-1">Prodotti certificati</p>
                     </div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                        3+ anni
-                      </div>
+                      <div className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">3+ anni</div>
                       <p className="text-gray-400 text-sm mt-1">Garanzia prodotti</p>
                     </div>
                   </div>
@@ -498,12 +497,9 @@ export default function ImpiantiAllarme() {
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
               <div className="text-center space-y-6 mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Pacchetti Allarme e Videosorveglianza
-                </h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">Pacchetti Allarme e Videosorveglianza a Roma</h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                  Soluzioni complete per ogni esigenza: dalla protezione della casa alla sicurezza industriale.
-                  Tutti i pacchetti includono prodotti <strong className="text-white">Hikvision, Ajax, Risco e Dahua</strong>.
+                  Soluzioni complete per ogni esigenza a Roma, EUR, Ostia e Fiumicino: dalla protezione della casa alla sicurezza industriale. Tutti i pacchetti includono prodotti <strong className="text-white">Hikvision, Ajax, Risco e Dahua</strong>.
                 </p>
               </div>
             </MorphingSection>
@@ -511,29 +507,17 @@ export default function ImpiantiAllarme() {
             <div className="grid md:grid-cols-3 gap-8">
               {packages.map((pkg, index) => (
                 <MorphingSection key={index} delay={index * 0.15}>
-                  <div
-                    className={`relative p-8 rounded-3xl glass-effect border transition-all duration-500 hover:scale-105 h-full flex flex-col ${
-                      pkg.highlighted
-                        ? 'border-emerald-500/50 shadow-lg shadow-emerald-500/20'
-                        : 'border-white/10 hover:border-white/20'
-                    }`}
-                  >
+                  <div className={`relative p-8 rounded-3xl glass-effect border transition-all duration-500 hover:scale-105 h-full flex flex-col ${pkg.highlighted ? 'border-emerald-500/50 shadow-lg shadow-emerald-500/20' : 'border-white/10 hover:border-white/20'}`}>
                     {pkg.highlighted && (
                       <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                        <span className="px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-bold uppercase tracking-wider">
-                          Più Richiesto
-                        </span>
+                        <span className="px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-bold uppercase tracking-wider">Piu Richiesto</span>
                       </div>
                     )}
-
                     <div className="text-center space-y-4 mb-8">
                       <h3 className="text-2xl font-bold text-white">{pkg.name}</h3>
-                      <div className={`text-3xl font-bold bg-gradient-to-r ${pkg.gradient} bg-clip-text text-transparent`}>
-                        {pkg.subtitle}
-                      </div>
+                      <div className={`text-3xl font-bold bg-gradient-to-r ${pkg.gradient} bg-clip-text text-transparent`}>{pkg.subtitle}</div>
                       <p className="text-gray-400 text-sm">{pkg.ideal}</p>
                     </div>
-
                     <div className="space-y-3 mb-8 flex-1">
                       {pkg.features.map((feature, i) => (
                         <div key={i} className="flex items-start gap-3">
@@ -542,16 +526,8 @@ export default function ImpiantiAllarme() {
                         </div>
                       ))}
                     </div>
-
                     <div className="text-center">
-                      <Button
-                        onClick={scrollToContact}
-                        className={`w-full py-6 rounded-2xl font-semibold text-white ${
-                          pkg.highlighted
-                            ? 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700'
-                            : 'glass-effect border border-white/20 hover:bg-white/10'
-                        }`}
-                      >
+                      <Button onClick={scrollToContact} className={`w-full py-6 rounded-2xl font-semibold text-white ${pkg.highlighted ? 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700' : 'glass-effect border border-white/20 hover:bg-white/10'}`}>
                         Richiedi Preventivo
                         <ArrowRight className="ml-2 w-4 h-4" />
                       </Button>
@@ -563,68 +539,40 @@ export default function ImpiantiAllarme() {
           </div>
         </section>
 
-        {/* Detailed Description Section */}
+        {/* Detailed Description */}
         <section className="py-24 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-emerald-950/10 to-black" />
           <div className="max-w-5xl mx-auto relative z-10">
             <MorphingSection>
               <div className="space-y-12">
                 <div className="text-center space-y-6">
-                  <h2 className="text-4xl md:text-5xl font-bold text-white">
-                    I Nostri Impianti nel Dettaglio
-                  </h2>
+                  <h2 className="text-4xl md:text-5xl font-bold text-white">Impianti di Allarme e Videosorveglianza a Roma: nel Dettaglio</h2>
                   <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 to-teal-500 mx-auto rounded-full" />
                 </div>
-
                 <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
                   <p>
-                    La sicurezza fisica è il <strong className="text-white">primo livello di protezione</strong> per
-                    la tua casa o la tua azienda. Un impianto di allarme e videosorveglianza ben progettato
-                    rappresenta il deterrente più efficace contro furti, intrusioni e atti vandalici.
+                    La sicurezza fisica e il <strong className="text-white">primo livello di protezione</strong> per la tua casa o la tua azienda a Roma. Un impianto di allarme e videosorveglianza ben progettato rappresenta il deterrente piu efficace contro furti, intrusioni e atti vandalici.
                   </p>
-
                   <p>
-                    Progettiamo ogni impianto <strong className="text-white">su misura</strong>, partendo da un
-                    sopralluogo tecnico gratuito per analizzare le vulnerabilità del sito e definire la
-                    soluzione più adeguata. Utilizziamo esclusivamente prodotti dei brand leader mondiali:{' '}
-                    <strong className="text-emerald-400">Hikvision</strong>,{' '}
-                    <strong className="text-emerald-400">Ajax Systems</strong>,{' '}
-                    <strong className="text-emerald-400">Risco</strong> e{' '}
-                    <strong className="text-emerald-400">Dahua</strong>.
+                    Progettiamo ogni impianto <strong className="text-white">su misura</strong>, partendo da un sopralluogo tecnico gratuito per analizzare le vulnerabilita del sito e definire la soluzione piu adeguata. Operiamo quotidianamente a EUR, Ostia, Fiumicino, Acilia, Casal Palocco, Pomezia e in tutta la zona sud di Roma.
                   </p>
-
                   <p>
-                    I nostri sistemi di <strong className="text-white">videosorveglianza IP</strong> offrono
-                    immagini ad alta definizione (fino a 4K), visione notturna avanzata e analisi video
-                    intelligente basata su AI per il rilevamento automatico di intrusioni, il riconoscimento
-                    targhe e l'analisi comportamentale.
+                    I nostri sistemi di <strong className="text-white">videosorveglianza IP</strong> offrono immagini ad alta definizione (fino a 4K), visione notturna avanzata e analisi video intelligente basata su AI per il rilevamento automatico di intrusioni e riconoscimento targhe.
                   </p>
-
                   <p>
-                    Tutti i nostri impianti sono <strong className="text-white">gestibili da remoto</strong> tramite
-                    app mobile dedicata: puoi visualizzare le telecamere in tempo reale, ricevere notifiche
-                    push in caso di allarme e armare/disarmare il sistema ovunque ti trovi.
+                    Tutti i nostri impianti sono <strong className="text-white">gestibili da remoto</strong> tramite app mobile: puoi visualizzare le telecamere in tempo reale, ricevere notifiche push in caso di allarme e armare/disarmare il sistema ovunque ti trovi.
                   </p>
                 </div>
               </div>
             </MorphingSection>
 
-            {/* Technologies Grid */}
             <MorphingSection delay={0.2}>
               <div className="mt-16">
-                <h3 className="text-3xl font-bold text-white text-center mb-4">
-                  Tecnologie e Soluzioni
-                </h3>
-                <p className="text-gray-400 text-center mb-12 text-lg">
-                  Componenti e servizi per un impianto di sicurezza completo e affidabile
-                </p>
-
+                <h3 className="text-3xl font-bold text-white text-center mb-4">Tecnologie e Soluzioni per la Sicurezza a Roma</h3>
+                <p className="text-gray-400 text-center mb-12 text-lg">Componenti e servizi per un impianto di sicurezza completo e affidabile</p>
                 <div className="grid md:grid-cols-2 gap-6">
                   {technologies.map((tech, index) => (
-                    <div
-                      key={index}
-                      className="p-6 rounded-2xl glass-effect border border-white/5 hover:border-emerald-500/30 transition-all duration-300 group hover:bg-white/5"
-                    >
+                    <div key={index} className="p-6 rounded-2xl glass-effect border border-white/5 hover:border-emerald-500/30 transition-all duration-300 group hover:bg-white/5">
                       <div className="flex items-start gap-4">
                         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                           <tech.icon className="w-5 h-5 text-white" />
@@ -640,7 +588,6 @@ export default function ImpiantiAllarme() {
               </div>
             </MorphingSection>
 
-            {/* Info Box */}
             <MorphingSection delay={0.3}>
               <div className="mt-12 p-8 rounded-3xl glass-effect border border-emerald-500/20">
                 <div className="flex items-start gap-4">
@@ -648,10 +595,7 @@ export default function ImpiantiAllarme() {
                   <div>
                     <h4 className="text-white font-bold text-xl mb-2">Normativa e Privacy</h4>
                     <p className="text-gray-300 text-lg leading-relaxed">
-                      Tutti i nostri impianti di videosorveglianza sono installati nel <strong className="text-emerald-400">pieno
-                      rispetto della normativa GDPR</strong> e delle linee guida del Garante della Privacy.
-                      Ti supportiamo nella predisposizione della cartellonistica obbligatoria e nella
-                      gestione della documentazione necessaria.
+                      Tutti i nostri impianti di videosorveglianza sono installati nel <strong className="text-emerald-400">pieno rispetto della normativa GDPR</strong> e delle linee guida del Garante della Privacy. Ti supportiamo nella predisposizione della cartellonistica obbligatoria e nella gestione della documentazione necessaria.
                     </p>
                   </div>
                 </div>
@@ -660,37 +604,54 @@ export default function ImpiantiAllarme() {
           </div>
         </section>
 
-        {/* FAQ Section */}
+        {/* Zone copertura */}
+        <section className="py-20 px-6 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-emerald-950/10 to-black" />
+          <div className="max-w-5xl mx-auto relative z-10">
+            <MorphingSection>
+              <div className="p-10 rounded-3xl glass-effect border border-emerald-500/20">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
+                    <MapPin className="w-5 h-5 text-white" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-white">Installazione allarmi e videosorveglianza a Roma Sud</h2>
+                </div>
+                <p className="text-gray-400 mb-8 text-lg leading-relaxed">
+                  CoreNexus installa impianti di allarme e videosorveglianza in tutto il quadrante sud di Roma. Sopralluogo sempre gratuito:
+                </p>
+                <div className="flex flex-wrap gap-3 mb-8">
+                  {coverageAreas.map((area, index) => (
+                    <span key={index} className="px-4 py-2 rounded-full glass-effect border border-emerald-500/20 text-emerald-400 text-sm font-medium">
+                      {area}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-gray-400 text-sm">Per le zone non elencate contattateci: valutiamo ogni richiesta su tutto il territorio provinciale di Roma.</p>
+              </div>
+            </MorphingSection>
+          </div>
+        </section>
+
+        {/* FAQ */}
         <FAQSection faqs={faqs} accentColor="emerald" gradientFrom="emerald-500" gradientTo="teal-500" />
 
-        {/* CTA Section */}
+        {/* CTA */}
         <section className="py-24 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-emerald-950/20 to-black" />
           <div className="max-w-4xl mx-auto relative z-10 text-center">
             <MorphingSection>
               <div className="p-12 rounded-3xl glass-effect border border-emerald-500/20 space-y-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Proteggi ciò che conta di più
-                </h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">Proteggi la tua casa o azienda a Roma</h2>
                 <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                  Richiedi un sopralluogo gratuito e senza impegno. Analizziamo il tuo sito
-                  e ti proponiamo la soluzione più adatta alle tue esigenze con i migliori brand del settore.
+                  Richiedi un sopralluogo gratuito e senza impegno a Roma, EUR, Ostia o Fiumicino. Analizziamo il tuo sito e ti proponiamo la soluzione piu adatta con i migliori brand del settore.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button
-                    size="lg"
-                    onClick={scrollToContact}
-                    className="group bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-10 py-7 text-lg rounded-2xl font-semibold shadow-lg shadow-emerald-500/20"
-                  >
+                  <Button size="lg" onClick={scrollToContact} className="group bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-10 py-7 text-lg rounded-2xl font-semibold shadow-lg shadow-emerald-500/20">
                     Richiedi Sopralluogo Gratuito
                     <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                   </Button>
                   <Link to="/servizi">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-10 py-7 text-lg rounded-2xl font-semibold"
-                    >
+                    <Button size="lg" variant="outline" className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-10 py-7 text-lg rounded-2xl font-semibold">
                       Vedi tutti i servizi
                     </Button>
                   </Link>
@@ -700,13 +661,12 @@ export default function ImpiantiAllarme() {
           </div>
         </section>
 
-        {/* Footer */}
         <footer className="bg-black border-t border-white/10 py-12 px-6">
           <div className="max-w-7xl mx-auto text-center space-y-4">
             <p className="text-gray-400 text-sm">
               © 2026 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</Link> - Tutti i diritti riservati.
             </p>
-            <p className="text-xs text-gray-600">v2.0 - 25/03/2026</p>
+            <p className="text-xs text-gray-600">v2.1 - 26/05/2026</p>
           </div>
         </footer>
 
