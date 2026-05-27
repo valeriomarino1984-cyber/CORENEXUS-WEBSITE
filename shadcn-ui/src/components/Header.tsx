@@ -120,7 +120,7 @@ export default function Header() {
                   {/* Griglia 2 colonne 5+5 */}
                   <div className="grid grid-cols-2 divide-x divide-white/5">
                     <div>
-                      {serviceLinks.slice(1, 6).map((link, index) => (
+                      {serviceLinks.slice(1, 7).map((link, index) => (
                         <button
                           key={index}
                           onClick={() => { navigate(link.path); setIsServicesOpen(false); }}
@@ -134,7 +134,7 @@ export default function Header() {
                       ))}
                     </div>
                     <div>
-                      {serviceLinks.slice(6).map((link, index) => (
+                      {serviceLinks.slice(7).map((link, index) => (
                         <button
                           key={index}
                           onClick={() => { navigate(link.path); setIsServicesOpen(false); }}
