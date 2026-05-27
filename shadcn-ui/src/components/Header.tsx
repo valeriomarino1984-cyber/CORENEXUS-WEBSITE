@@ -75,6 +75,7 @@ export default function Header() {
     { name: 'Allarme e Videosorveglianza', path: '/impianti-allarme-videosorveglianza', icon: Camera },
     { name: 'Siti Web & E-commerce', path: '/siti-web', icon: Globe },
     { name: 'Centralini VoIP', path: '/centralini-voip', icon: Phone },
+    { name: 'Prevenzione Virus e Ransomware', path: '/prevenzione-virus-ransomware', icon: ShieldCheck },
   ];
 
   const navLinkClass = (isActive: boolean) =>
