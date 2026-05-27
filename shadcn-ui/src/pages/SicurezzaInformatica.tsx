@@ -258,7 +258,7 @@ export default function SicurezzaInformatica() {
         <Header />
 
         {/* Hero Section */}
-        <section className="relative overflow-hidden pt-32 pb-20 px-6">
+        <section className="relative overflow-hidden pt-32 pb-20 px-6 premium-gradient">
           <div className="absolute inset-0 bg-gradient-to-br from-red-950/30 via-black to-orange-950/20" />
           <div className="absolute top-20 left-10 w-96 h-96 bg-red-500/10 rounded-full blur-3xl animate-float" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
