@@ -15,16 +15,16 @@ import {
   Router,
   Globe,
   Lock,
+  MapPin,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { breadcrumbSchema , localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
+import { breadcrumbSchema, localBusinessServiceSchema, standardAreaServed } from '@/utils/seoSchemas';
 import MorphingSection from '@/components/MorphingSection';
+import FAQSection from '@/components/FAQSection';
 
 export default function NetworkingReti() {
   const navigate = useNavigate();
-  const scrollToContact = () => {
-    navigate('/#contact');
-  };
+  const scrollToContact = () => { navigate('/#contact'); };
 
   const networkingBreadcrumb = breadcrumbSchema([
     { name: 'Home', url: '/' },
@@ -35,13 +35,17 @@ export default function NetworkingReti() {
   const networkingSchema = {
     "@context": "https://schema.org",
     "@graph": [
-      localBusinessServiceSchema("Networking e Reti Aziendali Roma EUR Ostia Fiumicino", "Progettazione, implementazione e gestione reti aziendali a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Firewall, VPN, VLAN, Wi-Fi enterprise, cablaggio strutturato.", "/networking-reti", "Networking e Reti"),
-     
+      localBusinessServiceSchema(
+        "Networking e Reti Aziendali Roma EUR Ostia Fiumicino",
+        "Progettazione, implementazione e gestione reti aziendali a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Firewall, VPN, VLAN, Wi-Fi enterprise, cablaggio strutturato.",
+        "/networking-reti",
+        "Networking e Reti"
+      ),
       networkingBreadcrumb,
       {
         "@type": "Service",
-        "name": "Networking e Reti Aziendali",
-        "description": "Consulenza, implementazione e supporto per la realizzazione e gestione delle reti aziendali a Roma",
+        "name": "Networking e Reti Aziendali Roma",
+        "description": "Progettazione e gestione reti aziendali a Roma: firewall, VPN, VLAN, Wi-Fi enterprise, cablaggio strutturato. Servizi networking per PMI di Roma, EUR, Ostia, Fiumicino e Pomezia.",
         "provider": {
           "@type": "Organization",
           "name": "CoreNexus Technology Solution",
@@ -53,23 +57,54 @@ export default function NetworkingReti() {
     ]
   };
 
+  const faqs = [
+    {
+      question: "Cosa include la progettazione di una rete aziendale?",
+      answer: "La progettazione di una rete aziendale include analisi dei bisogni, mappatura degli spazi, scelta degli apparati (switch, firewall, access point), configurazione VLAN per la segmentazione, setup Wi-Fi enterprise e documentazione tecnica completa. CoreNexus lo fa per PMI di Roma, EUR, Ostia e Fiumicino.",
+    },
+    {
+      question: "Perche la mia rete aziendale e lenta?",
+      answer: "Le cause piu comuni sono: apparati consumer non adeguati al carico aziendale, assenza di VLAN con traffico misto non ottimizzato, Wi-Fi con un solo access point saturo, switch non gestiti senza QoS, e banda insufficiente. CoreNexus analizza la tua rete gratuitamente e identifica i colli di bottiglia.",
+    },
+    {
+      question: "Cosa sono le VLAN e perche servono?",
+      answer: "Le VLAN (Virtual Local Area Network) separano logicamente il traffico di rete: dati aziendali, VoIP, videosorveglianza e ospiti su reti distinte. Migliorano sicurezza e performance. Se un PC viene infettato da ransomware, il danno rimane confinato senza propagarsi ad altri sistemi.",
+    },
+    {
+      question: "Operate a Roma Sud per installazioni di rete aziendale?",
+      answer: "Si, CoreNexus installa e gestisce reti aziendali in tutto il quadrante sud di Roma: EUR, Ostia, Fiumicino, Acilia, Casal Palocco, Pomezia, Mostacciano, Torrino, Laurentina, Spinaceto e zone limitrofe. Interveniamo on-site con tempi certi.",
+    },
+    {
+      question: "Quanto tempo richiede l'installazione di una rete aziendale?",
+      answer: "Un ufficio di 10-20 persone si completa in 1-3 giorni lavorativi. Una rete piu complessa con cablaggio strutturato, Wi-Fi enterprise e segmentazione VLAN richiede 3-5 giorni. Operiamo spesso fuori orario per non interrompere la vostra attivita.",
+    },
+  ];
+
+  const coverageAreas = [
+    'EUR', 'Ostia Lido', 'Ostia Antica', 'Fiumicino', 'Isola Sacra',
+    'Acilia', 'Casal Palocco', 'Infernetto', 'Axa', 'Malafede',
+    'Mostacciano', 'Torrino', 'Laurentina', 'Spinaceto', 'Mezzocammino',
+    'Pomezia', 'Ardea', 'Santa Palomba', 'Castel Romano', 'Garbatella',
+    'Ostiense', 'Marconi', 'Magliana', 'San Paolo',
+  ];
+
   const keyPoints = [
     'Sviluppiamo configurazioni di rete personalizzate per ogni esigenza',
-    'Definiamo la tipologia di rete più adatta alla tua azienda',
+    'Definiamo la tipologia di rete piu adatta alla tua azienda a Roma',
     'Semplifichiamo e ottimizziamo le reti preesistenti',
     'Ottimizziamo cablaggi strutturati e infrastrutture fisiche',
-    'Garantiamo alta disponibilità e ridondanza degli apparati',
+    'Garantiamo alta disponibilita e ridondanza degli apparati',
   ];
 
   const technologies = [
     { name: 'Firewall', desc: 'Protezione perimetrale avanzata con Fortinet, pfSense e OPNsense' },
     { name: 'VPN', desc: 'Connessioni sicure site-to-site e remote access per smart working' },
-    { name: 'Switch managed', desc: 'Configurazione e gestione switch Layer 2/3 enterprise' },
-    { name: 'VLAN', desc: 'Segmentazione logica della rete per sicurezza e performance' },
-    { name: 'Wi-Fi Enterprise', desc: 'Reti wireless professionali con access point gestiti centralmente' },
+    { name: 'Switch managed', desc: 'Configurazione e gestione switch Layer 2/3 enterprise Cisco e Ubiquiti' },
+    { name: 'VLAN', desc: 'Segmentazione logica della rete per sicurezza e performance ottimali' },
+    { name: 'Wi-Fi Enterprise', desc: 'Reti wireless professionali con access point UniFi gestiti centralmente' },
     { name: 'DMZ', desc: 'Zone demilitarizzate per servizi esposti in sicurezza' },
-    { name: 'Load Balancer', desc: 'Bilanciamento del carico per alta disponibilità dei servizi' },
-    { name: 'Cablaggio strutturato', desc: 'Progettazione e realizzazione cablaggi Cat.6/6A certificati' },
+    { name: 'Load Balancer', desc: 'Bilanciamento del carico per alta disponibilita dei servizi' },
+    { name: 'Cablaggio strutturato', desc: 'Progettazione e realizzazione cablaggi Cat6/Cat6A certificati' },
     { name: 'QoS', desc: 'Quality of Service per prioritizzare traffico VoIP e applicazioni critiche' },
     { name: 'Monitoraggio rete', desc: 'Monitoring 24/7 con Zabbix e SNMP per prevenire disservizi' },
   ];
@@ -93,7 +128,7 @@ export default function NetworkingReti() {
     {
       name: 'Pacchetto Plus',
       hours: '50 ore',
-      ideal: 'Adatto a progetti di media complessità e ristrutturazioni di rete',
+      ideal: 'Adatto a progetti di media complessita e ristrutturazioni di rete',
       features: [
         'Tutto del pacchetto Smart',
         'Progettazione rete completa',
@@ -114,7 +149,7 @@ export default function NetworkingReti() {
       features: [
         'Tutto del pacchetto Plus',
         'Progettazione e cablaggio strutturato',
-        'Ridondanza e alta disponibilità',
+        'Ridondanza e alta disponibilita',
         'Load balancing e failover',
         'Monitoraggio 24/7 continuativo',
         'Account manager dedicato',
@@ -130,12 +165,15 @@ export default function NetworkingReti() {
   return (
     <>
       <SEO
-        title="Networking e Reti Aziendali Roma EUR Ostia Fiumicino | Gestione Reti IT - CoreNexus"
-        description="Progettazione, implementazione e gestione reti aziendali a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Firewall, VPN, VLAN, Wi-Fi enterprise, cablaggio strutturato, switch e router professionali per PMI."
+        title="Networking e Reti Aziendali Roma | Gestione Reti IT EUR Ostia Fiumicino - CoreNexus"
+        description="Progettazione e gestione reti aziendali a Roma, EUR, Ostia, Fiumicino e Pomezia. Servizi networking completi: firewall, VPN, VLAN, Wi-Fi enterprise, cablaggio strutturato, switch managed. Interventi on-site rapidi per PMI. Preventivo gratuito."
         keywords={[
           'networking Roma',
-          'reti aziendali Roma EUR',
+          'reti aziendali Roma',
           'gestione reti IT Roma',
+          'progettazione rete aziendale Roma',
+          'servizi networking Roma',
+          'networking Roma EUR',
           'firewall aziendale Roma',
           'VPN aziendale Roma',
           'cablaggio strutturato Roma',
@@ -146,8 +184,9 @@ export default function NetworkingReti() {
           'reti aziendali Pomezia',
           'switch router Roma',
           'rete aziendale Roma Sud',
-          'installazione rete ufficio Roma EUR',
+          'installazione rete ufficio Roma',
           'consulenza networking Roma',
+          'progettare rete aziendale Roma',
         ]}
         canonical="/networking-reti"
         schema={networkingSchema}
@@ -165,10 +204,7 @@ export default function NetworkingReti() {
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
               <div className="mb-6">
-                <Link
-                  to="/servizi"
-                  className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors text-sm font-medium"
-                >
+                <Link to="/servizi" className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors text-sm font-medium">
                   <ArrowLeft className="w-4 h-4" />
                   Torna ai Servizi
                 </Link>
@@ -184,12 +220,14 @@ export default function NetworkingReti() {
                   </div>
 
                   <h1 className="text-5xl md:text-7xl font-bold gradient-text leading-tight">
-                    Networking e Reti
+                    Networking e Reti Aziendali
+                    <span className="block text-3xl md:text-4xl text-gray-400 mt-2 font-normal">
+                      a Roma, EUR, Ostia e Fiumicino
+                    </span>
                   </h1>
 
                   <p className="text-xl text-gray-400 leading-relaxed">
-                    Consulenza, implementazione e supporto per la realizzazione e la gestione delle reti aziendali.
-                    Progettiamo infrastrutture di rete affidabili, sicure e performanti.
+                    Progettazione, implementazione e gestione di reti aziendali sicure e performanti per PMI di Roma e provincia. Dal cablaggio strutturato al Wi-Fi enterprise, dalla VLAN al firewall.
                   </p>
 
                   <div className="space-y-4">
@@ -203,27 +241,18 @@ export default function NetworkingReti() {
                     ))}
                   </div>
 
-                  <Button
-                    size="lg"
-                    onClick={scrollToContact}
-                    className="group premium-button text-white px-10 py-7 text-lg rounded-2xl font-semibold"
-                  >
+                  <Button size="lg" onClick={scrollToContact} className="group premium-button text-white px-10 py-7 text-lg rounded-2xl font-semibold">
                     Richiedi una consulenza gratuita
                     <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                   </Button>
                 </div>
 
-                {/* Right side - Visual element */}
                 <div className="hidden lg:flex justify-center">
                   <div className="relative">
                     <div className="w-80 h-80 rounded-3xl glass-effect border border-cyan-500/20 p-8 flex flex-col items-center justify-center gap-6">
                       <div className="grid grid-cols-3 gap-4">
                         {[Network, Shield, Wifi, Cable, Server, Router, Globe, Lock, Zap].map((Icon, i) => (
-                          <div
-                            key={i}
-                            className="w-16 h-16 rounded-2xl glass-effect flex items-center justify-center hover:bg-cyan-500/20 transition-all duration-300 hover:scale-110"
-                            style={{ animationDelay: `${i * 100}ms` }}
-                          >
+                          <div key={i} className="w-16 h-16 rounded-2xl glass-effect flex items-center justify-center hover:bg-cyan-500/20 transition-all duration-300 hover:scale-110">
                             <Icon className="w-7 h-7 text-cyan-400" />
                           </div>
                         ))}
@@ -243,11 +272,9 @@ export default function NetworkingReti() {
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
               <div className="text-center space-y-6 mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Pacchetti di Consulenza Networking
-                </h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">Pacchetti di Consulenza Networking a Roma</h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                  Scegli il pacchetto più adatto alle tue esigenze. Ogni pacchetto include analisi iniziale e supporto dedicato.
+                  Scegli il pacchetto piu adatto alle tue esigenze. Ogni pacchetto include analisi iniziale e supporto dedicato per aziende di Roma e provincia.
                 </p>
               </div>
             </MorphingSection>
@@ -255,29 +282,17 @@ export default function NetworkingReti() {
             <div className="grid md:grid-cols-3 gap-8">
               {packages.map((pkg, index) => (
                 <MorphingSection key={index} delay={index * 0.15}>
-                  <div
-                    className={`relative p-8 rounded-3xl glass-effect border transition-all duration-500 hover:scale-105 h-full flex flex-col ${
-                      pkg.highlighted
-                        ? 'border-blue-500/50 shadow-lg shadow-blue-500/20'
-                        : 'border-white/10 hover:border-white/20'
-                    }`}
-                  >
+                  <div className={`relative p-8 rounded-3xl glass-effect border transition-all duration-500 hover:scale-105 h-full flex flex-col ${pkg.highlighted ? 'border-blue-500/50 shadow-lg shadow-blue-500/20' : 'border-white/10 hover:border-white/20'}`}>
                     {pkg.highlighted && (
                       <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                        <span className="px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-bold uppercase tracking-wider">
-                          Più Richiesto
-                        </span>
+                        <span className="px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-bold uppercase tracking-wider">Piu Richiesto</span>
                       </div>
                     )}
-
                     <div className="text-center space-y-4 mb-8">
                       <h3 className="text-2xl font-bold text-white">{pkg.name}</h3>
-                      <div className={`text-4xl font-bold bg-gradient-to-r ${pkg.gradient} bg-clip-text text-transparent`}>
-                        {pkg.hours}
-                      </div>
+                      <div className={`text-4xl font-bold bg-gradient-to-r ${pkg.gradient} bg-clip-text text-transparent`}>{pkg.hours}</div>
                       <p className="text-gray-400 text-sm">{pkg.ideal}</p>
                     </div>
-
                     <div className="space-y-3 mb-8 flex-1">
                       {pkg.features.map((feature, i) => (
                         <div key={i} className="flex items-start gap-3">
@@ -286,19 +301,11 @@ export default function NetworkingReti() {
                         </div>
                       ))}
                     </div>
-
                     <div className="text-center space-y-4">
                       <div className="inline-block px-4 py-2 rounded-full glass-effect">
                         <span className="text-cyan-400 font-bold text-lg">Sconto del {pkg.discount}</span>
                       </div>
-                      <Button
-                        onClick={scrollToContact}
-                        className={`w-full py-6 rounded-2xl font-semibold text-white ${
-                          pkg.highlighted
-                            ? 'premium-button'
-                            : 'glass-effect border border-white/20 hover:bg-white/10'
-                        }`}
-                      >
+                      <Button onClick={scrollToContact} className={`w-full py-6 rounded-2xl font-semibold text-white ${pkg.highlighted ? 'premium-button' : 'glass-effect border border-white/20 hover:bg-white/10'}`}>
                         Richiedi Preventivo
                         <ArrowRight className="ml-2 w-4 h-4" />
                       </Button>
@@ -317,48 +324,25 @@ export default function NetworkingReti() {
             <MorphingSection>
               <div className="space-y-12">
                 <div className="text-center space-y-6">
-                  <h2 className="text-4xl md:text-5xl font-bold text-white">
-                    Networking e Reti nel Dettaglio
-                  </h2>
+                  <h2 className="text-4xl md:text-5xl font-bold text-white">Networking e Reti Aziendali a Roma: nel Dettaglio</h2>
                   <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full" />
                 </div>
 
                 <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
                   <p>
-                    Partendo da un'analisi approfondita delle strutture esistenti, realizziamo piani di intervento
-                    per migliorare il business grazie alle nuove tecnologie di networking.
+                    Partendo da una analisi approfondita delle strutture esistenti, realizziamo piani di intervento per migliorare il business della tua azienda a Roma, EUR, Ostia e Fiumicino grazie alle nuove tecnologie di networking.
                   </p>
-
                   <p>
-                    La rete aziendale svolge un <strong className="text-white">ruolo fondamentale nel corretto funzionamento
-                    delle infrastrutture IT</strong> ed è il collante dei vari sistemi informativi. Il corretto funzionamento
-                    della rete è quindi <strong className="text-white">direttamente responsabile dell'operatività e della
-                    produzione</strong> aziendale.
+                    La rete aziendale svolge un <strong className="text-white">ruolo fondamentale nel corretto funzionamento delle infrastrutture IT</strong> ed e il collante dei vari sistemi informativi. Il corretto funzionamento della rete e quindi <strong className="text-white">direttamente responsabile dell'operativita e della produzione</strong> aziendale.
                   </p>
-
                   <p>
-                    Ad esempio, utilizzando un Router adatto alla gestione del tuo traffico di dati, può influire
-                    notevolmente sulle performance, portandole da sufficienti a eccellenti, indipendentemente dalla
-                    qualità della linea dati.
+                    Utilizzando apparati professionali adatti alla gestione del traffico dati aziendale, le performance passano da sufficienti a eccellenti, indipendentemente dalla qualita della linea. Questo vale per studi professionali all'EUR, aziende manifatturiere a Pomezia, negozi ad Acilia o uffici a Fiumicino.
                   </p>
-
                   <p>
-                    Costruire una buona struttura di Networking significa valutare l'uso che si fa delle applicazioni,
-                    la tipologia e le dimensioni dei dati trasferiti, dei servizi messi a disposizione. Tutto questo per
-                    calcolare la <strong className="text-white">capacità trasmissiva dell'infrastruttura di rete</strong> di
-                    cui si necessita.
+                    Costruire una buona infrastruttura di networking significa valutare l'uso che si fa delle applicazioni, la tipologia e le dimensioni dei dati trasferiti, dei servizi messi a disposizione. Tutto questo per calcolare la <strong className="text-white">capacita trasmissiva</strong> di cui si necessita.
                   </p>
-
                   <p>
-                    Senza la giusta tipologia di rete, si naviga in lentezza, si perde tempo a scaricare e archiviare
-                    file di normale routine, non si riesce a collegarsi in un tempo adeguato ai software, ai server e
-                    ad altri dispositivi.
-                  </p>
-
-                  <p>
-                    Ci occupiamo anche di <strong className="text-white">particolari configurazioni con più reti logiche
-                    all'interno della stessa rete fisica</strong> per gestire migrazioni di rete o integrazione con altri
-                    partner, grazie agli apparati di switching e di firewalling per la protezione dei dati.
+                    Ci occupiamo anche di <strong className="text-white">configurazioni con piu reti logiche all'interno della stessa rete fisica</strong> grazie a VLAN per gestire migrazioni o integrazioni con partner, con apparati di switching e firewalling per la protezione dei dati.
                   </p>
                 </div>
               </div>
@@ -367,19 +351,11 @@ export default function NetworkingReti() {
             {/* Technologies Grid */}
             <MorphingSection delay={0.2}>
               <div className="mt-16">
-                <h3 className="text-3xl font-bold text-white text-center mb-4">
-                  Installazione, Configurazione e Gestione
-                </h3>
-                <p className="text-gray-400 text-center mb-12 text-lg">
-                  Tecnologie e servizi che implementiamo per la tua rete aziendale
-                </p>
-
+                <h3 className="text-3xl font-bold text-white text-center mb-4">Installazione, Configurazione e Gestione Reti a Roma</h3>
+                <p className="text-gray-400 text-center mb-12 text-lg">Tecnologie e servizi che implementiamo per la tua rete aziendale</p>
                 <div className="grid md:grid-cols-2 gap-6">
                   {technologies.map((tech, index) => (
-                    <div
-                      key={index}
-                      className="p-6 rounded-2xl glass-effect border border-white/5 hover:border-cyan-500/30 transition-all duration-300 group hover:bg-white/5"
-                    >
+                    <div key={index} className="p-6 rounded-2xl glass-effect border border-white/5 hover:border-cyan-500/30 transition-all duration-300 group hover:bg-white/5">
                       <div className="flex items-start gap-4">
                         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                           <Network className="w-5 h-5 text-white" />
@@ -395,18 +371,46 @@ export default function NetworkingReti() {
               </div>
             </MorphingSection>
 
-            {/* Redundancy Note */}
             <MorphingSection delay={0.3}>
               <div className="mt-12 p-8 rounded-3xl glass-effect border border-cyan-500/20">
                 <p className="text-gray-300 text-lg leading-relaxed text-center">
-                  <strong className="text-cyan-400">Alta disponibilità:</strong> Ci occupiamo di installazioni con
-                  ridondanza di apparati al fine di garantire l'alta disponibilità del servizio e la continuità
-                  operativa della tua azienda.
+                  <strong className="text-cyan-400">Alta disponibilita:</strong> Ci occupiamo di installazioni con ridondanza di apparati al fine di garantire la continuita operativa della tua azienda a Roma, EUR, Ostia e Fiumicino.
                 </p>
               </div>
             </MorphingSection>
           </div>
         </section>
+
+        {/* Zone copertura */}
+        <section className="py-20 px-6 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-cyan-950/10 to-black" />
+          <div className="max-w-5xl mx-auto relative z-10">
+            <MorphingSection>
+              <div className="p-10 rounded-3xl glass-effect border border-cyan-500/20">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
+                    <MapPin className="w-5 h-5 text-white" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-white">Servizi networking e reti a Roma Sud: le zone coperte</h2>
+                </div>
+                <p className="text-gray-400 mb-8 text-lg leading-relaxed">
+                  CoreNexus installa e gestisce reti aziendali in tutto il quadrante sud di Roma con interventi on-site rapidi:
+                </p>
+                <div className="flex flex-wrap gap-3 mb-8">
+                  {coverageAreas.map((area, index) => (
+                    <span key={index} className="px-4 py-2 rounded-full glass-effect border border-cyan-500/20 text-cyan-400 text-sm font-medium">
+                      {area}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-gray-400 text-sm">Per le zone non elencate offriamo consulenza networking da remoto in tutta Italia.</p>
+              </div>
+            </MorphingSection>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <FAQSection faqs={faqs} accentColor="cyan" gradientFrom="cyan-500" gradientTo="blue-500" />
 
         {/* CTA Section */}
         <section className="py-24 px-6 relative">
@@ -414,28 +418,17 @@ export default function NetworkingReti() {
           <div className="max-w-4xl mx-auto relative z-10 text-center">
             <MorphingSection>
               <div className="p-12 rounded-3xl glass-effect border border-cyan-500/20 space-y-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Contattaci per una consulenza gratuita
-                </h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">Hai bisogno di un networking a Roma?</h2>
                 <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                  Analizziamo la tua infrastruttura di rete e ti proponiamo le soluzioni più adatte.
-                  Senza impegno.
+                  Analizziamo la tua infrastruttura di rete e ti proponiamo le soluzioni piu adatte per la tua azienda a Roma, EUR, Ostia o Fiumicino. Senza impegno.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button
-                    size="lg"
-                    onClick={scrollToContact}
-                    className="group premium-button text-white px-10 py-7 text-lg rounded-2xl font-semibold"
-                  >
+                  <Button size="lg" onClick={scrollToContact} className="group premium-button text-white px-10 py-7 text-lg rounded-2xl font-semibold">
                     Richiedi Consulenza Gratuita
                     <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                   </Button>
                   <Link to="/servizi">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-10 py-7 text-lg rounded-2xl font-semibold"
-                    >
+                    <Button size="lg" variant="outline" className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-10 py-7 text-lg rounded-2xl font-semibold">
                       Vedi tutti i servizi
                     </Button>
                   </Link>
@@ -445,13 +438,12 @@ export default function NetworkingReti() {
           </div>
         </section>
 
-        {/* Footer */}
         <footer className="bg-black border-t border-white/10 py-12 px-6">
           <div className="max-w-7xl mx-auto text-center space-y-4">
             <p className="text-gray-400 text-sm">
               © 2026 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</Link> - Tutti i diritti riservati.
             </p>
-            <p className="text-xs text-gray-600">v2.0 - 25/03/2026</p>
+            <p className="text-xs text-gray-600">v2.1 - 26/05/2026</p>
           </div>
         </footer>
 
