@@ -307,7 +307,7 @@ export default function SocAsAService() {
   return (
     <>
       <SEO
-        title="SOC as a Service Roma | Security Operations Center 24/7 - CoreNexus"
+        title="SOC as a Service per aziende a Roma, EUR, Ostia, Fiumicino e Pomezia. Security Operations Center gestito con Wazuh SIEM, TheHive, Cortex, Zabbix e AI Autoresponder. Rilevazione minacce 24/7, incident response e compliance NIS2. Preventivo gratuito."
         description="SOC as a Service per aziende a Roma. Wazuh SIEM, TheHive, Cortex, Zabbix e AI Autoresponder. Rilevazione minacce, gestione incidenti e risposta automatica 24/7. CoreNexus Technology Solution."
         keywords={[
           'SOC as a Service Roma',
@@ -325,6 +325,10 @@ export default function SocAsAService() {
           'monitoraggio sicurezza 24/7',
           'SOC open source',
           'cybersecurity PMI Roma',
+          'SOC Roma EUR',
+          'Security Operations Center Ostia Fiumicino',
+          'NIS2 compliance Roma',
+          'SOC as a Service PMI Roma',
         ]}
         canonical="/soc-as-a-service"
         schema={socSchema}
@@ -334,7 +338,7 @@ export default function SocAsAService() {
         <Header />
 
         {/* ══════════════ HERO ══════════════ */}
-        <section className="relative overflow-hidden pt-32 pb-20 px-6">
+        <section className="relative overflow-hidden pt-32 pb-20 px-6 premium-gradient">
           <div className="absolute inset-0 bg-gradient-to-br from-red-950/30 via-black to-orange-950/20" />
           <div className="absolute top-20 left-10 w-96 h-96 bg-red-500/10 rounded-full blur-3xl animate-float" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
@@ -365,7 +369,7 @@ export default function SocAsAService() {
                       Security Operations Center
                     </span>
                     <br />
-                    <span className="text-white">24/7</span>
+                    <span className="text-white">24/7</span><span className="block text-3xl md:text-4xl text-gray-400 mt-2 font-normal">per aziende a Roma, EUR, Ostia e Fiumicino</span>
                   </h1>
 
                   <p className="text-xl text-gray-400 leading-relaxed">
@@ -788,7 +792,7 @@ export default function SocAsAService() {
             <p className="text-gray-400 text-sm">
               © 2026 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</Link> - Tutti i diritti riservati.
             </p>
-            <p className="text-xs text-gray-600">v2.0 - 25/03/2026</p>
+            <p className="text-xs text-gray-600">v2.1 - 26/05/2026</p>
           </div>
         </footer>
 
