@@ -33,9 +33,7 @@ interface TechCategory {
 
 export default function Tecnologie() {
   const navigate = useNavigate();
-  const scrollToContact = () => {
-    navigate('/#contact');
-  };
+  const scrollToContact = () => { navigate('/#contact'); };
 
   const tecnologieBreadcrumb = breadcrumbSchema([
     { name: 'Home', url: '/' },
@@ -45,33 +43,23 @@ export default function Tecnologie() {
   const tecnologieSchema = {
     "@context": "https://schema.org",
     "@graph": [
-      localBusinessServiceSchema("Tecnologie IT Roma EUR Ostia Fiumicino", "Tecnologie e strumenti IT utilizzati da CoreNexus a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Wazuh, Zabbix, Proxmox, VMware, Kubernetes, pfSense.", "/tecnologie", "Tecnologie IT"),
+      localBusinessServiceSchema(
+        "Tecnologie IT Roma EUR Ostia Fiumicino",
+        "Tecnologie e strumenti IT utilizzati da CoreNexus a Roma, EUR, Ostia Lido, Fiumicino e Pomezia. Wazuh, Zabbix, Proxmox, VMware, Kubernetes, pfSense, Cisco, Fortinet.",
+        "/tecnologie",
+        "Tecnologie IT"
+      ),
       tecnologieBreadcrumb,
       {
         "@type": "ItemList",
-        "name": "Tecnologie utilizzate da CoreNexus Technology Solution",
-        "description": "Panoramica completa delle tecnologie, piattaforme e strumenti utilizzati da CoreNexus Technology Solution per i servizi IT aziendali a Roma",
+        "name": "Tecnologie utilizzate da CoreNexus Technology Solution a Roma",
+        "description": "Panoramica completa delle tecnologie, piattaforme e strumenti utilizzati da CoreNexus Technology Solution per i servizi IT aziendali a Roma, EUR, Ostia e Fiumicino",
         "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Sistemi Operativi: Linux Debian, RedHat, Windows Server"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Virtualizzazione: VMware, Proxmox, Hyper-V"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Networking: Cisco, Fortinet, MikroTik, pfSense, OPNsense"
-          },
-          {
-            "@type": "ListItem",
-            "position": 4,
-            "name": "Backup: Veeam, Acronis, R-Drive Image"
-          }
+          { "@type": "ListItem", "position": 1, "name": "Sistemi Operativi: Linux Debian, RedHat, Windows Server" },
+          { "@type": "ListItem", "position": 2, "name": "Virtualizzazione: VMware, Proxmox, Hyper-V" },
+          { "@type": "ListItem", "position": 3, "name": "Networking: Cisco, Fortinet, MikroTik, pfSense, OPNsense" },
+          { "@type": "ListItem", "position": 4, "name": "Backup: Veeam, Acronis, R-Drive Image" },
+          { "@type": "ListItem", "position": 5, "name": "Sicurezza: Wazuh SIEM, Zabbix, TheHive, Cortex" }
         ]
       }
     ]
@@ -87,7 +75,7 @@ export default function Tecnologie() {
       items: [
         {
           name: 'Linux Debian',
-          description: 'Distribuzione stabile e affidabile, ideale per server aziendali, web server e infrastrutture mission-critical. Nota per la sua sicurezza e il vasto repository di pacchetti.',
+          description: 'Distribuzione stabile e affidabile, ideale per server aziendali, web server e infrastrutture mission-critical a Roma e provincia. Nota per la sua sicurezza e il vasto repository di pacchetti.',
         },
         {
           name: 'Linux RedHat (RHEL)',
@@ -108,7 +96,7 @@ export default function Tecnologie() {
       items: [
         {
           name: 'VMware vSphere',
-          description: 'La piattaforma di virtualizzazione leader di mercato. Offre funzionalità avanzate come vMotion, HA, DRS e gestione centralizzata tramite vCenter per ambienti enterprise.',
+          description: 'La piattaforma di virtualizzazione leader di mercato. Offre funzionalita avanzate come vMotion, HA, DRS e gestione centralizzata tramite vCenter per ambienti enterprise.',
         },
         {
           name: 'Proxmox VE',
@@ -116,7 +104,7 @@ export default function Tecnologie() {
         },
         {
           name: 'Microsoft Hyper-V',
-          description: 'Hypervisor nativo di Microsoft, perfettamente integrato con Windows Server. Ideale per ambienti già basati su tecnologie Microsoft con replica e failover clustering.',
+          description: 'Hypervisor nativo di Microsoft, perfettamente integrato con Windows Server. Ideale per ambienti gia basati su tecnologie Microsoft con replica e failover clustering.',
         },
       ],
     },
@@ -133,11 +121,11 @@ export default function Tecnologie() {
         },
         {
           name: 'Fortinet',
-          description: 'Soluzioni di sicurezza di rete all-in-one. FortiGate offre firewall NGFW, VPN, IPS, web filtering e SD-WAN in un\'unica piattaforma ad alte prestazioni.',
+          description: "Soluzioni di sicurezza di rete all-in-one. FortiGate offre firewall NGFW, VPN, IPS, web filtering e SD-WAN in un'unica piattaforma ad alte prestazioni.",
         },
         {
           name: 'MikroTik',
-          description: 'Router e switch con RouterOS, estremamente versatili e dal rapporto qualità-prezzo imbattibile. Ideali per reti complesse con funzionalità avanzate di routing e firewall.',
+          description: 'Router e switch con RouterOS, estremamente versatili e dal rapporto qualita-prezzo imbattibile. Ideali per reti complesse con funzionalita avanzate di routing e firewall.',
         },
         {
           name: 'pfSense',
@@ -175,8 +163,8 @@ export default function Tecnologie() {
   return (
     <>
       <SEO
-        title="Tecnologie IT Roma | Stack Tecnologico Aziendale - CoreNexus Technology Solution"
-        description="Stack tecnologico CoreNexus per aziende a Roma, EUR, Ostia Lido, Fiumicino e Pomezia: Linux, Windows Server, VMware, Proxmox, Cisco, Fortinet, MikroTik, pfSense, Wazuh, Zabbix, Veeam, Acronis e molto altro."
+        title="Tecnologie IT Roma | Stack Tecnologico PMI EUR Ostia Fiumicino - CoreNexus"
+        description="Stack tecnologico CoreNexus per PMI a Roma, EUR, Ostia, Fiumicino e Pomezia. Linux, Windows Server, VMware, Proxmox, Cisco, Fortinet, pfSense, Wazuh SIEM, Zabbix, Veeam, Acronis. Tecnologie enterprise per le aziende di Roma Sud."
         keywords={[
           'tecnologie IT Roma',
           'stack tecnologico aziendale Roma',
@@ -192,16 +180,19 @@ export default function Tecnologie() {
           'Zabbix Roma',
           'Veeam backup Roma',
           'Acronis Roma',
-          'tecnologie IT Roma EUR Ostia Fiumicino',
+          'tecnologie IT Roma EUR',
+          'infrastruttura IT PMI Roma',
+          'tecnologie server Roma Sud',
         ]}
-        canonicalUrl="https://corenexus.it/tecnologie"
-        structuredData={tecnologieSchema}
+        canonical="/tecnologie"
+        schema={tecnologieSchema}
       />
+
       <div className="min-h-screen bg-black text-white overflow-hidden">
         <Header />
 
         {/* Hero Section */}
-        <section className="relative min-h-[70vh] flex items-center justify-center pt-24 pb-16 px-6">
+        <section className="relative min-h-[70vh] flex items-center justify-center pt-24 pb-16 px-6 premium-gradient">
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-950/40 via-black to-purple-950/30" />
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/8 rounded-full blur-3xl animate-pulse" />
@@ -222,33 +213,25 @@ export default function Tecnologie() {
                 <span className="text-white">Le </span>
                 <span className="gradient-text">Tecnologie</span>
                 <br />
-                <span className="text-white">che utilizziamo</span>
+                <span className="text-white">che utilizziamo a Roma</span>
               </h1>
             </MorphingSection>
 
             <MorphingSection>
               <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
                 Selezioniamo le migliori tecnologie sul mercato per garantire
-                <strong className="text-white"> affidabilità, sicurezza e prestazioni</strong> alla tua infrastruttura IT.
+                <strong className="text-white"> affidabilita, sicurezza e prestazioni</strong> alla tua infrastruttura IT a Roma, EUR, Ostia e Fiumicino.
               </p>
             </MorphingSection>
 
             <MorphingSection>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <Button
-                  size="lg"
-                  onClick={scrollToContact}
-                  className="group premium-button text-white px-10 py-7 text-lg rounded-2xl font-semibold"
-                >
+                <Button size="lg" onClick={scrollToContact} className="group premium-button text-white px-10 py-7 text-lg rounded-2xl font-semibold">
                   Richiedi una consulenza
                   <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                 </Button>
                 <Link to="/servizi">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-10 py-7 text-lg rounded-2xl font-semibold"
-                  >
+                  <Button size="lg" variant="outline" className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-10 py-7 text-lg rounded-2xl font-semibold">
                     <ArrowLeft className="mr-2" />
                     Vedi i servizi
                   </Button>
@@ -269,12 +252,8 @@ export default function Tecnologie() {
                     <category.icon className={`w-8 h-8 ${category.color}`} />
                   </div>
                   <div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-white">
-                      {category.title}
-                    </h2>
-                    <p className="text-gray-500 mt-1">
-                      {category.items.length} tecnologie
-                    </p>
+                    <h2 className="text-3xl md:text-4xl font-bold text-white">{category.title}</h2>
+                    <p className="text-gray-500 mt-1">{category.items.length} tecnologie</p>
                   </div>
                 </div>
               </MorphingSection>
@@ -282,19 +261,13 @@ export default function Tecnologie() {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {category.items.map((item, itemIndex) => (
                   <MorphingSection key={itemIndex}>
-                    <div
-                      className={`group p-8 rounded-3xl glass-effect ${category.borderColor} hover:border-opacity-50 transition-all duration-500 hover:-translate-y-2 h-full`}
-                    >
+                    <div className={`group p-8 rounded-3xl glass-effect ${category.borderColor} hover:border-opacity-50 transition-all duration-500 hover:-translate-y-2 h-full`}>
                       <div className="space-y-4">
                         <div className="flex items-center gap-3">
-                          <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${category.bgGlow} to-transparent ${category.color.replace('text-', 'bg-')}`} />
-                          <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
-                            {item.name}
-                          </h3>
+                          <div className={`w-3 h-3 rounded-full ${category.color.replace('text-', 'bg-')}`} />
+                          <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">{item.name}</h3>
                         </div>
-                        <p className="text-gray-400 leading-relaxed text-sm">
-                          {item.description}
-                        </p>
+                        <p className="text-gray-400 leading-relaxed text-sm">{item.description}</p>
                       </div>
                     </div>
                   </MorphingSection>
@@ -310,11 +283,9 @@ export default function Tecnologie() {
           <div className="max-w-5xl mx-auto relative z-10">
             <MorphingSection>
               <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                  Perché queste tecnologie?
-                </h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Perche queste tecnologie per le aziende di Roma?</h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                  Ogni tecnologia nel nostro stack è stata selezionata per offrire il massimo valore ai nostri clienti.
+                  Ogni tecnologia nel nostro stack e stata selezionata per offrire il massimo valore alle PMI di Roma, EUR, Ostia e Fiumicino.
                 </p>
               </div>
             </MorphingSection>
@@ -323,22 +294,22 @@ export default function Tecnologie() {
               {[
                 {
                   icon: Shield,
-                  title: 'Affidabilità comprovata',
-                  description: 'Utilizziamo solo tecnologie testate in ambienti enterprise, con track record di stabilità e supporto a lungo termine.',
+                  title: 'Affidabilita comprovata',
+                  description: 'Utilizziamo solo tecnologie testate in ambienti enterprise, con track record di stabilita e supporto a lungo termine.',
                 },
                 {
                   icon: Cpu,
                   title: 'Prestazioni ottimali',
-                  description: 'Ogni soluzione è scelta per garantire le massime prestazioni nel suo ambito, riducendo latenza e downtime.',
+                  description: "Ogni soluzione e scelta per garantire le massime prestazioni nel suo ambito, riducendo latenza e downtime per le aziende di Roma.",
                 },
                 {
                   icon: Shield,
                   title: 'Sicurezza integrata',
-                  description: 'La sicurezza è al centro di ogni scelta tecnologica, con aggiornamenti costanti e best practice di hardening.',
+                  description: 'La sicurezza e al centro di ogni scelta tecnologica, con aggiornamenti costanti e best practice di hardening.',
                 },
                 {
                   icon: Check,
-                  title: 'Interoperabilità',
+                  title: 'Interoperabilita',
                   description: 'Le nostre tecnologie sono selezionate per lavorare in sinergia, creando ecosistemi IT coerenti e facilmente gestibili.',
                 },
               ].map((item, index) => (
@@ -360,34 +331,23 @@ export default function Tecnologie() {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* CTA */}
         <section className="py-24 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-blue-950/20 to-black" />
           <div className="max-w-4xl mx-auto relative z-10 text-center">
             <MorphingSection>
               <div className="p-12 rounded-3xl glass-effect border border-cyan-500/20 space-y-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Hai bisogno di una consulenza tecnologica?
-                </h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">Hai bisogno di una consulenza tecnologica a Roma?</h2>
                 <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                  Analizziamo la tua infrastruttura e ti consigliamo le tecnologie più adatte alle tue esigenze.
-                  Senza impegno.
+                  Analizziamo la tua infrastruttura e ti consigliamo le tecnologie piu adatte alle tue esigenze a Roma, EUR, Ostia o Fiumicino. Senza impegno.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button
-                    size="lg"
-                    onClick={scrollToContact}
-                    className="group premium-button text-white px-10 py-7 text-lg rounded-2xl font-semibold"
-                  >
+                  <Button size="lg" onClick={scrollToContact} className="group premium-button text-white px-10 py-7 text-lg rounded-2xl font-semibold">
                     Richiedi Consulenza Gratuita
                     <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                   </Button>
                   <Link to="/servizi">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-10 py-7 text-lg rounded-2xl font-semibold"
-                    >
+                    <Button size="lg" variant="outline" className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-10 py-7 text-lg rounded-2xl font-semibold">
                       Vedi tutti i servizi
                     </Button>
                   </Link>
@@ -397,13 +357,12 @@ export default function Tecnologie() {
           </div>
         </section>
 
-        {/* Footer */}
         <footer className="bg-black border-t border-white/10 py-12 px-6">
           <div className="max-w-7xl mx-auto text-center space-y-4">
             <p className="text-gray-400 text-sm">
               © 2026 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</Link> - Tutti i diritti riservati.
             </p>
-            <p className="text-xs text-gray-600">v2.0 - 25/03/2026</p>
+            <p className="text-xs text-gray-600">v2.1 - 26/05/2026</p>
           </div>
         </footer>
 
