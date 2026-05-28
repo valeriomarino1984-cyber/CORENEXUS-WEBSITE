@@ -20,19 +20,15 @@ import { breadcrumbSchema, standardAreaServed, standardSameAs } from '@/utils/se
 import MorphingSection from '@/components/MorphingSection';
 
 const mapBadges = [
-  // Zona Litorale Romano — blu
   { name: 'Ostia', top: '72%', left: '18%', color: '#3b82f6' },
   { name: 'Fiumicino', top: '45%', left: '8%', color: '#3b82f6' },
   { name: 'Ostia Antica', top: '65%', left: '28%', color: '#3b82f6' },
-  // Zona Sud-Ovest — viola
   { name: 'Acilia', top: '58%', left: '33%', color: '#a855f7' },
   { name: 'Casal Palocco', top: '70%', left: '38%', color: '#a855f7' },
   { name: 'Dragona', top: '50%', left: '24%', color: '#a855f7' },
-  // Zona Sud — arancio
   { name: 'Mostacciano', top: '52%', left: '52%', color: '#f97316' },
   { name: 'Torrino', top: '58%', left: '56%', color: '#f97316' },
   { name: 'Spinaceto', top: '65%', left: '52%', color: '#f97316' },
-  // Zona EUR — verde
   { name: 'EUR', top: '44%', left: '56%', color: '#10b981' },
   { name: 'Pomezia', top: '78%', left: '58%', color: '#10b981' },
   { name: 'Ardea', top: '88%', left: '62%', color: '#10b981' },
@@ -61,16 +57,14 @@ export default function DoveSiamo() {
       {
         "@type": "LocalBusiness",
         "name": "CoreNexus Technology Solution",
-        "description": "Assistenza informatica professionale a Roma Sud, EUR, Ostia, Fiumicino e provincia.",
+        "description": "Assistenza informatica professionale a Roma Sud, EUR, Ostia, Fiumicino e provincia. Sistemisti IT, sicurezza informatica, reti aziendali e videosorveglianza.",
         "url": "https://corenexus.it",
+        "telephone": "+393534012055",
+        "email": "info@corenexus.it",
         "areaServed": standardAreaServed,
         "serviceArea": {
           "@type": "GeoCircle",
-          "geoMidpoint": {
-            "@type": "GeoCoordinates",
-            "latitude": 41.7519,
-            "longitude": 12.375
-          },
+          "geoMidpoint": { "@type": "GeoCoordinates", "latitude": 41.7519, "longitude": 12.375 },
           "geoRadius": "30000"
         },
         "sameAs": standardSameAs
@@ -81,7 +75,7 @@ export default function DoveSiamo() {
   const coverageZones = [
     {
       area: 'Zona Litorale Romano',
-      description: 'Copertura completa del litorale romano con interventi rapidi e assistenza on-site.',
+      description: 'Copertura completa del litorale romano con interventi rapidi e assistenza on-site per aziende e privati.',
       locations: ['Ostia Lido', 'Ostia Antica', 'Fiumicino', 'Focene', 'Isola Sacra', 'Maccarese'],
       gradient: 'from-blue-500 to-cyan-500',
       bgGlow: 'bg-blue-500/10',
@@ -92,7 +86,7 @@ export default function DoveSiamo() {
     },
     {
       area: 'Zona Sud-Ovest',
-      description: 'Area residenziale e commerciale con alta densità di clienti business.',
+      description: 'Area residenziale e commerciale con alta densita di clienti business. Interventi on-site con tempi certi.',
       locations: ['Acilia', 'Casal Palocco', 'Infernetto', 'Casal Bernocchi', 'Dragona', 'Dragoncello', 'Axa', 'Malafede'],
       gradient: 'from-purple-500 to-pink-500',
       bgGlow: 'bg-purple-500/10',
@@ -103,7 +97,7 @@ export default function DoveSiamo() {
     },
     {
       area: 'Zona Sud',
-      description: 'Quartieri residenziali e direzionali con eccellente copertura di servizio.',
+      description: 'Quartieri residenziali e direzionali con eccellente copertura di servizio IT e sicurezza informatica.',
       locations: ['Mostacciano', 'Torrino', 'Laurentina', 'Spinaceto', 'Mezzocammino', 'Cecchignola', 'Fonte Ostiense', 'Vitinia'],
       gradient: 'from-orange-500 to-red-500',
       bgGlow: 'bg-orange-500/10',
@@ -114,7 +108,7 @@ export default function DoveSiamo() {
     },
     {
       area: 'Zona EUR e Business District',
-      description: 'Cuore direzionale di Roma con servizi dedicati alle aziende del quartiere.',
+      description: 'Cuore direzionale di Roma con servizi IT dedicati alle aziende del quartiere EUR e zone limitrofe.',
       locations: ['EUR', 'Ferratella', 'Tre Fontane', 'Palazzo dei Congressi', 'Viale Europa', 'Montagnola'],
       gradient: 'from-emerald-500 to-teal-500',
       bgGlow: 'bg-emerald-500/10',
@@ -125,7 +119,7 @@ export default function DoveSiamo() {
     },
     {
       area: 'Zona Industriale e Pontina',
-      description: 'Copertura delle aree industriali e produttive lungo la direttrice Pontina.',
+      description: 'Copertura delle aree industriali e produttive lungo la direttrice Pontina. Specializzati in IT per PMI.',
       locations: ['Pomezia', 'Ardea', 'Santa Palomba', 'Castel Romano', 'Pratica di Mare', 'Torvaianica'],
       gradient: 'from-amber-500 to-yellow-500',
       bgGlow: 'bg-amber-500/10',
@@ -136,7 +130,7 @@ export default function DoveSiamo() {
     },
     {
       area: 'Roma Centro e Altre Zone',
-      description: 'Servizio disponibile su appuntamento per tutta Roma e provincia.',
+      description: 'Servizio disponibile su appuntamento per tutta Roma e provincia. Assistenza remota immediata.',
       locations: ['Roma Centro', 'Trastevere', 'Testaccio', 'San Paolo', 'Ostiense', 'Garbatella', 'Marconi', 'Magliana'],
       gradient: 'from-rose-500 to-red-500',
       bgGlow: 'bg-rose-500/10',
@@ -150,47 +144,49 @@ export default function DoveSiamo() {
   const advantages = [
     {
       icon: Car,
-      title: 'Interventi On-Site Rapidi',
-      description: 'Raggiungiamo la tua sede in tempi brevi grazie alla nostra posizione strategica nel quadrante sud di Roma.',
+      title: 'Interventi On-Site Rapidi a Roma',
+      description: 'Raggiungiamo la tua sede in tempi brevi grazie alla nostra posizione strategica nel quadrante sud di Roma, EUR, Ostia e Fiumicino.',
     },
     {
       icon: Clock,
       title: 'Tempi di Risposta Garantiti',
-      description: 'SLA personalizzati con tempi di intervento certi, dalla presa in carico alla risoluzione del problema.',
+      description: 'SLA personalizzati con tempi di intervento certi, dalla presa in carico alla risoluzione del problema IT.',
     },
     {
       icon: Globe,
       title: 'Assistenza Remota Illimitata',
-      description: 'Per le zone più distanti offriamo supporto remoto immediato tramite connessione sicura VPN.',
+      description: 'Per le zone piu distanti offriamo supporto remoto immediato tramite connessione sicura VPN per tutta Italia.',
     },
     {
       icon: Building2,
       title: 'Conoscenza del Territorio',
-      description: 'Operiamo da anni nel quadrante sud di Roma: conosciamo le infrastrutture, i provider e le esigenze locali.',
+      description: 'Operiamo da anni nel quadrante sud di Roma: conosciamo le infrastrutture, i provider locali e le esigenze delle PMI della zona.',
     },
   ];
 
   return (
     <>
       <SEO
-        title="Dove Siamo | Assistenza IT Roma EUR Ostia Fiumicino Pomezia Acilia - CoreNexus"
-        description="CoreNexus Technology Solution opera a Roma, EUR, Ostia Lido, Fiumicino, Pomezia, Acilia, Casal Palocco e Roma Sud. Assistenza informatica, supporto IT aziendale e interventi on-site rapidi in tutta la zona."
+        title="Dove Siamo | Assistenza IT Roma Sud EUR Ostia Fiumicino Pomezia Acilia - CoreNexus"
+        description="CoreNexus Technology Solution offre assistenza informatica a Roma, EUR, Ostia Lido, Fiumicino, Pomezia, Acilia, Casal Palocco e tutta Roma Sud. Interventi on-site rapidi per PMI e privati. Verifica la copertura nella tua zona."
         keywords={[
           'assistenza informatica Roma Sud',
+          'dove siamo CoreNexus',
+          'assistenza IT Roma',
           'supporto IT Ostia Lido',
           'assistenza IT Fiumicino',
           'sistemista EUR Roma',
           'assistenza informatica Pomezia',
           'supporto IT Acilia',
           'assistenza computer Casal Palocco',
-          'tecnico informatico Roma',
+          'tecnico informatico Roma Sud',
           'intervento IT on-site Roma',
           'zone copertura assistenza IT Roma',
           'assistenza IT Roma EUR',
-          'supporto informatico Ostia Antica',
-          'assistenza IT Infernetto',
-          'tecnico IT Axa Roma',
-          'assistenza informatica Torrino Roma',
+          'supporto informatico Ostia',
+          'tecnico IT Torrino Roma',
+          'assistenza informatica Spinaceto',
+          'IT Roma Ardea',
         ]}
         canonical="/dove-siamo"
         schema={doveSiamoSchema}
@@ -200,7 +196,7 @@ export default function DoveSiamo() {
         <Header />
 
         {/* Hero Section */}
-        <section className="relative overflow-hidden pt-32 pb-20 px-6">
+        <section className="relative overflow-hidden pt-32 pb-20 px-6 premium-gradient">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-950/30 via-black to-purple-950/20" />
           <div className="absolute top-20 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
@@ -216,18 +212,17 @@ export default function DoveSiamo() {
                 </div>
                 <h1 className="text-5xl md:text-7xl font-bold leading-tight">
                   <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500 bg-clip-text text-transparent">
-                    Dove Siamo
+                    Dove Operiamo
+                  </span>
+                  <span className="block text-3xl md:text-4xl text-gray-400 mt-2 font-normal">
+                    Roma, EUR, Ostia, Fiumicino e tutta Roma Sud
                   </span>
                 </h1>
                 <p className="text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto">
-                  Operiamo nel quadrante sud di Roma e provincia con interventi on-site rapidi e assistenza remota per tutta Italia.
+                  CoreNexus Technology Solution offre assistenza informatica professionale nel quadrante sud di Roma con interventi on-site rapidi. Sistemisti IT, sicurezza informatica, reti aziendali e videosorveglianza per PMI e privati.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                  <Button
-                    size="lg"
-                    onClick={scrollToContact}
-                    className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-7 text-lg rounded-2xl font-semibold shadow-lg shadow-blue-500/20"
-                  >
+                  <Button size="lg" onClick={scrollToContact} className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-7 text-lg rounded-2xl font-semibold shadow-lg shadow-blue-500/20">
                     Verifica la copertura nella tua zona
                     <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                   </Button>
@@ -237,27 +232,20 @@ export default function DoveSiamo() {
           </div>
         </section>
 
-        {/* Map Section con badge */}
+        {/* Map Section */}
         <section className="py-16 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900/30 to-black" />
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
               <div className="rounded-3xl glass-effect border border-white/10 overflow-hidden p-4">
-
-                {/* Legenda */}
                 <div className="flex flex-wrap gap-4 mb-4 px-2">
                   {mapLegend.map((item, i) => (
                     <div key={i} className="flex items-center gap-2">
-                      <div
-                        className="w-3 h-3 rounded-full border-2 border-white flex-shrink-0"
-                        style={{ background: item.color, boxShadow: `0 0 6px ${item.color}` }}
-                      />
+                      <div className="w-3 h-3 rounded-full border-2 border-white flex-shrink-0" style={{ background: item.color, boxShadow: `0 0 6px ${item.color}` }} />
                       <span className="text-gray-400 text-sm">{item.label}</span>
                     </div>
                   ))}
                 </div>
-
-                {/* Mappa + badge sovrapposti */}
                 <div className="relative w-full rounded-xl overflow-hidden" style={{ height: '480px' }}>
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d95386.38555866488!2d12.374999999999998!3d41.7519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13258a111bd74ac3%3A0x3094f9ab2388100!2sOstia%2C%20Roma%2C%20Italy!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
@@ -269,22 +257,11 @@ export default function DoveSiamo() {
                     referrerPolicy="no-referrer-when-downgrade"
                     title="Zone di Copertura CoreNexus Technology Solution - Assistenza IT Roma Sud e Litorale"
                   />
-
-                  {/* Badge sovrapposti */}
                   {mapBadges.map((badge, idx) => (
                     <div
                       key={idx}
                       className="absolute flex items-center gap-1 px-2 py-1 rounded-full text-white text-xs font-semibold pointer-events-none"
-                      style={{
-                        top: badge.top,
-                        left: badge.left,
-                        background: badge.color + 'dd',
-                        border: `1px solid ${badge.color}`,
-                        boxShadow: `0 0 8px ${badge.color}88`,
-                        zIndex: 10,
-                        transform: 'translate(-50%, -50%)',
-                        whiteSpace: 'nowrap',
-                      }}
+                      style={{ top: badge.top, left: badge.left, background: badge.color + 'dd', border: `1px solid ${badge.color}`, boxShadow: `0 0 8px ${badge.color}88`, zIndex: 10, transform: 'translate(-50%, -50%)', whiteSpace: 'nowrap' }}
                     >
                       <div className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0" />
                       {badge.name}
@@ -296,19 +273,18 @@ export default function DoveSiamo() {
           </div>
         </section>
 
-        {/* Coverage Zones Grid */}
+        {/* Coverage Zones */}
         <section className="py-24 px-6 relative">
           <div className="absolute inset-0 bg-gradient-to-b from-black via-blue-950/10 to-black" />
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
               <div className="text-center space-y-6 mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-white">Le Nostre Zone di Copertura</h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">Assistenza IT Roma: le nostre zone di copertura</h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
                   Assistenza informatica professionale con tempi di intervento garantiti in tutte le principali zone di Roma Sud e provincia.
                 </p>
               </div>
             </MorphingSection>
-
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {coverageZones.map((zone, index) => (
                 <MorphingSection key={index} delay={index * 0.1}>
@@ -348,9 +324,9 @@ export default function DoveSiamo() {
           <div className="max-w-7xl mx-auto relative z-10">
             <MorphingSection>
               <div className="text-center space-y-6 mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-white">Perché Scegliere un Partner Locale</h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">Perche Scegliere un Partner IT Locale a Roma</h2>
                 <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                  Essere vicini ai nostri clienti ci permette di offrire un servizio più rapido, efficiente e personalizzato.
+                  Essere vicini ai nostri clienti ci permette di offrire un servizio piu rapido, efficiente e personalizzato.
                 </p>
               </div>
             </MorphingSection>
@@ -380,7 +356,7 @@ export default function DoveSiamo() {
           <div className="max-w-5xl mx-auto relative z-10">
             <MorphingSection>
               <div className="text-center space-y-6 mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-white">Come Raggiungerci</h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">Come Raggiungerci a Roma Sud</h2>
                 <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
               </div>
             </MorphingSection>
@@ -391,9 +367,7 @@ export default function DoveSiamo() {
                     <Car className="w-7 h-7 text-white" />
                   </div>
                   <h3 className="text-xl font-bold text-white">In Auto</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    Facilmente raggiungibili dalla Via Cristoforo Colombo, Via Pontina e dal Grande Raccordo Anulare (uscite EUR, Ostia, Acilia).
-                  </p>
+                  <p className="text-gray-400 text-sm leading-relaxed">Facilmente raggiungibili dalla Via Cristoforo Colombo, Via Pontina e dal Grande Raccordo Anulare (uscite EUR, Ostia, Acilia).</p>
                 </div>
               </MorphingSection>
               <MorphingSection delay={0.2}>
@@ -402,9 +376,7 @@ export default function DoveSiamo() {
                     <Train className="w-7 h-7 text-white" />
                   </div>
                   <h3 className="text-xl font-bold text-white">Con i Mezzi</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    Raggiungibili con la Roma-Lido (Ostia), Metro B (EUR) e numerose linee bus ATAC che collegano le zone servite.
-                  </p>
+                  <p className="text-gray-400 text-sm leading-relaxed">Raggiungibili con la Roma-Lido (Ostia), Metro B (EUR) e numerose linee bus ATAC che collegano le zone servite.</p>
                 </div>
               </MorphingSection>
               <MorphingSection delay={0.3}>
@@ -413,9 +385,7 @@ export default function DoveSiamo() {
                     <Navigation className="w-7 h-7 text-white" />
                   </div>
                   <h3 className="text-xl font-bold text-white">Intervento On-Site</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    Siamo noi a venire da te! Il nostro team si sposta direttamente presso la tua sede per interventi tecnici e installazioni.
-                  </p>
+                  <p className="text-gray-400 text-sm leading-relaxed">Siamo noi a venire da te! Il nostro team si sposta direttamente presso la tua sede per interventi tecnici e installazioni a Roma e provincia.</p>
                 </div>
               </MorphingSection>
             </div>
@@ -424,17 +394,15 @@ export default function DoveSiamo() {
 
         {/* Assistenza remota */}
         <section className="py-16 px-6 relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-black to-black" />
           <div className="max-w-5xl mx-auto relative z-10">
             <MorphingSection>
               <div className="p-8 rounded-3xl glass-effect border border-blue-500/20">
                 <div className="flex items-start gap-4">
                   <Globe className="w-8 h-8 text-blue-400 flex-shrink-0 mt-1" />
                   <div>
-                    <h4 className="text-white font-bold text-xl mb-2">Assistenza Remota in Tutta Italia</h4>
+                    <h4 className="text-white font-bold text-xl mb-2">Assistenza Informatica Remota in Tutta Italia</h4>
                     <p className="text-gray-300 text-lg leading-relaxed">
-                      Non sei nella nostra zona di copertura on-site? Nessun problema! Offriamo <strong className="text-blue-400">assistenza remota professionale</strong> per
-                      tutta Italia tramite connessione sicura. Monitoraggio, manutenzione, supporto tecnico e consulenza IT senza limiti geografici.
+                      Non sei nella nostra zona di copertura on-site? Nessun problema! Offriamo <strong className="text-blue-400">assistenza remota professionale</strong> per tutta Italia tramite connessione sicura. Monitoraggio, manutenzione, supporto tecnico e consulenza IT senza limiti geografici.
                     </p>
                   </div>
                 </div>
@@ -449,25 +417,17 @@ export default function DoveSiamo() {
           <div className="max-w-4xl mx-auto relative z-10 text-center">
             <MorphingSection>
               <div className="p-12 rounded-3xl glass-effect border border-blue-500/20 space-y-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-white">Hai bisogno di assistenza nella tua zona?</h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white">Hai bisogno di assistenza IT nella tua zona?</h2>
                 <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                  Contattaci per verificare la disponibilità del servizio e ricevere un preventivo personalizzato per la tua area.
+                  Contattaci per verificare la disponibilita del servizio e ricevere un preventivo personalizzato per la tua area a Roma, EUR, Ostia o Fiumicino.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button
-                    size="lg"
-                    onClick={scrollToContact}
-                    className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-7 text-lg rounded-2xl font-semibold shadow-lg shadow-blue-500/20"
-                  >
+                  <Button size="lg" onClick={scrollToContact} className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-7 text-lg rounded-2xl font-semibold shadow-lg shadow-blue-500/20">
                     Contattaci Ora
                     <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                   </Button>
                   <Link to="/servizi">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-10 py-7 text-lg rounded-2xl font-semibold"
-                    >
+                    <Button size="lg" variant="outline" className="glass-effect border-white/20 hover:border-white/40 text-white hover:bg-white/10 px-10 py-7 text-lg rounded-2xl font-semibold">
                       Scopri i Nostri Servizi
                     </Button>
                   </Link>
@@ -482,7 +442,7 @@ export default function DoveSiamo() {
             <p className="text-gray-400 text-sm">
               © 2026 <Link to="/" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold">CoreNexus Technology Solution</Link> - Tutti i diritti riservati.
             </p>
-            <p className="text-xs text-gray-600">v2.1 - 25/05/2026</p>
+            <p className="text-xs text-gray-600">v2.1 - 26/05/2026</p>
           </div>
         </footer>
 
